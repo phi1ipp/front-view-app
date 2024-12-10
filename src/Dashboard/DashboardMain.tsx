@@ -27,7 +27,7 @@ export const DashboardMain: React.FC<DashboardProps> = ({
   const navSections: NavSection[] = [
     {
       items: [
-        { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/236b16b5d9861487b8a0b997b9084e9eac6b79a95ae8c3fd0f363249f853c4b2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740", label: "Dashboard", isActive: activeNavIndex === 0, onClick: () => handleNavClick(0) },
+        { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/236b16b5d9861487b8a0b997b9084e9eac6b79a95ae8c3fd0f363249f853c4b2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740", label: "Dashboard", isActive: activeNavIndex === 0, onClick: () =>'/dashboard' },
         { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/141ef2131f6462761fba4501c53c5acecf70dcbbbeae1e337b4997f4f892a2d9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740", label: "Campaigns", isActive: activeNavIndex === 1, onClick: () => handleNavClick(1) },
         { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/d0d3bff899b4577ba9afd46a89a6e6f367fd75ac402790a7e96894a0396354a8?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740", label: "Analytics", isActive: activeNavIndex === 2, onClick: () => handleNavClick(2) }
       ]
