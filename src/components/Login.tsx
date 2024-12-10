@@ -20,8 +20,8 @@ function Login() {
     }
   
     const url = isSignup
-      ? 'http://localhost:5000/users' // POST request for signup
-      : `http://localhost:5000/users?email=${email}&password=${password}`; // GET request for login
+      ? 'http://localhost:4000/users' // POST request for signup
+      : `http://localhost:4000/users?email=${email}&password=${password}`; // GET request for login
   
     try {
       if (isSignup) {
