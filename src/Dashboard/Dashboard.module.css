@@ -57,7 +57,7 @@
 
 .navItem {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 8px;
   padding: 8px 12px;
   margin: 2px 0;
@@ -102,9 +102,6 @@
   transform: scale(1.1);
 }
 
-.label {
-  
-}
 
 .userSignout {
   padding: 16px;

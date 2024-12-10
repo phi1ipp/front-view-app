@@ -16,7 +16,7 @@ export const NavItem: React.FC<NavItemProps> = ({
   >
     <div className={styles.stateLayer}>
       <img loading="lazy" src={icon} className={styles.navIcon} alt="" />
-      <span className={styles.label}>{label}</span>
+      <span >{label}</span>
       {section && <span className={styles.section}>{section}</span>}
     </div>
   </button>

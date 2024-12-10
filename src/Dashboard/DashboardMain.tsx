@@ -1,11 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import styles from './Dashboard.module.css';
 import { SideNav } from './SideNav.tsx';
+import { MainContent } from './MainContent.tsx';
 import { DashboardProps, NavSection } from './types';
 
 export const DashboardMain: React.FC<DashboardProps> = ({
   onNavItemClick,
   onFilterClick,
+  onCardClick,
   onLogout,
   onDownload
 }) => {
@@ -17,7 +19,10 @@ export const DashboardMain: React.FC<DashboardProps> = ({
     onNavItemClick?.(index);
   }, [onNavItemClick]);
 
-
+  const handleFilterClick = useCallback((index: number) => {
+    setActiveFilterIndex(index);
+    onFilterClick?.(index);
+  }, [onFilterClick]);
 
   const navSections: NavSection[] = [
     {
@@ -39,8 +44,22 @@ export const DashboardMain: React.FC<DashboardProps> = ({
     }
   ];
 
+  const filterChips = [
+    { label: "", isActive: activeFilterIndex === 0, onClick: () => handleFilterClick(0) },
+    { label: "", icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/22cf047b892edfb1a6ab3981480b8f929197261946eb8758ab075c7569b01a31?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740", isActive: activeFilterIndex === 1, onClick: () => handleFilterClick(1) },
+    { label: "", isActive: activeFilterIndex === 2, onClick: () => handleFilterClick(2) },
+    { label: "", isActive: activeFilterIndex === 3, onClick: () => handleFilterClick(3) },
+    { label: "", isActive: activeFilterIndex === 4, onClick: () => handleFilterClick(4) }
+  ];
 
-
+  const cards = Array(21).fill(null).map((_, index) => ({
+    image: `http://b.io/ext_${13 + (index % 7)}-`,
+    title: "",
+    date: index === 0 ? "Updated today" : 
+          index === 1 ? "Updated yesterday" : 
+          "Updated 2 days ago",
+    onClick: () => onCardClick?.(index)
+  }));
 
   return (
     <div className={styles.page}>
@@ -54,7 +73,8 @@ export const DashboardMain: React.FC<DashboardProps> = ({
         }}
         onLogout={onLogout}
       />
-      
+      <MainContent></MainContent>
+       
     </div>
   );
 };
