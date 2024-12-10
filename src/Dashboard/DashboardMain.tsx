@@ -4,6 +4,17 @@ import { SideNav } from './SideNav.tsx';
 import { MainContent } from './MainContent.tsx';
 import { DashboardProps, NavSection } from './types';
 
+// Example placeholder components
+const DashboardComponent = () => <div>Dashboard Component</div>;
+const CampaignsComponent = () => <div>Campaigns Component</div>;
+const AnalyticsComponent = () => <div>Analytics Component</div>;
+const UsersComponent = () => <div>Users Component</div>;
+const ConnectionsComponent = () => <div>Connections Component</div>;
+const ControlsComponent = () => <div>Controls Component</div>;
+const EntitlementsComponent = () => <div>Entitlements Component</div>;
+const SettingsComponent = () => <div>Settings Component</div>;
+
+
 export const DashboardMain: React.FC<DashboardProps> = ({
   onNavItemClick,
   onFilterClick,
@@ -61,20 +72,45 @@ export const DashboardMain: React.FC<DashboardProps> = ({
     onClick: () => onCardClick?.(index)
   }));
 
+  const renderMainContent = () => {
+    switch (activeNavIndex) {
+      case 0:
+        return <DashboardComponent />;
+      case 1:
+        return <CampaignsComponent />;
+      case 2:
+        return <AnalyticsComponent />;
+      case 3:
+        return <UsersComponent />;
+      case 4:
+        return <ConnectionsComponent />;
+      case 5:
+        return <ControlsComponent />;
+      case 6:
+        return <EntitlementsComponent />;
+      case 7:
+        return <SettingsComponent />;
+      default:
+        return <div>Select an item from the navigation.</div>;
+    }
+  };
+
   return (
     <div className={styles.page}>
+      {/* Side Navigation */}
       <SideNav
-        logo="https://cdn.builder.io/api/v1/image/assets/TEMP/372bc690f69db00839e7021bbe33cfc171e1f57239950891962bbcdd50ac540f?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+        logo="https://cdn.builder.io/api/v1/image/assets/TEMP/372bc690f69db00839e7021bbe33cfc171e1f57239950891962bbcdd50ac540f"
         sections={navSections}
         userInfo={{
-          name: "Thomas Raymond",
-          initial: "T",
-          role: "admin"
+          name: 'Thomas Raymond',
+          initial: 'T',
+          role: 'admin',
         }}
         onLogout={onLogout}
       />
-      <MainContent></MainContent>
-       
+
+      {/* Main Content */}
+      <div className={styles.mainContent}>{renderMainContent()}</div>
     </div>
   );
 };
