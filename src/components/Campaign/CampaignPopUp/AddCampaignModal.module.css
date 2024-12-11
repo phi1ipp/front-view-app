@@ -1,0 +1,155 @@
+.popUpAddCampaign {
+    border-radius: 16px;
+    background: var(--Background-White, #fff);
+    background-color: var(--Background-White, #fff);
+    display: flex;
+    max-width: 534px;
+    flex-direction: column;
+    justify-content: start;
+    padding: 16px 24px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  
+  .title {
+    color: #000;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0;
+    flex: 1;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .closeIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .formGroup {
+    margin: 24px 0;
+    position: relative;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #4c4c4c;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 24px;
+    background: transparent;
+  }
+  
+  .selectField {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #4c4c4c;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 24px;
+    background: transparent;
+    appearance: none;
+  }
+  
+  .label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: #f5f5f5;
+    padding: 0 4px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #111;
+  }
+  
+  .divider {
+    height: 1px;
+    background: #4c4c4c;
+    margin: 16px 0;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 16px 0;
+  }
+  
+  .cancelButton {
+    padding: 10px 24px;
+    border: 1px solid #2a6ebb;
+    border-radius: 100px;
+    color: #2a6ebb;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 140px;
+  }
+  
+  .submitButton {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 100px;
+    background: #2a6ebb;
+    color: #f5f5f5;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 140px;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+  }
+  
+  .submitButton:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 991px) {
+    .popUpAddCampaign {
+      width: 90%;
+      padding: 16px;
+    }
+    
+    .actions {
+      flex-direction: column;
+    }
+    
+    .cancelButton,
+    .submitButton {
+      width: 100%;
+    }
+  }

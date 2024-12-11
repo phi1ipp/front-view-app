@@ -57,3 +57,27 @@ export interface TableRowProps {
   campaign: CampaignData;
   onDownload: () => void;
 }
+
+export interface Campaign {
+  id: string;
+  name: string;
+  controlId: string;
+  connectionId: string;
+}
+
+
+export interface AddCampaignProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (campaign: Campaign) => void;
+}
+
+export interface Control {
+  id: string;
+  name: string;
+}
+
+export interface Connection {
+  id: string;
+  name: string;
+}

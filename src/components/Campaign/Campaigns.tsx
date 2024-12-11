@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Campaigns.module.css';
 import { CampaignsTable } from './CampaignsTable.tsx';
+import { AddCampaignModal } from './CampaignPopUp/AddCampaignModal.tsx';
 
 export const Campaigns: React.FC = () => {
   return (
@@ -17,7 +18,8 @@ export const Campaigns: React.FC = () => {
               alt=""
               className={styles.buttonIcon}
             />
-            <span className={styles.buttonText}>Create</span>
+            <button className={styles.buttonText}>Create</button>
+            <AddCampaignModal/>
           </div>
         </button>
       </div>
