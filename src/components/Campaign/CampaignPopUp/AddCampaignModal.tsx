@@ -76,7 +76,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
       <div className={styles.div3}>
         <div className={styles.div4}>
           <div className={styles.div5}>
-            <div className={styles.stateLayer}>
+          <div className={styles.labelTextContainer}>Campaign Name</div>
               <div className={styles.content}>
                 <input
                   type="text"
@@ -86,14 +86,12 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                   placeholder="Enter campaign name"
                   aria-label="Campaign Name"
                 />
-                <div className={styles.labelTextContainer}>Campaign Name</div>
-              </div>
             </div>
           </div>
         </div>
         <div className={styles.div6}>
           <div className={styles.div7}>
-            <div className={styles.stateLayer}>
+          <div className={styles.labelTextContainer2}>Controls</div>
               <div className={styles.content}>
                 <select
                   value={selectedControl}
@@ -108,14 +106,12 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                     </option>
                   ))}
                 </select>
-                <div className={styles.labelTextContainer2}>Controls</div>
-              </div>
             </div>
           </div>
         </div>
         <div className={styles.div8}>
           <div className={styles.div9}>
-            <div className={styles.stateLayer}>
+          <div className={styles.labelTextContainer}>Connection Name</div>
               <div className={styles.content}>
                 <select
                   value={selectedConnection}
@@ -130,8 +126,6 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                     </option>
                   ))}
                 </select>
-                <div className={styles.labelTextContainer}>Connection Name</div>
-              </div>
             </div>
           </div>
         </div>

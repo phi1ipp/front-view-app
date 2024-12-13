@@ -75,7 +75,7 @@
   
   .tableHead {
     flex: 1;
-    min-width: 240px;
+    min-width: 200px;
     padding: 16px;
     display: flex;
     align-items: center;
@@ -104,7 +104,7 @@
   
   .tableCell {
     flex: 1;
-    min-width: 240px;
+    min-width: 200px;
     padding: 16px;
     display: flex;
     align-items: center;
