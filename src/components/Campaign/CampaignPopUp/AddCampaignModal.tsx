@@ -77,7 +77,6 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
         <div className={styles.div4}>
           <div className={styles.div5}>
           <div className={styles.labelTextContainer}>Campaign Name</div>
-              <div className={styles.content}>
                 <input
                   type="text"
                   value={campaignName}
@@ -86,13 +85,11 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                   placeholder="Enter campaign name"
                   aria-label="Campaign Name"
                 />
-            </div>
           </div>
         </div>
         <div className={styles.div6}>
           <div className={styles.div7}>
           <div className={styles.labelTextContainer2}>Controls</div>
-              <div className={styles.content}>
                 <select
                   value={selectedControl}
                   onChange={(e) => setSelectedControl(e.target.value)}
@@ -106,13 +103,11 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                     </option>
                   ))}
                 </select>
-            </div>
           </div>
         </div>
         <div className={styles.div8}>
           <div className={styles.div9}>
           <div className={styles.labelTextContainer}>Connection Name</div>
-              <div className={styles.content}>
                 <select
                   value={selectedConnection}
                   onChange={(e) => setSelectedConnection(e.target.value)}
@@ -126,12 +121,10 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
                     </option>
                   ))}
                 </select>
-            </div>
           </div>
         </div>
       </div>
       <div className={styles.horizontalMiddleInset}>
-        <div className={styles.divider} />
       </div>
       <div className={styles.div10}>
         <button
