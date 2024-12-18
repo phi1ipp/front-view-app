@@ -81,3 +81,50 @@ export interface Connection {
   id: string;
   name: string;
 }
+
+export interface User {
+  userId: string;
+  loginId: string;
+  fullName: string;
+  email: string;
+}
+
+export interface UserModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  user?: User;
+  onSubmit: (user: User) => void;
+}
+
+export interface DeleteModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userId: string;
+  onConfirm: (userId: string) => void;
+}
+
+export interface TableHeaderProps {
+  label: string;
+  sortable?: boolean;
+  onSort?: () => void;
+}
+
+export interface TableRowProps {
+  user: User;
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+}
+
+export interface TableFooterProps {
+  totalItems: number;
+  currentPage: number;
+  rowsPerPage: number;
+  onPageChange: (page: number) => void;
+  onRowsPerPageChange: (rows: number) => void;
+}
+
+export interface UserTableProps {
+  users: User[];
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+}
