@@ -4,7 +4,7 @@ import { UserTable } from './UserTable.tsx';
 import { UserModal } from './UserModal.tsx';
 import { DeleteModal } from './DeleteModal.tsx';
 import { User } from './types';
-
+import Create from './Create.png';
 
 export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -19,9 +19,13 @@ export const UserManagement: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/api/users');
+      const response = await fetch('/users');
+      if (!response.ok) { // Check if the response was successful
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }  
       const data = await response.json();
-      setUsers(data);
+      console.log(JSON.stringify(response));
+      console.log('Data:', data); 
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -47,7 +51,7 @@ export const UserManagement: React.FC = () => {
   const handleUserSubmit = async (user: User) => {
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `/api/users/${user.userId}` : '/api/users';
+      const url = selectedUser ? `/users/${user.userId}` : '/users';
       
       await fetch(url, {
         method,
@@ -64,7 +68,7 @@ export const UserManagement: React.FC = () => {
 
   const handleDeleteConfirm = async (userId: string) => {
     try {
-      await fetch(`/api/users/${userId}`, { method: 'DELETE' });
+      await fetch(`/users/${userId}`, { method: 'DELETE' });
       fetchUsers();
       setIsDeleteModalOpen(false);
     } catch (error) {
@@ -78,17 +82,17 @@ export const UserManagement: React.FC = () => {
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Users</h1>
             </div>
-            <button className={styles.createButton} onClick={handleCreateUser}>
-              <div className={styles.buttonContent}>
-                <img
-                  loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b4608d1988e70018595556c3c26823efc666bca62fa6ad93cfa773d0dd82ca2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                  alt="Create Icon"
-                  className={styles.buttonIcon}
-                />
-                <span className={styles.buttonText}>Create</span>
-              </div>
-            </button>
+           <button className={styles.createButton} onClick={handleCreateUser}>
+                     <div className={styles.buttonContent}>
+                       <img
+                         loading="lazy"
+                         src={Create}
+                         alt="Create Icon"
+                         className={styles.buttonIcon}
+                       />
+                       <span className={styles.buttonText}>Create</span>
+                     </div>
+                   </button>
           </div>
       <div className={styles.content}>
         <UserTable

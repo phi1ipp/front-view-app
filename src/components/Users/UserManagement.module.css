@@ -167,10 +167,8 @@
   }
   
   .buttonText {
-    font-family: Roboto, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #2a6ebb;
+    font: 500 14px/20px Roboto;
+    letter-spacing: 0.1px;
   }
   
   .tableFooter {

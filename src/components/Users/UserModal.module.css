@@ -39,7 +39,7 @@
   }
   
   .formField input {
-    width: 100%;
+    width: 95%;
     padding: 8px 12px;
     border: 1px solid rgba(0, 0, 0, 0.23);
     border-radius: 4px;
@@ -80,3 +80,7 @@
   .submitButton:hover {
     background-color: var(--primary-dark, #1565c0);
   }
+
+
+  
+  
