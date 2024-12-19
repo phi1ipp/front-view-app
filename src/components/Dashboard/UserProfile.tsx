@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
 import { UserInfo } from './types';
-import Logout from './Images/Logout.svg';
+import Logout from './img/Logout.svg';
 
 interface UserProfileProps extends UserInfo {
   onLogout?: () => void;
