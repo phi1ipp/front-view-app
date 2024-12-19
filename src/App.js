@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route , Navigate} from 'react-router-dom';
 import Login from './components/Login.tsx';
-import Dashboard from './components/Dashboard.tsx';
+import Home from './components/Home.tsx';
 
 function App() {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
@@ -10,8 +10,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route
-        path="/dashboard"
-        element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+        path="/home"
+        element={isAuthenticated ? <Home /> : <Navigate to="/" />}
       />
     </Routes>
   </BrowserRouter>

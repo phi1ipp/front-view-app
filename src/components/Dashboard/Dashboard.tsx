@@ -21,7 +21,7 @@ const EntitlementsComponent = () => <div>Entitlements Component</div>;
 const SettingsComponent = () => <div>Settings Component</div>;
 
 
-export const DashboardMain: React.FC<DashboardProps> = ({
+export const Dashboard: React.FC<DashboardProps> = ({
   onNavItemClick,
   onFilterClick,
   onCardClick,
