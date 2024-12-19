@@ -128,3 +128,31 @@ export interface UserTableProps {
   onEdit: (user: User) => void;
   onDelete: (userId: string) => void;
 }
+
+
+//Login
+
+export interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+  };
+}
+
+export interface InputFieldProps {
+  label: string;
+  value: string;
+  icon: string;
+  type?: string;
+  onChange: (value: string) => void;
+  error?: string;
+}
+
+export interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  isLoading?: boolean;
+}

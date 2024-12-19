@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
 import { UserInfo } from './types';
+import Logout from './Images/Logout.svg';
 
 interface UserProfileProps extends UserInfo {
   onLogout?: () => void;
@@ -29,7 +30,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
       onClick={onLogout}
       aria-label="Logout"
     >
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/163ffcbe3d2f0f4ad41fcc78ffab9c6a3373a72f1f6da2bac5ac81ba27159e26?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740" alt="" className={styles.logoutIcon} />
+      <img src= {Logout} alt="" className={styles.logoutIcon} />
       <span>Logout</span>
     </button>
   </div>

@@ -1,0 +1,179 @@
+.loginContainer {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+  
+  .loginBackground {
+    background-color: #2a6ebb;
+    width: 100%;
+    flex: 1;
+  }
+  
+  .loginWrapper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .loginContent {
+    padding: 131px 70px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .loginHeader {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .logo {
+    aspect-ratio: 3.55;
+    object-fit: contain;
+    width: 300px;
+    border-radius: 8px;
+  }
+  
+  .loginForm {
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+  }
+  
+  .formContainer {
+    width: 100%;
+  }
+  
+  .loginTitle {
+    color: #111;
+    text-align: center;
+    font: 400 28px/36px Roboto;
+    margin-bottom: 40px;
+  }
+  
+  .formContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .inputContainer {
+    width: 100%;
+  }
+  
+  .inputWrapper {
+    border-radius: 4px 4px 0 0;
+    background: #fff;
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    transition: border-color 0.2s ease;
+  }
+  
+  .inputWrapper:focus-within {
+    border-color: #2a6ebb;
+  }
+  
+  .inputError {
+    border-color: #d32f2f;
+  }
+  
+  .inputContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font: 400 16px/24px Roboto;
+    color: #111;
+    background: transparent;
+    padding: 8px 0;
+  }
+  
+  .errorMessage {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .button {
+    background: #2a6ebb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font: 500 16px/24px Roboto;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    margin-top: 24px;
+  }
+  
+  .button:hover {
+    background: #235a9e;
+  }
+  
+  .button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .helpText {
+    display: block;
+    color: #2a6ebb;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 24px;
+    font: 400 14px/20px Roboto;
+    transition: color 0.2s ease;
+  }
+  
+  .helpText:hover {
+    color: #235a9e;
+    text-decoration: underline;
+  }
+  
+  .visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .loginContent {
+      padding: 24px;
+    }
+  
+    .loginHeader {
+      gap: 24px;
+    }
+  
+    .logo {
+      width: 200px;
+    }
+  
+    .loginForm {
+      padding: 24px;
+    }
+  }

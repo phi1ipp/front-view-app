@@ -20,3 +20,4 @@ export const createCampaign = async (campaign: Campaign): Promise<Campaign> => {
   });
   return response.json();
 };
+

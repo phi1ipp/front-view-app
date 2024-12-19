@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { AddCampaignProps, Control, Connection } from './types';
-import { fetchControls, fetchConnections, createCampaign } from './api.ts';
+import { fetchControls, fetchConnections, createCampaign } from '../../../types/api.ts';
 import styles from './AddCampaignModal.module.css';
 
 export const AddCampaignModal: React.FC<AddCampaignProps> = ({
