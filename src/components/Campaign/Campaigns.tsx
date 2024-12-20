@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Campaigns.module.css';
 import { CampaignsTable } from './CampaignsTable.tsx';
 import { CampaignData } from './types';
@@ -14,8 +14,13 @@ export const Campaigns: React.FC = () => {
     const [selectedCampaign, setSelectedCampaign] = useState<CampaignData | undefined>();
     const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false);
     const [downloadingId, setDownloadingId] = useState<number | null>(null);
+
+
+    useEffect(() => {
+        fetchCampaigns();
+      }, []);
   
-    const loadCampaigns = async () => {
+    const fetchCampaigns = async () => {
       try {
         const response = await fetch('http://localhost:4000/campaigns');
               if (!response.ok) { // Check if the response was successful
@@ -40,7 +45,7 @@ export const Campaigns: React.FC = () => {
     const handleCampaignCreate = async (campaigns: CampaignData) => {
         try {
           const method = selectedCampaign ? 'PUT' : 'POST';
-          const url = selectedCampaign ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
+          const url = selectedCampaign ? `http://localhost:4000/campaigns/${campaigns.id}` : 'http://localhost:4000/campaigns';
           
           await fetch(url, {
             method,
@@ -51,7 +56,7 @@ export const Campaigns: React.FC = () => {
           fetchCampaigns();
           setIsCampaignModalOpen(false);
         } catch (error) {
-          console.error('Error saving user:', error);
+          console.error('Error saving campaign:', error);
         }
       };
     
@@ -59,7 +64,7 @@ export const Campaigns: React.FC = () => {
     <div className={styles.container}>
              <div className={styles.header}>
                <div className={styles.titleContainer}>
-                 <h1 className={styles.title}>Users</h1>
+                 <h1 className={styles.title}>Campaigns</h1>
                </div>
               <button className={styles.createButton} onClick={handleCreateCampaign}>
                         <div className={styles.buttonContent}>

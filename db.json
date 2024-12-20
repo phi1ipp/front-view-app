@@ -8,16 +8,43 @@
   ],
   "usersdata": [
     {
-      "id": "2",
-      "loginId": "Jane",
-      "fullName": "Doe",
-      "email": "jane.doe@example.com"
-    },
-    {
       "id": "3",
       "loginId": "Alice",
-      "fullName": "Johnson",
+      "fullName": "Johnson123",
       "email": "alice.johnson@example.com"
+    },
+    {
+      "id": "a664",
+      "userId": "",
+      "loginId": "123",
+      "fullName": "Supraja Badhri",
+      "email": "test@example.com"
+    }
+  ],
+
+  
+
+  "campaigns": [
+    {
+      "id": 1,
+      "name": "Spring Sale 2024",
+      "status": "running",
+      "violationCount": 0,
+      "action": "Edit"
+    },
+    {
+      "id": 2,
+      "name": "Winter Awareness",
+      "status": "completed",
+      "violationCount": 3,
+      "action": "View"
+    },
+    {
+      "id": 3,
+      "name": "Summer Discount Bonanza",
+      "status": "error",
+      "violationCount": 1,
+      "action": "Fix"
     }
   ]
 }

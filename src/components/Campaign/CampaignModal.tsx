@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../Users/UserModal.module.css';
+import styles from './CampaignModal.module.css';
 import { CampaignModalProps, Campaign } from './types';
 
 export const CampaignModal: React.FC<CampaignModalProps> = ({
@@ -38,9 +38,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {campaign ? 'Edit Campaign' : 'Create Campaign'}
-        </h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formField}>
             <label htmlFor="name">Name</label>
