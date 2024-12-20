@@ -30,6 +30,12 @@
       "name": "Spring Sale 2024",
       "status": "running",
       "violationCount": 0,
+      "controls": "abc",
+      "connections":[{"id":1,
+      "name":"abc"
+},{"id":2,
+      "name":"abc"
+}],
       "action": "Edit"
     },
     {
@@ -37,6 +43,12 @@
       "name": "Winter Awareness",
       "status": "completed",
       "violationCount": 3,
+      "controls": "abc",
+      "connections":[{"id":1,
+      "name":"abc"
+},{"id":2,
+      "name":"abc"
+}],
       "action": "View"
     },
     {
@@ -44,7 +56,37 @@
       "name": "Summer Discount Bonanza",
       "status": "error",
       "violationCount": 1,
+      "controls": "abc",
+      "connections":[{"id":1,
+      "name":"abc"
+},{"id":2,
+      "name":"abc"
+}],
       "action": "Fix"
+    }
+  ],
+
+  "campaignConnections":[
+    {
+      "id":1,
+      "name":"abc"
+
+    },
+    {
+      "id":2,
+      "name":"bcd"
+    }
+  ],
+
+  "campaignControls":[
+    {
+      "id":1,
+      "name":"abc"
+
+    },
+    {
+      "id":2,
+      "name":"bcd"
     }
   ]
 }

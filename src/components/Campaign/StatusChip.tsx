@@ -3,13 +3,19 @@ import styles from './Campaigns.module.css';
 import { StatusChipProps } from './types';
 
 const statusStyles = {
-  Running: styles.statusChipWarning,
-  Completed: styles.statusChipSuccess,
-  Error: styles.statusChipError
+  running: styles.statusChipWarning,
+  completed: styles.statusChipSuccess,
+  error: styles.statusChipError
 };
 
-export const StatusChip: React.FC<StatusChipProps> = ({ status }) => (
-  <div className={`${styles.statusChip} ${statusStyles[status]}`}>
-    <div className={styles.statusText}>{status}</div>
-  </div>
-);
+
+export const StatusChip: React.FC<StatusChipProps> = ({ status }) => {
+  console.log("Status: ", status); // Debugging to see what status is passed
+  console.log("Computed Class: ", statusStyles[status]); // Check computed class
+
+  return (
+    <div className={`${styles.statusChip} ${statusStyles[status]}`}>
+      <div className={styles.statusText}>{status}</div>
+    </div>
+  );
+};

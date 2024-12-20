@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { AddCampaignProps, Control, Connection } from './types';
-import { fetchControls, fetchConnections, createCampaign } from '../../../types/api.ts';
 import styles from './AddCampaignModal.module.css';
 
 export const AddCampaignModal: React.FC<AddCampaignProps> = ({
@@ -13,40 +12,77 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
   const [selectedControl, setSelectedControl] = useState('');
   const [selectedConnection, setSelectedConnection] = useState('');
   const [controls, setControls] = useState<Control[]>([]);
+ const [isLoading, setIsLoading] = useState(false);
   const [connections, setConnections] = useState<Connection[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  
+
+
+  const fetchControls = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/campaignControls');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }  
+      const controlData = await response.json();
+      setControls(controlData); // Correctly set connections array
+      console.log('controls Data:', controlData); 
+    } catch (error) {
+      console.error('Error fetching controls:', error);
+    }
+  };
+
+  const fetchConnections = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/campaignConnections');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }  
+      const connectionsData = await response.json();
+      setConnections(connectionsData); // Correctly set connections array
+      console.log('Connections Data:', connectionsData); 
+    } catch (error) {
+      console.error('Error fetching connections:', error);
+    }
+  };
+
+  const createCampaign = async (campaign: { id: any; name: string; controlId: string; connectionIds: Connection[]; }) => {
+    try {
+  const response = await fetch('campaigns', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(campaign),
+  });
+  return response.json();
+} catch (error) {
+  console.error('Error fetching connections:', error);
+}
+};
+  
+
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const [controlsData, connectionsData] = await Promise.all([
-          fetchControls(),
-          fetchConnections(),
-        ]);
-        setControls(controlsData);
-        setConnections(connectionsData);
-      } catch (error) {
-        console.error('Failed to load data:', error);
-      }
-    };
-
     if (isOpen) {
-      loadData();
+      fetchControls();
+      fetchConnections();
     }
-  }, [isOpen]);
+  }, [isOpen]);  // Ensures that data is fetched every time the modal is opened
+  
+
 
   const handleSubmit = async () => {
-    if (!campaignName || !selectedControl || !selectedConnection) return;
-
+    if (!campaignName || !selectedControl || selectedConnection.length === 0) return;
+  
     setIsLoading(true);
     try {
       const campaign = {
         id: uuidv4(),
         name: campaignName,
         controlId: selectedControl,
-        connectionId: selectedConnection,
+        connectionIds: connections, // Changed to array of selected connections
       };
-
+  
       await createCampaign(campaign);
       onSubmit(campaign);
       onClose();
@@ -56,6 +92,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
       setIsLoading(false);
     }
   };
+  
 
   if (!isOpen) return null;
 
@@ -74,56 +111,57 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
         </div>
       </div>
       <div className={styles.div3}>
-        <div className={styles.div4}>
-          <div className={styles.div5}>
-          <div className={styles.labelTextContainer}>Campaign Name</div>
-                <input
-                  type="text"
-                  value={campaignName}
-                  onChange={(e) => setCampaignName(e.target.value)}
-                  className={styles.inputTextContainer}
-                  placeholder="Enter campaign name"
-                  aria-label="Campaign Name"
-                />
-          </div>
-        </div>
-        <div className={styles.div6}>
-          <div className={styles.div7}>
-          <div className={styles.labelTextContainer2}>Controls</div>
-                <select
-                  value={selectedControl}
-                  onChange={(e) => setSelectedControl(e.target.value)}
-                  className={styles.inputTextContainer}
-                  aria-label="Controls"
-                >
-                  <option value="">Select Control</option>
-                  {controls.map((control) => (
-                    <option key={control.id} value={control.id}>
-                      {control.name}
-                    </option>
-                  ))}
-                </select>
-          </div>
-        </div>
-        <div className={styles.div8}>
-          <div className={styles.div9}>
-          <div className={styles.labelTextContainer}>Connection Name</div>
-                <select
-                  value={selectedConnection}
-                  onChange={(e) => setSelectedConnection(e.target.value)}
-                  className={styles.inputTextContainer}
-                  aria-label="Connection Name"
-                >
-                  <option value="">Select Connection</option>
-                  {connections.map((connection) => (
-                    <option key={connection.id} value={connection.id}>
-                      {connection.name}
-                    </option>
-                  ))}
-                </select>
-          </div>
-        </div>
-      </div>
+  <div className={styles.div4}>
+    <div className={styles.div5}>
+      <div className={styles.labelTextContainer}>Campaign Name</div>
+      <input
+        type="text"
+        value={campaignName}
+        onChange={(e) => setCampaignName(e.target.value)}
+        className={styles.inputTextContainer}
+        placeholder="Enter campaign name"
+        aria-label="Campaign Name"
+      />
+    </div>
+  </div>
+  <div className={styles.div6}>
+    <div className={styles.div7}>
+      <div className={styles.labelTextContainer2}>Controls</div>
+      <select
+        value={selectedControl}
+        onChange={(e) => setSelectedControl(e.target.value)}
+        className={styles.inputTextContainer}
+        aria-label="Controls"
+      >
+        <option value="">Select Control</option>
+        {controls.map((control) => (
+          <option key={control.id} value={control.id}>{control.name}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+  <div className={styles.div6}>  {/* Using the same div structure as Controls for alignment */}
+    <div className={styles.div7}>
+      <div className={styles.labelTextContainer}>Connection Name</div>
+      <select
+        multiple
+        value={selectedConnection}
+        onChange={e => {
+          const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+          setSelectedConnection(selectedOptions);
+        }}
+        className={styles.inputTextContainer}
+        aria-label="Connection Names"
+      >
+        <option value="">Select Connections</option>
+        {connections.map((connection) => (
+          <option key={connection.id} value={connection.id}>{connection.name}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</div>
+
       <div className={styles.horizontalMiddleInset}>
       </div>
       <div className={styles.div10}>

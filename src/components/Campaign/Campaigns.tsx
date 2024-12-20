@@ -3,7 +3,7 @@ import styles from './Campaigns.module.css';
 import { CampaignsTable } from './CampaignsTable.tsx';
 import { CampaignData } from './types';
 import Create from './Create.png';
-import { CampaignModal } from './CampaignModal.tsx';
+import { AddCampaignModal } from './CampaignPopUp/AddCampaignModal.tsx';
 import { downloadCampaignReport, createCampaign, fetchCampaigns } from '../../types/api.ts';
 
 export const Campaigns: React.FC = () => {
@@ -85,7 +85,7 @@ export const Campaigns: React.FC = () => {
                //onDownload={handleEditUser}
              />
            </div>
-           <CampaignModal
+           <AddCampaignModal
                    isOpen={isCampaignModalOpen}
                    onClose={() => setIsCampaignModalOpen(false)}
                    user={selectedCampaign}
