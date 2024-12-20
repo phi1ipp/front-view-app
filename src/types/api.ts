@@ -21,3 +21,14 @@ export const createCampaign = async (campaign: Campaign): Promise<Campaign> => {
   return response.json();
 };
 
+
+export const fetchCampaigns = async (): Promise<Connection[]> => {
+  const response = await fetch('/api/connections');
+  return response.json();
+};
+
+export const downloadCampaignReport = async (): Promise<Connection[]> => {
+  const response = await fetch('/api/connections');
+  return response.json();
+};
+
