@@ -19,11 +19,12 @@ export const UserManagement: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/users');
-      if (!response.ok) { // Check if the response was successful
+      const response = await fetch('http://localhost:4000/usersdata');
+            if (!response.ok) { // Check if the response was successful
         throw new Error(`HTTP error! status: ${response.status}`);
       }  
       const data = await response.json();
+      setUsers(data);
       console.log(JSON.stringify(response));
       console.log('Data:', data); 
     } catch (error) {
@@ -43,15 +44,15 @@ export const UserManagement: React.FC = () => {
     setIsUserModalOpen(true);
   };
 
-  const handleDeleteClick = (userId: string) => {
-    setSelectedUserId(userId);
+  const handleDeleteClick = (id: string) => {
+    setSelectedUserId(id);
     setIsDeleteModalOpen(true);
   };
 
   const handleUserSubmit = async (user: User) => {
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `/users/${user.userId}` : '/users';
+      const url = selectedUser ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
       
       await fetch(url, {
         method,
@@ -66,9 +67,10 @@ export const UserManagement: React.FC = () => {
     }
   };
 
-  const handleDeleteConfirm = async (userId: string) => {
+  const handleDeleteConfirm = async (id: string) => {
+    console.log("id"+id)
     try {
-      await fetch(`/users/${userId}`, { method: 'DELETE' });
+      await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
       fetchUsers();
       setIsDeleteModalOpen(false);
     } catch (error) {
@@ -110,7 +112,7 @@ export const UserManagement: React.FC = () => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        userId={selectedUserId}
+        id={selectedUserId}
         onConfirm={handleDeleteConfirm}
       />
     </div>

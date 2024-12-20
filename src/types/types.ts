@@ -83,7 +83,7 @@ export interface Connection {
 }
 
 export interface User {
-  userId: string;
+  id: string;
   loginId: string;
   fullName: string;
   email: string;

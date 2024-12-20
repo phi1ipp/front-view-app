@@ -5,7 +5,7 @@ import { DeleteModalProps } from './types';
 export const DeleteModal: React.FC<DeleteModalProps> = ({
   isOpen,
   onClose,
-  userId,
+  id,
   onConfirm
 }) => {
   if (!isOpen) return null;
@@ -22,7 +22,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
             Cancel
           </button>
           <button
-            onClick={() => onConfirm(userId)}
+            onClick={() => onConfirm(id)}
             className={styles.deleteButton}
           >
             Delete

@@ -6,7 +6,7 @@ export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) =>
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.userId}</div>
+        <div className={styles.cellContent}>{user.id}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{user.loginId}</div>
@@ -35,7 +35,7 @@ export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) =>
         </button>
         <button
           className={styles.actionButton}
-          onClick={() => onDelete(user.userId)}
+          onClick={() => onDelete(user.id)}
           aria-label={`Delete ${user.fullName}`}
         >
           <div className={styles.buttonContent}>

@@ -30,7 +30,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete })
       <div className={styles.tableBody}>
         {users.map((user) => (
           <TableRow
-            key={user.userId}
+            key={user.id}
             user={user}
             onEdit={onEdit}
             onDelete={onDelete}

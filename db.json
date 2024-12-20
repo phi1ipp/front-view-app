@@ -1,15 +1,23 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "email": "user@example.com",
-        "password": "password123"
-      },
-      {
-        "id": 2,
-        "email": "admin@example.com",
-        "password": "admin123"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": "2",
+      "email": "admin@example.com",
+      "password": "admin123"
+    }
+  ],
+  "usersdata": [
+    {
+      "id": "2",
+      "loginId": "Jane",
+      "fullName": "Doe",
+      "email": "jane.doe@example.com"
+    },
+    {
+      "id": "3",
+      "loginId": "Alice",
+      "fullName": "Johnson",
+      "email": "alice.johnson@example.com"
+    }
+  ]
+}
