@@ -47,7 +47,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
 
   const createCampaign = async (campaign: { id: any; name: string; controlId: string; connectionIds: Connection[]; }) => {
     try {
-  const response = await fetch('campaigns', {
+  const response = await fetch('http://localhost:4000/campaigns', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
         </button>
         <button
           onClick={handleSubmit}
-          className={styles.button2}
+          className={styles.submitButt}
           disabled={isLoading || !campaignName || !selectedControl || !selectedConnection}
           aria-label="Run Campaign"
         >

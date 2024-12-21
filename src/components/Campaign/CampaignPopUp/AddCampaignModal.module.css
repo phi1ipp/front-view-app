@@ -73,6 +73,19 @@
   position: relative;
 }
 
+.submitButton {
+  padding: 8px 16px;
+  border: none;
+  background-color: var(--primary-color, #1976d2);
+  color: white;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-dark, #1565c0);
+}
 
 .inputTextContainer {
   width: 100%;

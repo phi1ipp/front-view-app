@@ -65,9 +65,27 @@ export interface Campaign {
   connections: Connection[];  // Array of Connection objects
 }
 
-export interface Connection {
+interface Connection {
   id: string;
+  campaignId: string;
   name: string;
+  host: string;
+  port: number;
+  loginId: string;
+}
+
+
+interface ConnectionsTableProps {
+  connections: Connection[];
+  onEdit: (connection: Connection) => void;
+  onDelete: (connectionId: string) => void;
+}
+
+interface ConnectionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  connection: Connection | undefined;
+  onSubmit: (connection: Connection) => void;
 }
 
 

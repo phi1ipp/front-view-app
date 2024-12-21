@@ -1,76 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../Users/UserManagement.module.css';
+import styles from './Connection.module.css';
 import { UserModal } from '../Users/UserModal.tsx';
 import { DeleteModal } from '../Users/DeleteModal.tsx';
-import { User } from './types.ts';
-import { ConnectionsTable } from './ConnectionsTable.tsx';
+import { Connection } from './types.ts';
+import { ConnectionTable } from './ConnectionTable.tsx';
 
 
 export const ConnectionsComponent: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | undefined>();
-  const [selectedUserId, setSelectedUserId] = useState<string>('');
+  const [connections, setConnections] = useState<Connection[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedConnection, setSelectedConnection] = useState<Connection | undefined>();
 
   useEffect(() => {
-    fetchUsers();
+    const fetchConnections = async () => {
+      try {
+        const response = await fetch('/api/connections');
+        const data = await response.json();
+        setConnections(data);
+      } catch (error) {
+        console.error('Error fetching connections:', error);
+      }
+    };
+    fetchConnections();
   }, []);
 
-  const fetchUsers = async () => {
+  const handleEdit = (connection: Connection) => {
+    setSelectedConnection(connection);
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async (connectionId: string) => {
     try {
-      const response = await fetch('/api/connections');
-      const data = await response.json();
-      setUsers(data);
+      await fetch(`/api/connections/${connectionId}`, { method: 'DELETE' });
+      setConnections(connections.filter(c => c.id !== connectionId));
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error deleting connection:', error);
+    }
+  };
+
+  const handleSubmit = async (connection: Connection) => {
+    const method = selectedConnection ? 'PUT' : 'POST';
+    const url = selectedConnection ? `/api/connections/${connection.id}` : '/api/connections';
+    
+    try {
+      await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(connection),
+      });
+      setIsModalOpen(false);
+      setSelectedConnection(undefined); // Reset selected connection after successful submission
+    } catch (error) {
+      console.error('Error saving connection:', error);
     }
   };
 
   const handleCreateUser = () => {
-    setSelectedUser(undefined);
-    setIsUserModalOpen(true);
-  };
-
+      setSelectedConnection(undefined);
+      setIsModalOpen(true);
+    };
   
-
-  const handleEditUser = (user: User) => {
-    setSelectedUser(user);
-    setIsUserModalOpen(true);
-  };
-
-  const handleDeleteClick = (userId: string) => {
-    setSelectedUserId(userId);
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleUserSubmit = async (user: User) => {
-    try {
-      const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `/api/users/${user.userId}` : '/api/users';
-      
-      await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
-      });
-      
-      fetchUsers();
-      setIsUserModalOpen(false);
-    } catch (error) {
-      console.error('Error saving user:', error);
-    }
-  };
-
-  const handleDeleteConfirm = async (userId: string) => {
-    try {
-      await fetch(`/api/users/${userId}`, { method: 'DELETE' });
-      fetchUsers();
-      setIsDeleteModalOpen(false);
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
+    
+    
+    const handleDeleteClick = (id: string) => {
+      setSelectedConnection(id);
+      setIsDeleteModalOpen(true);
+    };
+ 
 
   return (
         <div className={styles.container}>
@@ -91,22 +88,22 @@ export const ConnectionsComponent: React.FC = () => {
             </button>
           </div>
       <div className={styles.content}>
-        <ConnectionsTable
-          users={users}
-          onEdit={handleEditUser}
+        <ConnectionTable
+          users={connections}
+          onEdit={handleEdit}
           onDelete={handleDeleteClick}
         />
       </div>
       <UserModal
-        isOpen={isUserModalOpen}
-        onClose={() => setIsUserModalOpen(false)}
-        user={selectedUser}
-        onSubmit={handleUserSubmit}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        user={selectedConnection}
+        onSubmit={handleSubmit}
       />
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        userId={selectedUserId}
+        userId={selectedConnection}
         onConfirm={handleDeleteConfirm}
       />
     </div>

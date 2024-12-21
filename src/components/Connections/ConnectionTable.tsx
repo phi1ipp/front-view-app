@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styles from '../Users/UserManagement.module.css';
-import { TableHeader } from '../Users/TableHeader.tsx';
-import { TableRow } from '../Users/TableRow.tsx';
-import { TableFooter } from '../Users/TableFooter.tsx';
+import styles from './Connection.module.css';
+import { TableHeader } from './TableHeader.tsx';
+import { TableRow } from './TableRow.tsx';
+import { TableFooter } from './TableFooter.tsx';
 import { UserTableProps } from './types';
 
-export const ConnectionsTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
+export const ConnectionTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -21,16 +21,16 @@ export const ConnectionsTable: React.FC<UserTableProps> = ({ users, onEdit, onDe
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Campaign ID" sortable />
-        <TableHeader label="Connection Name" sortable />
-        <TableHeader label="Host Port" sortable />
-        <TableHeader label="Login Id" sortable />
+        <TableHeader label="User ID" sortable />
+        <TableHeader label="Login ID" sortable />
+        <TableHeader label="Full Name" sortable />
+        <TableHeader label="Email" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
         {users.map((user) => (
           <TableRow
-            key={user.userId}
+            key={user.id}
             user={user}
             onEdit={onEdit}
             onDelete={onDelete}

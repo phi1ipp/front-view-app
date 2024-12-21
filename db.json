@@ -21,9 +21,6 @@
       "email": "test@example.com"
     }
   ],
-
-  
-
   "campaigns": [
     {
       "id": 1,
@@ -31,11 +28,16 @@
       "status": "running",
       "violationCount": 0,
       "controls": "abc",
-      "connections":[{"id":1,
-      "name":"abc"
-},{"id":2,
-      "name":"abc"
-}],
+      "connections": [
+        {
+          "id": 1,
+          "name": "abc"
+        },
+        {
+          "id": 2,
+          "name": "abc"
+        }
+      ],
       "action": "Edit"
     },
     {
@@ -44,11 +46,16 @@
       "status": "completed",
       "violationCount": 3,
       "controls": "abc",
-      "connections":[{"id":1,
-      "name":"abc"
-},{"id":2,
-      "name":"abc"
-}],
+      "connections": [
+        {
+          "id": 1,
+          "name": "abc"
+        },
+        {
+          "id": 2,
+          "name": "abc"
+        }
+      ],
       "action": "View"
     },
     {
@@ -57,36 +64,67 @@
       "status": "error",
       "violationCount": 1,
       "controls": "abc",
-      "connections":[{"id":1,
-      "name":"abc"
-},{"id":2,
-      "name":"abc"
-}],
+      "connections": [
+        {
+          "id": 1,
+          "name": "abc"
+        },
+        {
+          "id": 2,
+          "name": "abc"
+        }
+      ],
       "action": "Fix"
-    }
-  ],
-
-  "campaignConnections":[
-    {
-      "id":1,
-      "name":"abc"
-
     },
     {
-      "id":2,
-      "name":"bcd"
-    }
-  ],
-
-  "campaignControls":[
-    {
-      "id":1,
-      "name":"abc"
-
+      "id": "954ef36f-a31c-4cb3-84aa-73715bc39901",
+      "name": "asdf",
+      "controlId": "2",
+      "connectionIds": [
+        {
+          "id": 1,
+          "name": "abc"
+        },
+        {
+          "id": 2,
+          "name": "bcd"
+        }
+      ]
     },
     {
-      "id":2,
-      "name":"bcd"
+      "id": "954ef36f-a31c-4cb3-84aa-73715bc39901",
+      "name": "asdf",
+      "controlId": "2",
+      "connectionIds": [
+        {
+          "id": 1,
+          "name": "abc"
+        },
+        {
+          "id": 2,
+          "name": "bcd"
+        }
+      ]
+    }
+  ],
+  "campaignConnections": [
+    {
+      "id": 1,
+      "name": "abc"
+    },
+    {
+      "id": 2,
+      "name": "bcd"
+    }
+  ],
+  "campaignControls": [
+    {
+      "id": 1,
+      "name": "abc"
+    },
+    {
+      "id": 2,
+      "name": "bcd"
     }
   ]
 }
