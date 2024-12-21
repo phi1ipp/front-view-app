@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LoginPage.module.css';
+import styles from './Login.module.css';
 import { InputFieldProps } from './types';
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -7,14 +7,13 @@ export const InputField: React.FC<InputFieldProps> = ({
   value,
   icon,
   type = "text",
-  onChange,
-  error
+  onChange
 }) => {
   const inputId = `${label.toLowerCase().replace(/\s+/g, '-')}-input`;
 
   return (
     <div className={styles.inputContainer}>
-      <div className={`${styles.inputWrapper} ${error ? styles.inputError : ''}`}>
+      <div className={styles.inputWrapper}>
         <div className={styles.inputContent}>
           <label htmlFor={inputId} className={styles.visuallyHidden}>
             {label}
@@ -24,11 +23,9 @@ export const InputField: React.FC<InputFieldProps> = ({
             type={type}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className={styles.input}
+            className={styles.inputField}
             placeholder={label}
             aria-label={label}
-            aria-invalid={!!error}
-            aria-describedby={error ? `${inputId}-error` : undefined}
           />
           <div className={styles.iconWrapper}>
             <div className={styles.iconContainer}>
@@ -37,8 +34,7 @@ export const InputField: React.FC<InputFieldProps> = ({
                   loading="lazy"
                   src={icon}
                   alt=""
-                  className={styles.icon}
-                  aria-hidden="true"
+                  className={styles.iconImage}
                 />
               </div>
             </div>
@@ -46,11 +42,6 @@ export const InputField: React.FC<InputFieldProps> = ({
         </div>
       </div>
       <div className={styles.inputIndicator} />
-      {error && (
-        <div id={`${inputId}-error`} className={styles.errorMessage} role="alert">
-          {error}
-        </div>
-      )}
     </div>
   );
 };

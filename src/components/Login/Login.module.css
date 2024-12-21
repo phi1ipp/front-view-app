@@ -1,0 +1,237 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
+.loginBackground {
+  background-color: #2a6ebb;
+  width: 100%;
+  height: 100%; /* Ensures it fills the parent without exceeding */
+  display: flex; /* Enables flexbox for its children */
+  flex-direction: column; /* Stacks children vertically */
+}
+
+.loginWrapper {
+  width: 100%;
+  flex-grow: 1; /* Allows this container to fill available space */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.loginContent {
+  padding: 50px; /* Adjust padding to reduce height */
+  width: 100%;
+ /* Or whatever max width you prefer */
+  box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+.headerSection {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: flex-end; /* Aligns items to the right */
+  align-items: center; /* Keeps items aligned vertically */
+  padding: 20px; /* Maintain padding around the edges */
+}
+
+
+
+.loginContainer {
+  justify-content: center; /* Center items horizontally in the viewport */
+  align-items: center; 
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height to the full viewport height */
+  overflow: hidden; /* Prevents any overflow from creating a scrollbar */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+}
+
+.logo {
+  aspect-ratio: 1.100;
+  object-fit: contain;
+  max-width: 250px;  /* Adjust the maximum width as needed */
+  margin-right: 40px; /* Space between logo and login card */
+}
+
+
+.loginCard {
+  background: #fff; /* Background color for the card */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds shadow for depth */
+  border-radius: 8px; /* Rounded corners for the card */
+  border-top: 1px solid #ccc; /* Adds a border to the top */
+  border-right: 1px solid #ccc; /* Adds a border to the right */
+  border-left: 1px solid #ccc; /* Adds a border to the left */
+  border-bottom: none; /* No border at the bottom */
+  padding: 40px; /* Inner padding */
+  max-width: 400px; /* Maximum width of the login card */
+  width: 100%; /* Adjust width to fit content */
+  margin-right: 50px; /* Right margin to position the card slightly to the left */
+}
+
+
+
+
+.loginForm {
+  max-width: 420px;
+  width: 100%;
+}
+
+.loginTitle {
+  color: #111;
+  text-align: center;
+  font: 400 28px/36px Roboto;
+  letter-spacing: 0;
+}
+
+.formContent {
+  margin-top: 72px;
+}
+
+.inputContainer {
+  margin-bottom: 80px;
+}
+
+.inputWrapper {
+  border-radius: 4px 4px 0 0;
+  background: #fff;
+  min-height: 56px;
+}
+
+.inputContent {
+  display: flex;
+  padding: 4px 0 4px 16px;
+  gap: 4px;
+  align-items: center;
+}
+
+.inputField {
+  flex: 1;
+  min-width: 240px;
+  border: none;
+  outline: none;
+  font: 400 16px/24px Roboto;
+  letter-spacing: 0.5px;
+  color: #111;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconContainer {
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.iconStateLayer {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.inputIndicator {
+  height: 1px;
+  width: 100%;
+  border: 1px solid #4c4c4c;
+}
+
+.loginButton {
+  border-radius: 100px;
+  background: #2a6ebb;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+  min-height: 40px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 108px;
+  overflow: hidden;
+}
+
+.buttonContent {
+  color: #f5f5f5;
+  text-align: center;
+  font: 500 14px/20px Roboto;
+  letter-spacing: 0.1px;
+  padding: 10px 24px;
+}
+
+.helpText {
+  color: #4a90e2;
+  letter-spacing: 0.4px;
+  font: 400 12px/2 Roboto;
+  margin-top: 24px;
+  padding: 0 24px;
+}
+
+@media (max-width: 991px) {
+  .loginContent {
+    padding: 20px; /* Reduced padding for smaller screens */
+  }
+
+  .headerSection {
+    flex-direction: column; /* Stacks logo and card vertically */
+    align-items: center; /* Center items for smaller screens */
+    padding: 10px;
+  }
+
+  .logo {
+    max-width: 80%; /* Adjust for smaller screens if needed */
+    margin-bottom: 20px; /* Adds space between logo and card on small screens */
+  }
+
+  .loginCard {
+    padding: 20px; /* Reduce padding inside card for smaller screens */
+    width: 100%; /* Use full width for small screens */
+    max-width: none; /* Overrides any max-width settings */
+    margin-left: 0; /* Reset margin for alignment on small screens */
+    margin-right: 0;
+  }
+
+
+
+  .formContent {
+    margin-top: 40px;
+  }
+
+  .inputContainer {
+    margin-bottom: 40px;
+  }
+
+  .loginButton {
+    margin-top: 40px;
+  }
+
+  .buttonContent {
+    padding: 10px 20px;
+  }
+
+  .helpText {
+    padding: 0 20px;
+  }
+}

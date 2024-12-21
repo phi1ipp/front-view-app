@@ -100,10 +100,6 @@ export interface Control {
   name: string;
 }
 
-export interface Connection {
-  id: string;
-  name: string;
-}
 
 export interface User {
   id: string;
@@ -155,27 +151,15 @@ export interface UserTableProps {
 
 //Login
 
-export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    email: string;
-    name: string;
-  };
-}
-
 export interface InputFieldProps {
   label: string;
   value: string;
   icon: string;
   type?: string;
   onChange: (value: string) => void;
-  error?: string;
 }
 
 export interface ButtonProps {
   label: string;
   onClick: () => void;
-  disabled?: boolean;
-  isLoading?: boolean;
 }

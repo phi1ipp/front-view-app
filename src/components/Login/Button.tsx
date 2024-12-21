@@ -1,23 +1,11 @@
 import React from 'react';
-import styles from './LoginPage.module.css';
+import styles from './Login.module.css';
 import { ButtonProps } from './types';
 
-export const Button: React.FC<ButtonProps> = ({ 
-  label, 
-  onClick, 
-  disabled = false,
-  isLoading = false 
-}) => {
+export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
-    <button 
-      className={`${styles.button} ${disabled ? styles.buttonDisabled : ''}`}
-      onClick={onClick}
-      disabled={disabled || isLoading}
-      aria-busy={isLoading}
-    >
-      <div className={styles.buttonContent}>
-        {isLoading ? 'Loading...' : label}
-      </div>
+    <button className={styles.loginButton} onClick={onClick}>
+      <div className={styles.buttonContent}>{label}</div>
     </button>
   );
 };
