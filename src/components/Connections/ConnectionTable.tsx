@@ -3,9 +3,9 @@ import styles from './Connection.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { UserTableProps } from './types';
+import { ConnectionsTableProps } from './types';
 
-export const ConnectionTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
+export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -17,28 +17,28 @@ export const ConnectionTable: React.FC<UserTableProps> = ({ users, onEdit, onDel
     setRowsPerPage(rows);
     setCurrentPage(1);
   };
-
+  
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="User ID" sortable />
-        <TableHeader label="Login ID" sortable />
+        <TableHeader label="Campaign ID" sortable />
         <TableHeader label="Full Name" sortable />
-        <TableHeader label="Email" sortable />
+        <TableHeader label="Host Port" sortable />
+        <TableHeader label="Login Id" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {users.map((user) => (
+        {connections.map((connection) => (
           <TableRow
-            key={user.id}
-            user={user}
+            key={connection.id}
+            connection={connection}
             onEdit={onEdit}
             onDelete={onDelete}
           />
         ))}
       </div>
       <TableFooter
-        totalItems={users.length}
+        totalItems={connections.length}
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}

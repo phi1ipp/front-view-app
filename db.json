@@ -126,5 +126,31 @@
       "id": 2,
       "name": "bcd"
     }
+  ],
+
+  "connections": [
+    {
+      "id": 1,
+      "campaignId": "123",
+      "fullName": "abcd",
+      "hostport": "8080",
+      "loginId": "2"
+    },
+    {
+      "id": 2,
+      "campaignId": "456",
+      "fullName": "efgh",
+      "hostport": "8080",
+      "loginId": "3"
+    },
+    {
+      "id": 3,
+      "campaignId": "789",
+      "fullName": "wesl",
+      "hostport": "8080",
+      "loginId": "4"
+    }
   ]
+
+
 }

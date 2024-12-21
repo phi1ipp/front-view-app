@@ -39,7 +39,7 @@ export const UserModal: React.FC<UserModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} role="dialog" aria-modal="true">
         <h2 className={styles.modalTitle}>
-          {user ? 'Edit User' : 'Create User'}
+          {user ? 'Edit Connection' : 'Create Connection'}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formField}>

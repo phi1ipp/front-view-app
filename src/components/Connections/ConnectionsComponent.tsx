@@ -15,8 +15,9 @@ export const ConnectionsComponent: React.FC = () => {
   useEffect(() => {
     const fetchConnections = async () => {
       try {
-        const response = await fetch('/api/connections');
+        const response = await fetch('http://localhost:4000/connections');
         const data = await response.json();
+        console.log(data)
         setConnections(data);
       } catch (error) {
         console.error('Error fetching connections:', error);
@@ -41,7 +42,7 @@ export const ConnectionsComponent: React.FC = () => {
 
   const handleSubmit = async (connection: Connection) => {
     const method = selectedConnection ? 'PUT' : 'POST';
-    const url = selectedConnection ? `/api/connections/${connection.id}` : '/api/connections';
+    const url = selectedConnection ? `http://localhost:4000/connections/${connection.id}` : 'http://localhost:4000/connections';
     
     try {
       await fetch(url, {
@@ -89,7 +90,7 @@ export const ConnectionsComponent: React.FC = () => {
           </div>
       <div className={styles.content}>
         <ConnectionTable
-          users={connections}
+          connections={connections}
           onEdit={handleEdit}
           onDelete={handleDeleteClick}
         />
@@ -97,13 +98,13 @@ export const ConnectionsComponent: React.FC = () => {
       <UserModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        user={selectedConnection}
+        connection={selectedConnection}
         onSubmit={handleSubmit}
       />
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        userId={selectedConnection}
+        connectionId={selectedConnection}
         onConfirm={handleDeleteConfirm}
       />
     </div>

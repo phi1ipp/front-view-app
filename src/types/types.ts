@@ -100,10 +100,7 @@ export interface Control {
   name: string;
 }
 
-export interface Connection {
-  id: string;
-  name: string;
-}
+
 
 export interface User {
   id: string;
