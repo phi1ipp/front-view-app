@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ConnectionModal.module.css';
-import { UserModalProps, User } from './types';
+import { ConnectionModalProps, Connection } from './types';
 
-export const UserModal: React.FC<UserModalProps> = ({
+export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   isOpen,
   onClose,
-  user,
+  connection,
   onSubmit
 }) => {
-  const [formData, setFormData] = useState<User>({
-    userId: '',
-    loginId: '',
-    fullName: '',
-    email: ''
+  const [formData, setFormData] = useState<Connection>({
+    name: '',
+    hostport: '',
+    loginId: ''
   });
 
   useEffect(() => {
-    if (user) {
-      setFormData(user);
+    if (connection) {
+      setFormData(connection);
     } else {
       setFormData({
-        userId: '',
-        loginId: '',
-        fullName: '',
-        email: ''
+        name: '',
+        hostport: '',
+        loginId: ''
       });
     }
-  }, [user]);
+  }, [connection]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,11 +37,31 @@ export const UserModal: React.FC<UserModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} role="dialog" aria-modal="true">
         <h2 className={styles.modalTitle}>
-          {user ? 'Edit Connection' : 'Create Connection'}
+          {connection ? 'Edit Connection' : 'Create Connection'}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formField}>
-            <label htmlFor="loginId">Login ID</label>
+            <label htmlFor="name">Connection Name</label>
+            <input
+              id="name"
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              required
+            />
+          </div>
+          <div className={styles.formField}>
+            <label htmlFor="fullName">Host and Port</label>
+            <input
+              id="hostport"
+              type="text"
+              value={formData.hostport}
+              onChange={(e) => setFormData({...formData, hostport: e.target.value})}
+              required
+            />
+          </div>
+          <div className={styles.formField}>
+            <label htmlFor="loginId">LoginId</label>
             <input
               id="loginId"
               type="text"
@@ -52,32 +70,12 @@ export const UserModal: React.FC<UserModalProps> = ({
               required
             />
           </div>
-          <div className={styles.formField}>
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              id="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-              required
-            />
-          </div>
-          <div className={styles.formField}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              required
-            />
-          </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
               Cancel
             </button>
             <button type="submit" className={styles.submitButton}>
-              {user ? 'Save' : 'Create'}
+              {connection ? 'Save' : 'Create'}
             </button>
           </div>
         </form>

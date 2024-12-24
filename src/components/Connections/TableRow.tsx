@@ -9,7 +9,7 @@ export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete
         <div className={styles.cellContent}>{connection.campaignId}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{connection.fullName}</div>
+        <div className={styles.cellContent}>{connection.name}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{connection.hostport}</div>
@@ -36,7 +36,7 @@ export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete
         <button
           className={styles.actionButton}
           onClick={() => onDelete(connection.id)}
-          aria-label={`Delete ${connection.fullName}`}
+          aria-label={`Delete ${connection.name}`}
         >
           <div className={styles.buttonContent}>
             <img

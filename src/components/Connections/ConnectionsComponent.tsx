@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Connection.module.css';
-import { UserModal } from '../Users/UserModal.tsx';
 import { DeleteModal } from '../Users/DeleteModal.tsx';
 import { Connection } from './types.ts';
 import { ConnectionTable } from './ConnectionTable.tsx';
+import {ConnectionModal} from './ConnectionModal.tsx'
 
 
 export const ConnectionsComponent: React.FC = () => {
   const [connections, setConnections] = useState<Connection[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedConnection, setSelectedConnection] = useState<Connection | undefined>();
-
+  const [selectedConnectionId, setSelectedConnectionId] = useState<string>('');
   useEffect(() => {
+    fetchConnections();
+  }, []);
+
+
+  
     const fetchConnections = async () => {
       try {
         const response = await fetch('http://localhost:4000/connections');
@@ -23,22 +28,26 @@ export const ConnectionsComponent: React.FC = () => {
         console.error('Error fetching connections:', error);
       }
     };
-    fetchConnections();
-  }, []);
+    
+
 
   const handleEdit = (connection: Connection) => {
     setSelectedConnection(connection);
     setIsModalOpen(true);
   };
 
-  const handleDeleteConfirm = async (connectionId: string) => {
+  const handleDeleteConfirm = async (id: string) => {
+    console.log("id"+id)
     try {
-      await fetch(`/api/connections/${connectionId}`, { method: 'DELETE' });
-      setConnections(connections.filter(c => c.id !== connectionId));
+      await fetch(`http://localhost:4000/connections/${id}`, { method: 'DELETE' });
+      fetchConnections();
+      setIsDeleteModalOpen(false);
     } catch (error) {
       console.error('Error deleting connection:', error);
     }
   };
+
+  
 
   const handleSubmit = async (connection: Connection) => {
     const method = selectedConnection ? 'PUT' : 'POST';
@@ -50,8 +59,10 @@ export const ConnectionsComponent: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(connection),
       });
+      console.log("connection "+connection);
       setIsModalOpen(false);
-      setSelectedConnection(undefined); // Reset selected connection after successful submission
+      fetchConnections();
+
     } catch (error) {
       console.error('Error saving connection:', error);
     }
@@ -65,7 +76,7 @@ export const ConnectionsComponent: React.FC = () => {
     
     
     const handleDeleteClick = (id: string) => {
-      setSelectedConnection(id);
+      setSelectedConnectionId(id);
       setIsDeleteModalOpen(true);
     };
  
@@ -95,7 +106,7 @@ export const ConnectionsComponent: React.FC = () => {
           onDelete={handleDeleteClick}
         />
       </div>
-      <UserModal
+      <ConnectionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         connection={selectedConnection}
@@ -104,7 +115,7 @@ export const ConnectionsComponent: React.FC = () => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        connectionId={selectedConnection}
+        id={selectedConnectionId}
         onConfirm={handleDeleteConfirm}
       />
     </div>

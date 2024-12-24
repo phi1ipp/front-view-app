@@ -23,7 +23,7 @@
   ],
   "campaigns": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Spring Sale 2024",
       "status": "running",
       "violationCount": 0,
@@ -41,7 +41,7 @@
       "action": "Edit"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Winter Awareness",
       "status": "completed",
       "violationCount": 3,
@@ -59,7 +59,7 @@
       "action": "View"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Summer Discount Bonanza",
       "status": "error",
       "violationCount": 1,
@@ -109,48 +109,38 @@
   ],
   "campaignConnections": [
     {
-      "id": 1,
+      "id": "1",
       "name": "abc"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "bcd"
     }
   ],
   "campaignControls": [
     {
-      "id": 1,
+      "id": "1",
       "name": "abc"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "bcd"
     }
   ],
-
   "connections": [
     {
-      "id": 1,
-      "campaignId": "123",
-      "fullName": "abcd",
-      "hostport": "8080",
-      "loginId": "2"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "campaignId": "456",
-      "fullName": "efgh",
+      "name": "efgh",
       "hostport": "8080",
       "loginId": "3"
     },
     {
-      "id": 3,
+      "id": "3",
       "campaignId": "789",
-      "fullName": "wesl",
+      "name": "wesl",
       "hostport": "8080",
       "loginId": "4"
     }
   ]
-
-
 }

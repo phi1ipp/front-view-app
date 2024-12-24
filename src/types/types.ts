@@ -69,8 +69,7 @@ interface Connection {
   id: string;
   campaignId: string;
   name: string;
-  host: string;
-  port: number;
+  hostport: string;
   loginId: string;
 }
 
