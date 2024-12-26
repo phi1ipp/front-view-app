@@ -2,26 +2,26 @@ import React from 'react';
 import styles from './Connection.module.css';
 import { TableRowProps } from './types';
 
-export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) => {
+export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete }) => {
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.id}</div>
+        <div className={styles.cellContent}>{connection.campaignId}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.loginId}</div>
+        <div className={styles.cellContent}>{connection.name}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.fullName}</div>
+        <div className={styles.cellContent}>{connection.hostport}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.email}</div>
+        <div className={styles.cellContent}>{connection.loginId}</div>
       </div>
       <div className={styles.actionCell}>
         <button
           className={styles.actionButton}
-          onClick={() => onEdit(user)}
-          aria-label={`Edit ${user.fullName}`}
+          onClick={() => onEdit(connection)}
+          aria-label={`Edit ${connection.fullName}`}
         >
           <div className={styles.buttonContent}>
             <img
@@ -35,8 +35,8 @@ export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) =>
         </button>
         <button
           className={styles.actionButton}
-          onClick={() => onDelete(user.id)}
-          aria-label={`Delete ${user.fullName}`}
+          onClick={() => onDelete(connection.id)}
+          aria-label={`Delete ${connection.name}`}
         >
           <div className={styles.buttonContent}>
             <img

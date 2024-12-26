@@ -69,8 +69,7 @@ interface Connection {
   id: string;
   campaignId: string;
   name: string;
-  host: string;
-  port: number;
+  hostport: string;
   loginId: string;
 }
 
@@ -99,6 +98,7 @@ export interface Control {
   id: string;
   name: string;
 }
+
 
 
 export interface User {
