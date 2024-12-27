@@ -75,12 +75,14 @@
 
 .submitButton {
   padding: 8px 16px;
-  border: none;
   background-color: var(--primary-color, #1976d2);
+  border: 1px solid var(--Navy-Blue, #2a6ebb);
   color: white;
-  border-radius: 4px;
+  border-radius: 100px;
+  padding: 10px 24px;
   font-weight: 500;
   cursor: pointer;
+  
 }
 
 .submitButton:hover {

@@ -110,7 +110,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
           />
         </div>
       </div>
-      <div className={styles.div3}>
+  <div className={styles.div3}>
   <div className={styles.div4}>
     <div className={styles.div5}>
       <div className={styles.labelTextContainer}>Campaign Name</div>
@@ -175,7 +175,7 @@ export const AddCampaignModal: React.FC<AddCampaignProps> = ({
         </button>
         <button
           onClick={handleSubmit}
-          className={styles.submitButt}
+          className={styles.submitButton}
           disabled={isLoading || !campaignName || !selectedControl || !selectedConnection}
           aria-label="Run Campaign"
         >
