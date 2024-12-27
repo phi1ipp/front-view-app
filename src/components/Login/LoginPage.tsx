@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import styles from './LoginPage.module.css';
+import styles from './Login.module.css';
 import { InputField } from './InputField.tsx';
 import { Button } from './Button.tsx';
-import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
-
-
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage: React.FC = () => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
@@ -58,61 +57,41 @@ export const LoginPage: React.FC = () => {
     }
   };
 
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginBackground}>
         <div className={styles.loginWrapper}>
           <div className={styles.loginContent}>
-            <div className={styles.loginHeader}>
+            <div className={styles.headerSection}>
               <img
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/92063446ab01485ec2b740e4689c8bbfa46362e9a78fa7bc3f52c05c97832cab?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
                 alt="Company Logo"
                 className={styles.logo}
               />
-              <div className={styles.loginForm}>
-                <div className={styles.formContainer}>
+              
+              <div className={styles.loginCard}>
+                <div className={styles.loginForm}>
                   <h1 className={styles.loginTitle}>Login</h1>
-                  <form 
-                    className={styles.formContent} 
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      handleLogin();
-                    }}
-                  >
+                  <form className={styles.formContent}>
                     <InputField
-                      label="User Name"
+                      label="User Name 123456"
                       value={username}
                       onChange={setUsername}
-                      icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a94d82d58f593d997fb09f88cd789f083100aafcacd62e7ea17d30bb956357ac?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                      error={errors.username}
+                      icon="https://cdn.builder.io/api/v1/image/assets/TEMP/612fb9c937453b33d31c2c41ec8ceb4a6515f3e19362262b1bc0343f0b6d299e?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
                     />
                     <InputField
                       label="Password"
                       value={password}
                       onChange={setPassword}
                       type="password"
-                      icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a94d82d58f593d997fb09f88cd789f083100aafcacd62e7ea17d30bb956357ac?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                      error={errors.password}
+                      icon="https://cdn.builder.io/api/v1/image/assets/TEMP/612fb9c937453b33d31c2c41ec8ceb4a6515f3e19362262b1bc0343f0b6d299e?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
                     />
-                    <Button 
-                      label="Login" 
-                      onClick={handleLogin}
-                      disabled={isLoading}
-                      isLoading={isLoading}
-                    />
+                    <Button label="Login" onClick={handleLogin} />
                   </form>
                 </div>
-                <a 
-                  href="/contact-admin" 
-                  className={styles.helpText}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = '/contact-admin';
-                  }}
-                >
-                  Having Trouble? Contact Admin
-                </a>
+                <p className={styles.helpText}>Having Trouble? Contact Admin</p>
               </div>
             </div>
           </div>
