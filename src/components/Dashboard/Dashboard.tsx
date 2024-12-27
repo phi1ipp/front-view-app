@@ -71,8 +71,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         { icon: ConnectionsIcon, label: "Connections", isActive: activeNavIndex === 4, onClick: () => handleNavClick(4) },
         { icon:  Controls, label: "Controls", isActive: activeNavIndex === 5, onClick: () => handleNavClick(5) },
         { icon:  activeNavIndex === 6?ExclusionOn:ExclusionOff, label: "Exclusion", isActive: activeNavIndex === 6, onClick: () => handleNavClick(6) },
-        { icon:  activeNavIndex === 7?EntitlementsOn:EntitlementsOff, label: "Entitlements", isActive: activeNavIndex === 6, onClick: () => handleNavClick(6) },
-        { icon: activeNavIndex === 8?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 7, onClick: () => handleNavClick(7) }
+        { icon:  activeNavIndex === 7?EntitlementsOn:EntitlementsOff, label: "Entitlements", isActive: activeNavIndex === 7, onClick: () => handleNavClick(7) },
+        { icon: activeNavIndex === 8?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 8, onClick: () => handleNavClick(8) }
       ]
     }
   ];
