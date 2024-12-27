@@ -43,34 +43,37 @@ export const UserModal: React.FC<UserModalProps> = ({
         </h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formField}>
-            <label htmlFor="loginId">Login ID</label>
             <input
               id="loginId"
               type="text"
               value={formData.loginId}
-              onChange={(e) => setFormData({...formData, loginId: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
               required
+              placeholder=" "
             />
+            <label htmlFor="loginId">Login ID</label>
           </div>
           <div className={styles.formField}>
-            <label htmlFor="fullName">Full Name</label>
             <input
               id="fullName"
               type="text"
               value={formData.fullName}
-              onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
               required
+              placeholder=" "
             />
+            <label htmlFor="fullName">Full Name</label>
           </div>
           <div className={styles.formField}>
-            <label htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
+              placeholder=" "
             />
+            <label htmlFor="email">Email</label>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
