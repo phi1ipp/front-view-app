@@ -87,11 +87,15 @@ interface ConnectionModalProps {
   onSubmit: (connection: Connection) => void;
 }
 
-
-export interface AddCampaignProps {
+interface CampaignModalProps {
   isOpen: boolean;
   onClose: () => void;
+  campaign: Campaign | undefined;
   onSubmit: (campaign: Campaign) => void;
+}
+
+export interface AddCampaignProps {
+  campaign: Campaign[];
 }
 
 export interface Control {

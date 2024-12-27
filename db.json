@@ -77,31 +77,31 @@
       "action": "Fix"
     },
     {
-      "id": "954ef36f-a31c-4cb3-84aa-73715bc39901",
-      "name": "asdf",
-      "controlId": "2",
+      "id": "c8dade00-80be-4113-8508-e078a8e65893",
+      "name": "jhguhjb",
+      "controlId": "1",
       "connectionIds": [
         {
-          "id": 1,
+          "id": "1",
           "name": "abc"
         },
         {
-          "id": 2,
+          "id": "2",
           "name": "bcd"
         }
       ]
     },
     {
-      "id": "954ef36f-a31c-4cb3-84aa-73715bc39901",
-      "name": "asdf",
-      "controlId": "2",
+      "id": "c8dade00-80be-4113-8508-e078a8e65893",
+      "name": "jhguhjb",
+      "controlId": "1",
       "connectionIds": [
         {
-          "id": 1,
+          "id": "1",
           "name": "abc"
         },
         {
-          "id": 2,
+          "id": "2",
           "name": "bcd"
         }
       ]

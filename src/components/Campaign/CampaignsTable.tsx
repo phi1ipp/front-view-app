@@ -6,7 +6,7 @@ import { AddCampaignProps } from './types';
 import { TableFooter } from '../Users/TableFooter.tsx';
 
 
-export const CampaignsTable: React.FC<AddCampaignProps> = ({ campaigns, onEdit, onDelete }) => {
+export const CampaignsTable: React.FC<AddCampaignProps> = ({ campaigns}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 

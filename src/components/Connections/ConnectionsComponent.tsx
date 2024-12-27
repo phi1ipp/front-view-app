@@ -68,7 +68,7 @@ export const ConnectionsComponent: React.FC = () => {
     }
   };
 
-  const handleCreateUser = () => {
+  const handleCreateConnection = () => {
       setSelectedConnection(undefined);
       setIsModalOpen(true);
     };
@@ -87,7 +87,7 @@ export const ConnectionsComponent: React.FC = () => {
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Connections</h1>
             </div>
-            <button className={styles.createButton} onClick={handleCreateUser}>
+            <button className={styles.createButton} onClick={handleCreateConnection}>
               <div className={styles.buttonContent}>
                 <img
                   loading="lazy"
