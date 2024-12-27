@@ -82,11 +82,11 @@
 }
 
 .submitButton {
-  padding: 8px 16px;
+  border-radius: 100px;
+  padding: 10px 24px;
   border: none;
   background-color: var(--primary-color, #1976d2);
   color: white;
-  border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
 }
