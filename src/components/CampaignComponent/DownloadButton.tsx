@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Campaigns.module.css';
+import styles from './Campaign.module.css';
 import { DownloadButtonProps } from './types';
 
 export const DownloadButton: React.FC<DownloadButtonProps> = ({ onClick }) => (

@@ -87,12 +87,28 @@ interface ConnectionModalProps {
   onSubmit: (connection: Connection) => void;
 }
 
-interface CampaignModalProps {
+interface Controls {
+  id: string;
+  campaignId: string;
+  name: string;
+  hostport: string;
+  loginId: string;
+}
+
+
+interface ControlTableProps {
+  controls: Control[];
+  onEdit: ( control: Control) => void;
+  onDelete: (controlId: string) => void;
+}
+
+interface ControlModalProps {
   isOpen: boolean;
   onClose: () => void;
-  campaign: Campaign | undefined;
-  onSubmit: (campaign: Campaign) => void;
+  control: Control | undefined;
+  onSubmit: ( control: Control) => void;
 }
+
 
 export interface AddCampaignProps {
   campaign: Campaign[];
@@ -152,6 +168,24 @@ export interface UserTableProps {
   onDelete: (userId: string) => void;
 }
 
+interface Campaigns {
+  id: string;
+  name: string;
+  status: 'Running' | 'Completed' | 'Error';
+  violationCount: number;
+}
+
+
+interface CampaignsTableProps {
+  campaigns: Campaigns[];
+}
+
+interface CampaignModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  campaigns: Campaigns | undefined;
+  onSubmit: (campaigns: Campaigns) => void;
+}
 
 //Login
 

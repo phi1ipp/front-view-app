@@ -19,6 +19,13 @@
       "loginId": "123",
       "fullName": "Supraja Badhri",
       "email": "test@example.com"
+    },
+    {
+      "id": "bf3e",
+      "userId": "",
+      "loginId": "nbv",
+      "fullName": "nkjn ",
+      "email": "jbhjbm@jkhj"
     }
   ],
   "campaigns": [
@@ -27,8 +34,8 @@
       "name": "Spring Sale 2024",
       "status": "running",
       "violationCount": 0,
-      "controls": "abc",
-      "connections": [
+      "connectionId": "1",
+      "controlIds": [
         {
           "id": 1,
           "name": "abc"
@@ -45,8 +52,8 @@
       "name": "Winter Awareness",
       "status": "completed",
       "violationCount": 3,
-      "controls": "abc",
-      "connections": [
+      "connectionId": "1",
+      "controlIds": [
         {
           "id": 1,
           "name": "abc"
@@ -63,8 +70,8 @@
       "name": "Summer Discount Bonanza",
       "status": "error",
       "violationCount": 1,
-      "controls": "abc",
-      "connections": [
+      "connectionId": "1",
+      "controlIds": [
         {
           "id": 1,
           "name": "abc"
@@ -77,34 +84,9 @@
       "action": "Fix"
     },
     {
-      "id": "c8dade00-80be-4113-8508-e078a8e65893",
-      "name": "jhguhjb",
-      "controlId": "1",
-      "connectionIds": [
-        {
-          "id": "1",
-          "name": "abc"
-        },
-        {
-          "id": "2",
-          "name": "bcd"
-        }
-      ]
-    },
-    {
-      "id": "c8dade00-80be-4113-8508-e078a8e65893",
-      "name": "jhguhjb",
-      "controlId": "1",
-      "connectionIds": [
-        {
-          "id": "1",
-          "name": "abc"
-        },
-        {
-          "id": "2",
-          "name": "bcd"
-        }
-      ]
+      "id": "3b98",
+      "name": "hjh",
+      "connection": "1"
     }
   ],
   "campaignConnections": [
@@ -125,6 +107,10 @@
     {
       "id": "2",
       "name": "bcd"
+    },
+    {
+      "id": "3",
+      "name": "bcde"
     }
   ],
   "connections": [

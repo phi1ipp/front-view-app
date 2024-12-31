@@ -21,18 +21,20 @@ import EntitlementsOn from './img/EntitlementsOn.svg';
 import SettingsOff from './img/SettingsOff.svg';
 import SettingsOn from './img/SettingsOn.svg';
 import {ConnectionsComponent} from '../Connections/ConnectionsComponent.tsx';
+import {ControlsComponent} from '../Controls/ControlsComponent.tsx';
+import { CampaignComponent } from '../CampaignComponent/CampaignComponent.tsx';
+
 
 const DashboardComponent = () => <div>Dashboard Component</div>;
 const CampaignsComponent = () => <div>
-<Campaigns>
-</Campaigns>
+<CampaignComponent></CampaignComponent>
 </div>;
 const AnalyticsComponent = () => <div>Analytics Component</div>;
 const UsersComponent = () => <div><UserManagement></UserManagement></div>;
 const ConnectionComponent = () => <div><ConnectionsComponent></ConnectionsComponent></div>;
-const ControlsComponent = () => <div>Controls Component</div>;
+const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div>;
 const ExclusionComponent = () => <div>Exclusion Component</div>
-const EntitlementsComponent = () => <div>Entitlements Component</div>;
+const EntitlementsComponent = () => <div></div>;
 const SettingsComponent = () => <div>Settings Component</div>;
 
 
@@ -90,7 +92,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       case 4:
         return <ConnectionComponent />;
       case 5:
-        return <ControlsComponent />;
+        return <ControlComponent />;
       case 6:
         return <ExclusionComponent />;
       case 7:

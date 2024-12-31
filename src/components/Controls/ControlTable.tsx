@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import styles from './Campaigns.module.css';
+import styles from './Control.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
-import { AddCampaignProps } from './types';
-import { TableFooter } from '../Users/TableFooter.tsx';
+import { TableFooter } from './TableFooter.tsx';
+import { ControlsTableProps } from './types';
 
-
-export const CampaignsTable: React.FC<AddCampaignProps> = ({ campaigns}) => {
+export const ControlTable: React.FC<ControlsTableProps> = ({controls, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -18,30 +17,28 @@ export const CampaignsTable: React.FC<AddCampaignProps> = ({ campaigns}) => {
     setRowsPerPage(rows);
     setCurrentPage(1);
   };
-  const handleDownload = () => {
-    // Handle download logic
-  };
-
+  
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Campaign ID" sortable />
-        <TableHeader label="Campaign Name" sortable />
-        <TableHeader label="Status" sortable />
-        <TableHeader label="Violation Count" sortable />
+        <TableHeader label="Control ID" sortable />
+        <TableHeader label="Control Name" sortable />
+        <TableHeader label="Entitlement1" sortable />
+        <TableHeader label="Entitlement2" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {campaigns.map((campaign) => (
+        {connections.map((connection) => (
           <TableRow
-            key={campaign.id}
-            campaign={campaign}
-            onDownload={handleDownload}
+            key={connection.id}
+            connection={connection}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         ))}
       </div>
       <TableFooter
-        totalItems={campaigns.length}
+        totalItems={connections.length}
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}
@@ -50,24 +47,3 @@ export const CampaignsTable: React.FC<AddCampaignProps> = ({ campaigns}) => {
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
