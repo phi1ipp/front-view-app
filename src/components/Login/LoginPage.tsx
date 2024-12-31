@@ -35,18 +35,24 @@ export const LoginPage: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:4000/users?email=${username}&password=${password}`);
+      const loginData = new FormData();
+      loginData.append('username', username);
+      loginData.append('password', password);
+
+      const response = await axios(`http://localhost:8080/auth/login`,{
+        method: 'POST',
+        data: loginData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
         console.log("logged in");
         // Check if the response contains any users
-        if (response.data.length > 0) {
+
             console.log("logged in 2");
           const user = response.data[0]; // Assuming the first match is the correct user
           localStorage.setItem("isAuthenticated", "true"); 
           localStorage.setItem("userName",username)
           navigate('/home');
-        } else {
-          setError('Invalid credentials. Please try again.');
-        } 
+        
     }catch (error) {
       setErrors({
         username: 'Invalid username or password',
@@ -56,6 +62,11 @@ export const LoginPage: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+
+
+
+
 
 
   return (
