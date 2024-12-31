@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ControlModal.module.css';
 import { ControlModalProps, Control } from './types';
+import { v4 as uuidv4 } from 'uuid'; 
 
 export const ControlModal: React.FC<ControlModalProps> = ({
   isOpen,
@@ -9,10 +10,9 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   onSubmit
 }) => {
   const [formData, setFormData] = useState<Control>({
-    name: '',
-    hostport: '',
-    loginId: '',
-    password: ''
+        name: '',
+        entitlement1: '',
+        entitlement2: '',
   });
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export const ControlModal: React.FC<ControlModalProps> = ({
       setFormData(control);
     } else {
       setFormData({
+        id: uuidv4(),
         name: '',
-        hostport: '',
-        loginId: '',
-        password: ''
+        entitlement1: '',
+        entitlement2: '',
       });
     }
   }, [control]);
@@ -55,25 +55,25 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 </div>
 <div className={styles.formField}>
   <input
-    id="hostport"
+    id="entitlement1"
     type="text"
     placeholder=" "
-    value={formData.hostport}
-    onChange={(e) => setFormData({ ...formData, hostport: e.target.value })}
+    value={formData.entitlement1}
+    onChange={(e) => setFormData({ ...formData, entitlement1: e.target.value })}
     required
   />
-  <label htmlFor="hostport">Entitlement 1</label>
+  <label htmlFor="entitlement1">Entitlement 1</label>
 </div>
 <div className={styles.formField}>
   <input
-    id="loginId"
+    id="entitlement2"
     type="text"
     placeholder=" "
-    value={formData.loginId}
-    onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
+    value={formData.entitlement2}
+    onChange={(e) => setFormData({ ...formData, entitlement2: e.target.value })}
     required
   />
-  <label htmlFor="loginId">Entitlement 2</label>
+  <label htmlFor="entitlement2">Entitlement 2</label>
   </div>
 
           <div className={styles.modalActions}>

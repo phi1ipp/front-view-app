@@ -12,7 +12,8 @@ export const UserModal: React.FC<UserModalProps> = ({
     userId: '',
     loginId: '',
     fullName: '',
-    email: ''
+    email: '',
+    password: ''
   });
 
   useEffect(() => {
@@ -74,6 +75,17 @@ export const UserModal: React.FC<UserModalProps> = ({
               placeholder=" "
             />
             <label htmlFor="email">Email</label>
+          </div>
+          <div className={styles.formField}>
+            <input
+              id="password"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+              placeholder=" "
+            />
+            <label htmlFor="password">Password</label>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>

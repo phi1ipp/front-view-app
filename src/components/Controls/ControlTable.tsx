@@ -21,24 +21,23 @@ export const ControlTable: React.FC<ControlsTableProps> = ({controls, onEdit, on
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Control ID" sortable />
         <TableHeader label="Control Name" sortable />
         <TableHeader label="Entitlement1" sortable />
         <TableHeader label="Entitlement2" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {connections.map((connection) => (
+        {controls.map((control) => (
           <TableRow
-            key={connection.id}
-            connection={connection}
+            key={control.id}
+            control={control}
             onEdit={onEdit}
             onDelete={onDelete}
           />
         ))}
       </div>
       <TableFooter
-        totalItems={connections.length}
+        totalItems={controls.length}
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}

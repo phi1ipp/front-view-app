@@ -34,6 +34,14 @@
   margin-bottom: 5px;
 }
 
+.successMessage {
+  background-color: #28a745;  
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+}
+
 .formField {
   position: relative; /* Required for positioning the floating label */
   margin-bottom: 24px;
