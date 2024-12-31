@@ -15,7 +15,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
       <div className={styles.modalContent} role="dialog" aria-modal="true">
         <h2 className={styles.modalTitle}>Confirm Delete</h2>
         <p className={styles.modalText}>
-          Are you sure you want to delete this user? This action cannot be undone.
+          Are you sure you want to delete this control? This action cannot be undone.
         </p>
         <div className={styles.modalActions}>
           <button onClick={onClose} className={styles.cancelButton}>

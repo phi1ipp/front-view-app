@@ -21,9 +21,9 @@ export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, 
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Campaign ID" sortable />
         <TableHeader label="Connection Name" sortable />
-        <TableHeader label="Host Port" sortable />
+        <TableHeader label="Host" sortable />
+        <TableHeader label="Port" sortable />
         <TableHeader label="Login Id" sortable />
         <TableHeader label="Action" />
       </div>

@@ -6,13 +6,13 @@ export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{connection.campaignId}</div>
-      </div>
-      <div className={styles.cell}>
         <div className={styles.cellContent}>{connection.name}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{connection.hostport}</div>
+        <div className={styles.cellContent}>{connection.host}</div>
+      </div>
+      <div className={styles.cell}>
+        <div className={styles.cellContent}>{connection.port}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{connection.loginId}</div>

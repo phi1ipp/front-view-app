@@ -89,10 +89,9 @@ interface ConnectionModalProps {
 
 interface Controls {
   id: string;
-  campaignId: string;
   name: string;
-  hostport: string;
-  loginId: string;
+  entitlement1: string;
+  entitlement2: string;
 }
 
 
@@ -126,6 +125,7 @@ export interface User {
   loginId: string;
   fullName: string;
   email: string;
+  password: string;
 }
 
 export interface UserModalProps {
