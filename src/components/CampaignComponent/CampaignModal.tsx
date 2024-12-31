@@ -18,7 +18,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const [selectedControls, setSelectedControls] = useState([]);
   const [showControlsModal, setShowControlsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');  // State to manage the success message
 
   useEffect(() => {
     fetchConnections();
@@ -62,10 +61,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         controlIds: selectedControls
       };
       onSubmit(formData);
-      setSuccessMessage('Created Campaign Successfully!');  // Set the success message
-      setTimeout(() => {
-        onClose();  // Close the modal after showing the message for a few seconds
-      }, 3000);
+      onClose();
     } catch (error) {
       console.error('Failed to create campaign:', error);
     } finally {
@@ -73,11 +69,11 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
+
   const onClose = () => {
     setFormData({name: '', connection: ''});
     setSelectedControls([]);
     setShowControlsModal(false);
-    setSuccessMessage('');  // Clear the success message
     close();
   };
 
@@ -121,7 +117,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
         <h2>Create Campaign</h2>
         <form onSubmit={handleNext}>
           <div className={styles.formField}>
@@ -136,7 +131,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <label htmlFor="name">Campaign Name</label>
           </div>
           <div className={styles.formField}>
-            {formData.connection && <div className={styles.selectedConnection}>{selectedConnectionName}</div>}
+           
             <select
               id="connection"
               value={formData.connection}
@@ -150,7 +145,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
                 </option>
               ))}
             </select>
-            <label htmlFor="connection">Connection</label>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
@@ -165,4 +159,3 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     </div>
   );
 };
-
