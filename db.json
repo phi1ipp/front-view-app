@@ -92,8 +92,8 @@
       "action": "Fix"
     },
     {
-      "id": "3b98",
-      "name": "hjh",
+      "id": "8271",
+      "name": "h",
       "connection": "1"
     }
   ],
@@ -105,6 +105,14 @@
     {
       "id": "2",
       "name": "bcd"
+    },
+    {
+      "id": "3",
+      "name": "abcd"
+    },
+    {
+      "id": "3",
+      "name": "bcde"
     }
   ],
   "campaignControls": [

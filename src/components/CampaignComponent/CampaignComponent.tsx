@@ -8,9 +8,9 @@ import {CampaignModal} from './CampaignModal.tsx'
 export const CampaignComponent: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | undefined>();
-  const [selectedCampaignId, setSelectedCampaignId] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+  const [errorMessage,setErrorMessage] = useState('');
   useEffect(() => {
     fetchCampaigns();
   }, []);
@@ -54,18 +54,30 @@ export const CampaignComponent: React.FC = () => {
     const url = 'http://localhost:4000/campaigns';
     
     try {
-      await fetch(url, {
+     const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(campaign),
       });
-      console.log("campaign "+campaign);
+
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+    console.log("campaign ", campaign);
+      setSuccessMessage('Created Campaign Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       setIsModalOpen(false);
       fetchCampaigns();
-
     } catch (error) {
       console.error('Error saving campaign:', error);
+      setErrorMessage('Failed to save campaign.');  // Set error message when saving campaign fails
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
+
   };
 
   const handleCreateCampaign = () => {
@@ -77,9 +89,15 @@ export const CampaignComponent: React.FC = () => {
 
   return (
         <div className={styles.container}>
+            {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
-              <h1 className={styles.title}>Connections</h1>
+              <h1 className={styles.title}>Campaigns</h1>
             </div>
             <button className={styles.createButton} onClick={handleCreateCampaign}>
               <div className={styles.buttonContent}>
@@ -102,7 +120,7 @@ export const CampaignComponent: React.FC = () => {
       <CampaignModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        connection={selectedCampaign}
+        campaign={selectedCampaign}
         onSubmit={handleSubmit}
       />
      

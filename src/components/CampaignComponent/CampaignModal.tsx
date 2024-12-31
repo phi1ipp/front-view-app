@@ -18,6 +18,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const [selectedControls, setSelectedControls] = useState([]);
   const [showControlsModal, setShowControlsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');  // State to manage the success message
 
   useEffect(() => {
     fetchConnections();
@@ -61,7 +62,10 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         controlIds: selectedControls
       };
       onSubmit(formData);
-      onClose();
+      setSuccessMessage('Created Campaign Successfully!');  // Set the success message
+      setTimeout(() => {
+        onClose();  // Close the modal after showing the message for a few seconds
+      }, 3000);
     } catch (error) {
       console.error('Failed to create campaign:', error);
     } finally {
@@ -69,11 +73,11 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-
   const onClose = () => {
     setFormData({name: '', connection: ''});
     setSelectedControls([]);
     setShowControlsModal(false);
+    setSuccessMessage('');  // Clear the success message
     close();
   };
 
@@ -117,6 +121,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
+        {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
         <h2>Create Campaign</h2>
         <form onSubmit={handleNext}>
           <div className={styles.formField}>
@@ -160,3 +165,4 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     </div>
   );
 };
+

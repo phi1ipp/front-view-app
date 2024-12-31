@@ -29,6 +29,22 @@
   text-overflow: ellipsis;
 }
 
+.successMessage {
+  background-color: #28a745; /* Green background */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px; /* Space below the message */
+}
+
+.errorMessage {
+  background-color: #d62020; /* Green background */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px; /* Space below the message */
+}
+
 .statusChipWarning {
   background: var(--Accent-Orange, #ff9f43);
 }

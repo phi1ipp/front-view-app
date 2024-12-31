@@ -12,6 +12,8 @@ export const ConnectionsComponent: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedConnection, setSelectedConnection] = useState<Connection | undefined>();
   const [selectedConnectionId, setSelectedConnectionId] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+    const [errorMessage,setErrorMessage] = useState('');
   useEffect(() => {
     fetchConnections();
   }, []);
@@ -27,6 +29,7 @@ export const ConnectionsComponent: React.FC = () => {
       } catch (error) {
         console.error('Error fetching connections:', error);
       }
+      
     };
     
 
@@ -39,11 +42,22 @@ export const ConnectionsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      await fetch(`http://localhost:4000/connections/${id}`, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:4000/connections/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+      setSuccessMessage('Deleted Connection Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchConnections();
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting connection:', error);
+      console.error('Error deleting Connections:', error);
+      setErrorMessage('Failed to deleting Connections.');  // Set error message when saving campaign fails
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -54,17 +68,27 @@ export const ConnectionsComponent: React.FC = () => {
     const url = selectedConnection ? `http://localhost:4000/connections/${connection.id}` : 'http://localhost:4000/connections';
     
     try {
-      await fetch(url, {
+     const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(connection),
       });
-      console.log("connection "+connection);
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+    console.log("Connections ", connection);
+      setSuccessMessage('Created Connections Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       setIsModalOpen(false);
       fetchConnections();
-
     } catch (error) {
-      console.error('Error saving connection:', error);
+      console.error('Error saving Connections:', error);
+      setErrorMessage('Failed to save Connections.');  // Set error message when saving campaign fails
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
