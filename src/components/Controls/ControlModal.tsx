@@ -88,7 +88,7 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   >
     <option value="">Select Entitlement 1</option>
     {entitlementOptions1.map(option => (
-      <option key={option.id} value={option.id}>{option.name}</option>
+      <option key={option.id} value={option.name}>{option.name}</option>
     ))}
   </select>
   <label htmlFor="ent1Name">Entitlement 1</label>
@@ -102,7 +102,7 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   >
     <option value="">Select Entitlement 2</option>
     {entitlementOptions2.map(option => (
-      <option key={option.id} value={option.id}>{option.name}</option>
+      <option key={option.id} value={option.name}>{option.name}</option>
     ))}
   </select>
   <label htmlFor="ent2Name">Entitlement 2</label>

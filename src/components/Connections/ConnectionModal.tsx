@@ -51,7 +51,7 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
         })
       });
       
-      if (response.ok) { // Check if the response status is 200-299
+      if (response.ok) { 
         setTestMessage('Connection successful!');
       } else {
         setTestMessage('Connection failed!');

@@ -148,20 +148,7 @@
       "password": "asdfas"
     }
   ],
-  "controls": [
-    {
-      "id": "487b18cb-956d-40d4-a640-ddac44441fc1",
-      "name": "1",
-      "entitlement1": "1",
-      "entitlement2": "1"
-    },
-    {
-      "id": "f2e933c0-cdee-47a4-bfd7-5b99b79dee4b",
-      "name": "a",
-      "entitlement1": "a",
-      "entitlement2": "a"
-    }
-  ],
+  "controls": [],
   "entitlement": [
     {
       "id": "1",
