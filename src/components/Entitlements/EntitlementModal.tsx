@@ -6,7 +6,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   isOpen,
   onClose,
   entitlement,
-  onSubmit
+  onSubmit,
 }) => {
   const [formData, setFormData] = useState<Entitlement>({
     entitlementName: '',
@@ -14,7 +14,6 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   });
 
   const [functions, setFunctions] = useState([]);
-
 
   useEffect(() => {
     fetchFunctions();
@@ -39,15 +38,23 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
     }
   };
 
-  const handleFunctionChange = (event) => {
-    const value = Array.from(
-      event.target.selectedOptions,
-      (option) => option.value
-    );
-    setFormData({ ...formData, functionList: value });
+  const handleAddFunction = (functionId: string) => {
+    if (!formData.accessSet.includes(functionId)) {
+      setFormData({
+        ...formData,
+        accessSet: [...formData.accessSet, functionId],
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleRemoveFunction = (functionId: string) => {
+    setFormData({
+      ...formData,
+      accessSet: formData.accessSet.filter((id) => id !== functionId),
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
   };
@@ -66,31 +73,64 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
               id="entitlementName"
               type="text"
               value={formData.entitlementName}
-              onChange={(e) => setFormData({ ...formData, entitlementName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, entitlementName: e.target.value })
+              }
               required
-              placeholder="Entitlement Name"
             />
             <label htmlFor="entitlementName">Entitlement Name</label>
           </div>
+
+          {/* Dropdown to select functions */}
           <div className={styles.formField}>
-            <label htmlFor="accessSet">Select Functions</label>
             <select
-              id="accessSet"
-              multiple
-              value={formData.accessSet}
-              onChange={handleFunctionChange}
-              size="5" // Adjust size as needed
-              required
+              className={styles.dropdown}
+              onChange={(e) => {
+                handleAddFunction(e.target.value);
+                e.target.value = ''; // Reset dropdown after selection
+              }}
+              value=""
             >
-              {functions.map((func) => (
-                <option key={func.id} value={func.id}>
-                  {func.name}
-                </option>
-              ))}
+              <option value="" disabled>
+                Select a function
+              </option>
+              {functions
+                .filter((func) => !formData.accessSet.includes(func.id))
+                .map((func) => (
+                  <option key={func.id} value={func.id}>
+                    {func.name}
+                  </option>
+                ))}
             </select>
           </div>
+
+          {/* Display selected functions below */}
+          <div className={styles.selectedList}>
+            {formData.accessSet.map((selectedId) => {
+              const selectedFunction = functions.find(
+                (func) => func.id === selectedId
+              );
+              return (
+                <div key={selectedId} className={styles.selectedItem}>
+                  {selectedFunction?.name}
+                  <button
+                    type="button"
+                    className={styles.removeButton}
+                    onClick={() => handleRemoveFunction(selectedId)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
           <div className={styles.modalActions}>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
+            <button
+              type="button"
+              onClick={onClose}
+              className={styles.cancelButton}
+            >
               Cancel
             </button>
             <button type="submit" className={styles.submitButton}>

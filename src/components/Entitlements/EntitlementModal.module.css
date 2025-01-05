@@ -109,3 +109,38 @@
 .submitButton:hover {
   background-color: var(--primary-dark, #1565c0);
 }
+
+.dropdown {
+  padding: 12px;
+  font-size: 16px;
+  width: 95%;
+}
+
+.selectedList {
+  margin-top: 16px; /* Spacing above the selected items */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.selectedItem {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.removeButton {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: #ff0000;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  color: #cc0000;
+}

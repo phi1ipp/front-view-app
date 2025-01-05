@@ -34,6 +34,24 @@
       "fullName": "hbhb",
       "email": "hbhjb@jhvhb",
       "password": "abcradabra"
+    },
+    {
+      "id": "0506",
+      "entitlementId": "",
+      "entitlementName": "asdf",
+      "accessSet": [
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "25e9",
+      "entitlementId": "",
+      "entitlementName": "123e",
+      "accessSet": [
+        "2",
+        "3"
+      ]
     }
   ],
   "campaigns": [
@@ -100,6 +118,11 @@
       "id": "6f4a",
       "name": "xcv",
       "connection": "1"
+    },
+    {
+      "id": "a22e",
+      "name": "Raju Kanuri",
+      "connection": "3"
     }
   ],
   "campaignConnections": [
