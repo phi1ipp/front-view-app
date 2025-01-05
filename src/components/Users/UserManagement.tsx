@@ -83,11 +83,22 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+     const response = await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+      setSuccessMessage('Deleted User Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchUsers();
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error('Error deleting User:', error);
+      setErrorMessage('Failed to delete User.'); 
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 

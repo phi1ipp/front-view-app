@@ -12,6 +12,8 @@ export const Entitlements: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedEntitlement, setSelectedEntitlement] = useState<Entitlement | undefined>();
   const [selectedEntitlementId, setSelectedEntitlementId] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+      const [errorMessage,setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchEntitlements();
@@ -54,32 +56,60 @@ export const Entitlements: React.FC = () => {
       const method = selectedEntitlement ? 'PUT' : 'POST';
       const url = selectedEntitlement ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
       
-      await fetch(url, {
+      const response=await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(entitlement),
       });
       
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+      setSuccessMessage('Created Entitlement Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchEntitlements();
       setIsEntitlementModalOpen(false);
     } catch (error) {
       console.error('Error saving Entitlement:', error);
+      setErrorMessage('Failed to save Entitlement.');  
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+     const response= await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+      setSuccessMessage('Deleted Connection Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchEntitlements();
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.error('Error deleting Entitlement:', error);
+      setErrorMessage('Failed to delete Entitlement.');  
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
   return (
         <div className={styles.container}>
+            {successMessage && (
+                  <div className={styles.successMessage}>{successMessage}</div>
+                )}
+                {errorMessage && (
+                  <div className={styles.errorMessage}>{errorMessage}</div>
+                )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Entitlements</h1>

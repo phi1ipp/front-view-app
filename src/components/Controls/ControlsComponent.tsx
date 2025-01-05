@@ -41,11 +41,23 @@ export const ControlsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      await fetch(`http://localhost:4000/controls/${id}`, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:4000/controls/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+    console.log("Controls ", control);
+      setSuccessMessage('Deleted Control Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchControls();
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting control:', error);
+      console.error('Error deleting Control:', error);
+      setErrorMessage('Failed to delete Control.');  
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 

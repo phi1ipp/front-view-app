@@ -54,7 +54,8 @@ export interface Campaign {
   id: string;
   name: string;
   controlId: string;
-  connections: Connection[];  // Array of Connection objects
+  connections: Connection[]; 
+   // Array of Connection objects
 }
 
 interface Connection {
