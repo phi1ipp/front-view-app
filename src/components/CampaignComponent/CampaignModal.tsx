@@ -7,16 +7,16 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,
   onClose: close,
   campaign,
-  onSubmit
+  onSubmit,
 }) => {
   const [formData, setFormData] = useState<Campaign>({
     name: '',
-    connection: ''
+    connection: '',
+    controls:[]
   });
   const [connections, setConnections] = useState([]);
-  const [controls, setControls] = useState([]);
-  const [selectedControls, setSelectedControls] = useState([]);
-  const [showControlsModal, setShowControlsModal] = useState(false);
+  const [controls, setControls] = useState<{ id: string; name: string }[]>([]);
+  const [selectedControls, setSelectedControls] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -44,12 +44,20 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    setShowControlsModal(true);
+  const handleAddControl = (controlId: string) => {
+    const control = controls.find((c) => c.id === controlId);
+    if (control && !selectedControls.some((selected) => selected.id === controlId)) {
+      setSelectedControls([...selectedControls, control]);
+    }
   };
 
-  const handleSubmit = async () => {
+  const handleRemoveControl = (controlId: string) => {
+    setSelectedControls(selectedControls.filter((control) => control.id !== controlId));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!formData.name || !formData.connection || selectedControls.length === 0) return;
 
     setIsLoading(true);
@@ -58,10 +66,10 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         id: uuidv4(),
         name: formData.name,
         connectionId: formData.connection,
-        controlIds: selectedControls
+        controlIds: selectedControls.map((control) => control.id),
       };
-      onSubmit(formData);
-      onClose();
+      onSubmit(campaign); // Pass the complete campaign data including controls
+      onClose(); // Close the modal after submission
     } catch (error) {
       console.error('Failed to create campaign:', error);
     } finally {
@@ -69,56 +77,21 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-
   const onClose = () => {
-    setFormData({name: '', connection: ''});
+    setFormData({ name: '', connection: '' });
     setSelectedControls([]);
-    setShowControlsModal(false);
-    close();
+    close(); // Close the modal
   };
 
-  const selectedConnectionName = connections.find(conn => conn.id === formData.connection)?.name;
+  const selectedConnectionName = connections.find((conn) => conn.id === formData.connection)?.name;
 
   if (!isOpen) return null;
-
-  if (showControlsModal) {
-    return (
-      <div className={styles.modalOverlay}>
-        <div className={styles.modalContent}>
-          <h2>Select Controls</h2>
-          {controls.map(control => (
-            <div key={control.id}>
-              <input
-                type="checkbox"
-                checked={selectedControls.includes(control.id)}
-                onChange={() => {
-                  const newSelection = selectedControls.includes(control.id)
-                    ? selectedControls.filter(c => c !== control.id)
-                    : [...selectedControls, control.id];
-                  setSelectedControls(newSelection);
-                }}
-              />
-              {control.name}
-            </div>
-          ))}
-          <div className={styles.modalActions}>
-            <button type="button" onClick={() => setShowControlsModal(false)} className={styles.cancelButton}>
-              Previous
-            </button>
-            <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
-              Create Campaign
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <h2>Create Campaign</h2>
-        <form onSubmit={handleNext}>
+        <form onSubmit={handleSubmit}>
           <div className={styles.formField}>
             <input
               id="name"
@@ -131,25 +104,71 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <label htmlFor="name">Campaign Name</label>
           </div>
           <div className={styles.formField}>
+
+<select
+
+  id="connection"
+value={formData.connection}
+
+  onChange={(e) => setFormData({ ...formData, connection: e.target.value })}
+
+  required
+
+>
+
+  <option value="">Select connection</option>
+
+  {connections.map(connection => (
+
+    <option key={connection.id} value={connection.id}>{connection.name}</option>
+
+  ))}
+
+</select>
+
+<label htmlFor="connection">Connections</label>
+
+</div>
+          <div className={styles.formField}>
             <select
-              id="connection"
-              value={formData.connection}
-              onChange={(e) => setFormData({ ...formData, connection: e.target.value })}
-              required
+              className={styles.dropdown}
+              onChange={(e) => handleAddControl(e.target.value)}
+              value=""
             >
-              <option value="">Select connection</option>
-              {connections.map(connection => (
-                <option key={connection.id} value={connection.id}>{connection.name}</option>
-              ))}
+              <option value="" disabled>
+                Select a control
+              </option>
+              {controls
+                .filter((control) => !selectedControls.some((selected) => selected.id === control.id))
+                .map((control) => (
+                  <option key={control.id} value={control.id}>
+                    {control.name}
+                  </option>
+                ))}
             </select>
-            <label htmlFor="connection">Connections</label>
           </div>
+
+          <div className={styles.selectedList}>
+            {selectedControls.map((control) => (
+              <div key={control.id} className={styles.selectedItem}>
+                {control.name}
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveControl(control.id)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
               Cancel
             </button>
-            <button type="submit" className={styles.submitButton}>
-              Next
+            <button type="submit" className={styles.submitButton} disabled={isLoading}>
+              {isLoading ? 'Creating...' : 'Create Campaign'}
             </button>
           </div>
         </form>
