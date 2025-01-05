@@ -166,8 +166,6 @@
     {
       "id": "1",
       "name": "sup",
-      "displayName": "s",
-      "description": "ent",
       "accessSet": [
         {
           "id": "1",
@@ -176,6 +174,10 @@
         {
           "id": "2",
           "name": "function2"
+        },
+        {
+          "id": "3",
+          "name": "function4"
         }
       ]
     }

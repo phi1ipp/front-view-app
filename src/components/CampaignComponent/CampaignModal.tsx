@@ -131,20 +131,18 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <label htmlFor="name">Campaign Name</label>
           </div>
           <div className={styles.formField}>
-           
             <select
               id="connection"
               value={formData.connection}
               onChange={(e) => setFormData({ ...formData, connection: e.target.value })}
               required
             >
-              <option value="">Select a Connection</option>
-              {connections.map((connection) => (
-                <option key={connection.id} value={connection.id}>
-                  {connection.name}
-                </option>
+              <option value="">Select connection</option>
+              {connections.map(connection => (
+                <option key={connection.id} value={connection.id}>{connection.name}</option>
               ))}
             </select>
+            <label htmlFor="connection">Entitlement 1</label>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
