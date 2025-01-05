@@ -217,13 +217,27 @@
         "displayName":"s",
         "description": "ent",
         "accessSet": [{
-         "id":1,
-         "name":"a"
+         "id":"1",
+         "name":"function1"
         },
         {
-          "id":2,
-          "name":"b"
+          "id":"2",
+          "name":"function2"
          }]
       }
-    ]
+    ],
+   "accessSet": [
+    {
+       "id":"1",
+       "name":"function1"
+        },
+        {
+          "id":"2",
+          "name":"funtion2"
+         }
+         ,
+         {
+           "id":"3",
+           "name":"function4"
+          }]
 }

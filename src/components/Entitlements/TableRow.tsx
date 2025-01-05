@@ -11,8 +11,19 @@ export const TableRow: React.FC<TableRowProps> = ({ entitlement, onEdit, onDelet
       <div className={styles.cell}>
         <div className={styles.cellContent}>{entitlement.name}</div>
       </div>
-      <div className={styles.cell}>
-        <div className={styles.cellContent}>{entitlement.accessSet}</div>
+     <div className={styles.cell}>
+        <div className={styles.cellContent}>
+          {Array.isArray(entitlement.accessSet) ? (
+            entitlement.accessSet.map((access: any) => (
+              // Use access.id as the key to ensure uniqueness
+              <span key={access.id} className={styles.accessItem}>
+                {access.name || access.id || 'Unknown'} {/* Adjust based on your object properties */}
+              </span>
+            ))
+          ) : (
+            <span>{entitlement.accessSet}</span>
+          )}
+        </div>
       </div>
       <div className={styles.actionCell}>
         <button

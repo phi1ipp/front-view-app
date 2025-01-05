@@ -41,7 +41,7 @@ export const Entitlements: React.FC = () => {
 
   
 
-  const handleEditEntitlement = (Entitlement: Entitlement) => {
+  const handleEditEntitlement = (entitlement: Entitlement) => {
     setSelectedEntitlement(entitlement);
     setIsEntitlementModalOpen(true);
   };
@@ -54,7 +54,7 @@ export const Entitlements: React.FC = () => {
   const handleEntitlementSubmit = async (entitlement: Entitlement) => {
     try {
       const method = selectedEntitlement ? 'PUT' : 'POST';
-      const url = selectedEntitlement ? `http://localhost:4000/entitlement/${user.id}` : 'http://localhost:4000/entitlement';
+      const url = selectedEntitlement ? `http://localhost:4000/entitlement/${entitlement.id}` : 'http://localhost:4000/entitlement';
       
       const response=await fetch(url, {
         method,

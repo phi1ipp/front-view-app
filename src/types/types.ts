@@ -168,8 +168,8 @@ export interface Entitlement {
 }
 
 export interface AccessList{
-id:bigint;
-name:string;
+id: bigint;
+name: string;
 }
 
 export interface EntitlementModalProps {
