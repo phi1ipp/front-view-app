@@ -10,7 +10,7 @@ export const UserModal: React.FC<UserModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<User>({
     userId: '',
-    loginId: '',
+    enabled: '',
     fullName: '',
     email: '',
     password: ''
@@ -22,7 +22,7 @@ export const UserModal: React.FC<UserModalProps> = ({
     } else {
       setFormData({
         userId: '',
-        loginId: '',
+        enabled: '',
         fullName: '',
         email: ''
       });
@@ -43,17 +43,6 @@ export const UserModal: React.FC<UserModalProps> = ({
           {user ? 'Edit User' : 'Create User'}
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="loginId"
-              type="text"
-              value={formData.loginId}
-              onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="loginId">Login ID</label>
-          </div>
           <div className={styles.formField}>
             <input
               id="fullName"

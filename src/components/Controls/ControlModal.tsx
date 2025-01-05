@@ -11,8 +11,8 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<Control>({
         name: '',
-        entitlement1: '',
-        entitlement2: '',
+        ent1Name: '',
+        ent2Name: '',
   });
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export const ControlModal: React.FC<ControlModalProps> = ({
       setFormData({
         id: uuidv4(),
         name: '',
-        entitlement1: '',
-        entitlement2: '',
+        ent1Name: '',
+        ent2Name: '',
       });
     }
   }, [control]);
@@ -55,22 +55,22 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 </div>
 <div className={styles.formField}>
   <input
-    id="entitlement1"
+    id="ent1Name"
     type="text"
     placeholder=" "
-    value={formData.entitlement1}
-    onChange={(e) => setFormData({ ...formData, entitlement1: e.target.value })}
+    value={formData.ent1Name}
+    onChange={(e) => setFormData({ ...formData, ent1Name: e.target.value })}
     required
   />
   <label htmlFor="entitlement1">Entitlement 1</label>
 </div>
 <div className={styles.formField}>
   <input
-    id="entitlement2"
+    id="ent2Name"
     type="text"
     placeholder=" "
-    value={formData.entitlement2}
-    onChange={(e) => setFormData({ ...formData, entitlement2: e.target.value })}
+    value={formData.ent2Name}
+    onChange={(e) => setFormData({ ...formData, ent2Name: e.target.value })}
     required
   />
   <label htmlFor="entitlement2">Entitlement 2</label>

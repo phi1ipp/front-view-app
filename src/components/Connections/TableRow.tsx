@@ -15,7 +15,7 @@ export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete
         <div className={styles.cellContent}>{connection.port}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{connection.loginId}</div>
+        <div className={styles.cellContent}>{connection.user}</div>
       </div>
       <div className={styles.actionCell}>
         <button

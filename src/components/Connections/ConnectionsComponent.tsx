@@ -107,6 +107,12 @@ export const ConnectionsComponent: React.FC = () => {
 
   return (
         <div className={styles.container}>
+               {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Connections</h1>

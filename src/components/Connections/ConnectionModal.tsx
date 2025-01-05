@@ -10,8 +10,9 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<Connection>({
     name: '',
-    hostport: '',
-    loginId: '',
+    host: '',
+    port:'',
+    user: '',
     password: ''
   });
 
@@ -21,8 +22,9 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
     } else {
       setFormData({
         name: '',
-        hostport: '',
-        loginId: '',
+        host: '',
+        port:'',
+        user: '',
         password: ''
       });
     }
@@ -32,6 +34,33 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
     e.preventDefault();
     onSubmit(formData);
   };
+  const [testMessage, setTestMessage] = useState('');
+
+  const handleTestConnection = async () => {
+    try {
+      const response = await fetch('/api/test-connection', {
+        method: 'POST', // Specify the method
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type in the headers
+        },
+        body: JSON.stringify({ // Convert the formData to JSON
+          host: formData.host,
+          port: formData.port,
+          user: formData.user,
+          password: formData.password
+        })
+      });
+      
+      if (response.ok) { // Check if the response status is 200-299
+        setTestMessage('Connection successful!');
+      } else {
+        setTestMessage('Connection failed!');
+      }
+    } catch (error) {
+      setTestMessage('Connection failed!');
+    }
+  };
+
 
   if (!isOpen) return null;
 
@@ -55,25 +84,36 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 </div>
 <div className={styles.formField}>
   <input
-    id="hostport"
+    id="host"
     type="text"
     placeholder=" "
-    value={formData.hostport}
-    onChange={(e) => setFormData({ ...formData, hostport: e.target.value })}
+    value={formData.host}
+    onChange={(e) => setFormData({ ...formData, host: e.target.value })}
     required
   />
-  <label htmlFor="hostport">Host Name Port</label>
+  <label htmlFor="host">Host</label>
 </div>
 <div className={styles.formField}>
   <input
-    id="loginId"
+    id="port"
     type="text"
     placeholder=" "
-    value={formData.loginId}
-    onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
+    value={formData.port}
+    onChange={(e) => setFormData({ ...formData, port: e.target.value })}
     required
   />
-  <label htmlFor="loginId">Login Id</label>
+  <label htmlFor="port">Port</label>
+</div>
+<div className={styles.formField}>
+  <input
+    id="user"
+    type="text"
+    placeholder=" "
+    value={formData.user}
+    onChange={(e) => setFormData({ ...formData, user: e.target.value })}
+    required
+  />
+  <label htmlFor="user">User</label>
   </div>
 <div className={styles.formField}>
   <input
@@ -89,6 +129,9 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 </div>
 
           <div className={styles.modalActions}>
+          <button type="submit" onClick={handleTestConnection} className={styles.submitButton}>
+              Test Connection
+            </button>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
               Cancel
             </button>
@@ -96,6 +139,7 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
               {connection ? 'Save' : 'Create'}
             </button>
           </div>
+          {testMessage && <div className={styles.testMessage}>{testMessage}</div>}
         </form>
       </div>
     </div>

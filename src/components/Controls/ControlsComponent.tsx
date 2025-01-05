@@ -12,6 +12,8 @@ export const ControlsComponent: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedControl, setSelectedControl] = useState<Control | undefined>();
   const [selectedControlId, setSelectedControlId] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+      const [errorMessage,setErrorMessage] = useState('');
   useEffect(() => {
     fetchControls();
   }, []);
@@ -54,17 +56,27 @@ export const ControlsComponent: React.FC = () => {
     const url = selectedControl ? `http://localhost:4000/controls/${control.id}` : 'http://localhost:4000/controls';
     
     try {
-      await fetch(url, {
+    const response =  await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(control),
       });
-      console.log("control "+control);
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+    }
+    console.log("Controls ", control);
+      setSuccessMessage('Created Control Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       setIsModalOpen(false);
       fetchControls();
-
     } catch (error) {
-      console.error('Error saving control:', error);
+      console.error('Error saving Control:', error);
+      setErrorMessage('Failed to save Control.');  // Set error message when saving campaign fails
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -83,6 +95,12 @@ export const ControlsComponent: React.FC = () => {
 
   return (
         <div className={styles.container}>
+               {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Controls</h1>

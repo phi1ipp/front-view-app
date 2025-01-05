@@ -40,10 +40,6 @@ export interface CampaignData {
   violationCount: number;
 }
 
-export interface TableHeaderProps {
-  label: string;
-  sortable?: boolean;
-}
 
 export interface StatusChipProps {
   status: CampaignData['status'];
@@ -53,10 +49,6 @@ export interface DownloadButtonProps {
   onClick: () => void;
 }
 
-export interface TableRowProps {
-  campaign: CampaignData;
-  onDownload: () => void;
-}
 
 export interface Campaign {
   id: string;
@@ -66,11 +58,12 @@ export interface Campaign {
 }
 
 interface Connection {
-  id: string;
-  campaignId: string;
+  id: integer;
   name: string;
-  hostport: string;
-  loginId: string;
+  host: string;
+  port: string;
+  user: string;
+  password:string;
 }
 
 
@@ -88,10 +81,13 @@ interface ConnectionModalProps {
 }
 
 interface Controls {
-  id: string;
+  id: bigint;
   name: string;
-  entitlement1: string;
-  entitlement2: string;
+  ent1Id:bigint;
+  ent1Name: string;
+  ent2Id:bigint;
+  ent2Name: string;
+
 }
 
 
@@ -122,7 +118,7 @@ export interface Control {
 
 export interface User {
   id: string;
-  loginId: string;
+  enabled: string;
   fullName: string;
   email: string;
   password: string;
@@ -133,6 +129,59 @@ export interface UserModalProps {
   onClose: () => void;
   user?: User;
   onSubmit: (user: User) => void;
+}
+
+export interface UserTableProps {
+  users: User[];
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+}
+
+export interface Campaigns {
+  id: string;
+  name: string;
+  status: 'Running' | 'Completed' | 'Error';
+  violationCount: number;
+}
+
+export interface CampaignsTableProps {
+  campaigns: Campaigns[];
+}
+
+export interface CampaignModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  campaigns: Campaigns | undefined;
+  onSubmit: (campaigns: Campaigns) => void;
+}
+
+
+
+export interface Entitlement {
+  id: bigint;
+  name: string;
+  description:string;
+  accessSet: AccessList[];
+  password: string;
+
+}
+
+export interface AccessList{
+id:bigint;
+name:string;
+}
+
+export interface EntitlementModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  entitlement?: Entitlement;
+  onSubmit: (entitlement: Entitlement) => void;
+}
+
+export interface EntitlementTableProps {
+  entitlements: Entitlement[];
+  onEdit: (entitlement: Entitlement) => void;
+  onDelete: (entitlementId: string) => void;
 }
 
 export interface DeleteModalProps {
@@ -162,32 +211,11 @@ export interface TableFooterProps {
   onRowsPerPageChange: (rows: number) => void;
 }
 
-export interface UserTableProps {
-  users: User[];
-  onEdit: (user: User) => void;
-  onDelete: (userId: string) => void;
+
+export interface ButtonProps {
+  label: string;
+  onClick: () => void;
 }
-
-interface Campaigns {
-  id: string;
-  name: string;
-  status: 'Running' | 'Completed' | 'Error';
-  violationCount: number;
-}
-
-
-interface CampaignsTableProps {
-  campaigns: Campaigns[];
-}
-
-interface CampaignModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  campaigns: Campaigns | undefined;
-  onSubmit: (campaigns: Campaigns) => void;
-}
-
-//Login
 
 export interface InputFieldProps {
   label: string;
@@ -197,7 +225,13 @@ export interface InputFieldProps {
   onChange: (value: string) => void;
 }
 
-export interface ButtonProps {
+export interface TableHeaderProps {
   label: string;
-  onClick: () => void;
+  sortable?: boolean;
+}
+
+
+export interface TableRowProps {
+  campaign: CampaignData;
+  onDownload: () => void;
 }

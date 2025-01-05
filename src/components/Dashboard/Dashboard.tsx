@@ -23,6 +23,8 @@ import SettingsOn from './img/SettingsOn.svg';
 import {ConnectionsComponent} from '../Connections/ConnectionsComponent.tsx';
 import {ControlsComponent} from '../Controls/ControlsComponent.tsx';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent.tsx';
+import { Entitlements } from '../Entitlements/Entitlements.tsx';
+
 
 
 const DashboardComponent = () => <div>Dashboard Component</div>;
@@ -34,7 +36,7 @@ const UsersComponent = () => <div><UserManagement></UserManagement></div>;
 const ConnectionComponent = () => <div><ConnectionsComponent></ConnectionsComponent></div>;
 const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div>;
 const ExclusionComponent = () => <div>Exclusion Component</div>
-const EntitlementsComponent = () => <div></div>;
+const EntitlementsComponent = () => <div><Entitlements></Entitlements></div>;
 const SettingsComponent = () => <div>Settings Component</div>;
 
 

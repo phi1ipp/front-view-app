@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styles from './Connection.module.css';
+import styles from './Entitlement.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { ConnectionsTableProps } from './types';
+import { EntitlementTableProps } from './types';
 
-export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, onEdit, onDelete }) => {
+export const EntitlementTable: React.FC<EntitlementTableProps> = ({ entitlements, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -17,28 +17,27 @@ export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, 
     setRowsPerPage(rows);
     setCurrentPage(1);
   };
-  
+
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Connection Name" sortable />
-        <TableHeader label="Host" sortable />
-        <TableHeader label="Port" sortable />
-        <TableHeader label="User" sortable />
+        <TableHeader label="Entitlement ID" sortable />
+        <TableHeader label="Entitlemen Name" sortable />
+        <TableHeader label="Function List" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {connections.map((connection) => (
+        {entitlements.map((entitlement) => (
           <TableRow
-            key={connection.id}
-            connection={connection}
+            key={entitlement.id}
+            entitlement={entitlement}
             onEdit={onEdit}
             onDelete={onDelete}
           />
         ))}
       </div>
       <TableFooter
-        totalItems={connections.length}
+        totalItems={entitlements.length}
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}
