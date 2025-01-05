@@ -142,7 +142,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
                 <option key={connection.id} value={connection.id}>{connection.name}</option>
               ))}
             </select>
-            <label htmlFor="connection">Entitlement 1</label>
+            <label htmlFor="connection">Connections</label>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
