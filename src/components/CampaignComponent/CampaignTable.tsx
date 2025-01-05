@@ -27,7 +27,7 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns }) => {
         <TableHeader label="Campaign ID" sortable />
         <TableHeader label="Campaign Name" sortable />
         <TableHeader label="Status" sortable />
-        <TableHeader label="Violation Cound" sortable />
+        <TableHeader label="Violation Count" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
