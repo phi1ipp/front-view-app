@@ -30,7 +30,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
 
   const fetchFunctions = async () => {
     try {
-      const response = await fetch('http://localhost:4000/campaignControls');
+      const response = await fetch('http://localhost:4000/entitlement/accessSet');
       const data = await response.json();
       setFunctions(data);
     } catch (error) {

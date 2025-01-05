@@ -52,6 +52,15 @@
         "2",
         "3"
       ]
+    },
+    {
+      "id": "6e5e",
+      "entitlementId": "",
+      "entitlementName": "hhh",
+      "accessSet": [
+        "1",
+        "3"
+      ]
     }
   ],
   "campaigns": [
@@ -200,5 +209,21 @@
       "entitlement1": "a",
       "entitlement2": "a"
     }
-  ]
+  ],
+    "entitlement": [
+      {
+        "id": "1",
+        "name": "sup",
+        "displayName":"s",
+        "description": "ent",
+        "accessSet": [{
+         "id":1,
+         "name":"a"
+        },
+        {
+          "id":2,
+          "name":"b"
+         }]
+      }
+    ]
 }

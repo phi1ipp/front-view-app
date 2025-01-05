@@ -21,7 +21,7 @@ export const Entitlements: React.FC = () => {
 
   const fetchEntitlements = async () => {
     try {
-      const response = await fetch('http://localhost:4000/usersdata');
+      const response = await fetch('http://localhost:4000/entitlement');
             if (!response.ok) { // Check if the response was successful
         throw new Error(`HTTP error! status: ${response.status}`);
       }  
@@ -54,7 +54,7 @@ export const Entitlements: React.FC = () => {
   const handleEntitlementSubmit = async (entitlement: Entitlement) => {
     try {
       const method = selectedEntitlement ? 'PUT' : 'POST';
-      const url = selectedEntitlement ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
+      const url = selectedEntitlement ? `http://localhost:4000/entitlement/${user.id}` : 'http://localhost:4000/entitlement';
       
       const response=await fetch(url, {
         method,
@@ -83,7 +83,7 @@ export const Entitlements: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-     const response= await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+     const response= await fetch(`http://localhost:4000/entitlement/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
