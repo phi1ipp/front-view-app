@@ -20,10 +20,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:4000/usersdata');
-            if (!response.ok) { // Check if the response was successful
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }  
+      const response = await fetch('http://localhost:4000/usersdata');          
       const data = await response.json();
       setUsers(data);
       console.log(JSON.stringify(response));
@@ -45,15 +42,16 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
     setIsUserModalOpen(true);
   };
 
-  const handleDeleteClick = (id: string) => {
-    setSelectedUserId(id);
+  const handleDeleteClick = (userName: string) => {
+    setSelectedUserId(userName);
     setIsDeleteModalOpen(true);
   };
 
   const handleUserSubmit = async (user: User) => {
+    console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
+      const url = selectedUser ? `http://localhost:4000/usersdata/${user.userName}` : 'http://localhost:4000/usersdata';
       
      const response =  await fetch(url, {
         method,
@@ -104,6 +102,12 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
 
   return (
         <div className={styles.container}>
+            {successMessage && (
+                            <div className={styles.successMessage}>{successMessage}</div>
+                          )}
+                          {errorMessage && (
+                            <div className={styles.errorMessage}>{errorMessage}</div>
+                          )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Users</h1>

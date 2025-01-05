@@ -118,7 +118,7 @@ export interface Control {
 
 
 export interface User {
-  id: string;
+  userName: string;
   enabled: string;
   fullName: string;
   email: string;
@@ -201,7 +201,7 @@ export interface TableHeaderProps {
 export interface TableRowProps {
   user: User;
   onEdit: (user: User) => void;
-  onDelete: (userId: string) => void;
+  onDelete: (userName: string) => void;
 }
 
 export interface TableFooterProps {

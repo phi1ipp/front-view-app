@@ -8,59 +8,11 @@
   ],
   "usersdata": [
     {
-      "id": "3",
-      "loginId": "Alice",
-      "fullName": "Johnson123",
-      "email": "alice.johnson@example.com"
-    },
-    {
-      "id": "a664",
-      "userId": "",
-      "loginId": "123",
+      "id": "supraja",
+      "enabled": "",
       "fullName": "Supraja Badhri",
-      "email": "test@example.com"
-    },
-    {
-      "id": "bf3e",
-      "userId": "",
-      "loginId": "nbv",
-      "fullName": "nkjn ",
-      "email": "jbhjbm@jkhj"
-    },
-    {
-      "id": "df2a",
-      "userId": "",
-      "loginId": "asd",
-      "fullName": "hbhb",
-      "email": "hbhjb@jhvhb",
-      "password": "abcradabra"
-    },
-    {
-      "id": "0506",
-      "entitlementId": "",
-      "entitlementName": "asdf",
-      "accessSet": [
-        "2",
-        "3"
-      ]
-    },
-    {
-      "id": "25e9",
-      "entitlementId": "",
-      "entitlementName": "123e",
-      "accessSet": [
-        "2",
-        "3"
-      ]
-    },
-    {
-      "id": "6e5e",
-      "entitlementId": "",
-      "entitlementName": "hhh",
-      "accessSet": [
-        "1",
-        "3"
-      ]
+      "email": "user@example.com",
+      "password": "jhgyuhjk"
     }
   ],
   "campaigns": [
@@ -210,34 +162,36 @@
       "entitlement2": "a"
     }
   ],
-    "entitlement": [
-      {
-        "id": "1",
-        "name": "sup",
-        "displayName":"s",
-        "description": "ent",
-        "accessSet": [{
-         "id":"1",
-         "name":"function1"
-        },
-        {
-          "id":"2",
-          "name":"function2"
-         }]
-      }
-    ],
-   "accessSet": [
+  "entitlement": [
     {
-       "id":"1",
-       "name":"function1"
+      "id": "1",
+      "name": "sup",
+      "displayName": "s",
+      "description": "ent",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
         },
         {
-          "id":"2",
-          "name":"funtion2"
-         }
-         ,
-         {
-           "id":"3",
-           "name":"function4"
-          }]
+          "id": "2",
+          "name": "function2"
+        }
+      ]
+    }
+  ],
+  "accessSet": [
+    {
+      "id": "1",
+      "name": "function1"
+    },
+    {
+      "id": "2",
+      "name": "funtion2"
+    },
+    {
+      "id": "3",
+      "name": "function4"
+    }
+  ]
 }

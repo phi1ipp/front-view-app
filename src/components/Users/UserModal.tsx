@@ -9,7 +9,7 @@ export const UserModal: React.FC<UserModalProps> = ({
   onSubmit
 }) => {
   const [formData, setFormData] = useState<User>({
-    userId: '',
+    id: '',
     enabled: '',
     fullName: '',
     email: '',
@@ -21,10 +21,11 @@ export const UserModal: React.FC<UserModalProps> = ({
       setFormData(user);
     } else {
       setFormData({
-        userId: '',
+        id: '',
         enabled: '',
         fullName: '',
-        email: ''
+        email: '',
+         password: ''
       });
     }
   }, [user]);
@@ -64,6 +65,17 @@ export const UserModal: React.FC<UserModalProps> = ({
               placeholder=" "
             />
             <label htmlFor="email">Email</label>
+          </div>
+          <div className={styles.formField}>
+            <input
+              id="id"
+              type="id"
+              value={formData.id}
+              onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+              required
+              placeholder=" "
+            />
+            <label htmlFor="id">User Name</label>
           </div>
           <div className={styles.formField}>
             <input

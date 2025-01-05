@@ -21,10 +21,10 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete })
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="User ID" sortable />
-        <TableHeader label="Enabled" sortable />
+        <TableHeader label="User Name" sortable />
         <TableHeader label="Full Name" sortable />
         <TableHeader label="Email" sortable />
+        <TableHeader label="Enabled" />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
