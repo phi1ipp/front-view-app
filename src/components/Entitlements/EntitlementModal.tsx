@@ -19,6 +19,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
     fetchFunctions();
     if (entitlement) {
       setFormData({
+        id:entitlement.id,
         name: entitlement.name,
         accessSet: entitlement.accessSet.map((access: any) => ({
           id: access.id,
@@ -87,7 +88,6 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
             <label htmlFor="name">Entitlement Name</label>
           </div>
 
-          {/* Dropdown to select functions */}
           <div className={styles.formField}>
             <select
               className={styles.dropdown}
@@ -107,7 +107,6 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
             </select>
           </div>
 
-          {/* Display selected functions below */}
           <div className={styles.selectedList}>
             {formData.accessSet.map((selected) => (
               <div key={selected.id} className={styles.selectedItem}>

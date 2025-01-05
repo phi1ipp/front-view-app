@@ -210,34 +210,52 @@
       "entitlement2": "a"
     }
   ],
-    "entitlement": [
-      {
-        "id": "1",
-        "name": "sup",
-        "displayName":"s",
-        "description": "ent",
-        "accessSet": [{
-         "id":"1",
-         "name":"function1"
-        },
-        {
-          "id":"2",
-          "name":"function2"
-         }]
-      }
-    ],
-   "accessSet": [
+  "entitlement": [
     {
-       "id":"1",
-       "name":"function1"
+      "id": "b918",
+      "name": "asdf",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
         },
         {
-          "id":"2",
-          "name":"funtion2"
-         }
-         ,
-         {
-           "id":"3",
-           "name":"function4"
-          }]
+          "id": "3",
+          "name": "function4"
+        }
+      ]
+    },
+    {
+      "id": "7e17",
+      "name": "adfasfd",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
+        },
+        {
+          "id": "2",
+          "name": "funtion2"
+        },
+        {
+          "id": "3",
+          "name": "function4"
+        }
+      ]
+    }
+  ],
+  "accessSet": [
+    {
+      "id": "1",
+      "name": "function1"
+    },
+    {
+      "id": "2",
+      "name": "funtion2"
+    },
+    {
+      "id": "3",
+      "name": "function4"
+    }
+  ]
 }
