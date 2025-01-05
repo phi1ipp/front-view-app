@@ -9,7 +9,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   onSubmit,
 }) => {
   const [formData, setFormData] = useState<Entitlement>({
-    entitlementName: '',
+    name: '',
     accessSet: [],
   });
 
@@ -18,11 +18,16 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   useEffect(() => {
     fetchFunctions();
     if (entitlement) {
-      setFormData(entitlement);
+      setFormData({
+        name: entitlement.name,
+        accessSet: entitlement.accessSet.map((access: any) => ({
+          id: access.id,
+          name: access.name,
+        })),
+      });
     } else {
       setFormData({
-        entitlementId: '',
-        entitlementName: '',
+        name: '',
         accessSet: [],
       });
     }
@@ -39,10 +44,11 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   };
 
   const handleAddFunction = (functionId: string) => {
-    if (!formData.accessSet.includes(functionId)) {
+    const functionToAdd = functions.find((func) => func.id === functionId);
+    if (functionToAdd && !formData.accessSet.some((access) => access.id === functionId)) {
       setFormData({
         ...formData,
-        accessSet: [...formData.accessSet, functionId],
+        accessSet: [...formData.accessSet, functionToAdd],
       });
     }
   };
@@ -50,7 +56,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   const handleRemoveFunction = (functionId: string) => {
     setFormData({
       ...formData,
-      accessSet: formData.accessSet.filter((id) => id !== functionId),
+      accessSet: formData.accessSet.filter((access) => access.id !== functionId),
     });
   };
 
@@ -70,32 +76,29 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
         <form onSubmit={handleSubmit}>
           <div className={styles.formField}>
             <input
-              id="entitlementName"
+              id="name"
               type="text"
-              value={formData.entitlementName}
+              value={formData.name}
               onChange={(e) =>
-                setFormData({ ...formData, entitlementName: e.target.value })
+                setFormData({ ...formData, name: e.target.value })
               }
               required
             />
-            <label htmlFor="entitlementName">Entitlement Name</label>
+            <label htmlFor="name">Entitlement Name</label>
           </div>
 
           {/* Dropdown to select functions */}
           <div className={styles.formField}>
             <select
               className={styles.dropdown}
-              onChange={(e) => {
-                handleAddFunction(e.target.value);
-                e.target.value = ''; // Reset dropdown after selection
-              }}
+              onChange={(e) => handleAddFunction(e.target.value)}
               value=""
             >
               <option value="" disabled>
                 Select a function
               </option>
               {functions
-                .filter((func) => !formData.accessSet.includes(func.id))
+                .filter((func) => !formData.accessSet.some((access) => access.id === func.id))
                 .map((func) => (
                   <option key={func.id} value={func.id}>
                     {func.name}
@@ -106,23 +109,18 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
 
           {/* Display selected functions below */}
           <div className={styles.selectedList}>
-            {formData.accessSet.map((selectedId) => {
-              const selectedFunction = functions.find(
-                (func) => func.id === selectedId
-              );
-              return (
-                <div key={selectedId} className={styles.selectedItem}>
-                  {selectedFunction?.name}
-                  <button
-                    type="button"
-                    className={styles.removeButton}
-                    onClick={() => handleRemoveFunction(selectedId)}
-                  >
-                    &times;
-                  </button>
-                </div>
-              );
-            })}
+            {formData.accessSet.map((selected) => (
+              <div key={selected.id} className={styles.selectedItem}>
+                {selected.name}
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveFunction(selected.id)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
           </div>
 
           <div className={styles.modalActions}>
