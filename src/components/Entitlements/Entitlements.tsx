@@ -10,10 +10,10 @@ export const Entitlements: React.FC = () => {
   const [entitlements, setEntitlements] = useState<Entitlement[]>([]);
   const [isEntitlementModalOpen, setIsEntitlementModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedEntitlement, setSelectedEntitlement] = useState<Entitlement | undefined>();
+  const [selectedEntitlement, setSelectedEntitlement] = useState<Entitlement | undefined>(undefined);
   const [selectedEntitlementId, setSelectedEntitlementId] = useState<string>('');
-  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
-      const [errorMessage,setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchEntitlements();
@@ -22,13 +22,12 @@ export const Entitlements: React.FC = () => {
   const fetchEntitlements = async () => {
     try {
       const response = await fetch('http://localhost:4000/entitlement');
-            if (!response.ok) { // Check if the response was successful
+      if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      }  
+      }
       const data = await response.json();
       setEntitlements(data);
-      console.log(JSON.stringify(response));
-      console.log('Data:', data); 
+      console.log('entitlements:', data); 
     } catch (error) {
       console.error('Error fetching Entitlements:', error);
     }
@@ -39,9 +38,8 @@ export const Entitlements: React.FC = () => {
     setIsEntitlementModalOpen(true);
   };
 
-  
-
   const handleEditEntitlement = (entitlement: Entitlement) => {
+    console.log("Edit entitlement: ", JSON.stringify(entitlement, null, 2)); // Pretty print the object
     setSelectedEntitlement(entitlement);
     setIsEntitlementModalOpen(true);
   };
@@ -52,80 +50,86 @@ export const Entitlements: React.FC = () => {
   };
 
   const handleEntitlementSubmit = async (entitlement: Entitlement) => {
+    console.log('Entitlement before submit:', entitlement);
+
+    if (!entitlement || !entitlement.name) {
+      setErrorMessage('Entitlement name is required.');
+      setTimeout(() => setErrorMessage(''), 5000);
+      return;
+    }
+
     try {
       const method = selectedEntitlement ? 'PUT' : 'POST';
-      const url = selectedEntitlement ? `http://localhost:4000/entitlement/${entitlement.id}` : 'http://localhost:4000/entitlement';
-      
-      const response=await fetch(url, {
+      const url = selectedEntitlement
+        ? `http://localhost:4000/entitlement/${entitlement.id}`
+        : 'http://localhost:4000/entitlement';
+
+      const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(entitlement),
       });
-      
+
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
-    }
-      setSuccessMessage('Created Entitlement Successfully!');  // Set success message
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
+        return;
+      }
+
+      setSuccessMessage('Entitlement saved successfully!');
+      setTimeout(() => setSuccessMessage(''), 5000);
+
       fetchEntitlements();
       setIsEntitlementModalOpen(false);
     } catch (error) {
-      console.error('Error saving Entitlement:', error);
-      setErrorMessage('Failed to save Entitlement.');  
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 5000);
+      console.error('Error saving entitlement:', error);
+      setErrorMessage('Failed to save entitlement.');
+      setTimeout(() => setErrorMessage(''), 5000);
     }
   };
 
   const handleDeleteConfirm = async (id: string) => {
-    console.log("id"+id)
     try {
-     const response= await fetch(`http://localhost:4000/entitlement/${id}`, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:4000/entitlement/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
-    }
-      setSuccessMessage('Deleted Connection Successfully!');  // Set success message
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
+        return;
+      }
+
+      setSuccessMessage('Deleted Entitlement Successfully!');
+      setTimeout(() => setSuccessMessage(''), 5000);
       fetchEntitlements();
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.error('Error deleting Entitlement:', error);
-      setErrorMessage('Failed to delete Entitlement.');  
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 5000);
+      setErrorMessage('Failed to delete Entitlement.');
+      setTimeout(() => setErrorMessage(''), 5000);
     }
   };
 
   return (
-        <div className={styles.container}>
-            {successMessage && (
-                  <div className={styles.successMessage}>{successMessage}</div>
-                )}
-                {errorMessage && (
-                  <div className={styles.errorMessage}>{errorMessage}</div>
-                )}
-          <div className={styles.header}>
-            <div className={styles.titleContainer}>
-              <h1 className={styles.title}>Entitlements</h1>
-            </div>
-           <button className={styles.createButton} onClick={handleCreateEntitlement}>
-                     <div className={styles.buttonContent}>
-                       <img
-                         loading="lazy"
-                         src={Create}
-                         alt="Create Icon"
-                         className={styles.buttonIcon}
-                       />
-                       <span className={styles.buttonText}>Create</span>
-                     </div>
-                   </button>
+    <div className={styles.container}>
+      {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
+      <div className={styles.header}>
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>Entitlements</h1>
+        </div>
+        <button className={styles.createButton} onClick={handleCreateEntitlement}>
+          <div className={styles.buttonContent}>
+            <img
+              loading="lazy"
+              src={Create}
+              alt="Create Icon"
+              className={styles.buttonIcon}
+            />
+            <span className={styles.buttonText}>Create</span>
           </div>
+        </button>
+      </div>
       <div className={styles.content}>
         <EntitlementTable
           entitlements={entitlements}

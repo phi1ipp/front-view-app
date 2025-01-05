@@ -159,16 +159,13 @@ export interface CampaignModalProps {
 
 
 export interface Entitlement {
-  id: bigint;
+  id: string;
   name: string;
-  description:string;
   accessSet: AccessList[];
-  password: string;
-
 }
 
 export interface AccessList{
-id: bigint;
+id: string;
 name: string;
 }
 
