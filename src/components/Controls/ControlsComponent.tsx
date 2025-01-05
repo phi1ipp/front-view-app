@@ -38,6 +38,8 @@ export const ControlsComponent: React.FC = () => {
     setIsModalOpen(true);
   };
 
+
+
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
@@ -45,7 +47,6 @@ export const ControlsComponent: React.FC = () => {
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
-    console.log("Controls ", control);
       setSuccessMessage('Deleted Control Successfully!');  // Set success message
       setTimeout(() => {
         setSuccessMessage('');
@@ -53,13 +54,15 @@ export const ControlsComponent: React.FC = () => {
       fetchControls();
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting Control:', error);
-      setErrorMessage('Failed to delete Control.');  
+      console.error('Error deleting Controls:', error);
+      setErrorMessage('Failed to deleting Control.');  // Set error message when saving campaign fails
       setTimeout(() => {
         setErrorMessage('');
       }, 5000);
     }
   };
+
+
 
   
 

@@ -51,7 +51,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
     console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `http://localhost:4000/usersdata/${user.userName}` : 'http://localhost:4000/usersdata';
+      const url = selectedUser ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
       
      const response =  await fetch(url, {
         method,
@@ -61,6 +61,9 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
       
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
     }
     console.log("Users ", user);
       setSuccessMessage('Created User Successfully!');  // Set success message
@@ -84,6 +87,9 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
      const response = await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
     }
       setSuccessMessage('Deleted User Successfully!');  // Set success message
       setTimeout(() => {

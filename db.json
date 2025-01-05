@@ -13,6 +13,13 @@
       "fullName": "Supraja Badhri",
       "email": "user@example.com",
       "password": "jhgyuhjk"
+    },
+    {
+      "id": "asdf",
+      "enabled": "",
+      "fullName": "asdf",
+      "email": "asdf@ad.com",
+      "password": "asdf"
     }
   ],
   "campaigns": [
@@ -84,6 +91,16 @@
       "id": "a22e",
       "name": "Raju Kanuri",
       "connection": "3"
+    },
+    {
+      "id": "ab1fb24b-d2e1-4a0c-83db-ac11966c7d7a",
+      "name": "asdf",
+      "connectionId": "1",
+      "controlIds": [
+        "1",
+        "3",
+        "2"
+      ]
     }
   ],
   "campaignConnections": [
@@ -125,14 +142,10 @@
       "name": "efghk",
       "hostport": "8080",
       "loginId": "3",
-      "password": "asdf"
-    },
-    {
-      "id": "3",
-      "campaignId": "789",
-      "name": "wesl",
-      "hostport": "8080",
-      "loginId": "4"
+      "password": "asdf",
+      "port": "asdf",
+      "host": "asdf",
+      "user": "asdf"
     },
     {
       "id": "85c1",
@@ -148,7 +161,14 @@
       "password": "asdfas"
     }
   ],
-  "controls": [],
+  "controls": [
+    {
+      "id": "946715cc-e5f4-4acc-9c67-b6895a4b4271",
+      "name": "adsf",
+      "ent1Name": "abc",
+      "ent2Name": "abcd"
+    }
+  ],
   "entitlement": [
     {
       "id": "1",
@@ -165,6 +185,16 @@
         {
           "id": "3",
           "name": "function4"
+        }
+      ]
+    },
+    {
+      "id": "4a70",
+      "name": "asdf",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
         }
       ]
     }

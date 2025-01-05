@@ -82,7 +82,7 @@ interface ConnectionModalProps {
 }
 
 interface Controls {
-  id: bigint;
+  id: string;
   name: string;
   ent1Id:bigint;
   ent1Name: string;
