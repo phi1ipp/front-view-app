@@ -4,7 +4,7 @@ import { UserModalProps, User } from './types';
 
 export const UserModal: React.FC<UserModalProps> = ({
   isOpen,
-  onClose,
+  onClose:close,
   user,
   onSubmit
 }) => {
@@ -16,6 +16,15 @@ export const UserModal: React.FC<UserModalProps> = ({
     password: ''
   });
 
+  const onClose = () => {
+    // Reset states to initial values when closing the modal
+    setFormData({  id: '',
+      enabled: '',
+      fullName: '',
+      email: '',
+      password: ''});  // Clear any errors
+    close();  // Call the onClose prop function to officially close the modal
+  };
   useEffect(() => {
     if (user) {
       setFormData(user);

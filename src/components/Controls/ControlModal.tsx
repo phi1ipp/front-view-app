@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const ControlModal: React.FC<ControlModalProps> = ({
   isOpen,
-  onClose,
+  onClose: close,
   control,
   onSubmit
 }) => {
@@ -15,12 +15,23 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     ent2Name: '',
   });
 
+  const onClose = () => {
+    // Reset states to initial values when closing the modal
+    setFormData({ name: '', ent1Name: '', ent2Name: '' });
+    setEntitlementOptions1([]);
+    setEntitlementOptions2([]);
+    setError(null);  // Clear any errors
+    close();  // Call the onClose prop function to officially close the modal
+  };
   const [entitlementOptions1, setEntitlementOptions1] = useState([]);
   const [entitlementOptions2, setEntitlementOptions2] = useState([]);
+  const [selectedEntitlements1, setSelectedEntitlements1] = useState<{ id: string; name: string }[]>([]);
+  const [selectedEntitlements2, setSelectedEntitlements2] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
     const fetchEntitlements = async () => {
       try {
         const response1 = await fetch('http://localhost:4000/campaignConnections');
@@ -52,10 +63,15 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     }
   }, [control]);
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
   };
+
+
+  
 
   if (!isOpen) return null;
   if (loading) return <div>Loading...</div>;

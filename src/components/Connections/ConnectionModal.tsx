@@ -4,7 +4,7 @@ import { ConnectionModalProps, Connection } from './types';
 
 export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   isOpen,
-  onClose,
+  onClose: close,
   connection,
   onSubmit
 }) => {
@@ -29,6 +29,16 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
       });
     }
   }, [connection]);
+
+  const onClose = () => {
+    // Reset states to initial values when closing the modal
+    setFormData({  name: '',
+      host: '',
+      port:'',
+      user: '',
+      password: '' });  // Clear any errors
+    close();  // Call the onClose prop function to officially close the modal
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

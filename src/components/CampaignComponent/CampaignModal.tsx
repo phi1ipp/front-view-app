@@ -19,6 +19,8 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const [selectedControls, setSelectedControls] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  
+
   useEffect(() => {
     fetchConnections();
     fetchControls();

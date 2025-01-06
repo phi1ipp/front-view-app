@@ -101,6 +101,14 @@
         "3",
         "2"
       ]
+    },
+    {
+      "id": "ccaebfdc-35f5-4e46-b6fa-7d0322cff543",
+      "name": "jjj",
+      "connectionId": "1",
+      "controlIds": [
+        "2"
+      ]
     }
   ],
   "campaignConnections": [
@@ -167,6 +175,12 @@
       "name": "adsf",
       "ent1Name": "abc",
       "ent2Name": "abcd"
+    },
+    {
+      "id": "c25be53f-02f8-4ee6-ad49-64ef7bbc6aed",
+      "name": "jhbhj",
+      "ent1Name": "abc",
+      "ent2Name": "bcd"
     }
   ],
   "entitlement": [
