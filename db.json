@@ -8,32 +8,18 @@
   ],
   "usersdata": [
     {
-      "id": "3",
-      "loginId": "Alice",
-      "fullName": "Johnson123",
-      "email": "alice.johnson@example.com"
-    },
-    {
-      "id": "a664",
-      "userId": "",
-      "loginId": "123",
+      "id": "supraja",
+      "enabled": "",
       "fullName": "Supraja Badhri",
-      "email": "test@example.com"
+      "email": "user@example.com",
+      "password": "jhgyuhjk"
     },
     {
-      "id": "bf3e",
-      "userId": "",
-      "loginId": "nbv",
-      "fullName": "nkjn ",
-      "email": "jbhjbm@jkhj"
-    },
-    {
-      "id": "df2a",
-      "userId": "",
-      "loginId": "asd",
-      "fullName": "hbhb",
-      "email": "hbhjb@jhvhb",
-      "password": "abcradabra"
+      "id": "asdf",
+      "enabled": "",
+      "fullName": "asdf",
+      "email": "asdf@ad.com",
+      "password": "asdf"
     }
   ],
   "campaigns": [
@@ -95,6 +81,34 @@
       "id": "8271",
       "name": "h",
       "connection": "1"
+    },
+    {
+      "id": "6f4a",
+      "name": "xcv",
+      "connection": "1"
+    },
+    {
+      "id": "a22e",
+      "name": "Raju Kanuri",
+      "connection": "3"
+    },
+    {
+      "id": "ab1fb24b-d2e1-4a0c-83db-ac11966c7d7a",
+      "name": "asdf",
+      "connectionId": "1",
+      "controlIds": [
+        "1",
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "ccaebfdc-35f5-4e46-b6fa-7d0322cff543",
+      "name": "jjj",
+      "connectionId": "1",
+      "controlIds": [
+        "2"
+      ]
     }
   ],
   "campaignConnections": [
@@ -136,14 +150,10 @@
       "name": "efghk",
       "hostport": "8080",
       "loginId": "3",
-      "password": "asdf"
-    },
-    {
-      "id": "3",
-      "campaignId": "789",
-      "name": "wesl",
-      "hostport": "8080",
-      "loginId": "4"
+      "password": "asdf",
+      "port": "asdf",
+      "host": "asdf",
+      "user": "asdf"
     },
     {
       "id": "85c1",
@@ -161,16 +171,60 @@
   ],
   "controls": [
     {
-      "id": "487b18cb-956d-40d4-a640-ddac44441fc1",
-      "name": "1",
-      "entitlement1": "1",
-      "entitlement2": "1"
+      "id": "946715cc-e5f4-4acc-9c67-b6895a4b4271",
+      "name": "adsf",
+      "ent1Name": "abc",
+      "ent2Name": "abcd"
     },
     {
-      "id": "f2e933c0-cdee-47a4-bfd7-5b99b79dee4b",
-      "name": "a",
-      "entitlement1": "a",
-      "entitlement2": "a"
+      "id": "c25be53f-02f8-4ee6-ad49-64ef7bbc6aed",
+      "name": "jhbhj",
+      "ent1Name": "abc",
+      "ent2Name": "bcd"
+    }
+  ],
+  "entitlement": [
+    {
+      "id": "1",
+      "name": "sup",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
+        },
+        {
+          "id": "2",
+          "name": "function2"
+        },
+        {
+          "id": "3",
+          "name": "function4"
+        }
+      ]
+    },
+    {
+      "id": "4a70",
+      "name": "asdf",
+      "accessSet": [
+        {
+          "id": "1",
+          "name": "function1"
+        }
+      ]
+    }
+  ],
+  "accessSet": [
+    {
+      "id": "1",
+      "name": "function1"
+    },
+    {
+      "id": "2",
+      "name": "funtion2"
+    },
+    {
+      "id": "3",
+      "name": "function4"
     }
   ]
 }

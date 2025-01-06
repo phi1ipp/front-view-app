@@ -4,27 +4,37 @@ import { UserModalProps, User } from './types';
 
 export const UserModal: React.FC<UserModalProps> = ({
   isOpen,
-  onClose,
+  onClose:close,
   user,
   onSubmit
 }) => {
   const [formData, setFormData] = useState<User>({
-    userId: '',
-    loginId: '',
+    id: '',
+    enabled: '',
     fullName: '',
     email: '',
     password: ''
   });
 
+  const onClose = () => {
+    // Reset states to initial values when closing the modal
+    setFormData({  id: '',
+      enabled: '',
+      fullName: '',
+      email: '',
+      password: ''});  // Clear any errors
+    close();  // Call the onClose prop function to officially close the modal
+  };
   useEffect(() => {
     if (user) {
       setFormData(user);
     } else {
       setFormData({
-        userId: '',
-        loginId: '',
+        id: '',
+        enabled: '',
         fullName: '',
-        email: ''
+        email: '',
+         password: ''
       });
     }
   }, [user]);
@@ -43,17 +53,6 @@ export const UserModal: React.FC<UserModalProps> = ({
           {user ? 'Edit User' : 'Create User'}
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="loginId"
-              type="text"
-              value={formData.loginId}
-              onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="loginId">Login ID</label>
-          </div>
           <div className={styles.formField}>
             <input
               id="fullName"
@@ -75,6 +74,17 @@ export const UserModal: React.FC<UserModalProps> = ({
               placeholder=" "
             />
             <label htmlFor="email">Email</label>
+          </div>
+          <div className={styles.formField}>
+            <input
+              id="id"
+              type="id"
+              value={formData.id}
+              onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+              required
+              placeholder=" "
+            />
+            <label htmlFor="id">User Name</label>
           </div>
           <div className={styles.formField}>
             <input

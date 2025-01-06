@@ -7,6 +7,22 @@
     overflow: hidden;
   }
   
+  .successMessage {
+    background-color: #28a745; /* Green background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px; /* Space below the message */
+  }
+  
+  .errorMessage {
+    background-color: #d62020; /* Green background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px; /* Space below the message */
+  }
+
   .tableHeader {
     display: flex;
     width: 100%;
@@ -84,22 +100,6 @@
     height: 18px;
   }
   
-  .successMessage {
-    background-color: #28a745; /* Green background */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px; /* Space below the message */
-  }
-  
-  .errorMessage {
-    background-color: #d62020; /* Green background */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px; /* Space below the message */
-  }
-
   .tableBody {
     display: flex;
     flex-direction: column;
@@ -251,6 +251,24 @@
     width: 24px;
     height: 24px;
   }
+
+
+  .accessItem {
+    display: inline-block;          /* Aligns items horizontally */
+    padding: 8px 16px;              /* Adds space inside the button */
+    margin-right: 8px;              /* Adds space between buttons */
+     /* Background color of the button (blue) */
+    color: rgb(121, 120, 120);                   /* Text color */
+    border: 1px solid;      /* Border color */
+    border-radius: 6px;             /* Rounded corners */             /* Pointer cursor on hover */
+    text-align: center;             /* Centers the text inside the button */
+    font-size: 14px;                /* Font size for the text */
+    font-weight: 600;               /* Makes the font bold */
+    user-select: none;              /* Prevents text selection on click */
+  }
+  
+  
+
   
   @media (max-width: 991px) {
     .tableContainer {
@@ -265,3 +283,6 @@
       flex-wrap: wrap;
     }
   }
+
+
+  

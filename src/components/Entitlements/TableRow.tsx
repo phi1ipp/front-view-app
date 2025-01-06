@@ -1,25 +1,35 @@
 import React from 'react';
-import styles from './Control.module.css';
+import styles from './Entitlement.module.css';
 import { TableRowProps } from './types';
 
-export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete }) => {
+export const TableRow: React.FC<TableRowProps> = ({ entitlement, onEdit, onDelete }) => {
   return (
     <div className={styles.tableCellRow}>
-      
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{control.name}</div>
+        <div className={styles.cellContent}>{entitlement.id}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{control.ent1Name}</div>
+        <div className={styles.cellContent}>{entitlement.name}</div>
       </div>
-      <div className={styles.cell}>
-        <div className={styles.cellContent}>{control.ent2Name}</div>
+     <div className={styles.cell}>
+        <div className={styles.cellContent}>
+          {Array.isArray(entitlement.accessSet) ? (
+            entitlement.accessSet.map((access: any) => (
+              // Use access.id as the key to ensure uniqueness
+              <span key={access.id} className={styles.accessItem}>
+                {access.name || access.id || 'Unknown'} {/* Adjust based on your object properties */}
+              </span>
+            ))
+          ) : (
+            <span>{entitlement.accessSet}</span>
+          )}
+        </div>
       </div>
       <div className={styles.actionCell}>
         <button
           className={styles.actionButton}
-          onClick={() => onEdit(control)}
-          aria-label={`Edit ${control.name}`}
+          onClick={() => onEdit(entitlement)}
+          aria-label={`Edit ${entitlement.id}`}
         >
           <div className={styles.buttonContent}>
             <img
@@ -33,8 +43,8 @@ export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete })
         </button>
         <button
           className={styles.actionButton}
-          onClick={() => onDelete(control.id)}
-          aria-label={`Delete ${control.name}`}
+          onClick={() => onDelete(entitlement.id)}
+          aria-label={`Delete ${entitlement.entitlementName}`}
         >
           <div className={styles.buttonContent}>
             <img

@@ -73,10 +73,7 @@
 }
 
 .formField input:focus + label,
-.formField input:not(:placeholder-shown) + label ,
-.formField select:not([value=""]) + label
-{
-  
+.formField input:not(:placeholder-shown) + label {
   top: -8px; /* Moves label above the input */
   left: 12px;
   font-size: 12px;

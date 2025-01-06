@@ -12,17 +12,15 @@ export const UserManagement: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
   const [selectedUserId, setSelectedUserId] = useState<string>('');
-
+const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+    const [errorMessage,setErrorMessage] = useState('');
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:4000/usersdata');
-            if (!response.ok) { // Check if the response was successful
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }  
+      const response = await fetch('http://localhost:4000/usersdata');          
       const data = await response.json();
       setUsers(data);
       console.log(JSON.stringify(response));
@@ -44,42 +42,78 @@ export const UserManagement: React.FC = () => {
     setIsUserModalOpen(true);
   };
 
-  const handleDeleteClick = (id: string) => {
-    setSelectedUserId(id);
+  const handleDeleteClick = (userName: string) => {
+    setSelectedUserId(userName);
     setIsDeleteModalOpen(true);
   };
 
   const handleUserSubmit = async (user: User) => {
+    console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
       const url = selectedUser ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
       
-      await fetch(url, {
+     const response =  await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
       });
       
-      fetchUsers();
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+    }
+    console.log("Users ", user);
+      setSuccessMessage('Created User Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       setIsUserModalOpen(false);
+      fetchUsers();
     } catch (error) {
-      console.error('Error saving user:', error);
+      console.error('Error saving User:', error);
+      setErrorMessage('Failed to save User.');  // Set error message when saving campaign fails
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+     const response = await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+    }
+      setSuccessMessage('Deleted User Successfully!');  // Set success message
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
       fetchUsers();
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error('Error deleting User:', error);
+      setErrorMessage('Failed to delete User.'); 
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
   return (
         <div className={styles.container}>
+            {successMessage && (
+                            <div className={styles.successMessage}>{successMessage}</div>
+                          )}
+                          {errorMessage && (
+                            <div className={styles.errorMessage}>{errorMessage}</div>
+                          )}
           <div className={styles.header}>
             <div className={styles.titleContainer}>
               <h1 className={styles.title}>Users</h1>

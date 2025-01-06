@@ -7,11 +7,6 @@
   overflow: hidden;
 }
 
-.tableHeader {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-}
 
 .statusChip {
   display: flex;
@@ -38,7 +33,7 @@
 }
 
 .errorMessage {
-  background-color: #d62020; /* Green background */
+  background-color: #d62020; /* red background */
   color: white;
   text-align: center;
   padding: 10px;
@@ -71,12 +66,18 @@
   margin-right: auto; /* Pushes the button to the left */
 }
 
+.tableHeader {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .tableHead {
   display: flex;
   align-items: center;
   padding: 16px;
   flex: 1;
-  min-width: 310px;
+  min-width: 150px;
   cursor: pointer;
   user-select: none;
 }
