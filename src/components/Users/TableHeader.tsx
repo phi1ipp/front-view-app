@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './UserManagement.module.css';
-import { TableHeaderProps } from './types';
+import { TableHeaderProps } from '../../types/types';
 
 export const TableHeader: React.FC<TableHeaderProps> = ({ label, sortable, onSort }) => {
   return (

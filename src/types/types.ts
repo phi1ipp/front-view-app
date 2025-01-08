@@ -43,7 +43,7 @@ export interface Campaign {
   status:String;
   violationCount:string;
   connectionId: string;
-  controls: Connection[]; 
+  controls: Controls[]; 
 }
 
 export interface CampaignModalProps {
@@ -98,6 +98,13 @@ export interface TableRowProps {
   onDelete: (id: string) => void;
 }
 
+export interface DeleteModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  id: string;
+  onConfirm: (id: string) => void;
+}
+
 //connections
 export interface Connection {
   length: any;
@@ -117,39 +124,25 @@ export interface ConnectionModalProps {
   onSubmit: (connection: Connection) => void;
 }
 export interface ConnectionsTableProps {
-  connections: Connection;
+  connections: Connection[];
   onEdit: (connection: Connection) => void;
   onDelete: (connectionId: string) => void;
 }
+export interface TableRowPropsConnection {
+  connection: Connection;
+  onEdit: (connection: Connection) => void;
+  onDelete: (id: string) => void;
+}
+export interface DeleteModalPropsConnection {
+  isOpen: boolean;
+  onClose: () => void;
+  userId: string;
+  onConfirm: (userId: string) => void;
+}
 
+//controls
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-interface Controls {
+export interface Controls {
   id: string;
   name: string;
   ent1Id:bigint;
@@ -160,40 +153,20 @@ interface Controls {
 }
 
 
-interface ControlTableProps {
-  controls: Control[];
-  onEdit: ( control: Control) => void;
+export interface ControlTableProps {
+  controls: Controls[];
+  onEdit: ( control: Controls) => void;
   onDelete: (controlId: string) => void;
 }
 
-interface ControlModalProps {
+export interface ControlModalProps {
   isOpen: boolean;
   onClose: () => void;
-  control: Control | undefined;
-  onSubmit: ( control: Control) => void;
+  control: Controls | undefined;
+  onSubmit: ( control: Controls) => void;
 }
 
-
-export interface AddCampaignProps {
-  campaign: Campaign[];
-}
-
-export interface Control {
-  id: string;
-  name: string;
-}
-
-
-
-
-
-
-
-
-
-
-
-
+//Entitlements
 
 export interface Entitlement {
   id: string;
@@ -219,12 +192,7 @@ export interface EntitlementTableProps {
   onDelete: (entitlementId: string) => void;
 }
 
-export interface DeleteModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  userId: string;
-  onConfirm: (userId: string) => void;
-}
+
 
 export interface TableHeaderProps {
   label: string;
@@ -256,9 +224,5 @@ export interface InputFieldProps {
   onChange: (value: string) => void;
 }
 
-export interface TableHeaderProps {
-  label: string;
-  sortable?: boolean;
-}
 
 

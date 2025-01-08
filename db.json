@@ -98,6 +98,7 @@
       "name": "bcde"
     }
   ],
+  
   "campaignControls": [
     {
       "id": "1",
@@ -114,28 +115,13 @@
   ],
   "connections": [
     {
-      "id": "2",
-      "campaignId": "456",
-      "name": "efghk",
-      "hostport": "8080",
-      "loginId": "3",
-      "password": "asdf",
-      "port": "asdf",
-      "host": "asdf",
-      "user": "asdf"
-    },
-    {
-      "id": "85c1",
+      "id": "",
       "name": "Supraja Badhri",
-      "hostport": "1234",
-      "loginId": "8"
-    },
-    {
-      "id": "18d7",
-      "name": "Supraja Badhri",
-      "hostport": "23",
-      "loginId": "2",
-      "password": "asdfas"
+      "host": "j",
+      "port": "k",
+      "db": "",
+      "user": "o",
+      "password": "o"
     }
   ],
   "controls": [

@@ -3,7 +3,7 @@ import styles from './Entitlement.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { EntitlementTableProps } from './types';
+import { EntitlementTableProps } from '../../types/types';
 
 export const EntitlementTable: React.FC<EntitlementTableProps> = ({ entitlements, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
