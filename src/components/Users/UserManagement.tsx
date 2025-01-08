@@ -52,7 +52,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
     console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `${API_ENDPOINTS.USERS_EDIT}${user.id}` : API_ENDPOINTS.USERS;
+      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.id}` : API_ENDPOINTS.USERS;
       
      const response =  await fetch(url, {
         method,
@@ -85,7 +85,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-     const response = await fetch(`${API_ENDPOINTS.USERS_EDIT}${id}`, { method: 'DELETE' });
+     const response = await fetch(`${API_ENDPOINTS.USERS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => {

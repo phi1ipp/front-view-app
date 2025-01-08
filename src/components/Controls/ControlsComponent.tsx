@@ -45,7 +45,7 @@ export const ControlsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      const response = await fetch(`${API_ENDPOINTS.CONNECTIONS_EDIT}/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.CONTROLS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
@@ -70,7 +70,7 @@ export const ControlsComponent: React.FC = () => {
 
   const handleSubmit = async (control: Control) => {
     const method = selectedControl ? 'PUT' : 'POST';
-    const url = selectedControl ? `${API_ENDPOINTS.CONNECTIONS_EDIT}/${control.id}` : API_ENDPOINTS.CONNECTIONS_EDIT;
+    const url = selectedControl ? `${API_ENDPOINTS.CONTROLS}/${control.id}` : API_ENDPOINTS.CONTROLS;
     
     try {
     const response =  await fetch(url, {
@@ -127,7 +127,7 @@ export const ControlsComponent: React.FC = () => {
                 <img
                   loading="lazy"
                   src={Create}
-                  className={styles.buttonIcon}
+                  className={styles.buttonIcon} alt="img"
                 />
                 <span className={styles.buttonText}>Create</span>
               </div>

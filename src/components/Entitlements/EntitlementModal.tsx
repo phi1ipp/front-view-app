@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './EntitlementModal.module.css';
 import { EntitlementModalProps, Entitlement } from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api.ts';
+import { v4 as uuidv4 } from 'uuid';
 
 export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   isOpen,
@@ -37,7 +38,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
       });
     } else {
       setFormData({
-        id:'',
+        id: uuidv4(),
         name: '',
         accessSet: [],
       });

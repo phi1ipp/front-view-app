@@ -13,20 +13,15 @@ export const API_ENDPOINTS = {
 
     //Users
     USERS: `${BASE_URL}/usersdata`,
-    USERS_EDIT: `${BASE_URL}/usersdata/`,
 
     //Connections
     CONNECTIONS : `${BASE_URL}/connections`,
-    CONNECTIONS_EDIT: `${BASE_URL}/connections/`,
     TEST_CONNECTION:`${BASE_URL}/connections/test-connection`,
 
      //Controls
      CONTROLS : `${BASE_URL}/controls`,
-     CONTROLS_EDIT: `${BASE_URL}/controls/`,
-
      //Entitlements
      ENTITLEMENTS : `${BASE_URL}/entitlements`,
-     ENTITLEMENTS_EDIT : `${BASE_URL}/entitlements/`,
      ENTITLEMENTS_ACCESSLIST: `${BASE_URL}/accessSet`
 
 

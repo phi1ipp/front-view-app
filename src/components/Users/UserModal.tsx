@@ -35,7 +35,7 @@ export const UserModal: React.FC<UserModalProps> = ({
         enabled: '',
         fullName: '',
         email: '',
-         password: ''
+        password: ''
       });
     }
   }, [user]);

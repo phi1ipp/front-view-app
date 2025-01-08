@@ -62,7 +62,7 @@ export const Entitlements: React.FC = () => {
     try {
       const method = selectedEntitlement ? 'PUT' : 'POST';
       const url = selectedEntitlement
-        ? `${API_ENDPOINTS.ENTITLEMENTS_EDIT}/${entitlement.id}`
+        ? `${API_ENDPOINTS.ENTITLEMENTS}/${entitlement.id}`
         : API_ENDPOINTS.ENTITLEMENTS;
 
       const response = await fetch(url, {
@@ -90,11 +90,10 @@ export const Entitlements: React.FC = () => {
 
   const handleDeleteConfirm = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:4000/entitlement/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.ENTITLEMENTS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
-        return;
-      }
+    }
 
       setSuccessMessage('Deleted Entitlement Successfully!');
       setTimeout(() => setSuccessMessage(''), 5000);

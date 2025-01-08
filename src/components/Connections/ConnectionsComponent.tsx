@@ -43,7 +43,7 @@ export const ConnectionsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      const response = await fetch(`${API_ENDPOINTS.USERS_EDIT}${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
@@ -66,7 +66,7 @@ export const ConnectionsComponent: React.FC = () => {
 
   const handleSubmit = async (connection: Connection) => {
     const method = selectedConnection ? 'PUT' : 'POST';
-    const url = selectedConnection ? `${API_ENDPOINTS.USERS_EDIT}${connection.id}` : API_ENDPOINTS.CONNECTIONS;
+    const url = selectedConnection ? `${API_ENDPOINTS.CONNECTIONS}/${connection.id}` : API_ENDPOINTS.CONNECTIONS;
     
     try {
      const response = await fetch(url, {
