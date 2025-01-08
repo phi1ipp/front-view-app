@@ -28,7 +28,9 @@ export const LoginPage: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
     if (!validateForm()) {
       return;
     }
@@ -99,7 +101,7 @@ export const LoginPage: React.FC = () => {
                       type="password"
                       icon="https://cdn.builder.io/api/v1/image/assets/TEMP/612fb9c937453b33d31c2c41ec8ceb4a6515f3e19362262b1bc0343f0b6d299e?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
                     />
-                    <Button label="Login" onClick={handleLogin} />
+                    <Button label="Login" onClick={handleLogin}/>
                   </form>
                 </div>
                 <p className={styles.helpText}>Having Trouble? Contact Admin</p>
