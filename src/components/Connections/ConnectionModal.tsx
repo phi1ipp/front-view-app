@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ConnectionModal.module.css';
-import { ConnectionModalProps, Connection } from './types';
+import { ConnectionModalProps, Connection } from '../../types/types';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   isOpen,
@@ -9,9 +10,11 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   onSubmit
 }) => {
   const [formData, setFormData] = useState<Connection>({
+    id:'',
     name: '',
     host: '',
     port:'',
+    db:'',
     user: '',
     password: ''
   });
@@ -21,9 +24,11 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
       setFormData(connection);
     } else {
       setFormData({
+        id:'',
         name: '',
         host: '',
         port:'',
+        db:'',
         user: '',
         password: ''
       });
@@ -32,9 +37,11 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 
   const onClose = () => {
     // Reset states to initial values when closing the modal
-    setFormData({  name: '',
+    setFormData({   id:'',
+      name: '',
       host: '',
       port:'',
+      db:'',
       user: '',
       password: '' });  // Clear any errors
     close();  // Call the onClose prop function to officially close the modal
@@ -48,7 +55,7 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 
   const handleTestConnection = async () => {
     try {
-      const response = await fetch('/api/test-connection', {
+      const response = await fetch(API_ENDPOINTS.TEST_CONNECTION, {
         method: 'POST', // Specify the method
         headers: {
           'Content-Type': 'application/json' // Specify the content type in the headers

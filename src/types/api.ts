@@ -1,6 +1,6 @@
 // src/constants/apiConstants.js
 
-import { CampaignModal } from "../components/CampaignComponent/CampaignModal";
+
 
 const BASE_URL = 'http://localhost:4000';
 
@@ -18,6 +18,11 @@ export const API_ENDPOINTS = {
     //Connections
     CONNECTIONS : `${BASE_URL}/connections/`,
     CONNECTIONS_EDIT: `${BASE_URL}/connections/`,
+    TEST_CONNECTION:`${BASE_URL}/connections/test-connection`,
+
+     //Controls
+     CONTROLS : `${BASE_URL}/controls/`,
+     CONTROLS_EDIT: `${BASE_URL}/controls/`,
 
 
     // Add more API endpoints as needed

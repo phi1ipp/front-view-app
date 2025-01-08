@@ -95,51 +95,59 @@ export interface UserTableProps {
 export interface TableRowProps {
   user: User;
   onEdit: (user: User) => void;
-  onDelete: (userName: string) => void;
+  onDelete: (id: string) => void;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-interface Connection {
-  id: integer;
+//connections
+export interface Connection {
+  length: any;
+  id: bigint;
   name: string;
   host: string;
   port: string;
+  db:String;
   user: string;
   password:string;
 }
 
-
-interface ConnectionsTableProps {
-  connections: Connection[];
+export interface ConnectionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  connection?: Connection;
+  onSubmit: (connection: Connection) => void;
+}
+export interface ConnectionsTableProps {
+  connections: Connection;
   onEdit: (connection: Connection) => void;
   onDelete: (connectionId: string) => void;
 }
 
-interface ConnectionModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  connection: Connection | undefined;
-  onSubmit: (connection: Connection) => void;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 interface Controls {
   id: string;

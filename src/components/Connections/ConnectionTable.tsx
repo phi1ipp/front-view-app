@@ -3,7 +3,7 @@ import styles from './Connection.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { ConnectionsTableProps } from './types';
+import { ConnectionsTableProps } from '../../types/types';
 
 export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
