@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Connection.module.css';
-import { TableRowProps } from './types';
+import { TableRowPropsConnection } from '../../types/types';
 
-export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete }) => {
+export const TableRow: React.FC<TableRowPropsConnection> = ({ connection, onEdit, onDelete }) => {
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
@@ -21,7 +21,7 @@ export const TableRow: React.FC<TableRowProps> = ({ connection, onEdit, onDelete
         <button
           className={styles.actionButton}
           onClick={() => onEdit(connection)}
-          aria-label={`Edit ${connection.fullName}`}
+          aria-label={`Edit ${connection.name}`}
         >
           <div className={styles.buttonContent}>
             <img

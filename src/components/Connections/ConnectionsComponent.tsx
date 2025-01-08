@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Connection.module.css';
 import { DeleteModal } from '../Users/DeleteModal.tsx';
-import { Connection } from './types.ts';
+import { Connection } from '../../types/types.ts';
 import { ConnectionTable } from './ConnectionTable.tsx';
 import {ConnectionModal} from './ConnectionModal.tsx'
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 
 export const ConnectionsComponent: React.FC = () => {
@@ -22,7 +23,7 @@ export const ConnectionsComponent: React.FC = () => {
   
     const fetchConnections = async () => {
       try {
-        const response = await fetch('http://localhost:4000/connections');
+        const response = await fetch(API_ENDPOINTS.CONNECTIONS);
         const data = await response.json();
         console.log(data)
         setConnections(data);
@@ -42,7 +43,7 @@ export const ConnectionsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      const response = await fetch(`http://localhost:4000/connections/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
@@ -65,7 +66,7 @@ export const ConnectionsComponent: React.FC = () => {
 
   const handleSubmit = async (connection: Connection) => {
     const method = selectedConnection ? 'PUT' : 'POST';
-    const url = selectedConnection ? `http://localhost:4000/connections/${connection.id}` : 'http://localhost:4000/connections';
+    const url = selectedConnection ? `${API_ENDPOINTS.CONNECTIONS}/${connection.id}` : API_ENDPOINTS.CONNECTIONS;
     
     try {
      const response = await fetch(url, {

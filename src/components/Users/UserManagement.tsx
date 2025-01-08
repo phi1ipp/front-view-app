@@ -3,8 +3,9 @@ import styles from './UserManagement.module.css';
 import { UserTable } from './UserTable.tsx';
 import { UserModal } from './UserModal.tsx';
 import { DeleteModal } from './DeleteModal.tsx';
-import { User } from './types';
+import { User } from '../../types/types';
 import Create from './Create.png';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -20,7 +21,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:4000/usersdata');          
+      const response = await fetch(API_ENDPOINTS.USERS);          
       const data = await response.json();
       setUsers(data);
       console.log(JSON.stringify(response));
@@ -51,7 +52,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
     console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `http://localhost:4000/usersdata/${user.id}` : 'http://localhost:4000/usersdata';
+      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.id}` : API_ENDPOINTS.USERS;
       
      const response =  await fetch(url, {
         method,
@@ -84,7 +85,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-     const response = await fetch(`http://localhost:4000/usersdata/${id}`, { method: 'DELETE' });
+     const response = await fetch(`${API_ENDPOINTS.USERS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ControlModal.module.css';
-import { ControlModalProps, Control } from './types';
+import { ControlModalProps, Control } from '../../types/types';
 import { v4 as uuidv4 } from 'uuid';
 
 export const ControlModal: React.FC<ControlModalProps> = ({

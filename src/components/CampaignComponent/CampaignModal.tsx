@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed
 import styles from './CampaignModal.module.css';
-import { CampaignModalProps, Campaign } from './types';
+import { CampaignModalProps, Campaign } from '../../types/types';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,
   onClose: close,
-  campaign,
   onSubmit,
 }) => {
   const [formData, setFormData] = useState<Campaign>({
@@ -28,7 +28,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchConnections = async () => {
     try {
-      const response = await fetch('http://localhost:4000/campaignConnections');
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONNECTIONS);
       const data = await response.json();
       setConnections(data);
     } catch (error) {
@@ -38,7 +38,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchControls = async () => {
     try {
-      const response = await fetch('http://localhost:4000/campaignControls');
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS);
       const data = await response.json();
       setControls(data);
     } catch (error) {

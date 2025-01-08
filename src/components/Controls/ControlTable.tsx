@@ -3,9 +3,9 @@ import styles from './Control.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { ControlsTableProps } from './types';
+import { ControlTableProps } from '../../types/types';
 
-export const ControlTable: React.FC<ControlsTableProps> = ({controls, onEdit, onDelete }) => {
+export const ControlTable: React.FC<ControlTableProps> = ({controls, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 

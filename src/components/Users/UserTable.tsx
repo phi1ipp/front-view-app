@@ -3,7 +3,7 @@ import styles from './UserManagement.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { UserTableProps } from './types';
+import { UserTableProps } from '../../types/types';
 
 export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);

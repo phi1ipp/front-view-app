@@ -3,8 +3,9 @@ import styles from './Entitlement.module.css';
 import { EntitlementTable } from './EntitlementTable.tsx';
 import { EntitlementModal } from './EntitlementModal.tsx';
 import { DeleteModal } from './DeleteModal.tsx';
-import { Entitlement } from './types';
+import { Entitlement } from '../../types/types';
 import Create from './Create.png';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const Entitlements: React.FC = () => {
   const [entitlements, setEntitlements] = useState<Entitlement[]>([]);
@@ -21,7 +22,7 @@ export const Entitlements: React.FC = () => {
 
   const fetchEntitlements = async () => {
     try {
-      const response = await fetch('http://localhost:4000/entitlement');
+      const response = await fetch(API_ENDPOINTS.ENTITLEMENTS);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -61,8 +62,8 @@ export const Entitlements: React.FC = () => {
     try {
       const method = selectedEntitlement ? 'PUT' : 'POST';
       const url = selectedEntitlement
-        ? `http://localhost:4000/entitlement/${entitlement.id}`
-        : 'http://localhost:4000/entitlement';
+        ? `${API_ENDPOINTS.ENTITLEMENTS}/${entitlement.id}`
+        : API_ENDPOINTS.ENTITLEMENTS;
 
       const response = await fetch(url, {
         method,
@@ -89,11 +90,10 @@ export const Entitlements: React.FC = () => {
 
   const handleDeleteConfirm = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:4000/entitlement/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.ENTITLEMENTS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
-        return;
-      }
+    }
 
       setSuccessMessage('Deleted Entitlement Successfully!');
       setTimeout(() => setSuccessMessage(''), 5000);

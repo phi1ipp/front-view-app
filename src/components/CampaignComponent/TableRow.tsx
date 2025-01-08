@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Campaign.module.css';
-import { TableRowProps } from './types';
+import { TableRowProps } from '../../types/types';
 import { StatusChip } from './StatusChip.tsx';
 import { DownloadButton } from './DownloadButton.tsx';
 

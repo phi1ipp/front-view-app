@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DeleteModal.module.css';
-import { DeleteModalProps } from './types';
+import { DeleteModalProps } from '../../types/types';
 
 export const DeleteModal: React.FC<DeleteModalProps> = ({
   isOpen,

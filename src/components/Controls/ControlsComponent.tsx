@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Control.module.css';
 import { DeleteModal } from '../Users/DeleteModal.tsx';
-import { Control } from './types.ts';
+import { Control } from '../../types/types.ts';
 import { ControlTable } from './ControlTable.tsx';
-import {ControlModal} from './ControlModal.tsx'
+import {ControlModal} from './ControlModal.tsx';
+import Create from './Create.png';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 
 export const ControlsComponent: React.FC = () => {
@@ -22,7 +24,7 @@ export const ControlsComponent: React.FC = () => {
   
     const fetchControls = async () => {
       try {
-        const response = await fetch('http://localhost:4000/controls');
+        const response = await fetch(API_ENDPOINTS.CONTROLS);
         const data = await response.json();
         console.log(data)
         setControls(data);
@@ -43,7 +45,7 @@ export const ControlsComponent: React.FC = () => {
   const handleDeleteConfirm = async (id: string) => {
     console.log("id"+id)
     try {
-      const response = await fetch(`http://localhost:4000/controls/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_ENDPOINTS.CONTROLS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
     }
@@ -68,7 +70,7 @@ export const ControlsComponent: React.FC = () => {
 
   const handleSubmit = async (control: Control) => {
     const method = selectedControl ? 'PUT' : 'POST';
-    const url = selectedControl ? `http://localhost:4000/controls/${control.id}` : 'http://localhost:4000/controls';
+    const url = selectedControl ? `${API_ENDPOINTS.CONTROLS}/${control.id}` : API_ENDPOINTS.CONTROLS;
     
     try {
     const response =  await fetch(url, {
@@ -124,9 +126,8 @@ export const ControlsComponent: React.FC = () => {
               <div className={styles.buttonContent}>
                 <img
                   loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b4608d1988e70018595556c3c26823efc666bca62fa6ad93cfa773d0dd82ca2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                  alt="Create Icon"
-                  className={styles.buttonIcon}
+                  src={Create}
+                  className={styles.buttonIcon} alt="img"
                 />
                 <span className={styles.buttonText}>Create</span>
               </div>

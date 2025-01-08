@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import styles from './EntitlementModal.module.css';
-import { EntitlementModalProps, Entitlement } from './types';
+import { EntitlementModalProps, Entitlement } from '../../types/types';
+import { API_ENDPOINTS } from '../../types/api.ts';
+import { v4 as uuidv4 } from 'uuid';
 
 export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   isOpen,
-  onClose,
+  onClose: close,
   entitlement,
   onSubmit,
 }) => {
   const [formData, setFormData] = useState<Entitlement>({
+    id:'',
     name: '',
-    accessSet: [],
+    accessSet: []
   });
 
+  const onClose = () => {
+    // Reset states to initial values when closing the modal
+    setFormData({   id:'',
+      name: '',
+      accessSet: [] });  // Clear any errors
+    close();  // Call the onClose prop function to officially close the modal
+  };
   const [functions, setFunctions] = useState([]);
 
   useEffect(() => {
@@ -28,6 +38,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
       });
     } else {
       setFormData({
+        id: uuidv4(),
         name: '',
         accessSet: [],
       });
@@ -36,7 +47,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
 
   const fetchFunctions = async () => {
     try {
-      const response = await fetch('http://localhost:4000/accessSet');
+      const response = await fetch(API_ENDPOINTS.ENTITLEMENTS_ACCESSLIST);
       const data = await response.json();
       setFunctions(data);
     } catch (error) {

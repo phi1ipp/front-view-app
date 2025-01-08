@@ -33,92 +33,45 @@ export interface DashboardProps {
   onDownload?: () => void;
 }
 
-export interface CampaignData {
+
+
+//Campaign
+
+export interface Campaign {
   id: string;
   name: string;
-  status: 'Running' | 'Completed' | 'Error';
-  violationCount: number;
+  status:String;
+  violationCount:string;
+  connectionId: string;
+  controls: Controls[]; 
 }
 
+export interface CampaignModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (campaigns: Campaign) => void;
+}
+
+export interface CampaignTableProps {
+  campaigns: Campaign[];
+}
 
 export interface StatusChipProps {
-  status: CampaignData['status'];
+  status: Campaign['status'];
 }
 
 export interface DownloadButtonProps {
   onClick: () => void;
 }
 
-
-export interface Campaign {
-  id: string;
-  name: string;
-  controlId: string;
-  connections: Connection[]; 
-   // Array of Connection objects
+export interface TableRowProps {
+  campaign: Campaign;
+  onDownload: () => void;
 }
 
-interface Connection {
-  id: integer;
-  name: string;
-  host: string;
-  port: string;
-  user: string;
-  password:string;
-}
-
-
-interface ConnectionsTableProps {
-  connections: Connection[];
-  onEdit: (connection: Connection) => void;
-  onDelete: (connectionId: string) => void;
-}
-
-interface ConnectionModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  connection: Connection | undefined;
-  onSubmit: (connection: Connection) => void;
-}
-
-interface Controls {
-  id: string;
-  name: string;
-  ent1Id:bigint;
-  ent1Name: string;
-  ent2Id:bigint;
-  ent2Name: string;
-
-}
-
-
-interface ControlTableProps {
-  controls: Control[];
-  onEdit: ( control: Control) => void;
-  onDelete: (controlId: string) => void;
-}
-
-interface ControlModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  control: Control | undefined;
-  onSubmit: ( control: Control) => void;
-}
-
-
-export interface AddCampaignProps {
-  campaign: Campaign[];
-}
-
-export interface Control {
-  id: string;
-  name: string;
-}
-
-
-
+//Users
 export interface User {
-  userName: string;
+  id: string;
   enabled: string;
   fullName: string;
   email: string;
@@ -138,25 +91,82 @@ export interface UserTableProps {
   onDelete: (userId: string) => void;
 }
 
-export interface Campaigns {
-  id: string;
-  name: string;
-  status: 'Running' | 'Completed' | 'Error';
-  violationCount: number;
+
+export interface TableRowProps {
+  user: User;
+  onEdit: (user: User) => void;
+  onDelete: (id: string) => void;
 }
 
-export interface CampaignsTableProps {
-  campaigns: Campaigns[];
-}
-
-export interface CampaignModalProps {
+export interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  campaigns: Campaigns | undefined;
-  onSubmit: (campaigns: Campaigns) => void;
+  id: string;
+  onConfirm: (id: string) => void;
+}
+
+//connections
+export interface Connection {
+  length: any;
+  id: bigint;
+  name: string;
+  host: string;
+  port: string;
+  db:String;
+  user: string;
+  password:string;
+}
+
+export interface ConnectionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  connection?: Connection;
+  onSubmit: (connection: Connection) => void;
+}
+export interface ConnectionsTableProps {
+  connections: Connection[];
+  onEdit: (connection: Connection) => void;
+  onDelete: (connectionId: string) => void;
+}
+export interface TableRowPropsConnection {
+  connection: Connection;
+  onEdit: (connection: Connection) => void;
+  onDelete: (id: string) => void;
+}
+export interface DeleteModalPropsConnection {
+  isOpen: boolean;
+  onClose: () => void;
+  userId: string;
+  onConfirm: (userId: string) => void;
+}
+
+//controls
+
+export interface Controls {
+  id: string;
+  name: string;
+  ent1Id:bigint;
+  ent1Name: string;
+  ent2Id:bigint;
+  ent2Name: string;
+
 }
 
 
+export interface ControlTableProps {
+  controls: Controls[];
+  onEdit: ( control: Controls) => void;
+  onDelete: (controlId: string) => void;
+}
+
+export interface ControlModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  control: Controls | undefined;
+  onSubmit: ( control: Controls) => void;
+}
+
+//Entitlements
 
 export interface Entitlement {
   id: string;
@@ -182,12 +192,7 @@ export interface EntitlementTableProps {
   onDelete: (entitlementId: string) => void;
 }
 
-export interface DeleteModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  userId: string;
-  onConfirm: (userId: string) => void;
-}
+
 
 export interface TableHeaderProps {
   label: string;
@@ -195,11 +200,7 @@ export interface TableHeaderProps {
   onSort?: () => void;
 }
 
-export interface TableRowProps {
-  user: User;
-  onEdit: (user: User) => void;
-  onDelete: (userName: string) => void;
-}
+
 
 export interface TableFooterProps {
   totalItems: number;
@@ -223,13 +224,5 @@ export interface InputFieldProps {
   onChange: (value: string) => void;
 }
 
-export interface TableHeaderProps {
-  label: string;
-  sortable?: boolean;
-}
 
 
-export interface TableRowProps {
-  campaign: CampaignData;
-  onDownload: () => void;
-}
