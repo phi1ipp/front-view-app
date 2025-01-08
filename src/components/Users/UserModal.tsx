@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserModal.module.css';
-import { UserModalProps, User } from './types';
+import { UserModalProps, User } from '../../types/types';
+
 
 export const UserModal: React.FC<UserModalProps> = ({
   isOpen,

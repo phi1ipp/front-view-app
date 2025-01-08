@@ -3,7 +3,8 @@ import styles from './Control.module.css';
 import { DeleteModal } from '../Users/DeleteModal.tsx';
 import { Control } from './types.ts';
 import { ControlTable } from './ControlTable.tsx';
-import {ControlModal} from './ControlModal.tsx'
+import {ControlModal} from './ControlModal.tsx';
+import Create from './Create.png';
 
 
 export const ControlsComponent: React.FC = () => {
@@ -124,8 +125,7 @@ export const ControlsComponent: React.FC = () => {
               <div className={styles.buttonContent}>
                 <img
                   loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b4608d1988e70018595556c3c26823efc666bca62fa6ad93cfa773d0dd82ca2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                  alt="Create Icon"
+                  src={Create}
                   className={styles.buttonIcon}
                 />
                 <span className={styles.buttonText}>Create</span>

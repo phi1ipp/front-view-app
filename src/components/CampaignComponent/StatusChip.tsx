@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Campaign.module.css';
-import { StatusChipProps } from './types';
+import { StatusChipProps } from '../../types/types';
 
 const statusStyles = {
   running: styles.statusChipWarning,

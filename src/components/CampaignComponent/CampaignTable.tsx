@@ -3,7 +3,7 @@ import styles from './Campaign.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
-import { CampaignTableProps } from './types';
+import { CampaignTableProps } from '../../types/types';
 
 export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns }) => {
   const [currentPage, setCurrentPage] = useState(1);

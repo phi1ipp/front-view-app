@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Campaign.module.css';
-import { Campaign } from './types.ts';
+import { Campaign } from '../../types/types.ts';
 import { CampaignTable } from './CampaignTable.tsx';
 import {CampaignModal} from './CampaignModal.tsx'
-
+import { API_ENDPOINTS } from '../../types/api.ts';
+import Create from './Create.png';
 
 export const CampaignComponent: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -19,7 +20,7 @@ export const CampaignComponent: React.FC = () => {
   
     const fetchCampaigns = async () => {
       try {
-        const response = await fetch('http://localhost:4000/campaigns');
+        const response = await fetch(API_ENDPOINTS.CAMPAIGNS);
         const data = await response.json();
         console.log(data)
         setCampaigns(data);
@@ -31,10 +32,8 @@ export const CampaignComponent: React.FC = () => {
 
     const handleDownload = async (campaign: Campaign) => {
         const method ='POST';
-        const url = 'http://localhost:4000/campaigns';
-        
         try {
-          await fetch(url, {
+          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
             method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(campaign),
@@ -51,10 +50,8 @@ export const CampaignComponent: React.FC = () => {
 
   const handleSubmit = async (campaign: Campaign) => {
     const method ='POST';
-    const url = 'http://localhost:4000/campaigns';
-    
     try {
-     const response = await fetch(url, {
+     const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(campaign),
@@ -103,7 +100,7 @@ export const CampaignComponent: React.FC = () => {
               <div className={styles.buttonContent}>
                 <img
                   loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b4608d1988e70018595556c3c26823efc666bca62fa6ad93cfa773d0dd82ca2?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+                  src={Create}
                   alt="Create Icon"
                   className={styles.buttonIcon}
                 />

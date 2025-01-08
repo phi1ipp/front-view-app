@@ -1,34 +1,24 @@
-import { Campaign, Control, Connection } from './types';
+// src/constants/apiConstants.js
 
-export const fetchControls = async (): Promise<Control[]> => {
-  const response = await fetch('/api/controls');
-  return response.json();
+import { CampaignModal } from "../components/CampaignComponent/CampaignModal";
+
+const BASE_URL = 'http://localhost:4000';
+
+export const API_ENDPOINTS = {
+    CAMPAIGNS: `${BASE_URL}/campaigns`,
+    DOWNLOAD_CAMPAIGNS:  `${BASE_URL}/campaigns`,
+    CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
+    CAMPAIGN_CONTROLS: `${BASE_URL}/campaignControls`,
+
+
+    //Users
+    USERS: `${BASE_URL}/usersdata`,
+    USERS_EDIT: `${BASE_URL}/usersdata/`,
+
+    //Connections
+    CONNECTIONS : `${BASE_URL}/connections/`,
+    CONNECTIONS_EDIT: `${BASE_URL}/connections/`,
+
+
+    // Add more API endpoints as needed
 };
-
-export const fetchConnections = async (): Promise<Connection[]> => {
-  const response = await fetch('/api/connections');
-  return response.json();
-};
-
-export const createCampaign = async (campaign: Campaign): Promise<Campaign> => {
-  const response = await fetch('/api/campaigns', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(campaign),
-  });
-  return response.json();
-};
-
-
-export const fetchCampaigns = async (): Promise<Connection[]> => {
-  const response = await fetch('/api/connections');
-  return response.json();
-};
-
-export const downloadCampaignReport = async (): Promise<Connection[]> => {
-  const response = await fetch('/api/connections');
-  return response.json();
-};
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './UserManagement.module.css';
-import { TableRowProps } from './types';
+import { TableRowProps } from '../../types/types';
 
 export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) => {
   return (

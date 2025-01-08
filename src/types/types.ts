@@ -33,30 +33,90 @@ export interface DashboardProps {
   onDownload?: () => void;
 }
 
-export interface CampaignData {
+
+
+//Campaign
+
+export interface Campaign {
   id: string;
   name: string;
-  status: 'Running' | 'Completed' | 'Error';
-  violationCount: number;
+  status:String;
+  violationCount:string;
+  connectionId: string;
+  controls: Connection[]; 
 }
 
+export interface CampaignModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (campaigns: Campaign) => void;
+}
+
+export interface CampaignTableProps {
+  campaigns: Campaign[];
+}
 
 export interface StatusChipProps {
-  status: CampaignData['status'];
+  status: Campaign['status'];
 }
 
 export interface DownloadButtonProps {
   onClick: () => void;
 }
 
-
-export interface Campaign {
-  id: string;
-  name: string;
-  controlId: string;
-  connections: Connection[]; 
-   // Array of Connection objects
+export interface TableRowProps {
+  campaign: Campaign;
+  onDownload: () => void;
 }
+
+//Users
+export interface User {
+  id: string;
+  enabled: string;
+  fullName: string;
+  email: string;
+  password: string;
+}
+
+export interface UserModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  user?: User;
+  onSubmit: (user: User) => void;
+}
+
+export interface UserTableProps {
+  users: User[];
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+}
+
+
+export interface TableRowProps {
+  user: User;
+  onEdit: (user: User) => void;
+  onDelete: (userName: string) => void;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 interface Connection {
   id: integer;
@@ -117,44 +177,13 @@ export interface Control {
 
 
 
-export interface User {
-  userName: string;
-  enabled: string;
-  fullName: string;
-  email: string;
-  password: string;
-}
 
-export interface UserModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  user?: User;
-  onSubmit: (user: User) => void;
-}
 
-export interface UserTableProps {
-  users: User[];
-  onEdit: (user: User) => void;
-  onDelete: (userId: string) => void;
-}
 
-export interface Campaigns {
-  id: string;
-  name: string;
-  status: 'Running' | 'Completed' | 'Error';
-  violationCount: number;
-}
 
-export interface CampaignsTableProps {
-  campaigns: Campaigns[];
-}
 
-export interface CampaignModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  campaigns: Campaigns | undefined;
-  onSubmit: (campaigns: Campaigns) => void;
-}
+
+
 
 
 
@@ -195,11 +224,7 @@ export interface TableHeaderProps {
   onSort?: () => void;
 }
 
-export interface TableRowProps {
-  user: User;
-  onEdit: (user: User) => void;
-  onDelete: (userName: string) => void;
-}
+
 
 export interface TableFooterProps {
   totalItems: number;
@@ -229,7 +254,3 @@ export interface TableHeaderProps {
 }
 
 
-export interface TableRowProps {
-  campaign: CampaignData;
-  onDownload: () => void;
-}
