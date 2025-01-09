@@ -52,7 +52,7 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
     console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.id}` : API_ENDPOINTS.USERS;
+      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.username}` : API_ENDPOINTS.USERS;
       
      const response =  await fetch(url, {
         method,
