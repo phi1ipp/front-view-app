@@ -71,7 +71,7 @@ export interface TableRowProps {
 
 //Users
 export interface User {
-  id: string;
+  username: string;
   enabled: string;
   fullName: string;
   email: string;
