@@ -123,6 +123,17 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
 </div>
 <div className={styles.formField}>
   <input
+    id="db"
+    type="text"
+    placeholder=" "
+    value={formData.db}
+    onChange={(e) => setFormData({ ...formData, db: e.target.value })}
+    required
+  />
+  <label htmlFor="db">db</label>
+  </div>
+<div className={styles.formField}>
+  <input
     id="user"
     type="text"
     placeholder=" "
