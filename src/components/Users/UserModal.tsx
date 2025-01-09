@@ -10,7 +10,7 @@ export const UserModal: React.FC<UserModalProps> = ({
   onSubmit
 }) => {
   const [formData, setFormData] = useState<User>({
-    id: '',
+    username: '',
     enabled: '',
     fullName: '',
     email: '',
@@ -19,7 +19,7 @@ export const UserModal: React.FC<UserModalProps> = ({
 
   const onClose = () => {
     // Reset states to initial values when closing the modal
-    setFormData({  id: '',
+    setFormData({  username: '',
       enabled: '',
       fullName: '',
       email: '',
@@ -31,7 +31,7 @@ export const UserModal: React.FC<UserModalProps> = ({
       setFormData(user);
     } else {
       setFormData({
-        id: '',
+        username: '',
         enabled: '',
         fullName: '',
         email: '',
@@ -78,10 +78,10 @@ export const UserModal: React.FC<UserModalProps> = ({
           </div>
           <div className={styles.formField}>
             <input
-              id="id"
-              type="id"
-              value={formData.id}
-              onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+              id="username"
+              type="username"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               required
               placeholder=" "
             />

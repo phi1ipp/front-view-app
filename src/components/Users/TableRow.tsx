@@ -6,14 +6,13 @@ export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) =>
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.id}</div>
-      </div>
-     
-      <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.fullName}</div>
+        <div className={styles.cellContent}>{user.username}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{user.email}</div>
+      </div>
+      <div className={styles.cell}>
+        <div className={styles.cellContent}>{user.fullName}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{user.enabled}</div>
