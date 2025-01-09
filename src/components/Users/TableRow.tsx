@@ -15,7 +15,7 @@ export const TableRow: React.FC<TableRowProps> = ({ user, onEdit, onDelete }) =>
         <div className={styles.cellContent}>{user.fullName}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.enabled}</div>
+        <div className={styles.cellContent}>{user.enabled ? "Yes" : "No"}</div>
       </div>
       <div className={styles.actionCell}>
         <button
