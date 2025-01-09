@@ -98,7 +98,6 @@
       "name": "bcde"
     }
   ],
-  
   "campaignControls": [
     {
       "id": "1",
@@ -115,13 +114,13 @@
   ],
   "connections": [
     {
-      "id": "",
-      "name": "Supraja Badhri",
-      "host": "j",
-      "port": "k",
-      "db": "",
-      "user": "o",
-      "password": "o"
+      "id": "13ee2e02-8ef1-4636-b352-d3a1934a6776",
+      "name": "adf",
+      "host": "asfd",
+      "port": "asdf",
+      "db": "asdfadfasf",
+      "user": "asdf",
+      "password": "asdf"
     }
   ],
   "controls": [

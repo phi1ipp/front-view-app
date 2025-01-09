@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './ConnectionModal.module.css';
 import { ConnectionModalProps, Connection } from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api.ts';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   isOpen,
@@ -24,7 +25,7 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
       setFormData(connection);
     } else {
       setFormData({
-        id:'',
+        id: uuidv4(),
         name: '',
         host: '',
         port:'',
@@ -121,6 +122,17 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   />
   <label htmlFor="port">Port</label>
 </div>
+<div className={styles.formField}>
+  <input
+    id="db"
+    type="text"
+    placeholder=" "
+    value={formData.db}
+    onChange={(e) => setFormData({ ...formData, db: e.target.value })}
+    required
+  />
+  <label htmlFor="db">db</label>
+  </div>
 <div className={styles.formField}>
   <input
     id="user"
