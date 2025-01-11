@@ -25,7 +25,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   useEffect(() => {
     fetchConnections();
-    fetchControls();
   }, []);
 
   const fetchConnections = async () => {
@@ -40,7 +39,8 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchControls = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CONTROLS);
+      const campaignName = formData.name;
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName));
       const data = await response.json();
       setControls(data);
     } catch (error) {
@@ -48,8 +48,15 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
+    const campaignName = formData.name;
+    const connectionId = formData.connectionId;
+
+    await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
+    const campaignControls = await fetchControls();
+    // setSelectedControls(campaignControls);
+    
     setShowControlsModal(true);
   };
 
@@ -105,7 +112,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
  
 
     return (
-<div className={styles.modalOverlay}>
+      <div className={styles.modalOverlay}>
         <div className={styles.modalContent}>
         <div className={styles.formField}>
           <h2>Controls</h2>
