@@ -30,7 +30,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchConnections = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONNECTIONS);
+      const response = await fetch(API_ENDPOINTS.CONNECTIONS);
       const data = await response.json();
       setConnections(data);
     } catch (error) {
@@ -40,7 +40,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchControls = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS);
+      const response = await fetch(API_ENDPOINTS.CONTROLS);
       const data = await response.json();
       setControls(data);
     } catch (error) {
