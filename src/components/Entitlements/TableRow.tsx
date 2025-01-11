@@ -6,9 +6,6 @@ export const TableRow: React.FC<TableRowProps> = ({ entitlement, onEdit, onDelet
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{entitlement.id}</div>
-      </div>
-      <div className={styles.cell}>
         <div className={styles.cellContent}>{entitlement.name}</div>
       </div>
      <div className={styles.cell}>
@@ -17,7 +14,7 @@ export const TableRow: React.FC<TableRowProps> = ({ entitlement, onEdit, onDelet
             entitlement.accessSet.map((access: any) => (
               // Use access.id as the key to ensure uniqueness
               <span key={access.id} className={styles.accessItem}>
-                {access.name || access.id || 'Unknown'} {/* Adjust based on your object properties */}
+                {access.displayName || access.id || 'Unknown'} {/* Adjust based on your object properties */}
               </span>
             ))
           ) : (

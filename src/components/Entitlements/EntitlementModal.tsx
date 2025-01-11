@@ -47,7 +47,7 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
 
   const fetchFunctions = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.ENTITLEMENTS_ACCESSLIST);
+      const response = await fetch(API_ENDPOINTS.ACCESSLIST);
       const data = await response.json();
       setFunctions(data);
     } catch (error) {
