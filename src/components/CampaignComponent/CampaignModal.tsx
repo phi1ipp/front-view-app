@@ -7,19 +7,21 @@ import { API_ENDPOINTS } from '../../types/api.ts';
 export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,
   onClose: close,
-  onSubmit,
+  onSubmit
 }) => {
   const [formData, setFormData] = useState<Campaign>({
-    name: '',
-    connection: '',
-    controls:[]
+    id: '',
+  name: '',
+  status:'',
+  violationCount:'',
+  connectionId: '',
+  controls: []
   });
   const [connections, setConnections] = useState([]);
-  const [controls, setControls] = useState<{ id: string; name: string }[]>([]);
-  const [selectedControls, setSelectedControls] = useState<{ id: string; name: string }[]>([]);
+  const [controls, setControls] = useState([]);
+  const [selectedControls, setSelectedControls] = useState([]);
+  const [showControlsModal, setShowControlsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  
 
   useEffect(() => {
     fetchConnections();
@@ -46,28 +48,21 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-  const handleAddControl = (controlId: string) => {
-    const control = controls.find((c) => c.id === controlId);
-    if (control && !selectedControls.some((selected) => selected.id === controlId)) {
-      setSelectedControls([...selectedControls, control]);
-    }
-  };
-
-  const handleRemoveControl = (controlId: string) => {
-    setSelectedControls(selectedControls.filter((control) => control.id !== controlId));
+  const handleNext = (e) => {
+    e.preventDefault();
+    setShowControlsModal(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.connection || selectedControls.length === 0) return;
+    if (!formData.name || !formData.connectionId || selectedControls.length === 0) return;
 
     setIsLoading(true);
     try {
       const campaign = {
-        id: uuidv4(),
         name: formData.name,
-        connectionId: formData.connection,
+        connectionId: formData.connectionId,
         controlIds: selectedControls.map((control) => control.id),
       };
       onSubmit(campaign); // Pass the complete campaign data including controls
@@ -80,58 +75,40 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   };
 
   const onClose = () => {
-    setFormData({ name: '', connection: '' });
+    setFormData({id: '',
+      name: '',
+      status:'',
+      violationCount:'',
+      connectionId: '',
+    controls:[]});
     setSelectedControls([]);
-    close(); // Close the modal
+    setShowControlsModal(false);
+    close();
   };
 
-  const selectedConnectionName = connections.find((conn) => conn.id === formData.connection)?.name;
+  const selectedConnectionName = connections.find(conn => conn.id === formData.connectionId)?.name;
 
   if (!isOpen) return null;
 
-  return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <h2>Create Campaign</h2>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="name"
-              type="text"
-              placeholder=""
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-            <label htmlFor="name">Campaign Name</label>
-          </div>
-          <div className={styles.formField}>
+  const handleAddControl = (controlId: string) => {
+    const control = controls.find((c) => c.id === controlId);
+    if (control && !selectedControls.some((selected) => selected.id === controlId)) {
+      setSelectedControls([...selectedControls, control]);
+    }
+  };
 
-<select
+  const handleRemoveControl = (controlId: string) => {
+    setSelectedControls(selectedControls.filter((control) => control.id !== controlId));
+  };
 
-  id="connection"
-value={formData.connection}
+  if (showControlsModal) {
+ 
 
-  onChange={(e) => setFormData({ ...formData, connection: e.target.value })}
-
-  required
-
->
-
-  <option value="">Select connection</option>
-
-  {connections.map(connection => (
-
-    <option key={connection.id} value={connection.id}>{connection.name}</option>
-
-  ))}
-
-</select>
-
-<label htmlFor="connection">Connections</label>
-
-</div>
-          <div className={styles.formField}>
+    return (
+<div className={styles.modalOverlay}>
+        <div className={styles.modalContent}>
+        <div className={styles.formField}>
+          <h2>Controls</h2>
             <select
               className={styles.dropdown}
               onChange={(e) => handleAddControl(e.target.value)}
@@ -166,11 +143,55 @@ value={formData.connection}
           </div>
 
           <div className={styles.modalActions}>
+            <button type="button" onClick={() => setShowControlsModal(false)} className={styles.cancelButton}>
+              Previous
+            </button>
+            <button type="submit" onClick={handleSubmit} className={styles.submitButton} disabled={isLoading}>
+            {isLoading ? 'Creating...' : 'Create Campaign'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );}
+
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <h2>Create Campaign</h2>
+        <form onSubmit={handleNext}>
+          <div className={styles.formField}>
+            <input
+              id="name"
+              type="text"
+              placeholder=""
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              required
+            />
+            <label htmlFor="name">Campaign Name</label>
+          </div>
+          <div className={styles.formField}>
+           
+            <select
+              id="connection"
+              value={formData.connectionId}
+              onChange={(e) => setFormData({ ...formData, connectionId: e.target.value })}
+              required
+            >
+              <option value="">Select a Connection</option>
+              {connections.map((connection) => (
+                <option key={connection.id} value={connection.id}>
+                  {connection.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
               Cancel
             </button>
-            <button type="submit" className={styles.submitButton} disabled={isLoading}>
-              {isLoading ? 'Creating...' : 'Create Campaign'}
+            <button type="submit" className={styles.submitButton}>
+              Next
             </button>
           </div>
         </form>

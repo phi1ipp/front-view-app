@@ -26,8 +26,6 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   };
   const [entitlementOptions1, setEntitlementOptions1] = useState([]);
   const [entitlementOptions2, setEntitlementOptions2] = useState([]);
-  const [selectedEntitlements1, setSelectedEntitlements1] = useState<{ id: string; name: string }[]>([]);
-  const [selectedEntitlements2, setSelectedEntitlements2] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
