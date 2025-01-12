@@ -92,7 +92,7 @@ export interface UserTableProps {
 }
 
 
-export interface TableRowProps {
+export interface UserTableRowProps {
   user: User;
   onEdit: (user: User) => void;
   onDelete: (id: string) => void;
