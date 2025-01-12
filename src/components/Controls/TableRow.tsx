@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './Control.module.css';
 import { TableRowProps } from './types';
-import  Editimg  from '../Dashboard/img/Editimg.svg';
-import  Deleteimg  from '../Dashboard/img/Deleteimg.svg';
 
 export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete }) => {
   return (
@@ -26,8 +24,8 @@ export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete })
           <div className={styles.buttonContent}>
             <img
               loading="lazy"
-              src={Editimg}
-                            className={styles.buttonIcon}
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/290a98c58fd6ff11b6bb3c974f3f49ea50375d611a7fc5c322ece00569ad5402?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+              className={styles.buttonIcon}
               alt="Edit"
             />
             <span className={styles.buttonText}>Edit</span>
@@ -41,7 +39,8 @@ export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete })
           <div className={styles.buttonContent}>
             <img
               loading="lazy"
-              src={Deleteimg}              className={styles.buttonIcon}
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dece34272e8ea9ad59a9c4539c5fa65e60c9c38463f6b19ce518fa8c1a8f0f9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+              className={styles.buttonIcon}
               alt="Delete"
             />
             <span className={styles.buttonText}>Delete</span>
