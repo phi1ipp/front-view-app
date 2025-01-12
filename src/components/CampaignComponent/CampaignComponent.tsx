@@ -20,7 +20,7 @@ export const CampaignComponent: React.FC = () => {
   
     const fetchCampaigns = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGNS);
+        const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
         const data = await response.json();
         console.log(data)
         setCampaigns(data);
@@ -49,17 +49,12 @@ export const CampaignComponent: React.FC = () => {
   
 
   const handleSubmit = async (campaign: Campaign) => {
-    const method ='POST';
     try {
-     const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(campaign),
-      });
+     const response = await fetch(API_ENDPOINTS.CAMPAIGN_START(campaign.name), {credentials: 'include'});
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
-    }
+      }
     console.log("campaign ", campaign);
       setSuccessMessage('Created Campaign Successfully!');  // Set success message
       setTimeout(() => {

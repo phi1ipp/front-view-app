@@ -39,6 +39,7 @@
     user-select: none;
   }
 
+
   .tableHead:last-of-type {
     display: flex;
     align-items: center;
@@ -160,7 +161,6 @@
     align-items: center;
     padding: 16px;
     gap: 8px;
-    max-width: 200px;
   }
   
   .actionButton {
