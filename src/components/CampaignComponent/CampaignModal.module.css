@@ -16,7 +16,7 @@
   padding: 24px;
   border-radius: 4px;
   width: 100%;
-  max-width: 500px;
+  max-width: 1000px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -123,16 +123,16 @@
   margin-top: 16px; /* Spacing above the selected items */
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 3px;
 }
 
 .selectedItem {
   display: flex;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.05);
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 0px 8px;
+  border-radius: 15px;
+  font-size: 10px;
 }
 
 .removeButton {

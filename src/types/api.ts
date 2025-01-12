@@ -2,11 +2,12 @@
 
 
 
-const BASE_URL = '/api';
+const BASE_URL = 'http://localhost:8080/api';
 
 export const API_ENDPOINTS = {
     CAMPAIGNS: `${BASE_URL}/report`,
     CAMPAIGN_PREPARE: (campaignName, connectionId) => `${BASE_URL}/report/${campaignName}/connection/${connectionId}/prepare`,
+    CAMPAIGN_START: (campaignName) => `${BASE_URL}/report/${campaignName}/start`,
     DOWNLOAD_CAMPAIGNS:  `${BASE_URL}/campaigns`,
     CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
     CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/report/${campaignName}/controls`,

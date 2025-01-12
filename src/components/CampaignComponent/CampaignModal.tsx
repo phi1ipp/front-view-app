@@ -29,7 +29,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchConnections = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CONNECTIONS);
+      const response = await fetch(API_ENDPOINTS.CONNECTIONS, {credentials: 'include'});
       const data = await response.json();
       setConnections(data);
     } catch (error) {
@@ -40,9 +40,11 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const fetchControls = async () => {
     try {
       const campaignName = formData.name;
-      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName));
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName), {credentials: 'include'});
       const data = await response.json();
       setControls(data);
+
+      return data;
     } catch (error) {
       console.error('Error fetching controls:', error);
     }
@@ -53,9 +55,9 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     const campaignName = formData.name;
     const connectionId = formData.connectionId;
 
-    await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
+    await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId), {credentials: 'include'});
     const campaignControls = await fetchControls();
-    // setSelectedControls(campaignControls);
+    setSelectedControls(campaignControls);
     
     setShowControlsModal(true);
   };
@@ -98,14 +100,14 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   if (!isOpen) return null;
 
   const handleAddControl = (controlId: string) => {
-    const control = controls.find((c) => c.id === controlId);
+    const control = controls.find((c) => c.id.toString() === controlId);
     if (control && !selectedControls.some((selected) => selected.id === controlId)) {
       setSelectedControls([...selectedControls, control]);
     }
   };
 
   const handleRemoveControl = (controlId: string) => {
-    setSelectedControls(selectedControls.filter((control) => control.id !== controlId));
+    setSelectedControls(selectedControls.filter((control) => control.id.toString() !== controlId));
   };
 
   if (showControlsModal) {
