@@ -43,7 +43,7 @@ export const TableRow: React.FC<userTableRowProps> = ({ user, onEdit, onDelete }
           <div className={styles.buttonContent}>
             <img
               loading="lazy"
-              src={Deleteimg}
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dece34272e8ea9ad59a9c4539c5fa65e60c9c38463f6b19ce518fa8c1a8f0f9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
               className={styles.buttonIcon}
               alt="Delete"
             />
