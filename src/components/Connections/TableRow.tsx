@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './Connection.module.css';
 import { TableRowPropsConnection } from '../../types/types';
+import  Editimg  from '../Dashboard/img/Editimg.svg';
+import  Deleteimg  from '../Dashboard/img/Deleteimg.svg';
 
 export const TableRow: React.FC<TableRowPropsConnection> = ({ connection, onEdit, onDelete }) => {
   return (
@@ -29,8 +31,7 @@ export const TableRow: React.FC<TableRowPropsConnection> = ({ connection, onEdit
           <div className={styles.buttonContent}>
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/290a98c58fd6ff11b6bb3c974f3f49ea50375d611a7fc5c322ece00569ad5402?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-              className={styles.buttonIcon}
+              src={Editimg}
               alt="Edit"
             />
             <span className={styles.buttonText}>Edit</span>
@@ -44,8 +45,8 @@ export const TableRow: React.FC<TableRowPropsConnection> = ({ connection, onEdit
           <div className={styles.buttonContent}>
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dece34272e8ea9ad59a9c4539c5fa65e60c9c38463f6b19ce518fa8c1a8f0f9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-              className={styles.buttonIcon}
+              src={Deleteimg}            
+                className={styles.buttonIcon}
               alt="Delete"
             />
             <span className={styles.buttonText}>Delete</span>

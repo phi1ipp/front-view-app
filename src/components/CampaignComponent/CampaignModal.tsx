@@ -6,6 +6,7 @@ import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,
+  campaign,
   onClose: close,
   onSubmit
 }) => {
@@ -155,9 +156,9 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <button type="button" onClick={() => setShowControlsModal(false)} className={styles.cancelButton}>
               Previous
             </button>
-            <button type="submit" onClick={handleSubmit} className={styles.submitButton} disabled={isLoading}>
-            {isLoading ? 'Creating...' : 'Create Campaign'}
-            </button>
+             <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
+                          {campaign ? 'Save' : 'Create'}
+                        </button>
           </div>
         </div>
       </div>

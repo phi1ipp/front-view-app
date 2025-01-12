@@ -50,7 +50,9 @@ export const CampaignComponent: React.FC = () => {
 
   const handleSubmit = async (campaign: Campaign) => {
     try {
-     const response = await fetch(API_ENDPOINTS.CAMPAIGN_START(campaign.name), {credentials: 'include'});
+      const method = selectedCampaign ? 'PUT' : 'POST';
+      const url = selectedCampaign ? `${API_ENDPOINTS.CAMPAIGN_START}/${campaign.name}` :API_ENDPOINTS.CAMPAIGN_START(campaign.name);
+     const response = await fetch(url, {credentials: 'include'});
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);

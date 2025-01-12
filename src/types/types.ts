@@ -48,6 +48,7 @@ export interface Campaign {
 
 export interface CampaignModalProps {
   isOpen: boolean;
+  campaign?: Campaign;
   onClose: () => void;
   onSubmit: (campaigns: Campaign) => void;
 }
@@ -66,6 +67,7 @@ export interface DownloadButtonProps {
 
 export interface TableRowProps {
   campaign: Campaign;
+  onEdit:(campaign: Campaign) => void;
   onDownload: () => void;
 }
 
@@ -92,7 +94,7 @@ export interface UserTableProps {
 }
 
 
-export interface TableRowProps {
+export interface userTableRowProps {
   user: User;
   onEdit: (user: User) => void;
   onDelete: (id: string) => void;
@@ -171,10 +173,10 @@ export interface ControlModalProps {
 export interface Entitlement {
   id: string;
   name: string;
-  accessSet: AccessList[];
+  accessSet: AccessSet[];
 }
 
-export interface AccessList{
+export interface AccessSet{
 id: string;
 name: string;
 }
@@ -187,9 +189,10 @@ export interface EntitlementModalProps {
 }
 
 export interface EntitlementTableProps {
-  entitlements: Entitlement[];
+  entitlement: Entitlement[];
   onEdit: (entitlement: Entitlement) => void;
-  onDelete: (entitlementId: string) => void;
+  onDelete: (id: string) => void;
+
 }
 
 
