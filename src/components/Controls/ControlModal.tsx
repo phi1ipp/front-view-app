@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './ControlModal.module.css';
 import { ControlModalProps, Control } from '../../types/types';
 import { v4 as uuidv4 } from 'uuid';
+import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const ControlModal: React.FC<ControlModalProps> = ({
   isOpen,
@@ -25,8 +26,6 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   };
   const [entitlementOptions1, setEntitlementOptions1] = useState([]);
   const [entitlementOptions2, setEntitlementOptions2] = useState([]);
-  const [selectedEntitlements1, setSelectedEntitlements1] = useState<{ id: string; name: string }[]>([]);
-  const [selectedEntitlements2, setSelectedEntitlements2] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -34,11 +33,11 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 
     const fetchEntitlements = async () => {
       try {
-        const response1 = await fetch('http://localhost:4000/campaignConnections');
+        const response1 = await fetch(API_ENDPOINTS.ENTITLEMENTS);
         const data1 = await response1.json();
         setEntitlementOptions1(data1);
 
-        const response2 = await fetch('http://localhost:4000/campaignConnections');
+        const response2 = await fetch(API_ENDPOINTS.ENTITLEMENTS);
         const data2 = await response2.json();
         setEntitlementOptions2(data2);
 

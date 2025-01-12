@@ -8,11 +8,20 @@
   ],
   "usersdata": [
     {
-      "id": "supraja",
+      "username": "supraja",
       "enabled": "",
       "fullName": "Supraja Badhri",
       "email": "suprajabadri0906@gmail",
-      "password": "h"
+      "password": "h",
+      "id": "b422"
+    },
+    {
+      "id": "b6db",
+      "username": "o",
+      "enabled": "",
+      "fullName": "Supraja Badhri",
+      "email": "jhhjkk@h",
+      "password": "1234"
     }
   ],
   "campaigns": [
@@ -53,29 +62,27 @@
       "action": "View"
     },
     {
-      "id": "e8d7ca45-a6b1-44de-bcb7-1010b9f205cb",
+      "id": "",
       "name": "Supraja Badhri",
-      "connectionId": "1",
+      "status": "",
+      "violationCount": "",
+      "connectionId": "bcd",
+      "controls": []
+    },
+    {
+      "id": "1fdb2e5d-0ab6-46e4-a2e7-d5989e92b077",
+      "name": "123456789",
+      "connectionId": "bcd",
       "controlIds": [
-        "2",
+        "1",
         "3"
       ]
     },
     {
-      "id": "615e5f95-681d-4fd7-8ff2-23ea650fc1ed",
-      "name": "w",
-      "status": "error",
-      "connectionId": "2",
+      "id": "df96",
+      "name": "hbhb",
+      "connectionId": "bcd",
       "controlIds": [
-        "2"
-      ]
-    },
-    {
-      "id": "5b442d67-ba49-4e12-8c6c-44aea169fa8c",
-      "name": "1",
-      "connectionId": "2",
-      "controlIds": [
-        "3",
         "1"
       ]
     }

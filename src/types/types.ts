@@ -71,7 +71,7 @@ export interface TableRowProps {
 
 //Users
 export interface User {
-  id: string;
+  username: string;
   enabled: string;
   fullName: string;
   email: string;
@@ -92,7 +92,7 @@ export interface UserTableProps {
 }
 
 
-export interface TableRowProps {
+export interface UserTableRowProps {
   user: User;
   onEdit: (user: User) => void;
   onDelete: (id: string) => void;

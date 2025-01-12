@@ -21,8 +21,7 @@ export const EntitlementTable: React.FC<EntitlementTableProps> = ({ entitlements
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Entitlement ID" sortable />
-        <TableHeader label="Entitlemen Name" sortable />
+        <TableHeader label="Entitlement Name" sortable />
         <TableHeader label="Function List" sortable />
         <TableHeader label="Action" />
       </div>
