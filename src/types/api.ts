@@ -2,30 +2,28 @@
 
 
 
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:4000';
 
 export const API_ENDPOINTS = {
-    CAMPAIGNS: `${BASE_URL}/report`,
-    CAMPAIGN_PREPARE: (campaignName, connectionId) => `${BASE_URL}/report/${campaignName}/connection/${connectionId}/prepare`,
-    CAMPAIGN_START: (campaignName) => `${BASE_URL}/report/${campaignName}/start`,
+    CAMPAIGNS: `${BASE_URL}/campaigns`,
     DOWNLOAD_CAMPAIGNS:  `${BASE_URL}/campaigns`,
     CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
-    CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/report/${campaignName}/controls`,
+    CAMPAIGN_CONTROLS: `${BASE_URL}/campaignControls`,
 
 
     //Users
-    USERS: `${BASE_URL}/user`,
+    USERS: `${BASE_URL}/users`,
 
     //Connections
-    CONNECTIONS : `${BASE_URL}/connection`,
+    CONNECTIONS : `${BASE_URL}/connections`,
     TEST_CONNECTION:`${BASE_URL}/connections/test-connection`,
 
      //Controls
-     CONTROLS : `${BASE_URL}/control`,
+     CONTROLS : `${BASE_URL}/controls`,
      //Entitlements
-     ENTITLEMENTS : `${BASE_URL}/entitlement`,
-     ENTITLEMENTS_ACCESSLIST: `${BASE_URL}/accessSet`,
-     ACCESSLIST: `${BASE_URL}/access`
+     ENTITLEMENTS : `${BASE_URL}/entitlements`,
+     ENTITLEMENTS_ACCESSLIST: `${BASE_URL}/accessSet`
+
 
     // Add more API endpoints as needed
 };

@@ -1,155 +1,489 @@
 {
-  "users": [
-    {
-      "id": "2",
-      "email": "admin@example.com",
-      "password": "admin123"
-    }
-  ],
-  "usersdata": [
-    {
-      "username": "supraja",
-      "enabled": "",
-      "fullName": "Supraja Badhri",
-      "email": "suprajabadri0906@gmail",
-      "password": "h",
-      "id": "b422"
-    },
-    {
-      "id": "b6db",
-      "username": "o",
-      "enabled": "",
-      "fullName": "Supraja Badhri",
-      "email": "jhhjkk@h",
-      "password": "1234"
-    }
-  ],
-  "campaigns": [
-    {
-      "id": "1",
-      "name": "Spring Sale 2024",
-      "status": "running",
-      "violationCount": 0,
-      "connectionId": "1",
-      "controlIds": [
-        {
-          "id": 1,
-          "name": "abc"
-        },
-        {
-          "id": 2,
-          "name": "abc"
-        }
-      ],
-      "action": "Edit"
-    },
-    {
-      "id": "2",
-      "name": "Winter Awareness",
-      "status": "completed",
-      "violationCount": 3,
-      "connectionId": "1",
-      "controlIds": [
-        {
-          "id": 1,
-          "name": "abc"
-        },
-        {
-          "id": 2,
-          "name": "abc"
-        }
-      ],
-      "action": "View"
-    },
-    {
-      "id": "",
-      "name": "Supraja Badhri",
-      "status": "",
-      "violationCount": "",
-      "connectionId": "bcd",
-      "controls": []
-    },
-    {
-      "id": "1fdb2e5d-0ab6-46e4-a2e7-d5989e92b077",
-      "name": "123456789",
-      "connectionId": "bcd",
-      "controlIds": [
-        "1",
-        "3"
-      ]
-    },
-    {
-      "id": "df96",
-      "name": "hbhb",
-      "connectionId": "bcd",
-      "controlIds": [
-        "1"
-      ]
-    }
-  ],
-  "campaignConnections": [
-    {
-      "id": "1",
-      "name": "abc"
-    },
-    {
-      "id": "2",
-      "name": "bcd"
-    },
-    {
-      "id": "3",
-      "name": "abcd"
-    },
-    {
-      "id": "3",
-      "name": "bcde"
-    }
-  ],
-  "campaignControls": [
-    {
-      "id": "1",
-      "name": "abc"
-    },
-    {
-      "id": "2",
-      "name": "bcd"
-    },
-    {
-      "id": "3",
-      "name": "bcde"
-    }
-  ],
-  "connections": [
-    {
-      "id": "13ee2e02-8ef1-4636-b352-d3a1934a6776",
-      "name": "adf",
-      "host": "asfd",
-      "port": "asdf",
-      "db": "asdfadfasf",
-      "user": "asdf",
-      "password": "asdf"
-    }
-  ],
-  "controls": [
-    {
-      "id": "946715cc-e5f4-4acc-9c67-b6895a4b4271",
-      "name": "adsf",
-      "ent1Name": "abc",
-      "ent2Name": "abcd"
-    },
-    {
-      "id": "c25be53f-02f8-4ee6-ad49-64ef7bbc6aed",
-      "name": "jhbhj",
-      "ent1Name": "abc",
-      "ent2Name": "bcd"
-    },
-    {
-      "id": "ecc78dcd-7fd3-4b85-b580-51a18ad7a9a9",
-      "name": "Supraja Badhri",
-      "ent1Name": "abcd",
-      "ent2Name": "bcd"
-    }
-  ],
+  "users": [{
+    "username": "admin",
+    "email": null,
+    "fullName": null,
+    "password": "***************",
+    "enabled": true
+ }, {
+    "username": "me",
+    "email": "new_email@nomail.com",
+    "fullName": "New Full Name",
+    "password": "***************",
+    "enabled": true
+ }, {
+    "username": "user",
+    "email": null,
+    "fullName": null,
+    "password": "***************",
+    "enabled": true
+ }],
+  "campaigns":[{
+    "id": 3,
+    "connId": 2,
+    "name": "2025010401",
+    "status": "READY"
+}, {
+    "id": 4,
+    "connId": 5,
+    "name": "prod",
+    "status": "SEED"
+}, {
+    "id": 5,
+    "connId": 5,
+    "name": "prod1",
+    "status": "SEED"
+}, {
+    "id": 6,
+    "connId": 5,
+    "name": "prod3",
+    "status": "SEED"
+}, {
+    "id": 7,
+    "connId": 5,
+    "name": "prod4",
+    "status": "SEED"
+}, {
+    "id": 8,
+    "connId": 5,
+    "name": "prod11",
+    "status": "SEED"
+}, {
+    "id": 9,
+    "connId": 5,
+    "name": "prod8",
+    "status": "SEED"
+}, {
+    "id": 10,
+    "connId": 5,
+    "name": "prod5",
+    "status": "SEED"
+}, {
+    "id": 11,
+    "connId": 5,
+    "name": "prod6",
+    "status": "SEED"
+}, {
+    "id": 12,
+    "connId": 5,
+    "name": "prod7",
+    "status": "SEED"
+}, {
+    "id": 13,
+    "connId": 5,
+    "name": "prod9",
+    "status": "SEED"
+}, {
+    "id": 14,
+    "connId": 2,
+    "name": "test1",
+    "status": "SEED"
+}, {
+    "id": 15,
+    "connId": 2,
+    "name": "test2",
+    "status": "SEED"
+}, {
+    "id": 16,
+    "connId": 2,
+    "name": "test3",
+    "status": "SEED"
+}, {
+    "id": 17,
+    "connId": 2,
+    "name": "test4",
+    "status": "SEED"
+}, {
+    "id": 18,
+    "connId": 2,
+    "name": "test5",
+    "status": "SEED"
+}, {
+    "id": 19,
+    "connId": 2,
+    "name": "test6",
+    "status": "SEED"
+}, {
+    "id": 20,
+    "connId": 5,
+    "name": "test7",
+    "status": "SEED"
+}, {
+    "id": 21,
+    "connId": 2,
+    "name": "test25",
+    "status": "SEED"
+}, {
+    "id": 22,
+    "connId": 2,
+    "name": "test2501",
+    "status": "SEED"
+}, {
+    "id": 23,
+    "connId": 2,
+    "name": "test2502",
+    "status": "SEED"
+}, {
+    "id": 24,
+    "connId": 2,
+    "name": "test2503",
+    "status": "READY"
+}, {
+    "id": 25,
+    "connId": 5,
+    "name": "prod0112",
+    "status": "SEED"
+}, {
+    "id": 26,
+    "connId": 5,
+    "name": "PROD2525",
+    "status": "SEED"
+}],
+ 
+  "connections": [{
+    "id": 1,
+    "name": "test",
+    "host": "test.host",
+    "port": 1521,
+    "user": "ebs.user",
+    "password": "*******"
+ }, {
+    "id": 5,
+    "name": "uat",
+    "host": "uat.host",
+    "port": 1521,
+    "user": "me",
+    "password": "*******"
+ }],
+  "controls": [{
+    "id": 1734,
+    "name": "PROD SOD AR Customer Credit Management & AR Receipts",
+    "description": "PROD SOD AR Customer Credit Management & AR Receipts",
+    "ent1Id": 2433027,
+    "ent2Id": 2433026,
+    "ent1Name": "AR Receipts(2)(1)(1)",
+    "ent2Name": "AR Customer Credit Management(2)(1)(1)"
+}, {
+    "id": 1735,
+    "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing",
+    "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing",
+    "ent1Id": 2433028,
+    "ent2Id": 2433029,
+    "ent1Name": "AR Sales Invoicing(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1736,
+    "name": "PROD SOD PA Define Project & PA Project Billing and Revenue Recognition",
+    "description": "PROD SOD PA Define Project & PA Project Billing and Revenue Recognition",
+    "ent1Id": 2433031,
+    "ent2Id": 2433030,
+    "ent1Name": "PA Project Billing and Revenue Recognition(2)(1)(1)",
+    "ent2Name": "PA Define Project(2)(1)(1)"
+}, {
+    "id": 1737,
+    "name": "PROD SOD GL Journal Entry & GL Journal Post",
+    "description": "PROD SOD GL Journal Entry & GL Journal Post",
+    "ent1Id": 2433032,
+    "ent2Id": 2433033,
+    "ent1Name": "GL Journal Post(2)(1)(1)",
+    "ent2Name": "GL Journal Entry(2)(1)(1)"
+}, {
+    "id": 1738,
+    "name": "PROD SOD PA Define Project & PA Adjust Project Costs and Revenue",
+    "description": "PROD SOD PA Define Project & PA Adjust Project Costs and Revenue",
+    "ent1Id": 2433034,
+    "ent2Id": 2433030,
+    "ent1Name": "PA Adjust Project Costs and Revenue(2)(1)(1)",
+    "ent2Name": "PA Define Project(2)(1)(1)"
+}, {
+    "id": 1739,
+    "name": "PROD SOD AP Payables Invoice Entry & PO Purchase Order Entry",
+    "description": "PROD SOD AP Payables Invoice Entry & PO Purchase Order Entry",
+    "ent1Id": 2433036,
+    "ent2Id": 2433035,
+    "ent1Name": "PO Purchase Order Entry(2)(1)(1)",
+    "ent2Name": "AP Payables Invoice Entry(2)(1)(1)"
+}, {
+    "id": 1740,
+    "name": "PROD SOD PO Receiving Transactions & INV Adjust Physical Inventory",
+    "description": "PROD SOD PO Receiving Transactions & INV Adjust Physical Inventory",
+    "ent1Id": 2433038,
+    "ent2Id": 2433037,
+    "ent1Name": "INV Adjust Physical Inventory(2)(1)(1)",
+    "ent2Name": "PO Receiving Transactions(2)(1)(1)"
+}, {
+    "id": 1741,
+    "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Customer Credit Management",
+    "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Customer Credit Management",
+    "ent1Id": 2433026,
+    "ent2Id": 2433029,
+    "ent1Name": "AR Customer Credit Management(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1742,
+    "name": "PROD SOD AR Enter Credit Memos and Adjustments & ONT Sales Order",
+    "description": "PROD SOD AR Enter Credit Memos and Adjustments & ONT Sales Order",
+    "ent1Id": 2433039,
+    "ent2Id": 2433029,
+    "ent1Name": "ONT Sales Order(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1743,
+    "name": "PROD SOD CE Bank Reconciliation & FND Application Setup",
+    "description": "PROD SOD CE Bank Reconciliation & FND Application Setup",
+    "ent1Id": 2433041,
+    "ent2Id": 2433040,
+    "ent1Name": "FND Application Setup(2)(1)(1)",
+    "ent2Name": "CE Bank Reconciliation(2)(1)(1)"
+}, {
+    "id": 1744,
+    "name": "PROD SOD PO Purchase Order Entry & PO Receiving Transactions",
+    "description": "PROD SOD PO Purchase Order Entry & PO Receiving Transactions",
+    "ent1Id": 2433037,
+    "ent2Id": 2433036,
+    "ent1Name": "PO Receiving Transactions(2)(1)(1)",
+    "ent2Name": "PO Purchase Order Entry(2)(1)(1)"
+}, {
+    "id": 1745,
+    "name": "PROD SOD FA Asset Transactions & PO Purchase Order Entry",
+    "description": "PROD SOD FA Asset Transactions & PO Purchase Order Entry",
+    "ent1Id": 2433036,
+    "ent2Id": 2433042,
+    "ent1Name": "PO Purchase Order Entry(2)(1)(1)",
+    "ent2Name": "FA Asset Transactions(2)(1)(1)"
+}, {
+    "id": 1746,
+    "name": "PROD SOD AR Customer Credit Management & ONT Sales Agreements",
+    "description": "PROD SOD AR Customer Credit Management & ONT Sales Agreements",
+    "ent1Id": 2433043,
+    "ent2Id": 2433026,
+    "ent1Name": "ONT Sales Agreements(2)(1)(1)",
+    "ent2Name": "AR Customer Credit Management(2)(1)(1)"
+}, {
+    "id": 1747,
+    "name": "PROD SOD AR Approve Adjustments & PA Project Billing and Revenue Recognition",
+    "description": "PROD SOD AR Approve Adjustments & PA Project Billing and Revenue Recognition",
+    "ent1Id": 2433031,
+    "ent2Id": 2433044,
+    "ent1Name": "PA Project Billing and Revenue Recognition(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1748,
+    "name": "PROD SOD AR Approve Adjustments & AR Sales Invoicing",
+    "description": "PROD SOD AR Approve Adjustments & AR Sales Invoicing",
+    "ent1Id": 2433028,
+    "ent2Id": 2433044,
+    "ent1Name": "AR Sales Invoicing(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1749,
+    "name": "PROD SOD AR Customer Master & AR Debit Memo",
+    "description": "PROD SOD AR Customer Master & AR Debit Memo",
+    "ent1Id": 2433045,
+    "ent2Id": 2433046,
+    "ent1Name": "AR Debit Memo(2)(1)(1)",
+    "ent2Name": "AR Customer Master(2)(1)(1)"
+}, {
+    "id": 1750,
+    "name": "PROD SOD AP Payables Invoice Entry & AP Payments",
+    "description": "PROD SOD AP Payables Invoice Entry & AP Payments",
+    "ent1Id": 2433047,
+    "ent2Id": 2433035,
+    "ent1Name": "AP Payments(2)(1)(1)",
+    "ent2Name": "AP Payables Invoice Entry(2)(1)(1)"
+}, {
+    "id": 1751,
+    "name": "PROD SOD AP Payables Invoice Entry & AP Supplier Master",
+    "description": "PROD SOD AP Payables Invoice Entry & AP Supplier Master",
+    "ent1Id": 2433048,
+    "ent2Id": 2433035,
+    "ent1Name": "AP Supplier Master(2)(1)(1)",
+    "ent2Name": "AP Payables Invoice Entry(2)(1)(1)"
+}, {
+    "id": 1752,
+    "name": "PROD SOD AP Release Payables Invoice Hold & PO Purchase Order Entry",
+    "description": "PROD SOD AP Release Payables Invoice Hold & PO Purchase Order Entry",
+    "ent1Id": 2433036,
+    "ent2Id": 2433049,
+    "ent1Name": "PO Purchase Order Entry(2)(1)(1)",
+    "ent2Name": "AP Release Payables Invoice Hold(2)(1)(1)"
+}, {
+    "id": 1753,
+    "name": "PROD SOD AR Approve Adjustments & AR Customer Credit Management",
+    "description": "PROD SOD AR Approve Adjustments & AR Customer Credit Management",
+    "ent1Id": 2433026,
+    "ent2Id": 2433044,
+    "ent1Name": "AR Customer Credit Management(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1754,
+    "name": "PROD SOD AR Approve Adjustments & AR Debit Memo",
+    "description": "PROD SOD AR Approve Adjustments & AR Debit Memo",
+    "ent1Id": 2433045,
+    "ent2Id": 2433044,
+    "ent1Name": "AR Debit Memo(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1755,
+    "name": "PROD SOD FA Asset Transactions & PO Receiving Transactions",
+    "description": "PROD SOD FA Asset Transactions & PO Receiving Transactions",
+    "ent1Id": 2433037,
+    "ent2Id": 2433042,
+    "ent1Name": "PO Receiving Transactions(2)(1)(1)",
+    "ent2Name": "FA Asset Transactions(2)(1)(1)"
+}, {
+    "id": 1756,
+    "name": "PROD SOD AR Enter Credit Memos/Adjustments & ONT Sales Pricing",
+    "description": "PROD SOD AR Enter Credit Memos/Adjustments & ONT Sales Pricing",
+    "ent1Id": 2433050,
+    "ent2Id": 2433029,
+    "ent1Name": "ONT Sales Pricing(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1757,
+    "name": "PROD SOD AP Payables Invoice Entry & PO Receiving Transactions",
+    "description": "PROD SOD AP Payables Invoice Entry & PO Receiving Transactions",
+    "ent1Id": 2433035,
+    "ent2Id": 2433037,
+    "ent1Name": "AP Payables Invoice Entry(2)(1)(1)",
+    "ent2Name": "PO Receiving Transactions(2)(1)(1)"
+}, {
+    "id": 1758,
+    "name": "PROD SOD FA Asset Transactions & AP Payables Invoice Entry",
+    "description": "PROD SOD FA Asset Transactions & AP Payables Invoice Entry",
+    "ent1Id": 2433035,
+    "ent2Id": 2433042,
+    "ent1Name": "AP Payables Invoice Entry(2)(1)(1)",
+    "ent2Name": "FA Asset Transactions(2)(1)(1)"
+}, {
+    "id": 1759,
+    "name": "PROD SOD AR Approve Adjustments & AR Receipts",
+    "description": "PROD SOD AR Approve Adjustments & AR Receipts",
+    "ent1Id": 2433027,
+    "ent2Id": 2433044,
+    "ent1Name": "AR Receipts(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1760,
+    "name": "PROD SOD CE Bank Reconciliation & AP Bank Account Setup",
+    "description": "PROD SOD CE Bank Reconciliation & AP Bank Account Setup",
+    "ent1Id": 2433051,
+    "ent2Id": 2433040,
+    "ent1Name": "AP Bank Account Setup(2)(1)(1)",
+    "ent2Name": "CE Bank Reconciliation(2)(1)(1)"
+}, {
+    "id": 1761,
+    "name": "PROD SOD AR Customer Credit Management & ONT Sales Order",
+    "description": "PROD SOD AR Customer Credit Management & ONT Sales Order",
+    "ent1Id": 2433039,
+    "ent2Id": 2433026,
+    "ent1Name": "ONT Sales Order(2)(1)(1)",
+    "ent2Name": "AR Customer Credit Management(2)(1)(1)"
+}, {
+    "id": 1762,
+    "name": "PROD SOD AP Supplier Master & PO Purchase Order Entry",
+    "description": "PROD SOD AP Supplier Master & PO Purchase Order Entry",
+    "ent1Id": 2433036,
+    "ent2Id": 2433048,
+    "ent1Name": "PO Purchase Order Entry(2)(1)(1)",
+    "ent2Name": "AP Supplier Master(2)(1)(1)"
+}, {
+    "id": 1763,
+    "name": "PROD SOD AP Release Payables Invoice Hold & PO Receiving Transactions",
+    "description": "PROD SOD AP Release Payables Invoice Hold & PO Receiving Transactions",
+    "ent1Id": 2433037,
+    "ent2Id": 2433049,
+    "ent1Name": "PO Receiving Transactions(2)(1)(1)",
+    "ent2Name": "AP Release Payables Invoice Hold(2)(1)(1)"
+}, {
+    "id": 1764,
+    "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Debit Memo",
+    "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Debit Memo",
+    "ent1Id": 2433045,
+    "ent2Id": 2433029,
+    "ent1Name": "AR Debit Memo(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1765,
+    "name": "PROD SOD AP Supplier Master & AP Payments",
+    "description": "PROD SOD AP Supplier Master & AP Payments",
+    "ent1Id": 2433047,
+    "ent2Id": 2433048,
+    "ent1Name": "AP Payments(2)(1)(1)",
+    "ent2Name": "AP Supplier Master(2)(1)(1)"
+}, {
+    "id": 1766,
+    "name": "PROD SOD FA Asset Transactions & AP Payments",
+    "description": "PROD SOD FA Asset Transactions & AP Payments",
+    "ent1Id": 2433047,
+    "ent2Id": 2433042,
+    "ent1Name": "AP Payments(2)(1)(1)",
+    "ent2Name": "FA Asset Transactions(2)(1)(1)"
+}, {
+    "id": 1767,
+    "name": "PROD SOD CE Bank Reconciliation & AR Receipts",
+    "description": "PROD SOD CE Bank Reconciliation & AR Receipts",
+    "ent1Id": 2433027,
+    "ent2Id": 2433040,
+    "ent1Name": "AR Receipts(2)(1)(1)",
+    "ent2Name": "CE Bank Reconciliation(2)(1)(1)"
+}, {
+    "id": 1768,
+    "name": "PROD SOD AR Receipts & PA Adjust Project Costs and Revenue",
+    "description": "PROD SOD AR Receipts & PA Adjust Project Costs and Revenue",
+    "ent1Id": 2433034,
+    "ent2Id": 2433027,
+    "ent1Name": "PA Adjust Project Costs and Revenue(2)(1)(1)",
+    "ent2Name": "AR Receipts(2)(1)(1)"
+}, {
+    "id": 1769,
+    "name": "PROD SOD PO Purchase Order Entry & AP Payments",
+    "description": "PROD SOD PO Purchase Order Entry & AP Payments",
+    "ent1Id": 2433047,
+    "ent2Id": 2433036,
+    "ent1Name": "AP Payments(2)(1)(1)",
+    "ent2Name": "PO Purchase Order Entry(2)(1)(1)"
+}, {
+    "id": 1770,
+    "name": "PROD SOD AR Customer Master & AR Sales Invoicing",
+    "description": "PROD SOD AR Customer Master & AR Sales Invoicing",
+    "ent1Id": 2433028,
+    "ent2Id": 2433046,
+    "ent1Name": "AR Sales Invoicing(2)(1)(1)",
+    "ent2Name": "AR Customer Master(2)(1)(1)"
+}, {
+    "id": 1771,
+    "name": "PROD SOD AR Approve Adjustments & ONT Sales Order",
+    "description": "PROD SOD AR Approve Adjustments & ONT Sales Order",
+    "ent1Id": 2433039,
+    "ent2Id": 2433044,
+    "ent1Name": "ONT Sales Order(2)(1)(1)",
+    "ent2Name": "AR Approve Adjustments(2)(1)(1)"
+}, {
+    "id": 1772,
+    "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Receipts",
+    "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Receipts",
+    "ent1Id": 2433027,
+    "ent2Id": 2433029,
+    "ent1Name": "AR Receipts(2)(1)(1)",
+    "ent2Name": "AR Enter Credit Memos & Adjustments(2)(1)(1)"
+}, {
+    "id": 1773,
+    "name": "PROD SOD INV Item Master & PO Requisition Entry",
+    "description": "PROD SOD INV Item Master & PO Requisition Entry",
+    "ent1Id": 2433053,
+    "ent2Id": 2433052,
+    "ent1Name": "PO Requisition Entry(2)(1)(1)",
+    "ent2Name": "INV Item Master(2)(1)(1)"
+}, {
+    "id": 1774,
+    "name": "PROD SOD AR Receipts & PA Project Billing and Revenue Recognition",
+    "description": "PROD SOD AR Receipts & PA Project Billing and Revenue Recognition",
+    "ent1Id": 2433031,
+    "ent2Id": 2433027,
+    "ent1Name": "PA Project Billing and Revenue Recognition(2)(1)(1)",
+    "ent2Name": "AR Receipts(2)(1)(1)"
+}],
   "entitlement": [
     {
       "id": "1",
