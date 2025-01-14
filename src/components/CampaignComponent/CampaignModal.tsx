@@ -7,7 +7,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,
   onClose,
   campaign,
-  onSubmit
+  onSubmit,
 }) => {
   const [formData, setFormData] = useState<Campaign>({
     id: '',
@@ -15,7 +15,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     status: '',
     violationCount: '',
     connectionId: '',
-    controls: []
+    controls: [],
   });
   const [connections, setConnections] = useState([]);
   const [controls, setControls] = useState([]);
@@ -39,7 +39,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         status: '',
         violationCount: '',
         connectionId: '',
-        controls: []
+        controls: [],
       });
       setSelectedControls([]);
       setAvailableControls(controls); // Assuming `controls` holds all available controls
@@ -92,7 +92,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
       const campaign = {
         name: formData.name,
         connectionId: formData.connectionId,
-        controlIds: selectedControls.map(control => control.id),
+        controlIds: selectedControls.map((control) => control.id),
       };
       await onSubmit(campaign);
       onClose();
@@ -103,28 +103,32 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-  const handleAddControl = (controlId) => {
-    const control = availableControls.find(control => control.id === controlId);
+  const handleAddControl = (e, controlId) => {
+    e.preventDefault();
+    const control = availableControls.find((control) => control.id === controlId);
     if (control) {
-      setSelectedControls(prev => [...prev, control]);
-      setAvailableControls(prev => prev.filter(c => c.id !== controlId));
+      setSelectedControls((prev) => [...prev, control]);
+      setAvailableControls((prev) => prev.filter((c) => c.id !== controlId));
     }
   };
 
-  const handleRemoveControl = (controlId) => {
-    const control = selectedControls.find(control => control.id === controlId);
+  const handleRemoveControl = (e, controlId) => {
+    e.preventDefault();
+    const control = selectedControls.find((control) => control.id === controlId);
     if (control) {
-      setAvailableControls(prev => [...prev, control]);
-      setSelectedControls(prev => prev.filter(c => c.id !== controlId));
+      setAvailableControls((prev) => [...prev, control]);
+      setSelectedControls((prev) => prev.filter((c) => c.id !== controlId));
     }
   };
 
-  const handleAddAllControls = () => {
+  const handleAddAllControls = (e) => {
+    e.preventDefault();
     setSelectedControls([...selectedControls, ...availableControls]);
     setAvailableControls([]);
   };
 
-  const handleRemoveAllControls = () => {
+  const handleRemoveAllControls = (e) => {
+    e.preventDefault();
     setAvailableControls([...availableControls, ...selectedControls]);
     setSelectedControls([]);
   };
@@ -141,11 +145,17 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               <div className={styles.list}>
                 <h3>Available Controls</h3>
                 <ul className={styles.scroll}>
-                  {availableControls && availableControls.length > 0 ? availableControls.map(control => (
-                    <li key={control.id}>
-                      <button onClick={() => handleAddControl(control.id)}>{control.name}</button>
-                    </li>
-                  )) : <li className={styles.empty}>No Available Controls</li>}
+                  {availableControls && availableControls.length > 0 ? (
+                    availableControls.map((control) => (
+                      <li key={control.id}>
+                        <button onClick={(e) => handleAddControl(e, control.id)}>
+                          {control.name}
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <li className={styles.empty}>No Available Controls</li>
+                  )}
                 </ul>
               </div>
               <div className={styles.listActions}>
@@ -155,16 +165,26 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               <div className={styles.list}>
                 <h3>Selected Controls</h3>
                 <ul className={styles.scroll}>
-                  {selectedControls.length > 0 ? selectedControls.map(control => (
-                    <li key={control.id}>
-                      <button onClick={() => handleRemoveControl(control)}>{control.name}</button>
-                    </li>
-                  )) : <li className={styles.empty}>No Selected Controls</li>}
+                  {selectedControls.length > 0 ? (
+                    selectedControls.map((control) => (
+                      <li key={control.id}>
+                        <button onClick={(e) => handleRemoveControl(e, control.id)}>
+                          {control.name}
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <li className={styles.empty}>No Selected Controls</li>
+                  )}
                 </ul>
               </div>
             </div>
             <div className={styles.modalActions}>
-              <button type="button" onClick={() => setShowControlsModal(false)} className={styles.cancelButton}>
+              <button
+                type="button"
+                onClick={() => setShowControlsModal(false)}
+                className={styles.cancelButton}
+              >
                 Previous
               </button>
               <button type="submit" className={styles.submitButton} disabled={isLoading}>
@@ -201,8 +221,10 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               required
             >
               <option value="">Select connection</option>
-              {connections.map(connection => (
-                <option key={connection.id} value={connection.id}>{connection.name}</option>
+              {connections.map((connection) => (
+                <option key={connection.id} value={connection.id}>
+                  {connection.name}
+                </option>
               ))}
             </select>
             <label htmlFor="connection">Connections</label>
