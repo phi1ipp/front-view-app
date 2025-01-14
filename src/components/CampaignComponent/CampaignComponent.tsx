@@ -28,7 +28,6 @@ export const CampaignComponent: React.FC = () => {
       try {
         const response = await fetch(API_ENDPOINTS.CAMPAIGNS);
         const data = await response.json();
-        console.log(data)
         setCampaigns(data);
       } catch (error) {
         console.error('Error fetching campaigns:', error);
@@ -44,7 +43,6 @@ export const CampaignComponent: React.FC = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(campaign),
           });
-          console.log("campaign "+campaign);
           setIsModalOpen(false);
           fetchCampaigns();
     
@@ -61,7 +59,6 @@ export const CampaignComponent: React.FC = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(campaign),
           });
-          console.log("campaign "+campaign);
           setIsModalOpen(false);
           fetchCampaigns();
     
@@ -84,7 +81,6 @@ export const CampaignComponent: React.FC = () => {
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
       }
-    console.log("campaign ", campaign);
       setSuccessMessage('Created Campaign Successfully!');  // Set success message
       setTimeout(() => {
         setSuccessMessage('');
@@ -120,9 +116,8 @@ export const CampaignComponent: React.FC = () => {
     };
   
     const handleDeleteConfirm = async (id: string) => {
-      console.log("id"+id)
       try {
-        const response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${API_ENDPOINTS.CAMPAIGNS}/${id}`, { method: 'DELETE' });
         if (!response.ok) {
           setErrorMessage(`HTTP error! Status: ${response.status}`);
       }
