@@ -6,10 +6,11 @@ const BASE_URL = 'http://localhost:4000';
 
 export const API_ENDPOINTS = {
     CAMPAIGNS: `${BASE_URL}/campaigns`,
+    CAMPAIGN_PREPARE: (campaignName, connectionId) => `${BASE_URL}/campaigns/${campaignName}/connection/${connectionId}/prepare`,
+    CAMPAIGN_START: (campaignName) => `${BASE_URL}/campaigns/${campaignName}/start`,
     DOWNLOAD_CAMPAIGNS:  `${BASE_URL}/campaigns`,
-    CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
-    CAMPAIGN_CONTROLS: `${BASE_URL}/campaignControls`,
-
+    CAMPAIGN_CONNECTIONS: `${BASE_URL}/connections`,
+    CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/campaigns/${campaignName}/controls`,
 
     //Users
     USERS: `${BASE_URL}/users`,

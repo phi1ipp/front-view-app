@@ -5,6 +5,7 @@ import { CampaignTable } from './CampaignTable.tsx';
 import {CampaignModal} from './CampaignModal.tsx'
 import { API_ENDPOINTS } from '../../types/api.ts';
 import Create from './Create.png';
+import { DeleteModal } from './DeleteModal.tsx';
 
 export const CampaignComponent: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -12,15 +13,20 @@ export const CampaignComponent: React.FC = () => {
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | undefined>();
   const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
   const [errorMessage,setErrorMessage] = useState('');
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+   const [selectedCampaignId, setSelectedCampaignId] = useState<string>('');
   useEffect(() => {
     fetchCampaigns();
   }, []);
 
-
+  const handleDeleteClick = (id: string) => {
+    setSelectedCampaignId(id);
+    setIsDeleteModalOpen(true);
+  };
   
     const fetchCampaigns = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+        const response = await fetch(API_ENDPOINTS.CAMPAIGNS);
         const data = await response.json();
         console.log(data)
         setCampaigns(data);
@@ -47,10 +53,33 @@ export const CampaignComponent: React.FC = () => {
         }
       };
   
+      const handleStartClick = async (campaign: Campaign) => {
+        const method ='POST';
+        try {
+          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(campaign),
+          });
+          console.log("campaign "+campaign);
+          setIsModalOpen(false);
+          fetchCampaigns();
+    
+        } catch (error) {
+          console.error('Error saving campaign:', error);
+        }
+      };
 
   const handleSubmit = async (campaign: Campaign) => {
+    const method = selectedCampaign ? 'PUT' : 'POST';
+          const url = selectedCampaign ? `${API_ENDPOINTS.CONNECTIONS}/${campaign.id}` : API_ENDPOINTS.CAMPAIGN_START(campaign.name);
+    
     try {
-     const response = await fetch(API_ENDPOINTS.CAMPAIGN_START(campaign.name), {credentials: 'include'});
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(campaign),
+      });
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
@@ -73,10 +102,46 @@ export const CampaignComponent: React.FC = () => {
   };
 
   const handleCreateCampaign = () => {
-      setSelectedCampaign(undefined);
+    setSelectedCampaign({
+      id: '',
+      name: '',
+      status: '',
+      violationCount: '',
+      connectionId: '',
+      controls: []
+    });
+    setIsModalOpen(true);
+  };
+
+
+  const handleEdit = (campaign: Campaign) => {
+      setSelectedCampaign(campaign);
       setIsModalOpen(true);
     };
   
+    const handleDeleteConfirm = async (id: string) => {
+      console.log("id"+id)
+      try {
+        const response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${id}`, { method: 'DELETE' });
+        if (!response.ok) {
+          setErrorMessage(`HTTP error! Status: ${response.status}`);
+      }
+        setSuccessMessage('Deleted Connection Successfully!');  // Set success message
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 5000);
+        fetchCampaigns();
+        setIsDeleteModalOpen(false);
+      } catch (error) {
+        console.error('Error deleting Connections:', error);
+        setErrorMessage('Failed to deleting Connections.');  // Set error message when saving campaign fails
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+      }
+    };
+  
+    
  
 
   return (
@@ -92,21 +157,24 @@ export const CampaignComponent: React.FC = () => {
               <h1 className={styles.title}>Campaigns</h1>
             </div>
             <button className={styles.createButton} onClick={handleCreateCampaign}>
-              <div className={styles.buttonContent}>
-                <img
-                  loading="lazy"
-                  src={Create}
-                  alt="Create Icon"
-                  className={styles.buttonIcon}
-                />
-                <span className={styles.buttonText}>Create</span>
-              </div>
-            </button>
+  <div className={styles.buttonContent}>
+    <img
+      loading="lazy"
+      src={Create}
+      alt="Create Icon"
+      className={styles.buttonIcon}
+    />
+    <span className={styles.buttonText}>Create</span>
+  </div>
+</button>
           </div>
       <div className={styles.content}>
         <CampaignTable
           campaigns={campaigns}
           onDownload={handleDownload}
+          onEdit={handleEdit}
+          onDelete={handleDeleteClick}
+          onStart={handleStartClick}
         />
       </div>
       <CampaignModal
@@ -115,7 +183,12 @@ export const CampaignComponent: React.FC = () => {
         campaign={selectedCampaign}
         onSubmit={handleSubmit}
       />
-     
+     <DeleteModal
+             isOpen={isDeleteModalOpen}
+             onClose={() => setIsDeleteModalOpen(false)}
+             id={selectedCampaignId}
+             onConfirm={handleDeleteConfirm}
+           />
     </div>
   );
 };

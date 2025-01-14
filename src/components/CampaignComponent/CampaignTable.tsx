@@ -5,7 +5,7 @@ import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
 import { CampaignTableProps } from '../../types/types';
 
-export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns }) => {
+export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit, onDelete,onStart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -36,6 +36,8 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns }) => {
                    key={campaign.id}
                    campaign={campaign}
                    onDownload={handleDownload}
+                   onEdit={onEdit}
+            onDelete={onDelete}
                  />
         ))}
       </div>

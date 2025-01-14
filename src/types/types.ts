@@ -49,11 +49,16 @@ export interface Campaign {
 export interface CampaignModalProps {
   isOpen: boolean;
   onClose: () => void;
+  campaign?: Campaign;
   onSubmit: (campaigns: Campaign) => void;
 }
 
 export interface CampaignTableProps {
   campaigns: Campaign[];
+  onEdit: (campaign: Campaign) => void;
+  onDelete: (id: string) => void;
+  onStart:(campaign:Campaign)=>void;
+
 }
 
 export interface StatusChipProps {
@@ -67,6 +72,9 @@ export interface DownloadButtonProps {
 export interface TableRowProps {
   campaign: Campaign;
   onDownload: () => void;
+  onEdit: (campaign: Campaign) => void;
+  onDelete: (id: string) => void;
+  onStart:(campaign:Campaign)=>void;
 }
 
 //Users
