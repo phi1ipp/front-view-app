@@ -48,7 +48,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchConnections = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CONNECTIONS);
+      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
       const data = await response.json();
       setConnections(data || []);
     } catch (error) {
