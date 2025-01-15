@@ -2,9 +2,8 @@ import React from 'react';
 import styles from './Campaign.module.css';
 import { TableRowProps } from '../../types/types';
 import { StatusChip } from './StatusChip.tsx';
-import { DownloadButton } from './DownloadButton.tsx';
 
-export const TableRow: React.FC<TableRowProps> = ({ campaign,onDownload }) => {
+export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit, onDelete, onStart }) => {
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
@@ -14,13 +13,85 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign,onDownload }) => {
         <div className={styles.cellContent}>{campaign.name}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}><div><StatusChip status={campaign.status} /></div></div>
+        <div className={styles.cellContent}><StatusChip status={campaign.status} /></div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{campaign.violationCount}</div>
       </div>
-      <div className={styles.actionCell}>   
-         <DownloadButton onClick={onDownload} />
+      <div className={styles.actionCell}>
+      <button
+                  className={styles.actionButton}
+                  onClick={() => onStart(campaign.id)}
+                  aria-label={`Start ${campaign.name}`}
+                >
+                  <div className={styles.buttonContent}>
+                    <img
+                      loading="lazy"
+                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dece34272e8ea9ad59a9c4539c5fa65e60c9c38463f6b19ce518fa8c1a8f0f9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+                      className={styles.buttonIcon}
+                      alt="Start"
+                    />
+                  </div>
+                </button>
+         <button
+                  className={styles.actionButton}
+                  onClick={() => onEdit(campaign)}
+                  aria-label={`Edit ${campaign.name}`}
+                >
+                  <div className={styles.buttonContent}>
+                    <img
+                      loading="lazy"
+                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/290a98c58fd6ff11b6bb3c974f3f49ea50375d611a7fc5c322ece00569ad5402?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+                      className={styles.buttonIcon}
+                      alt="Edit"
+                    />
+                  </div>
+                </button>
+                <button
+                  className={styles.actionButton}
+                  onClick={() => onDelete(campaign.id)}
+                  aria-label={`Delete ${campaign.name}`}
+                >
+                  <div className={styles.buttonContent}>
+                    <img
+                      loading="lazy"
+                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dece34272e8ea9ad59a9c4539c5fa65e60c9c38463f6b19ce518fa8c1a8f0f9?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+                      className={styles.buttonIcon}
+                      alt="Delete"
+                    />
+                  </div>
+                </button>
+                <button
+                  className={styles.actionButton}
+                  onClick={() => onDownload(campaign.id)}
+                  aria-label={`Download ${campaign.name}`}
+                >
+                  <div className={styles.buttonContent}>
+                    <img
+                      loading="lazy"
+                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ae6762565aef009d714d78982d8dc804924878677efa3d3efe0c0a2cd0b4b68?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
+                      className={styles.buttonIcon}
+                      alt="Download"
+                    />
+                  </div>
+                </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     </div>
   );
