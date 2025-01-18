@@ -63,7 +63,7 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
                 </button>
                 <button
                   className={styles.actionButton}
-                  onClick={() => onDownload(campaign.id)}
+                  onClick={() => onDownload(campaign)}
                   aria-label={`Download ${campaign.name}`}
                 >
                   <div className={styles.buttonContent}>
