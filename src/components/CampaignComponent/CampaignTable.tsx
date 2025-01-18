@@ -6,7 +6,7 @@ import { TableFooter } from './TableFooter.tsx';
 import { CampaignTableProps } from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api.ts';
 
-export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit, onDelete,onStart }) => {
+export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit, onDelete, onStart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -64,7 +64,7 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit,
                    campaign={campaign}
                    onDownload={handleDownload}
                    onEdit={onEdit}
-            onDelete={onDelete}
+                   onDelete={onDelete}
                  />
         ))}
       </div>
