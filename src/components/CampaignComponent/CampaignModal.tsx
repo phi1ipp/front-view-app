@@ -14,7 +14,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     name: '',
     status: '',
     violationCount: '',
-    connectionId: '',
+    connId: '',
     controls: [],
   });
   const [connections, setConnections] = useState([]);
@@ -38,7 +38,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         name: '',
         status: '',
         violationCount: '',
-        connectionId: '',
+        connId: '',
         controls: [],
       });
       setSelectedControls([]);
@@ -48,7 +48,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const fetchConnections = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+      const response = await fetch(API_ENDPOINTS.CONNECTIONS, {credentials: "include"});
       const data = await response.json();
       setConnections(data || []);
     } catch (error) {
@@ -73,7 +73,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const handleNext = async (e) => {
     e.preventDefault();
     const campaignName = formData.name;
-    const connectionId = formData.connectionId;
+    const connectionId = formData.connId;
 
     try {
       await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
@@ -85,13 +85,13 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.connectionId || selectedControls.length === 0) return;
+    if (!formData.name || !formData.connId || selectedControls.length === 0) return;
 
     setIsLoading(true);
     try {
       const campaign = {
         name: formData.name,
-        connectionId: formData.connectionId,
+        connectionId: formData.connId,
         controlIds: selectedControls.map((control) => control.id),
       };
       await onSubmit(campaign);
@@ -216,8 +216,8 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
           <div className={styles.formField}>
             <select
               id="connection"
-              value={formData.connectionId}
-              onChange={(e) => setFormData({ ...formData, connectionId: e.target.value })}
+              value={formData.connId}
+              onChange={(e) => setFormData({ ...formData, connId: e.target.value })}
               required
             >
               <option value="">Select connection</option>
