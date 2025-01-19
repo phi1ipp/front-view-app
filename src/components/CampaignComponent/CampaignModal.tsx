@@ -26,12 +26,27 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
   useEffect(() => {
     fetchConnections();
-    fetchControls();
+    fetchAllControls();
   }, []);
 
   useEffect(() => {
     if (campaign) {
       setFormData(campaign);
+
+      fetchCampaignControls(campaign.name)
+        .then(campaignControls => {
+          setSelectedControls(campaignControls);
+
+          if (controls.length) {
+            setAvailableControls(
+              // controls.filter(a => !campaignControls.includes(a))
+              []
+            )
+          }
+
+          // jump straight to the second screen so that there is no need to create/prep DB
+          setShowControlsModal(true);
+        })
     } else {
       setFormData({
         id: '',
@@ -57,16 +72,26 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
-  const fetchControls = async () => {
+  const fetchCampaignControls = async (campaignName) => {
+    try {
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName), {credentials: 'include'});
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching campaign controls:', error);
+      return [];
+    }
+  };
+
+  const fetchAllControls = async () => {
     try {
       const response = await fetch(API_ENDPOINTS.CONTROLS);
       const data = await response.json();
       setControls(data || []);
-      setAvailableControls(data || []);
+      // setAvailableControls(data || []);
     } catch (error) {
       console.error('Error fetching controls:', error);
       setControls([]);
-      setAvailableControls([]);
+      // setAvailableControls([]);
     }
   };
 
@@ -76,7 +101,9 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     const connectionId = formData.connId;
 
     try {
-      await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
+      if (formData.id === '')
+        await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
+      
       setShowControlsModal(true);
     } catch (error) {
       console.error('Failed to prepare campaign:', error);
@@ -208,6 +235,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               type="text"
               placeholder=""
               value={formData.name}
+              disabled={formData.id}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
             />
@@ -217,6 +245,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <select
               id="connection"
               value={formData.connId}
+              disabled={formData.id}
               onChange={(e) => setFormData({ ...formData, connId: e.target.value })}
               required
             >
