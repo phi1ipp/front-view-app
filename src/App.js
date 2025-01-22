@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route , Navigate} from 'react-router-dom';
 import { LoginPage } from './components/Login/LoginPage.tsx';
 import Home  from './components/Home.tsx';
+import { Logout } from './components/Logout.tsx';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -26,6 +28,7 @@ function App() {
         path="/home"
         element={isAuthenticated ? <Home /> : <Navigate to="/" />}
       />
+      <Route path="/logout" element={<Logout />} />
     </Routes>
   </BrowserRouter>
   );
