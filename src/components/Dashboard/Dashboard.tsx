@@ -24,6 +24,7 @@ import {ConnectionsComponent} from '../Connections/ConnectionsComponent.tsx';
 import {ControlsComponent} from '../Controls/ControlsComponent.tsx';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent.tsx';
 import { Entitlements } from '../Entitlements/Entitlements.tsx';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -47,6 +48,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onLogout,
   onDownload
 }) => {
+  const navigate = useNavigate();
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const [activeFilterIndex, setActiveFilterIndex] = useState(1);
 
@@ -54,6 +56,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
     setActiveNavIndex(index);
     onNavItemClick?.(index);
   }, [onNavItemClick]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userName");
+    navigate('/'); // Redirect to login
+  };
 
   const handleFilterClick = useCallback((index: number) => {
     setActiveFilterIndex(index);
@@ -117,7 +125,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           initial: userName?.charAt(0),
           role: 'admin',
         }}
-        onLogout={onLogout}
+        onLogout={handleLogout}
       />
 
       {/* Main Content */}
