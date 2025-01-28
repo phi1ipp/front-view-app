@@ -6,7 +6,12 @@ import { TableFooter } from './TableFooter.tsx';
 import { CampaignTableProps } from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api.ts';
 
-export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit, onDelete, onStart }) => {
+export const CampaignTable: React.FC<CampaignTableProps> = ({
+  campaigns,
+  onEdit,
+  onDelete,
+  onStart,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -16,38 +21,45 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit,
 
   const handleRowsPerPageChange = (rows: number) => {
     setRowsPerPage(rows);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to the first page when rows per page changes
   };
 
   const handleDownload = async (campaign: Campaign) => {
-      try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name), {
+    try {
+      const response = await fetch(
+        API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name),
+        {
           headers: {
-            'Content-Type': 'application/octet-stream'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+            'Content-Type': 'application/octet-stream',
+          },
         }
+      );
 
-        const blob = await response.blob();
-
-        // Create a URL for the blob and trigger the download
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `reports_${campaign.name}.zip`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-
-      } catch (error) {
-        console.error('Error downloading campaign reports:', error);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
-  
+
+      const blob = await response.blob();
+
+      // Create a URL for the blob and trigger the download
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `reports_${campaign.name}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading campaign reports:', error);
+    }
+  };
+
+  // Calculate the campaigns to display based on pagination
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const currentCampaigns = campaigns.slice(startIndex, endIndex);
+
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
@@ -58,14 +70,14 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, onEdit,
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {campaigns.map((campaign) => (
-                 <TableRow
-                   key={campaign.id}
-                   campaign={campaign}
-                   onDownload={handleDownload}
-                   onEdit={onEdit}
-                   onDelete={onDelete}
-                 />
+        {currentCampaigns.map((campaign) => (
+          <TableRow
+            key={campaign.id}
+            campaign={campaign}
+            onDownload={handleDownload}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
         ))}
       </div>
       <TableFooter

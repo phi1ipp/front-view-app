@@ -7,25 +7,32 @@ export const TableFooter: React.FC<TableFooterProps> = ({
   currentPage,
   rowsPerPage,
   onPageChange,
-  onRowsPerPageChange
+  onRowsPerPageChange,
 }) => {
+  const totalPages = Math.ceil(totalItems / rowsPerPage);
   const startItem = (currentPage - 1) * rowsPerPage + 1;
   const endItem = Math.min(currentPage * rowsPerPage, totalItems);
+
+  const handleRowsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    onRowsPerPageChange(parseInt(event.target.value, 10));
+  };
 
   return (
     <div className={styles.tableFooter}>
       <div className={styles.paginationContainer}>
         <div className={styles.rowsPerPage}>
           <span>Rows per page:</span>
-          <div className={styles.rowSelector}>
-            <span>{rowsPerPage}</span>
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ee9bc83447ebd345e6fb673f2a5844fc7a7902c83fb6e44607ea5696617eaa38?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-              alt="Select rows per page"
-              className={styles.dropdownIcon}
-            />
-          </div>
+          <select
+            value={rowsPerPage}
+            onChange={handleRowsChange}
+            className={styles.rowSelector}
+          >
+            {[5, 10, 20, 50].map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles.paginationInfo}>
           {`${startItem}-${endItem} of ${totalItems}`}
@@ -47,7 +54,7 @@ export const TableFooter: React.FC<TableFooterProps> = ({
           <button
             className={styles.pageButton}
             onClick={() => onPageChange(currentPage + 1)}
-            disabled={endItem === totalItems}
+            disabled={currentPage === totalPages}
             aria-label="Next page"
           >
             <img
