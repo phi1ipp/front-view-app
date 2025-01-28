@@ -19,8 +19,8 @@ export const CampaignComponent: React.FC = () => {
     fetchCampaigns();
   }, []);
 
-  const handleDeleteClick = (id: string) => {
-    setSelectedCampaignId(id);
+  const handleDeleteClick = (campaign: Campaign) => {
+    setSelectedCampaign(campaign);
     setIsDeleteModalOpen(true);
   };
   
@@ -115,26 +115,31 @@ export const CampaignComponent: React.FC = () => {
       setIsModalOpen(true);
     };
   
-    const handleDeleteConfirm = async (id: string) => {
-      try {
-        const response = await fetch(`${API_ENDPOINTS.CAMPAIGNS}/${id}`, { method: 'DELETE' });
-        if (!response.ok) {
-          setErrorMessage(`HTTP error! Status: ${response.status}`);
+  const handleDeleteConfirm = async (name: string) => {
+    try {
+      const response = await fetch(`${API_ENDPOINTS.CAMPAIGNS}/${name}`, { method: 'DELETE' });
+      
+      if (!response.ok) {
+        setErrorMessage(`HTTP error! Status: ${response.status}`);
       }
-        setSuccessMessage('Deleted Connection Successfully!');  // Set success message
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 5000);
-        fetchCampaigns();
-        setIsDeleteModalOpen(false);
-      } catch (error) {
-        console.error('Error deleting Connections:', error);
-        setErrorMessage('Failed to deleting Connections.');  // Set error message when saving campaign fails
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 5000);
-      }
-    };
+
+      setSuccessMessage('Deleted Connection Successfully!');  // Set success message
+      
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
+
+      fetchCampaigns();
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      console.error('Error deleting Connections:', error);
+      setErrorMessage('Failed to deleting Connections.');  // Set error message when saving campaign fails
+      
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
+    }
+  };
   
     
  
@@ -181,7 +186,7 @@ export const CampaignComponent: React.FC = () => {
      <DeleteModal
              isOpen={isDeleteModalOpen}
              onClose={() => setIsDeleteModalOpen(false)}
-             id={selectedCampaignId}
+             campaign={selectedCampaign}
              onConfirm={handleDeleteConfirm}
            />
     </div>
