@@ -17,19 +17,25 @@
   font: 500 14px/20px Roboto;
   letter-spacing: 0.1px;
   color: var(--Light-Gray, #f5f5f5);
-  width: 70px; /* Example fixed width, adjust as necessary */
-  height: 30px; /* Example fixed height, adjust as necessary */
+  width: 70px; 
+  height: 30px; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; 
+}
 .successMessage {
-  background-color: #28a745; /* Green background */
+  background-color: #28a745; 
   color: white;
   text-align: center;
   padding: 10px;
-  margin-bottom: 10px; /* Space below the message */
+  margin-bottom: 10px; 
 }
 
 .errorMessage {

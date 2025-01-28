@@ -139,6 +139,11 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     }
   };
 
+  const cancelControl= (e) => {
+    onClose();
+    setSelectedControls([]);
+  }
+
   const handleRemoveControl = (e, controlId) => {
     e.preventDefault();
     const control = selectedControls.find((control) => control.id === controlId);
@@ -259,7 +264,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             <label htmlFor="connection">Connections</label>
           </div>
           <div className={styles.modalActions}>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
+          <button type="button" onClick={(e) => cancelControl(e)} className={styles.cancelButton}>
               Cancel
             </button>
             <button type="submit" className={styles.submitButton}>
