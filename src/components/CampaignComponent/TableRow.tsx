@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Campaign.module.css';
 import { TableRowProps } from '../../types/types';
 import { StatusChip } from './StatusChip.tsx';
+import StartFill from './StartFill.svg';
 
 export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit, onDelete, onStart }) => {
 
