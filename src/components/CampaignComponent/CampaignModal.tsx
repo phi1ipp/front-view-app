@@ -30,23 +30,38 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   }, []);
 
   useEffect(() => {
+
+    if (!isOpen) return;
     if (campaign) {
+      // Set form data from existing campaign
       setFormData(campaign);
+  
+      // Fetch campaign-specific controls
+      fetchCampaignControls(campaign.name).then(campaignControls => {
+        
+  
+        // If editing an existing campaign, filter available controls and jump to the controls modal
+        if (campaign.id && controls.length) { // This checks if it's an edit operation
+          setAvailableControls(
+            controls.filter(control => !campaignControls.map(c => c.id).includes(control.id))
+          );
+          setShowControlsModal(true); // Jump to controls management for editing
+          setAvailableControls(controls);
+        } else {
+          // For a new campaign creation, do not filter or jump to second screen
+          setAvailableControls(controls);
+          setFormData({
+            id: '',
+            name: '',
+            status: '',
+            violationCount: '',
+            connId: '',
+            controls: [],
+          });
+          
 
-      fetchCampaignControls(campaign.name)
-        .then(campaignControls => {
-          setSelectedControls(campaignControls);
-
-          if (controls.length) {
-            setAvailableControls(
-              // controls.filter(a => !campaignControls.includes(a))
-              []
-            )
-          }
-
-          // jump straight to the second screen so that there is no need to create/prep DB
-          setShowControlsModal(true);
-        })
+        }
+      });
     } else {
       setFormData({
         id: '',

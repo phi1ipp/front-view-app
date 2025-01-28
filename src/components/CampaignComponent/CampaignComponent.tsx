@@ -14,7 +14,6 @@ export const CampaignComponent: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
   const [errorMessage,setErrorMessage] = useState('');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-   const [selectedCampaignId, setSelectedCampaignId] = useState<string>('');
   useEffect(() => {
     fetchCampaigns();
   }, []);
