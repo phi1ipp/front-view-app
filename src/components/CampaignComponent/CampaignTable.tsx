@@ -8,6 +8,7 @@ import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const CampaignTable: React.FC<CampaignTableProps> = ({
   campaigns,
+  onDownload,
   onEdit,
   onDelete,
   onStart,
