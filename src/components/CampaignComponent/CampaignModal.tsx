@@ -39,14 +39,14 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
       // Fetch campaign-specific controls
       fetchCampaignControls(campaign.name).then(campaignControls => {
         
-  
         // If editing an existing campaign, filter available controls and jump to the controls modal
-        if (campaign.id && controls.length) { // This checks if it's an edit operation
+        if (campaign.id && controls.length) {
+          // This checks if it's an edit operation
+          setSelectedControls(campaignControls);
           setAvailableControls(
             controls.filter(control => !campaignControls.map(c => c.id).includes(control.id))
           );
           setShowControlsModal(true); // Jump to controls management for editing
-          setAvailableControls(controls);
         } else {
           // For a new campaign creation, do not filter or jump to second screen
           setAvailableControls(controls);
@@ -88,13 +88,16 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   };
 
   const fetchCampaignControls = async (campaignName) => {
+    console.log("Campagin name "+campaignName);
     try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName), {credentials: 'include'});
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName), {credentials: "include"});
+      console.log(API_ENDPOINTS.CAMPAIGN_CONTROLS(campaignName));
       return await response.json();
     } catch (error) {
       console.error('Error fetching campaign controls:', error);
       return [];
     }
+    
   };
 
   const fetchAllControls = async () => {
