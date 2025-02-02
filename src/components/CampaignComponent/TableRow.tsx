@@ -50,7 +50,7 @@ const [isHoveringDownload, setIsHoveringDownload] = useState(false);
         </button>
                 <button
                   className={styles.actionButton}
-                  onClick={() => onDelete(campaign.id)}
+                  onClick={() => onDelete(campaign)}
                   onMouseEnter={() => setIsHoveringDelete(true)}
           onMouseLeave={() => setIsHoveringDelete(false)}
                   aria-label={`Delete ${campaign.name}`}
