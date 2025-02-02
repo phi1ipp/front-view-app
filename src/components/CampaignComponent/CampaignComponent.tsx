@@ -68,7 +68,7 @@ export const CampaignComponent: React.FC = () => {
 
   const handleSubmit = async (campaign: Campaign) => {
     const method = selectedCampaign ? 'PUT' : 'POST';
-          const url = selectedCampaign ? `${API_ENDPOINTS.CONNECTIONS}/${campaign.id}` : `${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}, {credentials: 'include'}`;
+    const url = selectedCampaign ? `${API_ENDPOINTS.CONNECTIONS}/${campaign.id}` : `${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}, {credentials: 'include'}`;
     
     try {
       const response = await fetch(url, {

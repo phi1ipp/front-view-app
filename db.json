@@ -3,141 +3,174 @@
     "username": "admin",
     "email": null,
     "fullName": null,
-    "password": "***************",
+    "password": "*****",
     "enabled": true
  }, {
     "username": "me",
     "email": "new_email@nomail.com",
     "fullName": "New Full Name",
-    "password": "***************",
+    "password": "*****",
     "enabled": true
  }, {
     "username": "user",
     "email": null,
     "fullName": null,
-    "password": "***************",
+    "password": "*****",
     "enabled": true
  }],
   "campaigns":[{
     "id": 3,
     "connId": 2,
     "name": "2025010401",
-    "status": "READY"
+    "status": "READY",
+    "controls": [{
+        "id": 1734,
+        "name": "PROD SOD AR Customer Credit Management & AR Receipts",
+        "description": "PROD SOD AR Customer Credit Management & AR Receipts"
+    }, {
+        "id": 1735,
+        "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing",
+        "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing"
+    }
+]
 }, {
     "id": 4,
     "connId": 5,
     "name": "prod",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 5,
     "connId": 5,
     "name": "prod1",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 6,
     "connId": 5,
     "name": "prod3",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 7,
     "connId": 5,
     "name": "prod4",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 8,
     "connId": 5,
     "name": "prod11",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 9,
     "connId": 5,
     "name": "prod8",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 10,
     "connId": 5,
     "name": "prod5",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 11,
     "connId": 5,
     "name": "prod6",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 12,
     "connId": 5,
     "name": "prod7",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 13,
     "connId": 5,
     "name": "prod9",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 14,
     "connId": 2,
     "name": "test1",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 15,
     "connId": 2,
     "name": "test2",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 16,
     "connId": 2,
     "name": "test3",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 17,
     "connId": 2,
     "name": "test4",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 18,
     "connId": 2,
     "name": "test5",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 19,
     "connId": 2,
     "name": "test6",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 20,
     "connId": 5,
     "name": "test7",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 21,
     "connId": 2,
     "name": "test25",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 22,
     "connId": 2,
     "name": "test2501",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 23,
     "connId": 2,
     "name": "test2502",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 24,
     "connId": 2,
     "name": "test2503",
-    "status": "READY"
+    "status": "READY",
+    "controls": []
 }, {
     "id": 25,
     "connId": 5,
     "name": "prod0112",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }, {
     "id": 26,
     "connId": 5,
     "name": "PROD2525",
-    "status": "SEED"
+    "status": "SEED",
+    "controls": []
 }],
  
   "connections": [{
@@ -146,14 +179,14 @@
     "host": "test.host",
     "port": 1521,
     "user": "ebs.user",
-    "password": "*******"
+    "password": "***"
  }, {
     "id": 5,
     "name": "uat",
     "host": "uat.host",
     "port": 1521,
     "user": "me",
-    "password": "*******"
+    "password": "***"
  }],
   "controls": [{
     "id": 1734,
@@ -528,4 +561,16 @@
       "name": "function4"
     }
   ]
+  ,
+  "2025010401": [{
+        "id": 1734,
+        "name": "PROD SOD AR Customer Credit Management & AR Receipts",
+        "description": "PROD SOD AR Customer Credit Management & AR Receipts"
+    }, {
+        "id": 1735,
+        "name": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing",
+        "description": "PROD SOD AR Enter Credit Memos/Adjustments & AR Sales Invoicing"
+    }
+]
 }
+

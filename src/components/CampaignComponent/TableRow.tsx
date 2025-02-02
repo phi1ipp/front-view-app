@@ -31,7 +31,7 @@ const [isHoveringDownload, setIsHoveringDownload] = useState(false);
                   onMouseEnter={() => setIsHoveringStart(true)}
                   onMouseLeave={() => setIsHoveringStart(false)}
                   aria-label={`Start ${campaign.name}`}
-                  disabled={campaign.status !== 'READY'}
+                  disabled={campaign.status == 'READY'}
                 >
                   <div className={styles.buttonContent}>
                   {isHoveringStart ? 'Start' : <img src={StartFill} className={styles.buttonIcon} alt="Start" />}                   
