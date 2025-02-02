@@ -58,8 +58,6 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             connId: '',
             controls: [],
           });
-          
-
         }
       });
     } else {
@@ -230,6 +228,9 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               </div>
             </div>
             <div className={styles.modalActions}>
+            <button type="button" onClick={(e) => cancelControl(e)} className={styles.submitButton}>
+              Cancel
+            </button>
               <button
                 type="button"
                 onClick={() => setShowControlsModal(false)}
@@ -240,6 +241,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               <button type="submit" className={styles.submitButton} disabled={isLoading}>
                 {isLoading ? 'Processing...' : 'Submit'}
               </button>
+              
             </div>
           </form>
         </div>
