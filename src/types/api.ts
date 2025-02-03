@@ -10,7 +10,7 @@ export const API_ENDPOINTS = {
     CAMPAIGN_START: (campaignName) => `${BASE_URL}/report/${campaignName}/start`,
     CAMPAIGN_DOWNLOAD: (campaignName) => `${BASE_URL}/report/${campaignName}/download`,
     //CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/campaigns/${campaignName}/controls`,
-    CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/${campaignName}`,
+    CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/report/${campaignName}/controls`,
 
     CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
 
