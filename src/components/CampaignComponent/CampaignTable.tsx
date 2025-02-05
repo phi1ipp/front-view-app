@@ -60,11 +60,13 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
     }
   };
 
+
+  
   // Calculate the campaigns to display based on pagination
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentCampaigns = campaigns.slice(startIndex, startIndex + rowsPerPage);
 
-  // ✅ Fix: Disable "Next" if no more campaigns exist
+  
   const isNextDisabled = currentPage >= totalPages || currentCampaigns.length === 0;
 
   return (
@@ -94,7 +96,7 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
-        isNextDisabled={isNextDisabled} // ✅ Pass prop to Footer
+        isNextDisabled={isNextDisabled} 
       />
     </div>
   );

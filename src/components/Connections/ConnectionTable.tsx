@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import styles from './Connection.module.css';
 import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
-import { TableFooter } from './TableFooter.tsx';
+import { TableFooter } from '../CampaignComponent/TableFooter.tsx';
 import { ConnectionsTableProps } from '../../types/types';
 
 export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const totalPages = Math.ceil(connections.length / rowsPerPage);
+
+
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const currentConnections= connections.slice(startIndex, startIndex + rowsPerPage);
+
+
+  const isNextDisabled = currentPage >= totalPages || currentConnections.length === 0;
+
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const handleRowsPerPageChange = (rows: number) => {
@@ -29,7 +40,7 @@ export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, 
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>
-        {connections.map((connection) => (
+        {currentConnections.map((connection) => (
           <TableRow
             key={connection.id}
             connection={connection}
@@ -41,9 +52,11 @@ export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, 
       <TableFooter
         totalItems={connections.length}
         currentPage={currentPage}
+        totalPages={totalPages}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
+        isNextDisabled={isNextDisabled} 
       />
     </div>
   );

@@ -49,7 +49,7 @@ export const TableFooter: React.FC<TableFooterProps> = ({
           <button
             className={styles.pageButton}
             onClick={() => onPageChange(currentPage + 1)}
-            disabled={isNextDisabled} // ✅ Now correctly disables "Next"
+            disabled={isNextDisabled} 
             aria-label="Next page"
           >
             Next &gt;
