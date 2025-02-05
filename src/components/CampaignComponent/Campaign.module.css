@@ -294,6 +294,8 @@
 .pageButton:disabled {
   opacity: 0.38;
   cursor: not-allowed;
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .pageButtonIcon {
@@ -313,4 +315,57 @@
   .actionCell {
     flex-wrap: wrap;
   }
+}
+
+.tableFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.paginationInfo {
+  font-size: 14px;
+  color: #555;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageButton {
+  padding: 6px 12px;
+  font-size: 14px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.pageButton:hover {
+  background: #0056b3;
+}
+
+.pageButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pageNumber {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
 }
