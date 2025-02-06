@@ -118,7 +118,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     <div className={styles.page}>
       {/* Side Navigation */}
       <SideNav
-        logo="https://cdn.builder.io/api/v1/image/assets/TEMP/372bc690f69db00839e7021bbe33cfc171e1f57239950891962bbcdd50ac540f"
+        logo="https://logo.stocklight.com/NASDAQ/POWL.png"
         sections={navSections}
         userInfo={{
           name: userName,

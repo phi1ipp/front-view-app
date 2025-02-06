@@ -77,16 +77,14 @@ export const LoginPage: React.FC = () => {
         <div className={styles.loginWrapper}>
           <div className={styles.loginContent}>
             <div className={styles.headerSection}>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/92063446ab01485ec2b740e4689c8bbfa46362e9a78fa7bc3f52c05c97832cab?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
-                alt="Company Logo"
-                className={styles.logo}
-              />
-              
               <div className={styles.loginCard}>
                 <div className={styles.loginForm}>
-                  <h1 className={styles.loginTitle}>Login</h1>
+                  <img
+                    loading="lazy"
+                    src="https://logo.stocklight.com/NASDAQ/POWL.png"
+                    alt="Company Logo"
+                    className={styles.logo}
+                  />
                   <form className={styles.formContent}>
                     <InputField
                       label="User Name 123456"
