@@ -11,10 +11,12 @@ export const SideNav: React.FC<SideNavProps> = ({
   onLogout 
 }) => (
   <nav className={styles.sideNav} aria-label="Main navigation">
+    <div className={styles.titleLogo}>
+      <img loading="lazy" src={logo}
+        className={styles.logoImage} alt="Company logo" 
+      />
+    </div>
     <div className={styles.navContent}>
-      <div className={styles.titleLogo}>
-        <img loading="lazy" src={logo} className={styles.logoImage} alt="Company logo" />
-      </div>
       {sections.map((section, index) => (
         <NavSection key={index} {...section} />
       ))}
