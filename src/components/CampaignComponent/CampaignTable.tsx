@@ -16,8 +16,12 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const totalPages = Math.ceil(campaigns.length / rowsPerPage);
+
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const handleRowsPerPageChange = (rows: number) => {
@@ -56,10 +60,14 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
     }
   };
 
+
+  
   // Calculate the campaigns to display based on pagination
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const currentCampaigns = campaigns.slice(startIndex, endIndex);
+  const currentCampaigns = campaigns.slice(startIndex, startIndex + rowsPerPage);
+
+  
+  const isNextDisabled = currentPage >= totalPages || currentCampaigns.length === 0;
 
   return (
     <div className={styles.tableContainer}>
@@ -84,9 +92,11 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
       <TableFooter
         totalItems={campaigns.length}
         currentPage={currentPage}
+        totalPages={totalPages}
         rowsPerPage={rowsPerPage}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
+        isNextDisabled={isNextDisabled} 
       />
     </div>
   );
