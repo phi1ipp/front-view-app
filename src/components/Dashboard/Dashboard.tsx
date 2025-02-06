@@ -116,18 +116,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const userName = localStorage.getItem("userName")
   return (
     <div className={styles.page}>
-      {/* Side Navigation */}
-      <SideNav
-        logo="https://logo.stocklight.com/NASDAQ/POWL.png"
-        sections={navSections}
-        userInfo={{
-          name: userName,
-          initial: userName?.charAt(0),
-          role: 'admin',
-        }}
-        onLogout={handleLogout}
-      />
-
+      <div>
+        {/* Side Navigation */}
+        <SideNav
+          logo="https://logo.stocklight.com/NASDAQ/POWL.png"
+          sections={navSections}
+          userInfo={{
+            name: userName,
+            initial: userName?.charAt(0),
+            role: 'admin',
+          }}
+          onLogout={handleLogout}
+        />
+        </div>
       {/* Main Content */}
       <div className={styles.mainContent}>{renderMainContent()}</div>
     </div>

@@ -15,7 +15,10 @@ export const TableRow: React.FC<UserTableRowProps> = ({ user, onEdit, onDelete }
         <div className={styles.cellContent}>{user.fullName}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{user.enabled ? "Yes" : "No"}</div>
+        <div className={styles.cellContent}>{user.isAdmin ? "✅" : "❌"}</div>
+      </div>
+      <div className={styles.cell}>
+        <div className={styles.cellContent}>{user.enabled ? "✅" : "❌"}</div>
       </div>
       <div className={styles.actionCell}>
         <button
