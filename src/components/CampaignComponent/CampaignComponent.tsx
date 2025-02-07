@@ -22,49 +22,64 @@ export const CampaignComponent: React.FC = () => {
     setSelectedCampaign(campaign);
     setIsDeleteModalOpen(true);
   };
-  
-    const fetchCampaigns = async () => {
-      try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
-        const data = await response.json();
-        setCampaigns(data);
-      } catch (error) {
-        console.error('Error fetching campaigns:', error);
+
+  const handleDownload = async (campaign: Campaign) => {
+    try {
+      const response = await fetch(
+        API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name),
+        {
+          headers: {
+            'Content-Type': 'application/octet-stream',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
 
+      const blob = await response.blob();
 
-    const handleDownload = async (campaign: Campaign) => {
-        const method ='POST';
-        try {
-          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(campaign),
-          });
-          setIsModalOpen(false);
-          fetchCampaigns();
-    
-        } catch (error) {
-          console.error('Error saving campaign:', error);
-        }
-      };
+      // Create a URL for the blob and trigger the download
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `reports_${campaign.name}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading campaign reports:', error);
+    }
+  };
   
-      const handleStartClick = async (campaign: Campaign) => {
-        const method ='POST';
-        try {
-          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(campaign),
-          });
-          setIsModalOpen(false);
-          fetchCampaigns();
-    
-        } catch (error) {
-          console.error('Error saving campaign:', error);
-        }
-      };
+  const fetchCampaigns = async () => {
+    try {
+      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+      const data = await response.json();
+      setCampaigns(data);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error);
+    }
+  };
+
+
+  const handleStartClick = async (campaign: Campaign) => {
+    const method ='POST';
+    try {
+      await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(campaign),
+      });
+      setIsModalOpen(false);
+      fetchCampaigns();
+
+    } catch (error) {
+      console.error('Error saving campaign:', error);
+    }
+  };
 
   const handleSubmit = async (campaign: Campaign) => {
     const method = selectedCampaign ? 'PUT' : 'POST';
