@@ -29,39 +29,6 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
     setCurrentPage(1); // Reset to the first page when rows per page changes
   };
 
-  const handleDownload = async (campaign: Campaign) => {
-    try {
-      const response = await fetch(
-        API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name),
-        {
-          headers: {
-            'Content-Type': 'application/octet-stream',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const blob = await response.blob();
-
-      // Create a URL for the blob and trigger the download
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `reports_${campaign.name}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading campaign reports:', error);
-    }
-  };
-
-
-  
   // Calculate the campaigns to display based on pagination
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentCampaigns = campaigns.slice(startIndex, startIndex + rowsPerPage);
