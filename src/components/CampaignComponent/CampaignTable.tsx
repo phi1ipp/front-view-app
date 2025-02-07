@@ -83,7 +83,7 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
           <TableRow
             key={campaign.id}
             campaign={campaign}
-            onDownload={handleDownload}
+            onDownload={onDownload}
             onEdit={onEdit}
             onDelete={onDelete}
           />

@@ -63,7 +63,7 @@ const [isHoveringDownload, setIsHoveringDownload] = useState(false);
                 </button>
                 <button
           className={styles.actionButton}
-          onClick={() => onDownload(campaign.id)}
+          onClick={() => onDownload(campaign)}
           onMouseEnter={() => setIsHoveringDownload(true)}
           onMouseLeave={() => setIsHoveringDownload(false)}
           aria-label={`Download ${campaign.name}`}
