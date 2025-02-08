@@ -88,6 +88,11 @@
   color: var(--Navy-Blue, #2a6ebb);
 }
 
+.navItemDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .stateLayer {
   display: flex;
   align-items: center;
