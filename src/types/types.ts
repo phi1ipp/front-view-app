@@ -4,6 +4,7 @@ export interface NavItemProps {
   isActive?: boolean;
   onClick?: () => void;
   section?: string;
+  forAdmins?: boolean;
 }
 
 export interface NavSection {
