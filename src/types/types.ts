@@ -201,6 +201,33 @@ export interface EntitlementTableProps {
   onDelete: (entitlementId: string) => void;
 }
 
+//Exclusion
+
+
+export interface Exclusion {
+  id: string;
+  name: string;
+
+}
+
+export interface ExclusionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  exclusion?: Exclusion;
+  onSubmit: (exclusion: Exclusion) => void;
+}
+
+export interface ExclusionTableProps {
+  exclusions: Exclusion[];
+  onEdit: (exclusion: Exclusion) => void;
+  onDelete: (id: string) => void;
+}
+export interface ExclusionTableRowProps {
+  exclusion: Exclusion;
+  onEdit: (exclusion: Exclusion) => void;
+  onDelete: (id: string) => void;
+}
+
 
 
 export interface TableHeaderProps {

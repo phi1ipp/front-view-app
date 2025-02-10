@@ -25,6 +25,7 @@ import {ControlsComponent} from '../Controls/ControlsComponent.tsx';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent.tsx';
 import { Entitlements } from '../Entitlements/Entitlements.tsx';
 import { useNavigate } from 'react-router-dom';
+import { Exclusions } from '../Exclusions/Exclusions.tsx';
 
 
 
@@ -36,7 +37,7 @@ const AnalyticsComponent = () => <div>Analytics Component</div>;
 const UsersComponent = () => <div><UserManagement></UserManagement></div>;
 const ConnectionComponent = () => <div><ConnectionsComponent></ConnectionsComponent></div>;
 const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div>;
-const ExclusionComponent = () => <div>Exclusion Component</div>
+const ExclusionComponent = () => <div><Exclusions></Exclusions></div>
 const EntitlementsComponent = () => <div><Entitlements></Entitlements></div>;
 const SettingsComponent = () => <div>Settings Component</div>;
 

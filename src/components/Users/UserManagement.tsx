@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './UserManagement.module.css';
 import { UserTable } from './UserTable.tsx';
 import { UserModal } from './UserModal.tsx';
-import { DeleteModal } from './DeleteModal.tsx';
+import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
 import { User } from '../../types/types';
 import Create from './Create.png';
 import { API_ENDPOINTS } from '../../types/api.ts';
