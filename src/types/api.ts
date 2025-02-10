@@ -14,6 +14,8 @@ export const API_ENDPOINTS = {
 
     CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
 
+    //Exclusions
+    EXCLUSIONS: `${BASE_URL}/exclusion`,
 
     //Users
     USERS: `${BASE_URL}/user`,
