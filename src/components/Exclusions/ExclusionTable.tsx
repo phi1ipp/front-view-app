@@ -30,7 +30,7 @@ export const ExclusionTable: React.FC<ExclusionTableProps> = ({ exclusions = [],
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
         <TableHeader label="Exclusion ID" sortable />
-        <TableHeader label="Exclusion Name" sortable />
+        <TableHeader label="Exclusion Rule" sortable />
         <TableHeader label="Action" />
       </div>
       <div className={styles.tableBody}>

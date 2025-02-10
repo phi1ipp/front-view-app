@@ -207,7 +207,7 @@ export interface EntitlementTableProps {
 export interface Exclusion {
   id: string;
   name: string;
-
+  rule: string;
 }
 
 export interface ExclusionModalProps {

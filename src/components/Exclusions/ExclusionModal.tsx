@@ -11,13 +11,13 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<Exclusion>({
     id: '',
-    name: ''
+    rule: ''
   });
 
   const onClose = () => {
     // Reset states to initial values when closing the modal
     setFormData({  id: '',
-      name: ''});  // Clear any errors
+      rule: ''});  // Clear any errors
     close();  // Call the onClose prop function to officially close the modal
   };
   useEffect(() => {
@@ -26,7 +26,7 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
     } else {
       setFormData({
        id: '',
-      name: ''
+      rule: ''
       });
     }
   }, [exclusion]);
@@ -42,10 +42,10 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} role="dialog" aria-modal="true">
         <h2 className={styles.modalTitle}>
-          {exclusion ? 'Edit User' : 'Create User'}
+          {exclusion ? 'Edit Exclusion Rule' : 'Create Exclusion Rule'}
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
+          <div className={formData.id ? styles.formFieldHidden : styles.formField}>
             <input
               id="id"
               type="text"
@@ -53,6 +53,7 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
               onChange={(e) => setFormData({ ...formData, id: e.target.value })}
               required
               placeholder=" "
+              readOnly={formData.id}
             />
             <label htmlFor="id">Exclusion ID</label>
           </div>
@@ -60,12 +61,12 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
             <input
               id="name"
               type="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              value={formData.rule}
+              onChange={(e) => setFormData({ ...formData, rule: e.target.value })}
               required
               placeholder=" "
             />
-            <label htmlFor="name">Exclusion Name</label>
+            <label htmlFor="name">Exclusion Rule</label>
           </div>
          
           <div className={styles.modalActions}>
