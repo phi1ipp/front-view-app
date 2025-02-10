@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Connection.module.css';
-import { DeleteModal } from '../Users/DeleteModal.tsx';
+import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
 import { Connection } from '../../types/types.ts';
 import { ConnectionTable } from './ConnectionTable.tsx';
 import {ConnectionModal} from './ConnectionModal.tsx'
@@ -46,6 +46,7 @@ export const ConnectionsComponent: React.FC = () => {
       const response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
     }
       setSuccessMessage('Deleted Connection Successfully!');  // Set success message
       setTimeout(() => {
@@ -76,6 +77,7 @@ export const ConnectionsComponent: React.FC = () => {
       });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
     }
     console.log("Connections ", connection);
       setSuccessMessage('Created Connections Successfully!');  // Set success message

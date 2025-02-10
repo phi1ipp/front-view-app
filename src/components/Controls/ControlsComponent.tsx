@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Control.module.css';
-import { DeleteModal } from '../Users/DeleteModal.tsx';
+import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
 import { Control } from '../../types/types.ts';
 import { ControlTable } from './ControlTable.tsx';
 import {ControlModal} from './ControlModal.tsx';
@@ -48,6 +48,7 @@ export const ControlsComponent: React.FC = () => {
       const response = await fetch(`${API_ENDPOINTS.CONTROLS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
     }
       setSuccessMessage('Deleted Control Successfully!');  // Set success message
       setTimeout(() => {
@@ -80,6 +81,7 @@ export const ControlsComponent: React.FC = () => {
       });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
     }
     console.log("Controls ", control);
       setSuccessMessage('Created Control Successfully!');  // Set success message

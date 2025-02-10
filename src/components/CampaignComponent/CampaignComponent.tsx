@@ -79,6 +79,7 @@ export const CampaignComponent: React.FC = () => {
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
       }
       setSuccessMessage('Created Campaign Successfully!');  // Set success message
       setTimeout(() => {
@@ -120,6 +121,7 @@ export const CampaignComponent: React.FC = () => {
       
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
       }
 
       setSuccessMessage('Deleted Connection Successfully!');  // Set success message

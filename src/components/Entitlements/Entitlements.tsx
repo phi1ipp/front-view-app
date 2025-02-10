@@ -73,6 +73,7 @@ export const Entitlements: React.FC = () => {
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
         return;
       }
 
@@ -93,6 +94,7 @@ export const Entitlements: React.FC = () => {
       const response = await fetch(`${API_ENDPOINTS.ENTITLEMENTS}/${id}`, { method: 'DELETE' });
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
+        setTimeout(() => setErrorMessage(''), 5000);
     }
 
       setSuccessMessage('Deleted Entitlement Successfully!');
