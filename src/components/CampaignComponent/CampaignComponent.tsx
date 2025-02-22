@@ -82,24 +82,30 @@ export const CampaignComponent: React.FC = () => {
   };
 
   const handleSubmit = async (campaign: Campaign) => {
-    const method = selectedCampaign ? 'PUT' : 'POST';
-    const url = selectedCampaign ? `${API_ENDPOINTS.CONNECTIONS}/${campaign.id}` : `${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}, {credentials: 'include'}`;
-    
+    let response;
+
     try {
-      const response = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(campaign),
-      });
+      if (selectedCampaign) {
+        response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${campaign.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(campaign),
+        });
+      } else {
+        response = await fetch(`${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}`);
+      }
+    
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
       }
+
       setSuccessMessage('Created Campaign Successfully!');  // Set success message
       setTimeout(() => {
         setSuccessMessage('');
       }, 5000);
+      
       setIsModalOpen(false);
       fetchCampaigns();
     } catch (error) {
@@ -113,14 +119,14 @@ export const CampaignComponent: React.FC = () => {
   };
 
   const handleCreateCampaign = () => {
-    setSelectedCampaign({
-      id: '',
-      name: '',
-      status: '',
-      violationCount: '',
-      connectionId: '',
-      controls: []
-    });
+    // setSelectedCampaign({
+    //   id: '',
+    //   name: '',
+    //   status: '',
+    //   violationCount: '',
+    //   connectionId: '',
+    //   controls: []
+    // });
     setIsModalOpen(true);
   };
 
@@ -154,6 +160,8 @@ export const CampaignComponent: React.FC = () => {
       setTimeout(() => {
         setErrorMessage('');
       }, 5000);
+    } finally {
+      setSelectedCampaign(undefined);
     }
   };
   
