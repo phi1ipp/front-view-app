@@ -6,7 +6,7 @@ export const TableRow: React.FC<ExclusionTableRowProps> = ({ exclusion, onEdit, 
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{exclusion.id}</div>
+        <div className={styles.cellContent}>{exclusion.name}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{exclusion.rule}</div>
