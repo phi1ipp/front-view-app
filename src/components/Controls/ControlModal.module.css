@@ -45,7 +45,7 @@
 .formField input:focus,
 .formField select:focus {
   outline: none;
-  border-color: var(--primary-color, #1976d2);
+  border-color: var(--primary-color, #217151);
 }
 
 .formField label {
@@ -65,7 +65,7 @@
   top: -8px; /* Moves label above the input */
   left: 12px;
   font-size: 12px;
-  color: var(--primary-color, #1976d2);
+  color: var(--primary-color, #217151);
 }
 
 .modalActions {
@@ -79,7 +79,7 @@
   padding: 8px 16px;
   border: none;
   background: none;
-  color: var(--primary-color, #1976d2);
+  color: var(--primary-color, #217151);
   font-weight: 500;
   cursor: pointer;
 }
@@ -88,7 +88,7 @@
   border-radius: 100px;
   padding: 10px 24px;
   border: none;
-  background-color: var(--primary-color, #1976d2);
+  background-color: var(--primary-color, #217151);
   color: white;
   font-weight: 500;
   cursor: pointer;
