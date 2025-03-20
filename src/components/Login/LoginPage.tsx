@@ -47,13 +47,14 @@ export const LoginPage: React.FC = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
         console.log("logged in");
-        // Check if the response contains any users
 
-            console.log("logged in 2");
-          const user = response.data[0]; // Assuming the first match is the correct user
-          localStorage.setItem("isAuthenticated", "true"); 
-          localStorage.setItem("userName",username)
-          navigate('/home');
+        const user = await fetch('/api/user/me').then(rsp => rsp.json());
+
+        localStorage.setItem("isAuthenticated", "true"); 
+        localStorage.setItem("userName", user.username);
+        localStorage.setItem("isAdmin", user.isAdmin);
+
+        navigate('/home');
         
     }catch (error) {
       setErrors({

@@ -47,6 +47,10 @@
   margin-bottom: 24px;
 }
 
+.formFieldHidden {
+  visibility: hidden;
+}
+
 .formField input , .formField select{
   width: 95%;
   padding: 12px 12px 8px; /* Extra padding for the label space */

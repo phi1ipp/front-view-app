@@ -4,6 +4,7 @@ export interface NavItemProps {
   isActive?: boolean;
   onClick?: () => void;
   section?: string;
+  forAdmins?: boolean;
 }
 
 export interface NavSection {
@@ -206,7 +207,7 @@ export interface EntitlementTableProps {
 export interface Exclusion {
   id: string;
   name: string;
-
+  rule: string;
 }
 
 export interface ExclusionModalProps {

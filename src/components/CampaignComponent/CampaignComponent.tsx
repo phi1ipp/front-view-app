@@ -22,69 +22,90 @@ export const CampaignComponent: React.FC = () => {
     setSelectedCampaign(campaign);
     setIsDeleteModalOpen(true);
   };
-  
-    const fetchCampaigns = async () => {
-      try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
-        const data = await response.json();
-        setCampaigns(data);
-      } catch (error) {
-        console.error('Error fetching campaigns:', error);
-      }
-    };
 
-
-    const handleDownload = async (campaign: Campaign) => {
-        const method ='POST';
-        try {
-          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(campaign),
-          });
-          setIsModalOpen(false);
-          fetchCampaigns();
-    
-        } catch (error) {
-          console.error('Error saving campaign:', error);
-        }
-      };
-  
-      const handleStartClick = async (campaign: Campaign) => {
-        const method ='POST';
-        try {
-          await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(campaign),
-          });
-          setIsModalOpen(false);
-          fetchCampaigns();
-    
-        } catch (error) {
-          console.error('Error saving campaign:', error);
-        }
-      };
-
-  const handleSubmit = async (campaign: Campaign) => {
-    const method = selectedCampaign ? 'PUT' : 'POST';
-    const url = selectedCampaign ? `${API_ENDPOINTS.CONNECTIONS}/${campaign.id}` : `${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}, {credentials: 'include'}`;
-    
+  const handleDownload = async (campaign: Campaign) => {
     try {
-      const response = await fetch(url, {
+      const response = await fetch(
+        API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name),
+        {
+          headers: {
+            'Content-Type': 'application/octet-stream',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const blob = await response.blob();
+
+      // Create a URL for the blob and trigger the download
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `reports_${campaign.name}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading campaign reports:', error);
+    }
+  };
+  
+  const fetchCampaigns = async () => {
+    try {
+      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+      const data = await response.json();
+      setCampaigns(data);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error);
+    }
+  };
+
+
+  const handleStartClick = async (campaign: Campaign) => {
+    const method ='POST';
+    try {
+      await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(campaign),
       });
+      setIsModalOpen(false);
+      fetchCampaigns();
+
+    } catch (error) {
+      console.error('Error saving campaign:', error);
+    }
+  };
+
+  const handleSubmit = async (campaign: Campaign) => {
+    let response;
+
+    try {
+      if (selectedCampaign) {
+        response = await fetch(`${API_ENDPOINTS.CONNECTIONS}/${campaign.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(campaign),
+        });
+      } else {
+        response = await fetch(`${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}`);
+      }
+    
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
       }
+
       setSuccessMessage('Created Campaign Successfully!');  // Set success message
       setTimeout(() => {
         setSuccessMessage('');
       }, 5000);
+      
       setIsModalOpen(false);
       fetchCampaigns();
     } catch (error) {
@@ -98,14 +119,14 @@ export const CampaignComponent: React.FC = () => {
   };
 
   const handleCreateCampaign = () => {
-    setSelectedCampaign({
-      id: '',
-      name: '',
-      status: '',
-      violationCount: '',
-      connectionId: '',
-      controls: []
-    });
+    // setSelectedCampaign({
+    //   id: '',
+    //   name: '',
+    //   status: '',
+    //   violationCount: '',
+    //   connectionId: '',
+    //   controls: []
+    // });
     setIsModalOpen(true);
   };
 
@@ -139,6 +160,8 @@ export const CampaignComponent: React.FC = () => {
       setTimeout(() => {
         setErrorMessage('');
       }, 5000);
+    } finally {
+      setSelectedCampaign(undefined);
     }
   };
   

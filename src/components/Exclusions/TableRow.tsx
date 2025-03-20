@@ -6,16 +6,16 @@ export const TableRow: React.FC<ExclusionTableRowProps> = ({ exclusion, onEdit, 
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{exclusion.id}</div>
+        <div className={styles.cellContent}>{exclusion.name}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{exclusion.name}</div>
+        <div className={styles.cellContent}>{exclusion.rule}</div>
       </div>
       <div className={styles.actionCell}>
         <button
           className={styles.actionButton}
           onClick={() => onEdit(exclusion)}
-          aria-label={`Edit ${exclusion.name}`}
+          aria-label={`Edit`}
         >
           <div className={styles.buttonContent}>
             <img
@@ -30,7 +30,7 @@ export const TableRow: React.FC<ExclusionTableRowProps> = ({ exclusion, onEdit, 
         <button
           className={styles.actionButton}
           onClick={() => onDelete(exclusion.id)}
-          aria-label={`Delete ${exclusion.name}`}
+          aria-label={`Delete`}
         >
           <div className={styles.buttonContent}>
             <img

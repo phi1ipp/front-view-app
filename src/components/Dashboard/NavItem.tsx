@@ -7,10 +7,14 @@ export const NavItem: React.FC<NavItemProps> = ({
   label, 
   isActive, 
   onClick,
+  forAdmins,
   section 
-}) => (
+}) => {
+  const isDisabled = forAdmins && localStorage.getItem('isAdmin') === "false";
+
+  return (
   <button 
-    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
+    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''} ${isDisabled ? styles.navItemDisabled : ''}`}
     onClick={onClick}
     aria-pressed={isActive}
   >
@@ -19,5 +23,7 @@ export const NavItem: React.FC<NavItemProps> = ({
       <span >{label}</span>
       {section && <span className={styles.section}>{section}</span>}
     </div>
+    {isDisabled && <div><span>🔒</span></div>}
   </button>
 );
+}

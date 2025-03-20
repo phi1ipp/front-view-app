@@ -9,7 +9,8 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
   const [isHoveringStart, setIsHoveringStart] = useState(false);
   const [isHoveringDelete, setIsHoveringDelete] = useState(false);
   const [isHoveringEdit, setIsHoveringEdit] = useState(false);
-const [isHoveringDownload, setIsHoveringDownload] = useState(false);
+  const [isHoveringDownload, setIsHoveringDownload] = useState(false);
+
   return (
     <div className={styles.tableCellRow}>
       <div className={styles.cell}>
@@ -63,9 +64,10 @@ const [isHoveringDownload, setIsHoveringDownload] = useState(false);
                 </button>
                 <button
           className={styles.actionButton}
-          onClick={() => onDownload(campaign.id)}
+          onClick={() => onDownload(campaign)}
           onMouseEnter={() => setIsHoveringDownload(true)}
           onMouseLeave={() => setIsHoveringDownload(false)}
+          disabled={campaign.status != 'READY'}
           aria-label={`Download ${campaign.name}`}
         >
           <div className={styles.buttonContent}>

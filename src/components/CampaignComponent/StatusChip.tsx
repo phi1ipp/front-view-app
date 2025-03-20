@@ -5,7 +5,8 @@ import { StatusChipProps } from '../../types/types';
 const statusStyles = {
   running: styles.statusChipWarning,
   seed: styles.statusChipWarning,
-  completed: styles.statusChipSuccess,
+  transfer: styles.statusChipWarning,
+  data: styles.statusChipWarning,
   ready: styles.statusChipSuccess,
   error: styles.statusChipError
 };
@@ -17,7 +18,22 @@ export const StatusChip: React.FC<StatusChipProps> = ({ status }) => {
 
   return (
     <div className={`${styles.statusChip} ${statusStyles[status.toLowerCase()]}`}>
-      <div className={styles.statusText}>{status}</div>
+      <div className={styles.statusText}>{statusText(status.toLowerCase())}</div>
     </div>
   );
 };
+
+function statusText(dbStatus) {
+  switch (dbStatus) {
+    case 'ready':
+      return 'Ready';
+    case 'seed': 
+      return 'Needs data';
+    case 'data':
+      return 'Needs analysis';
+    case 'transfer':
+      return 'Data transfer';
+    default:
+      return 'Error';
+  }
+}

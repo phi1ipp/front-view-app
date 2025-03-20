@@ -59,8 +59,8 @@ export const Exclusions: React.FC = () => {
   const handleExclusionSubmit = async (exclusion: Exclusion) => {
     console.log('Exclusion before submit:', exclusion);
 
-    if (!exclusion || !exclusion.name) {
-      setErrorMessage('Exclusion name is required.');
+    if (!exclusion || !exclusion.rule) {
+      setErrorMessage('Exclusion rule is required.');
       setTimeout(() => setErrorMessage(''), 5000);
       return;
     }
