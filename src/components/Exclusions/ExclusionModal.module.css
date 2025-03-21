@@ -51,7 +51,7 @@
   visibility: hidden;
 }
 
-.formField input , .formField select{
+.formField input , .formField select , .formField textarea{
   width: 95%;
   padding: 12px 12px 8px; /* Extra padding for the label space */
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -61,6 +61,11 @@
 }
 
 .formField input:focus {
+  outline: none;
+  border-color: var(--primary-color, #217151);
+}
+
+.formField textarea:focus {
   outline: none;
   border-color: var(--primary-color, #217151);
 }
@@ -78,6 +83,14 @@
 
 .formField input:focus + label,
 .formField input:not(:placeholder-shown) + label {
+  top: -8px; /* Moves label above the input */
+  left: 12px;
+  font-size: 12px;
+  color: var(--primary-color, #217151);
+}
+
+.formField textarea:focus + label,
+.formField textarea:not(:placeholder-shown) + label {
   top: -8px; /* Moves label above the input */
   left: 12px;
   font-size: 12px;

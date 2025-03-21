@@ -68,19 +68,19 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
               required
               placeholder=" "
             />
-            <label htmlFor="name">Exclusion Rule</label>
+            <label htmlFor="name">Exclusion Name</label>
           </div>
           <div className={styles.formField}>
-            <input
-              id="rule"
-              type="name"
-              value={formData.rule}
-              onChange={(e) => setFormData({ ...formData, rule: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="name">Exclusion Rule</label>
-          </div>
+  <textarea
+    id="rule"
+    value={formData.rule}
+    onChange={(e) => setFormData({ ...formData, rule: e.target.value })}
+    required
+    placeholder=" "
+    rows="4"
+  />
+  <label htmlFor="rule" className={styles.floatingLabel}>Exclusion Rule</label>
+</div>
          
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
