@@ -151,16 +151,42 @@ export interface DeleteModalPropsConnection {
 
 //controls
 
-export interface Controls {
-  id: string;
-  name: string;
-  ent1Id:bigint;
-  ent1Name: string;
-  ent2Id:bigint;
-  ent2Name: string;
-
+// Base interface for all controls
+export interface GrcControl {
+    id: number;
+    name: string;
+    description: string;
+    type: 'SA' | 'SOD';  // Union type for discriminator
 }
 
+// Segregation of Authority control
+export interface GrcSaControl extends GrcControl {
+    type: 'SA';
+    id: number;
+    entId: number;
+    entName: string;
+}
+
+// Segregation of Duties control
+export interface GrcSodControl extends GrcControl {
+    type: 'SOD';
+    id: number;
+    ent1Id: number;
+    ent2Id: number;
+    ent1Name: string;
+    ent2Name: string;
+}
+
+export type Controls = GrcSaControl | GrcSodControl;
+
+// Type guard functions to check control types
+export const isSaControl = (control: Controls): control is GrcSaControl => {
+    return control.type === 'SA';
+};
+
+export const isSodControl = (control: Controls): control is GrcSodControl => {
+    return control.type === 'SOD';
+};
 
 export interface ControlTableProps {
   controls: Controls[];
