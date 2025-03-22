@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ControlModal.module.css';
-import { ControlModalProps, Control } from '../../types/types';
-import { v4 as uuidv4 } from 'uuid';
+import { ControlModalProps, Controls, isSodControl } from '../../types/types.ts';
 import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const ControlModal: React.FC<ControlModalProps> = ({
@@ -10,20 +9,41 @@ export const ControlModal: React.FC<ControlModalProps> = ({
   control,
   onSubmit
 }) => {
-  const [formData, setFormData] = useState<Control>({
-    name: '',
-    ent1Name: '',
-    ent2Name: '',
-  });
+
+  const [controlType, setControlType] = useState<'SA' | 'SOD'>('SA');
+  const [formData, setFormData] = useState<Controls>(
+    controlType === 'SA' 
+        ? {
+            id: 0,
+            name: '',
+            description: '',
+            type: 'SA',
+            entId: 0,
+            entName: ''
+        } as GrcSaControl
+        : {
+            id: 0,
+            name: '',
+            description: '',
+            type: 'SOD',
+            ent1Id: 0,
+            ent2Id: 0,
+            ent1Name: '',
+            ent2Name: ''
+        } as GrcSodControl
+);
 
   const onClose = () => {
     // Reset states to initial values when closing the modal
-    setFormData({ name: '', ent1Name: '', ent2Name: '' });
+    setControlType('SA');
+    setFormData({ name: '', entName: '', entId: 0 } as GrcSaControl);
+
     setEntitlementOptions1([]);
     setEntitlementOptions2([]);
     setError(null);  // Clear any errors
     close();  // Call the onClose prop function to officially close the modal
   };
+
   const [entitlementOptions1, setEntitlementOptions1] = useState([]);
   const [entitlementOptions2, setEntitlementOptions2] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,14 +71,17 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     fetchEntitlements();
 
     if (control) {
+      setControlType(control.type);
       setFormData(control);
     } else {
+      setControlType('SA');
       setFormData({
-        id: uuidv4(),
+        id: 0,
         name: '',
-        ent1Name: '',
-        ent2Name: '',
-      });
+        type: 'SA',
+        entName: '',
+        entId: 0
+      } as GrcSaControl);
     }
   }, [control]);
 
@@ -89,7 +112,12 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     type="text"
     placeholder=" "
     value={formData.name}
-    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+    onChange={(e) => {
+      if (isSodControl(formData))
+        setFormData({ ...formData, name: e.target.value } as GrcSodControl)
+      else
+        setFormData({ ...formData, name: e.target.value } as GrcSaControl)
+    }}
     required
   />
   <label htmlFor="Name">Control Name</label>
@@ -97,8 +125,15 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 <div className={styles.formField}>
   <select
     id="ent1Name"
-    value={formData.ent1Name}
-    onChange={(e) => setFormData({ ...formData, ent1Name: e.target.value })}
+    value={isSodControl(formData) ? formData.ent1Name : formData.entName}
+    onChange={(e) => {
+      const selectedOption = entitlementOptions1.find(option => option.name === e.target.value);
+
+      if (isSodControl(formData))
+        setFormData({ ...formData, ent1Name: e.target.value, ent1id: selectedOption.id } as GrcSodControl)
+      else
+        setFormData({ ...formData, entName: e.target.value, entId: selectedOption.id } as GrcSaControl)
+    }}
     required
   >
     <option value="">Select Entitlement 1</option>
@@ -111,9 +146,30 @@ export const ControlModal: React.FC<ControlModalProps> = ({
 <div className={styles.formField}>
   <select
     id="ent2Name"
-    value={formData.ent2Name}
-    onChange={(e) => setFormData({ ...formData, ent2Name: e.target.value })}
-    required
+    value={isSodControl(formData) ? formData.ent2Name : ''}
+    onChange={(e) => {
+      setControlType('SOD');
+
+      if (isSodControl(formData)) {
+        setFormData(
+          { 
+            ...formData, 
+            ent2id: e.target.key,
+            ent2Name: e.target.value 
+          } as GrcSodControl
+        )
+      } else {
+        setFormData(
+        {
+          id: formData.id,
+          ent1Name: formData.entName,
+          ent1id: formData.entId,
+          ent2Name: e.target.value,
+          ent2id: e.target.key,
+          type: 'SOD'
+        } as GrcSodControl)
+      }
+    }}
   >
     <option value="">Select Entitlement 2</option>
     {entitlementOptions2.map(option => (
@@ -121,7 +177,7 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     ))}
   </select>
   <label htmlFor="ent2Name">Entitlement 2</label>
-</div>
+  </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
               Cancel
