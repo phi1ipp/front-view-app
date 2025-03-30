@@ -149,12 +149,13 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     value={isSodControl(formData) ? formData.ent2Name : ''}
     onChange={(e) => {
       setControlType('SOD');
+      const selectedOption = entitlementOptions2.find(option => option.name === e.target.value);
 
       if (isSodControl(formData)) {
         setFormData(
           { 
             ...formData, 
-            ent2id: e.target.key,
+            ent2id: selectedOption.id,
             ent2Name: e.target.value 
           } as GrcSodControl
         )
@@ -162,10 +163,11 @@ export const ControlModal: React.FC<ControlModalProps> = ({
         setFormData(
         {
           id: formData.id,
+          name: formData.name,
           ent1Name: formData.entName,
           ent1id: formData.entId,
           ent2Name: e.target.value,
-          ent2id: e.target.key,
+          ent2id: selectedOption.id,
           type: 'SOD'
         } as GrcSodControl)
       }
