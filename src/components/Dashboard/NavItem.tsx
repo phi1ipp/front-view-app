@@ -14,9 +14,11 @@ export const NavItem: React.FC<NavItemProps> = ({
 
   return (
   <button 
-    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''} ${isDisabled ? styles.navItemDisabled : ''}`}
+    // className={`${styles.navItem} ${isActive ? styles.navItemActive : ''} ${isDisabled ? styles.navItemDisabled : ''}`}
+    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
     onClick={onClick}
     aria-pressed={isActive}
+    disabled={isDisabled}
   >
     <div className={styles.stateLayer}>
       <img loading="lazy" src={icon} className={styles.navIcon} alt="" />
