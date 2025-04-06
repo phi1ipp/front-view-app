@@ -32,7 +32,8 @@
   margin-bottom: 24px;
 }
 
-.formField input {
+.formField input,
+.formField select {
   width: 95%;
   padding: 12px 12px 8px; /* Extra padding for the label space */
   border: 1px solid rgba(0, 0, 0, 0.23);
@@ -41,7 +42,8 @@
   background: transparent;
 }
 
-.formField input:focus {
+.formField input:focus,
+.formField select:focus {
   outline: none;
   border-color: var(--primary-color, #217151);
 }
@@ -58,7 +60,8 @@
 }
 
 .formField input:focus + label,
-.formField input:not(:placeholder-shown) + label {
+.formField input:not(:placeholder-shown) + label ,
+.formField select:not([value=""]) + label{
   top: -8px; /* Moves label above the input */
   left: 12px;
   font-size: 12px;
@@ -94,3 +97,4 @@
 .submitButton:hover {
   background-color: var(--primary-dark, #1565c0);
 }
+
