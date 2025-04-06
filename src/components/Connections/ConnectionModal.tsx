@@ -13,12 +13,14 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
     id: 0,
     name: '',
     host: '',
-    port:'',
-    db:'',
+    port: '',
+    db: '',
+    sidService: '',
     user: '',
     password: '',
     type: 'service'
   });
+
 
   const [, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -31,8 +33,9 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
         id: 0,
         name: '',
         host: '',
-        port:'',
-        db:'',
+        port: '',
+        db: '',
+        sidService: '',
         user: '',
         password: '',
         type: 'service'
@@ -57,13 +60,15 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
       id: 0,
       name: '',
       host: '',
-      port:'',
-      db:'',
+      port: '',
+      db: '',
+      sidService: '',
       user: '',
       type: 'service',
       password: '' 
     });
     close();  // Call the onClose prop function to officially close the modal
+
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -76,19 +81,19 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   const handleTestConnection = async () => {
     try {
       const response = await fetch(API_ENDPOINTS.TEST_CONNECTION, {
-        method: 'POST', // Specify the method
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json' // Specify the content type in the headers
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ // Convert the formData to JSON
+        body: JSON.stringify({
           host: formData.host,
           port: formData.port,
           user: formData.user,
           password: formData.password
         })
       });
-      
-      if (response.ok) { 
+
+      if (response.ok) {
         setTestMessage('Connection successful!');
       } else {
         setTestMessage('Connection failed!');
@@ -97,7 +102,6 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
       setTestMessage('Connection failed!');
     }
   };
-
 
   if (!isOpen) return null;
 
@@ -152,6 +156,20 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
               />
               <label htmlFor="db">db</label>
             </div>
+            <div className={styles.formField}>
+           <select
+             id="sidService"
+             value={formData.sidService}
+             onChange={(e) => setFormData({ ...formData, sidService: e.target.value })}
+             required
+           >
+             <option value="">Select SidService</option>
+              <option value="Huey">Huey</option>
+              <option value="Dewey">Dewey</option>
+              <option value="Louie">Louie</option>
+           </select>
+           <label htmlFor="sidService">sidService 1</label>
+         </div>
 
             <div className={styles.formField}>
               <select
@@ -204,6 +222,7 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
             {testMessage && <div className={styles.testMessage}>{testMessage}</div>}
           </form>
         </div>
+
       </div>
   );
 };
