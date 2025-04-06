@@ -41,20 +41,23 @@ export const LoginPage: React.FC = () => {
       loginData.append('username', username);
       loginData.append('password', password);
 
-      const response = await axios(`http://localhost:8080/auth/login`,{
+      const response = await axios(`/auth/login`,{
         method: 'POST',
         data: loginData,
         headers: { "Content-Type": "multipart/form-data" },
       });
-        console.log("logged in");
+      console.log("logged in");
 
-        const user = await fetch('/api/user/me').then(rsp => rsp.json());
+      const user = await fetch('/api/user/me').then(rsp => rsp.json());
 
-        localStorage.setItem("isAuthenticated", "true"); 
-        localStorage.setItem("userName", user.username);
-        localStorage.setItem("isAdmin", user.isAdmin);
+      localStorage.setItem("isAuthenticated", "true"); 
+      localStorage.setItem("userName", user.username);
+      localStorage.setItem("isAdmin", user.isAdmin);
 
-        navigate('/home');
+      // Manually trigger authentication state update
+      window.dispatchEvent(new Event('auth-change'));
+
+      navigate('/home');
         
     }catch (error) {
       setErrors({

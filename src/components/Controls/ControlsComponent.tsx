@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Control.module.css';
 import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
-import { Control } from '../../types/types.ts';
+import { Control, isSodControl } from '../../types/types.ts';
 import { ControlTable } from './ControlTable.tsx';
 import {ControlModal} from './ControlModal.tsx';
 import Create from './Create.png';
@@ -66,30 +66,37 @@ export const ControlsComponent: React.FC = () => {
   };
 
 
-
-  
-
-  const handleSubmit = async (control: Control) => {
+  const handleSubmit = async (control: Controls) => {
     const method = selectedControl ? 'PUT' : 'POST';
     const url = selectedControl ? `${API_ENDPOINTS.CONTROLS}/${control.id}` : API_ENDPOINTS.CONTROLS;
     
     try {
-    const response =  await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(control),
-      });
+      console.log('>> handleSubmit control', control);
+
+      const typedControl = isSodControl(control) 
+        ? control as GrcSodControl
+        : control as GrcSaControl;
+
+      console.log('typedControl', typedControl);
+
+      const response =  await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(typedControl),
+        });
+
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
-    }
-    console.log("Controls ", control);
-      setSuccessMessage('Created Control Successfully!');  // Set success message
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
-      setIsModalOpen(false);
-      fetchControls();
+      }
+
+      console.log("Controls ", control);
+        setSuccessMessage('Created Control Successfully!');  // Set success message
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 5000);
+        setIsModalOpen(false);
+        fetchControls();
     } catch (error) {
       console.error('Error saving Control:', error);
       setErrorMessage('Failed to save Control.');  // Set error message when saving campaign fails
@@ -106,10 +113,10 @@ export const ControlsComponent: React.FC = () => {
   
     
     
-    const handleDeleteClick = (id: string) => {
-      setSelectedControlId(id);
-      setIsDeleteModalOpen(true);
-    };
+  const handleDeleteClick = (id: string) => {
+    setSelectedControlId(id);
+    setIsDeleteModalOpen(true);
+  };
  
 
   return (

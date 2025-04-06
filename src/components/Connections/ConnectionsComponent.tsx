@@ -85,7 +85,7 @@ export const ConnectionsComponent: React.FC = () => {
         setSuccessMessage('');
       }, 5000);
       setIsModalOpen(false);
-      fetchConnections();
+      await fetchConnections();
     } catch (error) {
       console.error('Error saving Connections:', error);
       setErrorMessage('Failed to save Connections.');  // Set error message when saving campaign fails
