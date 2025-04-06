@@ -37,6 +37,16 @@ export const CampaignComponent: React.FC = () => {
     setIsDeleteModalOpen(true);
   };
 
+  const fetchCampaigns = async () => {
+    try {
+      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+      const data = await response.json();
+      setCampaigns(data);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error);
+    }
+  }
+
   const handleDownload = async (campaign: Campaign) => {
     try {
       const response = await fetch(
@@ -67,16 +77,7 @@ export const CampaignComponent: React.FC = () => {
       console.error('Error downloading campaign reports:', error);
     }
   };
-  
-  const fetchCampaigns = async () => {
-    try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
-      const data = await response.json();
-      setCampaigns(data);
-    } catch (error) {
-      console.error('Error fetching campaigns:', error);
-    }
-  };
+
 
 
   const handleStartClick = async (campaign: Campaign) => {
