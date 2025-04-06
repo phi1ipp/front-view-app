@@ -38,7 +38,7 @@ export const TableRow: React.FC<UserTableRowProps> = ({ user, onEdit, onDelete }
         </button>
         <button
           className={styles.actionButton}
-          onClick={() => onDelete(user.id)}
+          onClick={() => onDelete(user.username)}
           aria-label={`Delete ${user.fullName}`}
         >
           <div className={styles.buttonContent}>

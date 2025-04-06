@@ -50,7 +50,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onDownload
 }) => {
   const navigate = useNavigate();
-  const [activeNavIndex, setActiveNavIndex] = useState(0);
+  const [activeNavIndex, setActiveNavIndex] = useState(1);
   const [activeFilterIndex, setActiveFilterIndex] = useState(1);
 
   const handleNavClick = useCallback((index: number) => {
@@ -72,9 +72,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const navSections: NavSection[] = [
     {
       items: [
-        {icon:activeNavIndex === 0 ?DashboardOn:DashboardOff,label: "Dashboard",isActive: activeNavIndex === 0,onClick: () => handleNavClick(0)},
-        { icon:activeNavIndex === 1?CampaignOn:CampaignOff,label: "Campaigns", isActive: activeNavIndex === 1, onClick: () => handleNavClick(1) },
-        { icon:Analytics ,label: "Analytics", isActive: activeNavIndex === 2, onClick: () => handleNavClick(2) }
+        // { icon:activeNavIndex === 0 ? DashboardOn:DashboardOff,label: "Dashboard",isActive: activeNavIndex === 0,onClick: () => handleNavClick(0)},
+        { icon:activeNavIndex === 1 ? CampaignOn:CampaignOff,label: "Campaigns", isActive: activeNavIndex === 1, onClick: () => handleNavClick(1) },
+        // { icon:Analytics ,label: "Analytics", isActive: activeNavIndex === 2, onClick: () => handleNavClick(2) }
       ]
     },
     {
@@ -85,19 +85,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
         { icon:  Controls, label: "Controls", isActive: activeNavIndex === 5, forAdmins: true, onClick: () => handleNavClick(5) },
         { icon:  activeNavIndex === 6?ExclusionOn:ExclusionOff, label: "Exclusion", isActive: activeNavIndex === 6, forAdmins: true, onClick: () => handleNavClick(6) },
         { icon:  activeNavIndex === 7?EntitlementsOn:EntitlementsOff, label: "Entitlements", isActive: activeNavIndex === 7, forAdmins: true, onClick: () => handleNavClick(7) },
-        { icon: activeNavIndex === 8?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 8, forAdmins: true, onClick: () => handleNavClick(8) }
+        // { icon: activeNavIndex === 8?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 8, forAdmins: true, onClick: () => handleNavClick(8) }
       ]
     }
   ];
 
   const renderMainContent = () => {
     switch (activeNavIndex) {
-      case 0:
-        return <DashboardComponent />;
+      // case 0:
+      //   return <DashboardComponent />;
       case 1:
         return <CampaignsComponent />;
-      case 2:
-        return <AnalyticsComponent />;
+      // case 2:
+      //   return <AnalyticsComponent />;
       case 3:
         return <UsersComponent />;
       case 4:
@@ -108,8 +108,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <ExclusionComponent />;
       case 7:
         return <EntitlementsComponent />;
-      case 8:
-        return <SettingsComponent />;
+      // case 8:
+      //   return <SettingsComponent />;
       default:
         return <div>Select an item from the navigation.</div>;
     }

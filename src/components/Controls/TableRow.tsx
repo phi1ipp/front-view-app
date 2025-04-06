@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Control.module.css';
-import { TableRowProps } from './types';
+import { TableRowProps, isSaControl } from '../../types/types.ts';
 
 export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete }) => {
   return (
@@ -10,7 +10,7 @@ export const TableRow: React.FC<TableRowProps> = ({ control, onEdit, onDelete })
         <div className={styles.cellContent}>{control.name}</div>
       </div>
       <div className={styles.cell}>
-        <div className={styles.cellContent}>{control.ent1Name}</div>
+        <div className={styles.cellContent}>{isSaControl(control) ? control.entName : control.ent1Name}</div>
       </div>
       <div className={styles.cell}>
         <div className={styles.cellContent}>{control.ent2Name}</div>
