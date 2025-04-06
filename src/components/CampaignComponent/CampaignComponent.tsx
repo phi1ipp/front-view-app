@@ -17,7 +17,7 @@ export const CampaignComponent: React.FC = () => {
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+        const response = await fetch(API_ENDPOINTS.CAMPAIGNS);
         const data = await response.json();
         setCampaigns(data);
       } catch (error) {
@@ -36,16 +36,6 @@ export const CampaignComponent: React.FC = () => {
     setSelectedCampaign(campaign);
     setIsDeleteModalOpen(true);
   };
-
-  const fetchCampaigns = async () => {
-    try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
-      const data = await response.json();
-      setCampaigns(data);
-    } catch (error) {
-      console.error('Error fetching campaigns:', error);
-    }
-  }
 
   const handleDownload = async (campaign: Campaign) => {
     try {
