@@ -35,6 +35,7 @@ export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, 
         <TableHeader label="Connection Name" sortable />
         <TableHeader label="Host" sortable />
         <TableHeader label="Port" sortable />
+        <TableHeader label="Type" sortable />
         <TableHeader label="DB" sortable />
         <TableHeader label="User" sortable />
         <TableHeader label="Action" />

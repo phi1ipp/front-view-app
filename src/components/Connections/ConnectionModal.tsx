@@ -10,17 +10,19 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   onSubmit
 }) => {
   const [formData, setFormData] = useState<Connection>({
-    id: '',
+    id: 0,
     name: '',
     host: '',
     port: '',
     db: '',
-    sidService: 'huey',
+    sidService: '',
     user: '',
-    password: ''
+    password: '',
+    type: 'service'
   });
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const [, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,9 +35,10 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
         host: '',
         port: '',
         db: '',
-        sidService: 'huey',
+        sidService: '',
         user: '',
-        password: ''
+        password: '',
+        type: 'service'
       });
     }
   }, [connection]);
@@ -53,17 +56,19 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   }, []);
 
   const onClose = () => {
-    setFormData({
-      id: '',
+    setFormData({   
+      id: 0,
       name: '',
       host: '',
       port: '',
       db: '',
-      sidService: 'huey',
+      sidService: '',
       user: '',
-      password: ''
+      type: 'service',
+      password: '' 
     });
-    close();
+    close();  // Call the onClose prop function to officially close the modal
+
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -101,61 +106,57 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {connection ? 'Edit Connection' : 'Create Connection'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="name"
-              type="text"
-              placeholder=" "
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-            <label htmlFor="name">Connection Name</label>
-          </div>
-
-          <div className={styles.formField}>
-            <input
-              id="host"
-              type="text"
-              placeholder=" "
-              value={formData.host}
-              onChange={(e) => setFormData({ ...formData, host: e.target.value })}
-              required
-            />
-            <label htmlFor="host">Host</label>
-          </div>
-
-          <div className={styles.formField}>
-            <input
-              id="port"
-              type="text"
-              placeholder=" "
-              value={formData.port}
-              onChange={(e) => setFormData({ ...formData, port: e.target.value })}
-              required
-            />
-            <label htmlFor="port">Port</label>
-          </div>
-
-          <div className={styles.formField}>
-            <input
-              id="db"
-              type="text"
-              placeholder=" "
-              value={formData.db}
-              onChange={(e) => setFormData({ ...formData, db: e.target.value })}
-              required
-            />
-            <label htmlFor="db">DB</label>
-          </div>
-
-         <div className={styles.formField}>
+      <div className={styles.modalOverlay}>
+        <div className={styles.modalContent} role="dialog" aria-modal="true">
+          <h2 className={styles.modalTitle}>
+            {connection ? 'Edit Connection' : 'Create Connection'}
+          </h2>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formField}>
+              <input
+                  id="name"
+                  type="text"
+                  placeholder=" " // Placeholder for floating effect
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  required
+              />
+              <label htmlFor="name">Connection Name</label>
+            </div>
+            <div className={styles.formField}>
+              <input
+                  id="host"
+                  type="text"
+                  placeholder=" "
+                  value={formData.host}
+                  onChange={(e) => setFormData({...formData, host: e.target.value})}
+                  required
+              />
+              <label htmlFor="host">Host</label>
+            </div>
+            <div className={styles.formField}>
+              <input
+                  id="port"
+                  type="text"
+                  placeholder=" "
+                  value={formData.port}
+                  onChange={(e) => setFormData({...formData, port: e.target.value})}
+                  required
+              />
+              <label htmlFor="port">Port</label>
+            </div>
+            <div className={styles.formField}>
+              <input
+                  id="db"
+                  type="text"
+                  placeholder=" "
+                  value={formData.db}
+                  onChange={(e) => setFormData({...formData, db: e.target.value})}
+                  required
+              />
+              <label htmlFor="db">db</label>
+            </div>
+            <div className={styles.formField}>
            <select
              id="sidService"
              value={formData.sidService}
@@ -170,45 +171,58 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
            <label htmlFor="sidService">sidService 1</label>
          </div>
 
+            <div className={styles.formField}>
+              <select
+                  id="type"
+                  value={formData.type}
+                  onChange={(e) => setFormData({...formData, type: e.target.value})}
+                  required
+              >
+                <option value="sid">SID</option>
+                <option value="service" default>Service</option>
+              </select>
+              <label htmlFor="type">Type</label>
+            </div>
 
-          <div className={styles.formField}>
-            <input
-              id="user"
-              type="text"
-              placeholder=" "
-              value={formData.user}
-              onChange={(e) => setFormData({ ...formData, user: e.target.value })}
-              required
-            />
-            <label htmlFor="user">User</label>
-          </div>
+            <div className={styles.formField}>
+              <input
+                  id="user"
+                  type="text"
+                  placeholder=" "
+                  value={formData.user}
+                  onChange={(e) => setFormData({...formData, user: e.target.value})}
+                  required
+              />
+              <label htmlFor="user">User</label>
+            </div>
+            <div className={styles.formField}>
+              <input
+                  id="password"
+                  type="password"
+                  placeholder=" "
+                  value={formData.password}
+                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  required
+              />
 
-          <div className={styles.formField}>
-            <input
-              id="password"
-              type="password"
-              placeholder=" "
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
-            />
-            <label htmlFor="password">Password</label>
-          </div>
+              <label htmlFor="password">Password</label>
+            </div>
 
-          <div className={styles.modalActions}>
-            <button type="submit" onClick={handleTestConnection} className={styles.submitButton}>
-              Test Connection
-            </button>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              {connection ? 'Save' : 'Create'}
-            </button>
-          </div>
-          {testMessage && <div className={styles.testMessage}>{testMessage}</div>}
-        </form>
+            <div className={styles.modalActions}>
+              <button type="submit" onClick={handleTestConnection} className={styles.submitButton}>
+                Test Connection
+              </button>
+              <button type="button" onClick={onClose} className={styles.cancelButton}>
+                Cancel
+              </button>
+              <button type="submit" className={styles.submitButton}>
+                {connection ? 'Save' : 'Create'}
+              </button>
+            </div>
+            {testMessage && <div className={styles.testMessage}>{testMessage}</div>}
+          </form>
+        </div>
+
       </div>
-    </div>
   );
 };

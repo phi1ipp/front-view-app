@@ -116,14 +116,14 @@ export interface DeleteModalProps {
 
 //connections
 export interface Connection {
-  length: any;
-  id: bigint;
+  id: number;
   name: string;
   host: string;
   port: string;
   db:String;
   user: string;
   password:string;
+  type: 'sid' | 'service';
 }
 
 export interface ConnectionModalProps {

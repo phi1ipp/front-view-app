@@ -18,7 +18,7 @@
   align-items: center;
   padding: 16px;
   flex: 1;
-  min-width: 150px;
+  min-width: 100px;
   cursor: pointer;
   user-select: none;
 }
@@ -96,7 +96,7 @@
 
 .cell {
   flex: 1;
-  min-width: 150px;
+  min-width: 100px;
   padding: 16px;
   display: flex;
   align-items: center;

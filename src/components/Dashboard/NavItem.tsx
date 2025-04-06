@@ -14,7 +14,6 @@ export const NavItem: React.FC<NavItemProps> = ({
 
   return (
   <button 
-    // className={`${styles.navItem} ${isActive ? styles.navItemActive : ''} ${isDisabled ? styles.navItemDisabled : ''}`}
     className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
     onClick={onClick}
     aria-pressed={isActive}
