@@ -9,8 +9,8 @@ export const LoginPage: React.FC = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setErrors] = useState<{ username?: string; password?: string }>({});
+  const [, setIsLoading] = useState(false);
  const navigate = useNavigate(); 
 
 
@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
       loginData.append('username', username);
       loginData.append('password', password);
 
-      const response = await axios(`/auth/login`,{
+      await axios(`/auth/login`,{
         method: 'POST',
         data: loginData,
         headers: { "Content-Type": "multipart/form-data" },

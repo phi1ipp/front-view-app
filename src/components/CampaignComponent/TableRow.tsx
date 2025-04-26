@@ -32,7 +32,7 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
                   onMouseEnter={() => setIsHoveringStart(true)}
                   onMouseLeave={() => setIsHoveringStart(false)}
                   aria-label={`Start ${campaign.name}`}
-                  disabled={campaign.status == 'READY'}
+                  disabled={campaign.status === 'READY'}
                 >
                   <div className={styles.buttonContent}>
                   {isHoveringStart ? 'Start' : <img src={StartFill} className={styles.buttonIcon} alt="Start" />}                   
@@ -67,7 +67,7 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
           onClick={() => onDownload(campaign)}
           onMouseEnter={() => setIsHoveringDownload(true)}
           onMouseLeave={() => setIsHoveringDownload(false)}
-          disabled={campaign.status != 'READY'}
+          disabled={campaign.status !== 'READY'}
           aria-label={`Download ${campaign.name}`}
         >
           <div className={styles.buttonContent}>

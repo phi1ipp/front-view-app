@@ -17,7 +17,7 @@ export const Logout: React.FC = () => {
   // or via a button click, depending on your use case
   React.useEffect(() => {
     handleLogout();
-  }, []);
+  });
 
   // Optionally show a message or a loading spinner while the logout process completes
   return <div>Logging out...</div>;

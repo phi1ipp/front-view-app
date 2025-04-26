@@ -72,7 +72,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
       setSelectedControls([]);
       setAvailableControls(controls); // Assuming `controls` holds all available controls
     }
-  }, [isOpen, controls]);
+  }, [isOpen, controls, campaign]);
 
   const fetchConnections = async () => {
     try {

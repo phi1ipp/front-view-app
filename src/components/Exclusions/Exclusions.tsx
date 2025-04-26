@@ -15,7 +15,6 @@ export const Exclusions: React.FC = () => {
   const [selectedExclusionId, setSelectedExclusionId] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [inputText, setInputText] = useState('');
 
   useEffect(() => {
     fetchExclusions();
@@ -35,10 +34,6 @@ export const Exclusions: React.FC = () => {
     }
   };
 
-
-  const [formData, setFormData] = useState<Functions>({
-      name: ''
-    });
 
   const handleCreateExclusion = () => {
     setSelectedExclusion(undefined);
@@ -112,10 +107,6 @@ export const Exclusions: React.FC = () => {
       setErrorMessage('Failed to delete Exclusion.');
       setTimeout(() => setErrorMessage(''), 5000);
     }
-  };
-
-  const handleCancel = () => {
-    setInputText('');
   };
 
   return (

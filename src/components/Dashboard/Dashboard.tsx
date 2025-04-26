@@ -1,13 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import styles from './Dashboard.module.css';
 import { SideNav } from './SideNav.tsx';
-import { MainContent } from './MainContent.tsx';
 import { DashboardProps, NavSection } from './types.ts';
-import { Campaigns } from '../Campaign/Campaigns.tsx';
 import { UserManagement } from '../Users/UserManagement.tsx';
-import Analytics from './img/Analytics.svg';
-import DashboardOff from './img/DashboardOff.svg';
-import DashboardOn from './img/DashboardOn.svg';
 import CampaignOff from './img/CampaignOff.svg';
 import CampaignOn from './img/CampaignOn.svg';
 import UsersOff from './img/UsersOff.svg';
@@ -18,8 +13,6 @@ import ExclusionOff from './img/ExclusionOff.svg';
 import ExclusionOn from './img/ExclusionOn.svg';
 import EntitlementsOff from './img/EntitlementsOff.svg';
 import EntitlementsOn from './img/EntitlementsOn.svg';
-import SettingsOff from './img/SettingsOff.svg';
-import SettingsOn from './img/SettingsOn.svg';
 import {ConnectionsComponent} from '../Connections/ConnectionsComponent.tsx';
 import {ControlsComponent} from '../Controls/ControlsComponent.tsx';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent.tsx';
@@ -29,17 +22,14 @@ import { Exclusions } from '../Exclusions/Exclusions.tsx';
 
 
 
-const DashboardComponent = () => <div>Dashboard Component</div>;
 const CampaignsComponent = () => <div>
 <CampaignComponent></CampaignComponent>
 </div>;
-const AnalyticsComponent = () => <div>Analytics Component</div>;
 const UsersComponent = () => <div><UserManagement></UserManagement></div>;
 const ConnectionComponent = () => <div><ConnectionsComponent></ConnectionsComponent></div>;
 const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div>;
 const ExclusionComponent = () => <div><Exclusions></Exclusions></div>
 const EntitlementsComponent = () => <div><Entitlements></Entitlements></div>;
-const SettingsComponent = () => <div>Settings Component</div>;
 
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -51,7 +41,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
 }) => {
   const navigate = useNavigate();
   const [activeNavIndex, setActiveNavIndex] = useState(1);
-  const [activeFilterIndex, setActiveFilterIndex] = useState(1);
 
   const handleNavClick = useCallback((index: number) => {
     setActiveNavIndex(index);
@@ -63,11 +52,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
     localStorage.removeItem("userName");
     navigate('/'); // Redirect to login
   };
-
-  const handleFilterClick = useCallback((index: number) => {
-    setActiveFilterIndex(index);
-    onFilterClick?.(index);
-  }, [onFilterClick]);
 
   const navSections: NavSection[] = [
     {

@@ -4,7 +4,6 @@ import { TableHeader } from './TableHeader.tsx';
 import { TableRow } from './TableRow.tsx';
 import { TableFooter } from './TableFooter.tsx';
 import { CampaignTableProps } from '../../types/types';
-import { API_ENDPOINTS } from '../../types/api.ts';
 
 export const CampaignTable: React.FC<CampaignTableProps> = ({
   campaigns,
