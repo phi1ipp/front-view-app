@@ -43,7 +43,7 @@ export interface Campaign {
   name: string;
   status:String;
   violationCount:string;
-  connectionId: string;
+  connId: string;
   controls: Controls[]; 
 }
 

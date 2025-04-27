@@ -114,11 +114,11 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   const handleNext = async (e) => {
     e.preventDefault();
     const campaignName = formData.name;
-    const connectionId = formData.connId;
+    const connId = formData.connId;
 
     try {
       if (formData.id === '')
-        await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connectionId));
+        await fetch(API_ENDPOINTS.CAMPAIGN_PREPARE(campaignName, connId));
       
       setShowControlsModal(true);
     } catch (error) {
@@ -134,7 +134,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
     try {
       const campaign = {
         name: formData.name,
-        connectionId: formData.connId,
+        connId: formData.connId,
         controlIds: selectedControls.map((control) => control.id),
       };
       await onSubmit(campaign);

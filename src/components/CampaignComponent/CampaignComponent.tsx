@@ -107,7 +107,11 @@ export const CampaignComponent: React.FC = () => {
           body: JSON.stringify(campaign),
         });
       } else {
-        response = await fetch(`${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}`);
+        response = await fetch(`${API_ENDPOINTS.CAMPAIGN_START(campaign.name)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(campaign),
+        });
       }
     
 
