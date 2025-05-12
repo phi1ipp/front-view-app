@@ -21,7 +21,6 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
     type: 'service'
   });
 
-
   const [, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -156,20 +155,6 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
               />
               <label htmlFor="db">db</label>
             </div>
-            <div className={styles.formField}>
-           <select
-             id="sidService"
-             value={formData.sidService}
-             onChange={(e) => setFormData({ ...formData, sidService: e.target.value })}
-             required
-           >
-             <option value="">Select SidService</option>
-              <option value="Huey">Huey</option>
-              <option value="Dewey">Dewey</option>
-              <option value="Louie">Louie</option>
-           </select>
-           <label htmlFor="sidService">sidService 1</label>
-         </div>
 
             <div className={styles.formField}>
               <select
@@ -183,7 +168,6 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
               </select>
               <label htmlFor="type">Type</label>
             </div>
-
             <div className={styles.formField}>
               <input
                   id="user"
@@ -222,7 +206,6 @@ export const ConnectionModal: React.FC<ConnectionModalProps> = ({
             {testMessage && <div className={styles.testMessage}>{testMessage}</div>}
           </form>
         </div>
-
       </div>
   );
 };
