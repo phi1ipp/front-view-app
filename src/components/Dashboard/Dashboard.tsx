@@ -48,9 +48,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   }, [onNavItemClick]);
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("userName");
-    navigate('/'); // Redirect to login
+    navigate('/logout')
   };
 
   const navSections: NavSection[] = [

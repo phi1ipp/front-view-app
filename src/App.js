@@ -19,6 +19,9 @@ function App() {
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('auth-change', handleStorageChange);
 
+    // Also check auth status on initial mount and when the component updates
+    handleStorageChange();
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('auth-change', handleStorageChange);
@@ -27,15 +30,21 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route
-        path="/home"
-        element={isAuthenticated ? <Home /> : <Navigate to="/" />}
-      />
-      <Route path="/logout" element={<Logout />} />
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route 
+          path="/" 
+          element={isAuthenticated ? <Navigate to="/home" /> : <LoginPage />} 
+        />
+        <Route
+          path="/home"
+          element={isAuthenticated ? <Home /> : <Navigate to="/" />}
+        />
+        <Route 
+          path="/logout" 
+          element={<Logout />} 
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

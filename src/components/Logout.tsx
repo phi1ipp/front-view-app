@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const Logout: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Clear authentication data or reset relevant state
+  useEffect(() => {
+    // Clear authentication data
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("userName");
+    localStorage.removeItem("isAdmin");
+    
+    // Dispatch event to notify about auth change
+    window.dispatchEvent(new Event('auth-change'));
+    
+    // Add a small delay to ensure state updates before redirect
+    setTimeout(() => {
+      navigate('/');
+    }, 100);
+  }, [navigate]);
 
-    // Redirect to the login page
-    navigate('/login');
-  };
-
-  // You can trigger the logout process automatically on component mount
-  // or via a button click, depending on your use case
-  React.useEffect(() => {
-    handleLogout();
-  });
-
-  // Optionally show a message or a loading spinner while the logout process completes
+  // Show a loading message while logout completes
   return <div>Logging out...</div>;
 };
-
-
