@@ -13,8 +13,9 @@ export const UserManagement: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
   const [selectedUserId, setSelectedUserId] = useState<string>('');
-const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
-    const [errorMessage,setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
+  const [errorMessage,setErrorMessage] = useState('');
+  
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -24,8 +25,6 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
       const response = await fetch(API_ENDPOINTS.USERS);          
       const data = await response.json();
       setUsers(data);
-      console.log(JSON.stringify(response));
-      console.log('Data:', data); 
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -49,12 +48,11 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
   };
 
   const handleUserSubmit = async (user: User) => {
-    console.log("user",user);
     try {
       const method = selectedUser ? 'PUT' : 'POST';
       const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.username}` : API_ENDPOINTS.USERS;
       
-     const response =  await fetch(url, {
+      const response =  await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
@@ -65,14 +63,17 @@ const [successMessage, setSuccessMessage] = useState(''); // State to manage the
         setTimeout(() => {
           setErrorMessage('');
         }, 5000);
-    }
-    console.log("Users ", user);
+      }
+
       setSuccessMessage('Created User Successfully!');  // Set success message
+
       setTimeout(() => {
         setSuccessMessage('');
       }, 5000);
+
       setIsUserModalOpen(false);
       fetchUsers();
+
     } catch (error) {
       console.error('Error saving User:', error);
       setErrorMessage('Failed to save User.');  // Set error message when saving campaign fails

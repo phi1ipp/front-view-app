@@ -81,7 +81,8 @@ export interface TableRowProps {
 //Users
 export interface User {
   username: string;
-  enabled: string;
+  enabled: boolean;
+  isAdmin: boolean;
   fullName: string;
   email: string;
   password: string;

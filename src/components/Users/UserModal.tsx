@@ -11,31 +11,36 @@ export const UserModal: React.FC<UserModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<User>({
     username: '',
-    enabled: '',
     fullName: '',
     email: '',
-    password: ''
+    password: '',
+    enabled: true,
+    isAdmin: false
   });
 
   const onClose = () => {
     // Reset states to initial values when closing the modal
     setFormData({  username: '',
-      enabled: '',
       fullName: '',
       email: '',
-      password: ''});  // Clear any errors
+      password: '',
+      enabled: true,
+      isAdmin: false
+    });  // Clear any errors
     close();  // Call the onClose prop function to officially close the modal
   };
+
   useEffect(() => {
     if (user) {
       setFormData(user);
     } else {
       setFormData({
         username: '',
-        enabled: '',
         fullName: '',
         email: '',
-        password: ''
+        password: '',
+        enabled: true,
+        isAdmin: false
       });
     }
   }, [user]);
@@ -97,6 +102,28 @@ export const UserModal: React.FC<UserModalProps> = ({
               placeholder=" "
             />
             <label htmlFor="password">Password</label>
+          </div>
+          <div className={styles.checkboxContainer}>
+            <div className={styles.checkboxField}>
+              <input
+                id="admin"
+                type="checkbox"
+                checked={!!formData.isAdmin}
+                onChange={(e) => setFormData({ ...formData, isAdmin: e.target.checked })}
+                className={styles.checkbox}
+              />
+              <label htmlFor="admin" className={styles.checkboxLabel}>Admin?</label>
+            </div>
+            <div className={styles.checkboxField}>
+              <input
+                id="enabled"
+                type="checkbox"
+                checked={!!formData.enabled}
+                onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
+                className={styles.checkbox}
+              />
+              <label htmlFor="enabled" className={styles.checkboxLabel}>Enabled?</label>
+            </div>
           </div>
           <div className={styles.modalActions}>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
