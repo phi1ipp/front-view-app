@@ -9,7 +9,31 @@ export const SideNav: React.FC<SideNavProps> = ({
   sections, 
   userInfo,
   onLogout 
-}) => (
+}) => {
+
+  const handleChangePassword = async (passwordData: { currentPassword: string; newPassword: string }) => {
+    try {
+      // Call your API to change password
+      const response = await fetch('/api/user/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(passwordData)
+      });
+
+      if (response.ok) {
+        alert('Password changed successfully!');
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.message}`);
+      }
+    } catch (error) {
+      alert('Failed to change password. Please try again.');
+    }
+  };
+
+  return (
   <nav className={styles.sideNav} aria-label="Main navigation">
     <div className={styles.titleLogo}>
       <img loading="lazy" src={logo}
@@ -21,6 +45,7 @@ export const SideNav: React.FC<SideNavProps> = ({
         <NavSection key={index} {...section} />
       ))}
     </div>
-    <UserProfile {...userInfo} onLogout={onLogout} />
+    <UserProfile {...userInfo} onLogout={onLogout} onChangePassword={handleChangePassword} />
   </nav>
 );
+};
