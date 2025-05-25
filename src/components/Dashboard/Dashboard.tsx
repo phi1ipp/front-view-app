@@ -47,8 +47,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
     onNavItemClick?.(index);
   }, [onNavItemClick]);
 
-  const handleLogout = () => {
-    navigate('/logout')
+  const handleLogout = async () => {
+    await fetch('/auth/logout');
+    navigate('/logout');
   };
 
   const navSections: NavSection[] = [
