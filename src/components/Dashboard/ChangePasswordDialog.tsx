@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../Users/UserModal.module.css';
 
 interface ChangePasswordDialogProps {
@@ -23,7 +23,21 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Handle Esc key press to close the modal
+  const handleClose = useCallback(() => {
+    setFormData({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+    setErrors({});
+    setShowPasswords({
+      current: false,
+      new: false,
+      confirm: false
+    });
+    onClose();
+  }, [onClose]);
+
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -38,7 +52,7 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
     return () => {
       document.removeEventListener('keydown', handleEscKey);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -87,21 +101,6 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
       });
       handleClose();
     }
-  };
-
-  const handleClose = () => {
-    setFormData({
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: ''
-    });
-    setErrors({});
-    setShowPasswords({
-      current: false,
-      new: false,
-      confirm: false
-    });
-    onClose();
   };
 
   if (!isOpen) return null;

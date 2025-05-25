@@ -10,12 +10,6 @@ interface UserProfileProps extends UserInfo {
   onChangePassword?: (passwordData: { currentPassword: string; newPassword: string }) => void;
 }
 
-interface ChangePasswordDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (passwordData: { currentPassword: string; newPassword: string }) => void;
-}
-
 export const UserProfile: React.FC<UserProfileProps> = ({
   name,
   initial,
