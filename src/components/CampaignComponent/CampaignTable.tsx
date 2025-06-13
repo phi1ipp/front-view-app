@@ -38,7 +38,7 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
-        <TableHeader label="Campaign ID" sortable />
+        {/*<TableHeader label="Campaign ID" sortable />*/}
         <TableHeader label="Campaign Name" sortable />
         <TableHeader label="Status" sortable />
         <TableHeader label="Violation Count" sortable />

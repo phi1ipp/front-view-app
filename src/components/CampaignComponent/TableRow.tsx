@@ -13,10 +13,10 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
 
   return (
     <div className={styles.tableCellRow}>
-      <div className={styles.cell}>
+{/*      <div className={styles.cell}>
         <div className={styles.cellContent}>{campaign.id}</div>
       </div>
-      <div className={styles.cell}>
+*/}      <div className={styles.cell}>
         <div className={styles.cellContent}>{campaign.name}</div>
       </div>
       <div className={styles.cell}>
