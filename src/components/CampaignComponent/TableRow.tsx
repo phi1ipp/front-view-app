@@ -22,10 +22,10 @@ export const TableRow: React.FC<TableRowProps> = ({ campaign, onDownload, onEdit
       <div className={styles.cell}>
         <div className={styles.cellContent}><StatusChip status={campaign.status} /></div>
       </div>
-      <div className={styles.cell}>
+{/*      <div className={styles.cell}>
         <div className={styles.cellContent}>{campaign.violationCount}</div>
       </div>
-      <div className={styles.actionCell}>
+*/}      <div className={styles.actionCell}>
       <button
                   className={styles.actionButton}
                   onClick={() => onStart(campaign.id)}

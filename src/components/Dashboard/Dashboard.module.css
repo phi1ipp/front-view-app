@@ -353,7 +353,7 @@
   display: block;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
   .sideNav {
     width: 240px;
   }
