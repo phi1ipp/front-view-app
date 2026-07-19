@@ -175,6 +175,8 @@
 }
 
 .actionCell {
+  flex: 1;
+  min-width: 150px;
   display: flex;
   align-items: center;
   padding: 16px;
