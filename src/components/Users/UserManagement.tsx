@@ -52,10 +52,15 @@ export const UserManagement: React.FC = () => {
       const method = selectedUser ? 'PUT' : 'POST';
       const url = selectedUser ? `${API_ENDPOINTS.USERS}/${selectedUser.username}` : API_ENDPOINTS.USERS;
       
+      const payload: Partial<User> = { ...user };
+      if (selectedUser && !payload.password) {
+        delete payload.password;
+      }
+
       const response =  await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
+        body: JSON.stringify(payload),
       });
       
       if (!response.ok) {

@@ -67,7 +67,7 @@ export const UserModal: React.FC<UserModalProps> = ({
 
     if (user && !formData.password) {
       setPasswordErrors([]);
-      onSubmit({ ...formData, password: user.password });
+      onSubmit(formData);
       return;
     }
 
