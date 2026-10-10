@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Exclusion.module.css';
-import { TableHeader } from './TableHeader.tsx';
-import { TableRow } from './TableRow.tsx';
-import { TableFooter } from '../CampaignComponent/TableFooter.tsx';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
+import { TableFooter } from '../CampaignComponent/TableFooter';
 import { ExclusionTableProps } from '../../types/types';
 export const ExclusionTable: React.FC<ExclusionTableProps> = ({ exclusions = [], onEdit, onDelete }) => {
   // Now `exclusions` is guaranteed to be an array, even if it's an empty array.

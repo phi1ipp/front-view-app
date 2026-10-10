@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../Users/UserModal.module.css';
+import { usePasswordPolicy } from '../../hooks/usePasswordPolicy';
+import { validatePassword } from '../../utils/passwordPolicy';
 
 interface ChangePasswordDialogProps {
   isOpen: boolean;
@@ -23,6 +25,10 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const [passwordPolicyErrors, setPasswordPolicyErrors] = useState<string[]>([]);
+
+  const { policy } = usePasswordPolicy();
+
   const handleClose = useCallback(() => {
     setFormData({
       currentPassword: '',
@@ -30,6 +36,7 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
       confirmPassword: ''
     });
     setErrors({});
+    setPasswordPolicyErrors([]);
     setShowPasswords({
       current: false,
       new: false,
@@ -59,6 +66,9 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
+    if (field === 'newPassword' && policy) {
+      setPasswordPolicyErrors(value ? validatePassword(value, policy) : []);
+    }
   };
 
   const togglePasswordVisibility = (field: keyof typeof showPasswords) => {
@@ -67,6 +77,7 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
+    const policyErrors: string[] = [];
     
     if (!formData.currentPassword) {
       newErrors.currentPassword = 'Current password is required';
@@ -74,8 +85,11 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
     
     if (!formData.newPassword) {
       newErrors.newPassword = 'New password is required';
-    } else if (formData.newPassword.length < 8) {
-      newErrors.newPassword = 'Password must be at least 8 characters';
+    } else if (policy) {
+      const v = validatePassword(formData.newPassword, policy);
+      if (v.length > 0) {
+        policyErrors.push(...v);
+      }
     }
     
     if (!formData.confirmPassword) {
@@ -89,7 +103,8 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
     }
     
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setPasswordPolicyErrors(policyErrors);
+    return Object.keys(newErrors).length === 0 && policyErrors.length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -199,8 +214,16 @@ export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOp
                 {errors.newPassword}
               </div>
             )}
+            {passwordPolicyErrors.length > 0 &&
+              passwordPolicyErrors.map((err, i) => (
+                <div
+                  key={i}
+                  style={{ color: '#d32f2f', fontSize: '12px', marginTop: '4px' }}
+                >
+                  {err}
+                </div>
+              ))}
           </div>
-
           {/* Confirm New Password */}
           <div className={styles.formField}>
             <div style={{ position: 'relative' }}>

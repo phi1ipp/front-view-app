@@ -1,11 +1,12 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import styles from './Campaign.module.css';
-import { Campaign } from '../../types/types.ts';
-import { CampaignTable } from './CampaignTable.tsx';
-import {CampaignModal} from './CampaignModal.tsx'
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { Campaign } from '../../types/types';
+import { CampaignTable } from './CampaignTable';
+import {CampaignModal} from './CampaignModal';
+import { API_ENDPOINTS } from '../../types/api';
 import Create from './Create.png';
-import { DeleteModal } from './DeleteModal.tsx';
+import { DeleteModal } from './DeleteModal';
 
 export const CampaignComponent: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);

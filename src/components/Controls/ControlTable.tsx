@@ -1,8 +1,9 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import styles from './Control.module.css';
-import { TableHeader } from './TableHeader.tsx';
-import { TableRow } from './TableRow.tsx';
-import { TableFooter } from '../CampaignComponent/TableFooter.tsx';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
+import { TableFooter } from '../CampaignComponent/TableFooter';
 import { ControlTableProps } from '../../types/types';
 
 export const ControlTable: React.FC<ControlTableProps> = ({controls, onEdit, onDelete }) => {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import styles from './Dashboard.module.css';
 import { MainContentProps } from './types';

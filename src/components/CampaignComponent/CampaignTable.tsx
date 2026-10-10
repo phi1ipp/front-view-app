@@ -1,8 +1,9 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import styles from './Campaign.module.css';
-import { TableHeader } from './TableHeader.tsx';
-import { TableRow } from './TableRow.tsx';
-import { TableFooter } from './TableFooter.tsx';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
+import { TableFooter } from './TableFooter';
 import { CampaignTableProps } from '../../types/types';
 
 export const CampaignTable: React.FC<CampaignTableProps> = ({

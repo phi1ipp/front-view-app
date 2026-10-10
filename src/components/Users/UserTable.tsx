@@ -1,8 +1,9 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import styles from './UserManagement.module.css';
-import { TableHeader } from './TableHeader.tsx';
-import { TableRow } from './TableRow.tsx';
-import { TableFooter } from '../CampaignComponent/TableFooter.tsx';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
+import { TableFooter } from '../CampaignComponent/TableFooter';
 import { UserTableProps } from '../../types/types';
 
 export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {

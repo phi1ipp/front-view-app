@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Connection.module.css';
-import { TableHeader } from './TableHeader.tsx';
-import { TableRow } from './TableRow.tsx';
-import { TableFooter } from '../CampaignComponent/TableFooter.tsx';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
+import { TableFooter } from '../CampaignComponent/TableFooter';
 import { ConnectionsTableProps } from '../../types/types';
 
 export const ConnectionTable: React.FC<ConnectionsTableProps> = ({ connections, onEdit, onDelete }) => {

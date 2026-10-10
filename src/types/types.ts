@@ -79,6 +79,14 @@ export interface TableRowProps {
 }
 
 //Users
+export interface PasswordPolicy {
+  minLength: number;
+  requireUppercase: boolean;
+  requireLowercase: boolean;
+  requireDigit: boolean;
+  requireSpecial: boolean;
+}
+
 export interface User {
   username: string;
   enabled: boolean;

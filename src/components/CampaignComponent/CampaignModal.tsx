@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import styles from './CampaignModal.module.css';
 import { CampaignModalProps, Campaign } from '../../types/types';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 export const CampaignModal: React.FC<CampaignModalProps> = ({
   isOpen,

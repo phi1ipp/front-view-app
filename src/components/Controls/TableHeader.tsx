@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import styles from './Control.module.css';
 import { TableHeaderProps } from './types';

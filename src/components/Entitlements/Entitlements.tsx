@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Entitlement.module.css';
-import { EntitlementTable } from './EntitlementTable.tsx';
-import { EntitlementModal } from './EntitlementModal.tsx';
-import { DeleteModal } from './DeleteModal.tsx';
+import { EntitlementTable } from './EntitlementTable';
+import { EntitlementModal } from './EntitlementModal';
+import { DeleteModal } from './DeleteModal';
 import { Entitlement } from '../../types/types';
 import Create from './Create.png';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 export const Entitlements: React.FC = () => {
   const [entitlements, setEntitlements] = useState<Entitlement[]>([]);

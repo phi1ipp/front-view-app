@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserModal.module.css';
 import { UserModalProps, User } from '../../types/types';
+import { usePasswordPolicy } from '../../hooks/usePasswordPolicy';
+import { validatePassword } from '../../utils/passwordPolicy';
 
 
 export const UserModal: React.FC<UserModalProps> = ({
@@ -18,6 +20,10 @@ export const UserModal: React.FC<UserModalProps> = ({
     isAdmin: false
   });
 
+  const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
+
+  const { policy } = usePasswordPolicy();
+
   const onClose = () => {
     // Reset states to initial values when closing the modal
     setFormData({  username: '',
@@ -27,12 +33,13 @@ export const UserModal: React.FC<UserModalProps> = ({
       enabled: true,
       isAdmin: false
     });  // Clear any errors
+    setPasswordErrors([]);
     close();  // Call the onClose prop function to officially close the modal
   };
 
   useEffect(() => {
     if (user) {
-      setFormData(user);
+      setFormData({ ...user, password: '' });
     } else {
       setFormData({
         username: '',
@@ -45,8 +52,32 @@ export const UserModal: React.FC<UserModalProps> = ({
     }
   }, [user]);
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, password: value });
+    if (policy) {
+      setPasswordErrors(value ? validatePassword(value, policy) : []);
+    } else {
+      setPasswordErrors([]);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (user && !formData.password) {
+      setPasswordErrors([]);
+      onSubmit({ ...formData, password: user.password });
+      return;
+    }
+
+    const errors = validatePassword(formData.password, policy);
+    setPasswordErrors(errors);
+
+    if (errors.length > 0) {
+      return;
+    }
+
     onSubmit(formData);
   };
 
@@ -88,20 +119,25 @@ export const UserModal: React.FC<UserModalProps> = ({
               value={formData.username}
               onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               required
+              disabled={!!user}
               placeholder=" "
             />
-            <label htmlFor="id">User Name</label>
+            <label htmlFor="username">User Name</label>
           </div>
           <div className={styles.formField}>
             <input
               id="password"
               type="password"
               value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
+              onChange={handlePasswordChange}
+              required={!user}
               placeholder=" "
             />
             <label htmlFor="password">Password</label>
+            {passwordErrors.length > 0 &&
+              passwordErrors.map((err, i) => (
+                <div key={i} className={styles.errorMessage}>{err}</div>
+              ))}
           </div>
           <div className={styles.checkboxContainer}>
             <div className={styles.checkboxField}>

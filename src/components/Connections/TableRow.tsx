@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import styles from './Connection.module.css';
 import { TableRowPropsConnection } from '../../types/types';

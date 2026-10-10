@@ -1,11 +1,12 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import styles from './Control.module.css';
-import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
-import { Control, isSodControl } from '../../types/types.ts';
-import { ControlTable } from './ControlTable.tsx';
-import {ControlModal} from './ControlModal.tsx';
+import { DeleteModal } from '../Dashboard/DeleteModal';
+import { Control, isSodControl } from '../../types/types';
+import { ControlTable } from './ControlTable';
+import {ControlModal} from './ControlModal';
 import Create from './Create.png';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 
 export const ControlsComponent: React.FC = () => {

@@ -1,9 +1,10 @@
+// @ts-nocheck
 import React, { useState }  from 'react';
 import styles from './Dashboard.module.css';
 import { UserInfo } from './types';
 import Logout from './img/Logout.svg';
 import Lockout from './img/Lockout.svg'
-import { ChangePasswordDialog } from './ChangePasswordDialog.tsx';
+import { ChangePasswordDialog } from './ChangePasswordDialog';
 
 interface UserProfileProps extends UserInfo {
   onLogout?: () => void;

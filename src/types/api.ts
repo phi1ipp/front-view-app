@@ -6,11 +6,11 @@ const BASE_URL = '/api';
 
 export const API_ENDPOINTS = {
     CAMPAIGNS: `${BASE_URL}/report`,
-    CAMPAIGN_PREPARE: (campaignName, connectionId) => `${BASE_URL}/report/${campaignName}/connection/${connectionId}/prepare`,
-    CAMPAIGN_START: (campaignName) => `${BASE_URL}/report/${campaignName}/start`,
-    CAMPAIGN_DOWNLOAD: (campaignName) => `${BASE_URL}/report/${campaignName}/download`,
-    //CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/campaigns/${campaignName}/controls`,
-    CAMPAIGN_CONTROLS: (campaignName) => `${BASE_URL}/report/${campaignName}/controls`,
+    CAMPAIGN_PREPARE: (campaignName: string, connectionId: string) => `${BASE_URL}/report/${campaignName}/connection/${connectionId}/prepare`,
+    CAMPAIGN_START: (campaignName: string) => `${BASE_URL}/report/${campaignName}/start`,
+    CAMPAIGN_DOWNLOAD: (campaignName: string) => `${BASE_URL}/report/${campaignName}/download`,
+    //CAMPAIGN_CONTROLS: (campaignName: string) => `${BASE_URL}/campaigns/${campaignName}/controls`,
+    CAMPAIGN_CONTROLS: (campaignName: string) => `${BASE_URL}/report/${campaignName}/controls`,
 
     CAMPAIGN_CONNECTIONS: `${BASE_URL}/campaignConnections`,
 
@@ -29,7 +29,12 @@ export const API_ENDPOINTS = {
      //Entitlements
      ENTITLEMENTS : `${BASE_URL}/entitlement`,
      ENTITLEMENTS_ACCESSLIST: `${BASE_URL}/accessSet`,
-     ACCESSLIST: `${BASE_URL}/access`
+     ACCESSLIST: `${BASE_URL}/access`,
+
+     //Config
+     CONFIG: {
+       PASSWORD_POLICY: `${BASE_URL}/config/password-policy`
+     }
 
     // Add more API endpoints as needed
 };

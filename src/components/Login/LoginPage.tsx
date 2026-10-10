@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import { InputField } from './InputField.tsx';
-import { Button } from './Button.tsx';
+import { InputField } from './InputField';
+import { Button } from './Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

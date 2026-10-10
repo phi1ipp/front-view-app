@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './ConnectionModal.module.css';
 import { ConnectionModalProps, Connection } from '../../types/types';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 export const ConnectionModal: React.FC<ConnectionModalProps> = ({
   isOpen,

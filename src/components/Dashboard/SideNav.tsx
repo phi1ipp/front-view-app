@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
-import { NavSection } from './NavSection.tsx';
-import { UserProfile } from './UserProfile.tsx';
-import { SideNavProps } from './types.ts';
+import { NavSection } from './NavSection';
+import { UserProfile } from './UserProfile';
+import { SideNavProps } from '../../types/types';
 
 export const SideNav: React.FC<SideNavProps> = ({ 
   logo, 

@@ -119,3 +119,9 @@
 .submitButton:hover {
   background-color: var(--primary-dark, #1565c0);
 }
+
+.errorMessage {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+}

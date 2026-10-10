@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Connection.module.css';
-import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
-import { Connection } from '../../types/types.ts';
-import { ConnectionTable } from './ConnectionTable.tsx';
-import {ConnectionModal} from './ConnectionModal.tsx'
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { DeleteModal } from '../Dashboard/DeleteModal';
+import { Connection } from '../../types/types';
+import { ConnectionTable } from './ConnectionTable';
+import {ConnectionModal} from './ConnectionModal';
+import { API_ENDPOINTS } from '../../types/api';
 
 
 export const ConnectionsComponent: React.FC = () => {

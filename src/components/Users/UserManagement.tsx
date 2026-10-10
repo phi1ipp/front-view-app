@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserManagement.module.css';
-import { UserTable } from './UserTable.tsx';
-import { UserModal } from './UserModal.tsx';
-import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
+import { UserTable } from './UserTable';
+import { UserModal } from './UserModal';
+import { DeleteModal } from '../Dashboard/DeleteModal';
 import { User } from '../../types/types';
 import Create from './Create.png';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -50,7 +50,7 @@ export const UserManagement: React.FC = () => {
   const handleUserSubmit = async (user: User) => {
     try {
       const method = selectedUser ? 'PUT' : 'POST';
-      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${user.username}` : API_ENDPOINTS.USERS;
+      const url = selectedUser ? `${API_ENDPOINTS.USERS}/${selectedUser.username}` : API_ENDPOINTS.USERS;
       
       const response =  await fetch(url, {
         method,
@@ -63,9 +63,10 @@ export const UserManagement: React.FC = () => {
         setTimeout(() => {
           setErrorMessage('');
         }, 5000);
+        return;
       }
 
-      setSuccessMessage('Created User Successfully!');  // Set success message
+      setSuccessMessage(selectedUser ? 'Updated User Successfully!' : 'Created User Successfully!');
 
       setTimeout(() => {
         setSuccessMessage('');

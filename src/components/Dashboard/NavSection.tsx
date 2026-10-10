@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
-import { NavItem } from './NavItem.tsx';
-import { NavSection as NavSectionType } from './types.ts';
+import { NavItem } from './NavItem';
+import { NavSection as NavSectionType } from '../../types/types';
 
 export const NavSection: React.FC<NavSectionType> = ({ title, items }) => (
   <div className={styles.navSection}>

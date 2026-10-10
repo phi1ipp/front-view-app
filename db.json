@@ -663,5 +663,12 @@
       "id": "3",
       "name": "function4"
     }
-  ]
+  ],
+  "password-policy": {
+    "minLength": 8,
+    "requireUppercase": true,
+    "requireLowercase": true,
+    "requireDigit": true,
+    "requireSpecial": true
+  }
 }

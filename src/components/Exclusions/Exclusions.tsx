@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Exclusion.module.css';
-import { ExclusionTable } from './ExclusionTable.tsx';
-import { ExclusionModal } from './ExclusionModal.tsx';
-import { DeleteModal } from '../Dashboard/DeleteModal.tsx';
-import { Exclusion } from '../../types/types.ts';
+import { ExclusionTable } from './ExclusionTable';
+import { ExclusionModal } from './ExclusionModal';
+import { DeleteModal } from '../Dashboard/DeleteModal';
+import { Exclusion } from '../../types/types';
 import Create from './Create.png';
-import { API_ENDPOINTS } from '../../types/api.ts';
+import { API_ENDPOINTS } from '../../types/api';
 
 export const Exclusions: React.FC = () => {
   const [exclusions, setExclusions] = useState<Exclusion[]>([]); 
