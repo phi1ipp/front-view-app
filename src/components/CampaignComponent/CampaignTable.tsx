@@ -1,10 +1,58 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import styles from './Campaign.module.css';
-import { TableHeader } from './TableHeader';
-import { TableRow } from './TableRow';
-import { TableFooter } from './TableFooter';
-import { CampaignTableProps } from '../../types/types';
+import { DataTable, TableFooter, StatusChip, Column } from '../shared';
+import { CampaignActions } from './CampaignActions';
+import { CampaignTableProps, Campaign } from '../../types/types';
+
+const statusKind = (status: string): 'warning' | 'success' | 'error' => {
+  switch (status.toLowerCase()) {
+    case 'ready':
+      return 'success';
+    case 'error':
+      return 'error';
+    default:
+      return 'warning';
+  }
+};
+
+const statusText = (dbStatus: string): string => {
+  switch (dbStatus) {
+    case 'ready':
+      return 'Ready';
+    case 'seed':
+      return 'Needs data';
+    case 'data':
+      return 'Needs analysis';
+    case 'transfer':
+      return 'Data transfer';
+    default:
+      return 'Error';
+  }
+};
+
+const columns: Array<Column<Campaign>> = [
+  {
+    key: 'name',
+    label: 'Campaign Name',
+    sortable: true,
+    flex: true,
+    minWidth: 150,
+    render: (c) => c.name,
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+    flex: true,
+    minWidth: 150,
+    render: (c) => (
+      <StatusChip
+        status={c.status}
+        label={statusText(c.status.toLowerCase())}
+        kind={statusKind(c.status)}
+      />
+    ),
+  },
+];
 
 export const CampaignTable: React.FC<CampaignTableProps> = ({
   campaigns,
@@ -17,6 +65,9 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const totalPages = Math.ceil(campaigns.length / rowsPerPage);
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const currentCampaigns = campaigns.slice(startIndex, startIndex + rowsPerPage);
+  const isNextDisabled = currentPage >= totalPages || currentCampaigns.length === 0;
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -26,45 +77,45 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({
 
   const handleRowsPerPageChange = (rows: number) => {
     setRowsPerPage(rows);
-    setCurrentPage(1); // Reset to the first page when rows per page changes
+    setCurrentPage(1);
   };
 
-  // Calculate the campaigns to display based on pagination
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const currentCampaigns = campaigns.slice(startIndex, startIndex + rowsPerPage);
-
-  
-  const isNextDisabled = currentPage >= totalPages || currentCampaigns.length === 0;
+  const allColumns: Array<Column<Campaign>> = [
+    ...columns,
+    {
+      key: 'actions',
+      label: 'Action',
+      isActions: true,
+      flex: true,
+      minWidth: 150,
+      render: (campaign) => (
+        <CampaignActions
+          campaign={campaign}
+          onDownload={onDownload}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          onStart={onStart}
+        />
+      ),
+    },
+  ];
 
   return (
-    <div className={styles.tableContainer}>
-      <div className={styles.tableHeader}>
-        {/*<TableHeader label="Campaign ID" sortable />*/}
-        <TableHeader label="Campaign Name" sortable />
-        <TableHeader label="Status" sortable />
-        {/*<TableHeader label="Violation Count" sortable />*/}
-        <TableHeader label="Action" />
-      </div>
-      <div className={styles.tableBody}>
-        {currentCampaigns.map((campaign) => (
-          <TableRow
-            key={campaign.id}
-            campaign={campaign}
-            onDownload={onDownload}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </div>
-      <TableFooter
-        totalItems={campaigns.length}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        rowsPerPage={rowsPerPage}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        isNextDisabled={isNextDisabled} 
-      />
-    </div>
+    <DataTable
+      columns={allColumns}
+      rows={currentCampaigns}
+      rowKey={(c) => c.id}
+      footer={
+        <TableFooter
+          totalItems={campaigns.length}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          rowsPerPage={rowsPerPage}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          isNextDisabled={isNextDisabled}
+        />
+      }
+    />
   );
 };

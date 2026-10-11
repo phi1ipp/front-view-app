@@ -1,7 +1,15 @@
-// @ts-nocheck
 import React from 'react';
-import styles from './Campaign.module.css';
-import { TableFooterProps } from './types';
+import styles from './shared.module.css';
+
+export interface TableFooterProps {
+  totalItems: number;
+  currentPage: number;
+  totalPages: number;
+  rowsPerPage: number;
+  onPageChange: (page: number) => void;
+  onRowsPerPageChange: (rows: number) => void;
+  isNextDisabled: boolean;
+}
 
 export const TableFooter: React.FC<TableFooterProps> = ({
   totalItems,
@@ -10,9 +18,9 @@ export const TableFooter: React.FC<TableFooterProps> = ({
   rowsPerPage,
   onPageChange,
   onRowsPerPageChange,
-  isNextDisabled, // ✅ New prop to handle "Next" button state
+  isNextDisabled,
 }) => {
-  const startItem = (currentPage - 1) * rowsPerPage + 1;
+  const startItem = totalItems === 0 ? 0 : (currentPage - 1) * rowsPerPage + 1;
   const endItem = Math.min(currentPage * rowsPerPage, totalItems);
 
   return (
@@ -50,7 +58,7 @@ export const TableFooter: React.FC<TableFooterProps> = ({
           <button
             className={styles.pageButton}
             onClick={() => onPageChange(currentPage + 1)}
-            disabled={isNextDisabled} 
+            disabled={isNextDisabled}
             aria-label="Next page"
           >
             Next &gt;

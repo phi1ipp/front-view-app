@@ -1,291 +1,238 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import styles from '../Users/UserModal.module.css';
+import React, { useState, useEffect } from 'react';
+import {
+  Modal,
+  ModalActions,
+  FormField,
+  Button,
+  Banner,
+} from '../shared';
 import { usePasswordPolicy } from '../../hooks/usePasswordPolicy';
 import { validatePassword } from '../../utils/passwordPolicy';
 
-interface ChangePasswordDialogProps {
+export interface ChangePasswordDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { currentPassword: string; newPassword: string }) => void;
+  onSubmit: (passwordData: { currentPassword: string; newPassword: string }) => void;
 }
 
-export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({ isOpen, onClose, onSubmit }) => 
-{
+export const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+}) => {
   const [formData, setFormData] = useState({
     currentPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    passwordErrors: [] as string[],
+    errorMessage: '',
+    currentPasswordRequired: false,
+    passwordsRequired: false,
+    passwordsDontMatch: false,
+    showCurrentPassword: false,
+    showNewPassword: false,
+    showConfirmPassword: false,
   });
-
-  const [showPasswords, setShowPasswords] = useState({
-    current: false,
-    new: false,
-    confirm: false
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const [passwordPolicyErrors, setPasswordPolicyErrors] = useState<string[]>([]);
 
   const { policy } = usePasswordPolicy();
 
-  const handleClose = useCallback(() => {
-    setFormData({
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: ''
-    });
-    setErrors({});
-    setPasswordPolicyErrors([]);
-    setShowPasswords({
-      current: false,
-      new: false,
-      confirm: false
-    });
-    onClose();
-  }, [onClose]);
-
   useEffect(() => {
-    const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
     if (isOpen) {
-      document.addEventListener('keydown', handleEscKey);
+      setFormData((prev) => ({
+        ...prev,
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+        passwordErrors: [],
+        errorMessage: '',
+        currentPasswordRequired: false,
+        passwordsRequired: false,
+        passwordsDontMatch: false,
+      }));
     }
+  }, [isOpen]);
 
-    return () => {
-      document.removeEventListener('keydown', handleEscKey);
+  const validateCurrentPassword = (value: string) => {
+    if (!value.trim()) {
+      return 'Current password is required';
+    }
+    return '';
+  };
+
+  const validatePasswords = (newPwd: string, confirmPwd: string) => {
+    const errors = {
+      passwordsRequired: false,
+      passwordsDontMatch: false,
+      passwordErrors: [] as string[],
     };
-  }, [isOpen, handleClose]);
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+    if (!newPwd.trim() || !confirmPwd.trim()) {
+      errors.passwordsRequired = true;
+    } else if (newPwd !== confirmPwd) {
+      errors.passwordsDontMatch = true;
     }
-    if (field === 'newPassword' && policy) {
-      setPasswordPolicyErrors(value ? validatePassword(value, policy) : []);
+
+    if (newPwd && policy) {
+      errors.passwordErrors = validatePassword(newPwd, policy);
     }
+
+    return errors;
   };
 
-  const togglePasswordVisibility = (field: keyof typeof showPasswords) => {
-    setShowPasswords(prev => ({ ...prev, [field]: !prev[field] }));
+  const handleNewPasswordChange = (value: string) => {
+    const { passwordErrors, passwordsDontMatch, passwordsRequired } = validatePasswords(
+      value,
+      formData.confirmPassword
+    );
+    setFormData((prev) => ({
+      ...prev,
+      newPassword: value,
+      passwordErrors,
+      passwordsDontMatch,
+      passwordsRequired,
+    }));
   };
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    const policyErrors: string[] = [];
-    
-    if (!formData.currentPassword) {
-      newErrors.currentPassword = 'Current password is required';
-    }
-    
-    if (!formData.newPassword) {
-      newErrors.newPassword = 'New password is required';
-    } else if (policy) {
-      const v = validatePassword(formData.newPassword, policy);
-      if (v.length > 0) {
-        policyErrors.push(...v);
-      }
-    }
-    
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your new password';
-    } else if (formData.newPassword !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-    
-    if (formData.currentPassword === formData.newPassword) {
-      newErrors.newPassword = 'New password must be different from current password';
-    }
-    
-    setErrors(newErrors);
-    setPasswordPolicyErrors(policyErrors);
-    return Object.keys(newErrors).length === 0 && policyErrors.length === 0;
+  const handleConfirmPasswordChange = (value: string) => {
+    const { passwordErrors, passwordsDontMatch, passwordsRequired } = validatePasswords(
+      formData.newPassword,
+      value
+    );
+    setFormData((prev) => ({
+      ...prev,
+      confirmPassword: value,
+      passwordErrors,
+      passwordsDontMatch,
+      passwordsRequired,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCurrentPasswordChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      currentPassword: value,
+      currentPasswordRequired: !value.trim(),
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit({
+
+    const currentPasswordError = validateCurrentPassword(formData.currentPassword);
+    const { passwordsRequired, passwordsDontMatch, passwordErrors } = validatePasswords(
+      formData.newPassword,
+      formData.confirmPassword
+    );
+
+    setFormData((prev) => ({
+      ...prev,
+      currentPasswordRequired: !!currentPasswordError,
+      passwordsRequired,
+      passwordsDontMatch,
+      passwordErrors,
+    }));
+
+    if (
+      currentPasswordError ||
+      passwordsRequired ||
+      passwordsDontMatch ||
+      passwordErrors.length > 0
+    ) {
+      return;
+    }
+
+    try {
+      await onSubmit({
         currentPassword: formData.currentPassword,
-        newPassword: formData.newPassword
+        newPassword: formData.newPassword,
       });
-      handleClose();
+
+      setFormData((prev) => ({
+        ...prev,
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+        passwordErrors: [],
+        errorMessage: '',
+        currentPasswordRequired: false,
+        passwordsRequired: false,
+        passwordsDontMatch: false,
+      }));
+      onClose();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
+      setFormData((prev) => ({ ...prev, errorMessage: message }));
     }
   };
 
-  if (!isOpen) return null;
+  const toggleVisibility = (field: 'current' | 'new' | 'confirm') => {
+    setFormData((prev) => {
+      const key = `show${field.charAt(0).toUpperCase()}${field.slice(1)}Password` as
+        | 'showCurrentPassword'
+        | 'showNewPassword'
+        | 'showConfirmPassword';
+      return { ...prev, [key]: !prev[key] };
+    });
+  };
+
+  const eyeToggle = (field: 'current' | 'new' | 'confirm') => (
+    <Button variant="text" onClick={() => toggleVisibility(field)} ariaLabel="Toggle visibility">
+      👁️
+    </Button>
+  );
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>Change Password</h2>
-        
-        <form onSubmit={handleSubmit}>
-          {/* Current Password */}
-          <div className={styles.formField}>
-            <div style={{ position: 'relative' }}>
-              <input
-                id="currentPassword"
-                type={showPasswords.current ? 'text' : 'password'}
-                value={formData.currentPassword}
-                onChange={(e) => handleInputChange('currentPassword', e.target.value)}
-                required
-                placeholder=" "
-                style={{ paddingRight: '40px', width: '89%' }}
-              />
-              <label htmlFor="currentPassword">Current Password</label>
-              <button
-                type="button"
-                onClick={() => togglePasswordVisibility('current')}
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '16px',
-                  zIndex: 1,
-                  padding: '0',
-                  width: '20px',
-                  height: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                aria-label={showPasswords.current ? 'Hide password' : 'Show password'}
-              >
-                {showPasswords.current ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
-            {errors.currentPassword && (
-              <div style={{ color: '#d32f2f', fontSize: '12px', marginTop: '4px' }}>
-                {errors.currentPassword}
-              </div>
-            )}
-          </div>
-
-          {/* New Password */}
-          <div className={styles.formField}>
-            <div style={{ position: 'relative' }}>
-              <input
-                id="newPassword"
-                type={showPasswords.new ? 'text' : 'password'}
-                value={formData.newPassword}
-                onChange={(e) => handleInputChange('newPassword', e.target.value)}
-                required
-                placeholder=" "
-                style={{ paddingRight: '40px', width: '89%' }}
-              />
-              <label htmlFor="newPassword">New Password</label>
-              <button
-                type="button"
-                onClick={() => togglePasswordVisibility('new')}
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '16px',
-                  zIndex: 1,
-                  padding: '0',
-                  width: '20px',
-                  height: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                aria-label={showPasswords.new ? 'Hide password' : 'Show password'}
-              >
-                {showPasswords.new ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
-            {errors.newPassword && (
-              <div style={{ color: '#d32f2f', fontSize: '12px', marginTop: '4px' }}>
-                {errors.newPassword}
-              </div>
-            )}
-            {passwordPolicyErrors.length > 0 &&
-              passwordPolicyErrors.map((err, i) => (
-                <div
-                  key={i}
-                  style={{ color: '#d32f2f', fontSize: '12px', marginTop: '4px' }}
-                >
-                  {err}
-                </div>
-              ))}
-          </div>
-          {/* Confirm New Password */}
-          <div className={styles.formField}>
-            <div style={{ position: 'relative' }}>
-              <input
-                id="confirmPassword"
-                type={showPasswords.confirm ? 'text' : 'password'}
-                value={formData.confirmPassword}
-                onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                required
-                placeholder=" "
-                style={{ paddingRight: '40px', width: '89%' }}
-              />
-              <label htmlFor="confirmPassword">Confirm New Password</label>
-              <button
-                type="button"
-                onClick={() => togglePasswordVisibility('confirm')}
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '16px',
-                  zIndex: 1,
-                  padding: '0',
-                  width: '20px',
-                  height: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                aria-label={showPasswords.confirm ? 'Hide password' : 'Show password'}
-              >
-                {showPasswords.confirm ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
-            {errors.confirmPassword && (
-              <div style={{ color: '#d32f2f', fontSize: '12px', marginTop: '4px' }}>
-                {errors.confirmPassword}
-              </div>
-            )}
-          </div>
-
-          <div className={styles.modalActions}>
-            <button 
-              type="button" 
-              onClick={handleClose} 
-              className={styles.cancelButton}
-            >
-              Cancel
-            </button>
-            <button 
-              type="submit" 
-              className={styles.submitButton}
-            >
-              Change Password
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} onClose={onClose} title="Change Password">
+      <form onSubmit={handleSubmit}>
+        {formData.errorMessage && <Banner type="error">{formData.errorMessage}</Banner>}
+        <FormField
+          id="currentPassword"
+          label="Current Password"
+          type={formData.showCurrentPassword ? 'text' : 'password'}
+          value={formData.currentPassword}
+          onChange={handleCurrentPasswordChange}
+          error={
+            formData.currentPasswordRequired ? 'Current password is required' : undefined
+          }
+          required
+          trailing={eyeToggle('current')}
+        />
+        <FormField
+          id="newPassword"
+          label="New Password"
+          type={formData.showNewPassword ? 'text' : 'password'}
+          value={formData.newPassword}
+          onChange={handleNewPasswordChange}
+          error={formData.passwordsRequired ? 'New password is required' : formData.passwordErrors}
+          required
+          trailing={eyeToggle('new')}
+        />
+        <FormField
+          id="confirmPassword"
+          label="Confirm New Password"
+          type={formData.showConfirmPassword ? 'text' : 'password'}
+          value={formData.confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          error={
+            formData.passwordsRequired
+              ? 'Confirm password is required'
+              : formData.passwordsDontMatch
+              ? 'Passwords do not match'
+              : undefined
+          }
+          required
+          trailing={eyeToggle('confirm')}
+        />
+        <ModalActions>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" type="submit">
+            Change Password
+          </Button>
+        </ModalActions>
+      </form>
+    </Modal>
   );
 };

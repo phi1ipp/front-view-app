@@ -1,0 +1,52 @@
+:root {
+  --color-primary: #005239;
+  --color-primary-hover: #00422e;
+  --color-on-primary: #ffffff;
+  --color-primary-subtle: rgba(0, 82, 57, 0.08);
+
+  --color-surface: #ffffff;
+  --color-bg: #f5f5f5;
+  --color-header-band: #f5f5f5;
+
+  --color-text: rgba(0, 0, 0, 0.87);
+  --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-text-title: rgba(30, 30, 30, 1);
+
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-divider: rgba(255, 255, 255, 0.1);
+  --color-outline: rgba(0, 0, 0, 0.23);
+  --color-hover: rgba(0, 0, 0, 0.04);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-on-primary-hover: rgba(255, 255, 255, 0.1);
+
+  --color-success: #28a745;
+  --color-danger: #d32f2f;
+  --color-danger-hover: #c62828;
+  --color-warning: #ff9f43;
+
+  --color-info: #007bff;
+
+  --color-tint-success: rgba(40, 167, 69, 0.12);
+  --color-tint-danger: rgba(211, 47, 47, 0.12);
+  --color-tint-warning: rgba(255, 159, 67, 0.15);
+  --color-tint-neutral: rgba(0, 0, 0, 0.05);
+  --color-tint-info: rgba(0, 123, 255, 0.12);
+
+  --color-focus: #005239;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 100px;
+  --radius-panel: 28px;
+
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --text-title: 600 28px/1 var(--font-sans);
+  --text-label: 500 14px/20px var(--font-sans);
+  --text-body: 400 14px/20px var(--font-sans);
+  --text-caption: 400 12px/16px var(--font-sans);
+}

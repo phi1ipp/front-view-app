@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import styles from './UserModal.module.css';
+import {
+  Modal,
+  ModalActions,
+  FormField,
+  CheckboxContainer,
+  CheckboxField,
+  Button,
+} from '../shared';
 import { UserModalProps, User } from '../../types/types';
 import { usePasswordPolicy } from '../../hooks/usePasswordPolicy';
 import { validatePassword } from '../../utils/passwordPolicy';
 
-
-export const UserModal: React.FC<UserModalProps> = ({
-  isOpen,
-  onClose:close,
-  user,
-  onSubmit
-}) => {
+export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose: close, user, onSubmit }) => {
   const [formData, setFormData] = useState<User>({
     username: '',
     fullName: '',
     email: '',
     password: '',
     enabled: true,
-    isAdmin: false
+    isAdmin: false,
   });
 
   const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
@@ -25,35 +26,20 @@ export const UserModal: React.FC<UserModalProps> = ({
   const { policy } = usePasswordPolicy();
 
   const onClose = () => {
-    // Reset states to initial values when closing the modal
-    setFormData({  username: '',
-      fullName: '',
-      email: '',
-      password: '',
-      enabled: true,
-      isAdmin: false
-    });  // Clear any errors
+    setFormData({ username: '', fullName: '', email: '', password: '', enabled: true, isAdmin: false });
     setPasswordErrors([]);
-    close();  // Call the onClose prop function to officially close the modal
+    close();
   };
 
   useEffect(() => {
     if (user) {
       setFormData({ ...user, password: '' });
     } else {
-      setFormData({
-        username: '',
-        fullName: '',
-        email: '',
-        password: '',
-        enabled: true,
-        isAdmin: false
-      });
+      setFormData({ username: '', fullName: '', email: '', password: '', enabled: true, isAdmin: false });
     }
   }, [user]);
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handlePasswordChange = (value: string) => {
     setFormData({ ...formData, password: value });
     if (policy) {
       setPasswordErrors(value ? validatePassword(value, policy) : []);
@@ -81,96 +67,66 @@ export const UserModal: React.FC<UserModalProps> = ({
     onSubmit(formData);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {user ? 'Edit User' : 'Create User'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="fullName">Full Name</label>
-          </div>
-          <div className={styles.formField}>
-            <input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="email">Email</label>
-          </div>
-          <div className={styles.formField}>
-            <input
-              id="username"
-              type="username"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              required
-              disabled={!!user}
-              placeholder=" "
-            />
-            <label htmlFor="username">User Name</label>
-          </div>
-          <div className={styles.formField}>
-            <input
-              id="password"
-              type="password"
-              value={formData.password}
-              onChange={handlePasswordChange}
-              required={!user}
-              placeholder=" "
-            />
-            <label htmlFor="password">Password</label>
-            {passwordErrors.length > 0 &&
-              passwordErrors.map((err, i) => (
-                <div key={i} className={styles.errorMessage}>{err}</div>
-              ))}
-          </div>
-          <div className={styles.checkboxContainer}>
-            <div className={styles.checkboxField}>
-              <input
-                id="admin"
-                type="checkbox"
-                checked={!!formData.isAdmin}
-                onChange={(e) => setFormData({ ...formData, isAdmin: e.target.checked })}
-                className={styles.checkbox}
-              />
-              <label htmlFor="admin" className={styles.checkboxLabel}>Admin?</label>
-            </div>
-            <div className={styles.checkboxField}>
-              <input
-                id="enabled"
-                type="checkbox"
-                checked={!!formData.enabled}
-                onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-                className={styles.checkbox}
-              />
-              <label htmlFor="enabled" className={styles.checkboxLabel}>Enabled?</label>
-            </div>
-          </div>
-          <div className={styles.modalActions}>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              {user ? 'Save' : 'Create'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} onClose={onClose} title={user ? 'Edit User' : 'Create User'}>
+      <form onSubmit={handleSubmit}>
+        <FormField
+          id="fullName"
+          label="Full Name"
+          type="text"
+          value={formData.fullName}
+          onChange={(v) => setFormData({ ...formData, fullName: v })}
+          required
+        />
+        <FormField
+          id="email"
+          label="Email"
+          type="email"
+          value={formData.email}
+          onChange={(v) => setFormData({ ...formData, email: v })}
+          required
+        />
+        <FormField
+          id="username"
+          label="User Name"
+          type="text"
+          value={formData.username}
+          onChange={(v) => setFormData({ ...formData, username: v })}
+          required
+          disabled={!!user}
+        />
+        <FormField
+          id="password"
+          label="Password"
+          type="password"
+          value={formData.password}
+          onChange={handlePasswordChange}
+          required={!user}
+          error={passwordErrors}
+        />
+        <CheckboxContainer>
+          <CheckboxField
+            id="admin"
+            label="Admin?"
+            checked={!!formData.isAdmin}
+            onChange={(c) => setFormData({ ...formData, isAdmin: c })}
+          />
+          <CheckboxField
+            id="enabled"
+            label="Enabled?"
+            checked={!!formData.enabled}
+            onChange={(c) => setFormData({ ...formData, enabled: c })}
+          />
+        </CheckboxContainer>
+        <ModalActions>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" type="submit">
+            {user ? 'Save' : 'Create'}
+          </Button>
+        </ModalActions>
+      </form>
+    </Modal>
   );
 };

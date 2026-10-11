@@ -2,7 +2,7 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: var(--Background-White, #fff);
+  background: var(--color-surface);
 }
 
 .sideNav {
@@ -11,9 +11,9 @@
   width: 280px;
   min-width: 240px;
   height: 100vh;
-  background: var(--Navy-Blue, #005239);
-  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
-    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-2),
+    var(--shadow-1);
 }
 
 .navContent {
@@ -22,13 +22,9 @@
   overflow-y: auto;
 }
 
-.navigationDrawer {
-  padding: 16px;
-}
-
 .titleLogo {
   margin-bottom: 24px;
-  background-color: #f5f5f5;
+  background-color: var(--color-surface);
   padding: 20px;
 }
 
@@ -37,7 +33,7 @@
   height: auto;
   object-fit: contain;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255 / 1.0);
+  background-color: var(--color-surface);
 }
 
 .navSection {
@@ -45,7 +41,7 @@
 }
 
 .sectionTitle {
-  color: var(--Light-Gray, #f5f5f5);
+  color: var(--color-bg);
   font: 500 12px/16px Roboto, sans-serif;
   padding: 8px 16px;
   opacity: 0.7;
@@ -53,10 +49,9 @@
 
 .sectionDivider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-on-primary-hover);
   margin: 8px 0;
 }
-
 
 .navItem {
   display: flex;
@@ -65,7 +60,7 @@
   padding: 8px 12px;
   margin: 2px 0;
   border-radius: 100px;
-  color: var(--Light-Gray, #f5f5f5);
+  color: var(--color-bg);
   font: 500 14px/20px Roboto, sans-serif;
   transition: all 0.2s;
   border: none;
@@ -75,11 +70,11 @@
 }
 
 .navItem:hover {
-  background: rgba(245, 245, 245, 0.1);
+  background: var(--color-on-primary-hover);
 }
 
 .navItem:focus-visible {
-  outline: 2px solid var(--Light-Gray, #f5f5f5);
+  outline: 2px solid var(--color-bg);
   outline-offset: -2px;
 }
 
@@ -89,8 +84,8 @@
 }
 
 .navItemActive {
-  background: var(--Light-Gray, #f5f5f5);
-  color: var(--Navy-Blue, #005239);
+  background: var(--color-bg);
+  color: var(--color-primary);
 }
 
 .stateLayer {
@@ -110,16 +105,15 @@
   transform: scale(1.1);
 }
 
-
-.userSignout {
-  padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: auto;
+.section {
+  margin-left: auto;
+  font: 400 11px/14px Roboto, sans-serif;
+  opacity: 0.7;
 }
 
 .userProfile {
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--color-divider);
 }
 
 .userInfo {
@@ -141,8 +135,8 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: var(--Light-Gray, #f5f5f5);
-  color: var(--Navy-Blue, #005239);
+  background: var(--color-bg);
+  color: var(--color-primary);
   border-radius: 50%;
   font: 500 14px/20px Roboto, sans-serif;
 }
@@ -153,16 +147,17 @@
 }
 
 .userName {
-  color: var(--Light-Gray, #f5f5f5);
+  color: var(--color-bg);
   font: 500 16px/24px Roboto, sans-serif;
 }
 
 .userRole {
-  color: var(--Light-Gray, #f5f5f5);
+  color: var(--color-bg);
   font: 400 12px/16px Roboto, sans-serif;
   opacity: 0.7;
   text-transform: capitalize;
 }
+
 .logoutButton {
   display: flex;
   align-items: center;
@@ -171,7 +166,7 @@
   width: 100%;
   border: none;
   background: none;
-  color: var(--Light-Gray, #f5f5f5);
+  color: var(--color-bg);
   font: 500 14px/20px Roboto, sans-serif;
   cursor: pointer;
   border-radius: 100px;
@@ -179,7 +174,7 @@
 }
 
 .logoutButton:hover {
-  background: rgba(245, 245, 245, 0.1);
+  background: var(--color-on-primary-hover);
 }
 
 .logoutIcon {
@@ -191,183 +186,15 @@
   flex: 1;
   overflow-y: auto;
   padding: 24px;
-  background: var(--Light-Gray, #f5f5f5);
-}
-
-
-
-.content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.filterChipsContainer {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-}
-
-.filterChip {
-  display: flex;
-  align-items: center;
-  padding: 6px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--Schemes-Outline-Variant, #cac4d0);
-  font: 500 14px/20px Roboto, sans-serif;
-  color: var(--Light-Black, #4c4c4c);
-  background: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.filterChip:hover {
-  background: rgba(42, 110, 187, 0.05);
-}
-
-.filterChip:focus-visible {
-  outline: 2px solid var(--Navy-Blue, #005239);
-  outline-offset: 2px;
-}
-
-.filterChipActive {
-  background: var(--Schemes-Secondary-Container, #e8def8);
-  border: none;
-}
-
-.filterIcon {
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-  transition: transform 0.2s;
-}
-
-.filterChip:hover .filterIcon {
-  transform: scale(1.1);
-}
-
-.featuredContent {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
-}
-
-.featuredImage {
-  width: 216px;
-  height: 216px;
-  border-radius: 28px;
-  object-fit: cover;
-  transition: transform 0.2s;
-}
-
-.featuredImage:hover {
-  transform: scale(1.02);
-}
-
-.featuredText {
-  flex: 1;
-}
-
-.featuredDate {
-  font: 500 11px/16px Roboto, sans-serif;
-  color: var(--Light-Black, #4c4c4c);
-  margin-bottom: 8px;
-  display: block;
-}
-
-.featuredDescription {
-  font: 400 14px/20px Roboto, sans-serif;
-  color: var(--Dark-Black, #1e1e1e);
-  margin-bottom: 24px;
-}
-
-.downloadButton {
-  padding: 10px 24px;
-  border-radius: 100px;
-  background: var(--Navy-Blue, #005239);
-  color: var(--Light-Gray, #f5f5f5);
-  font: 500 14px/20px Roboto, sans-serif;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.downloadButton:hover {
-  background: var(--Navy-Blue-Dark, #1d5494);
-  transform: translateY(-1px);
-}
-
-.downloadButton:focus-visible {
-  outline: 2px solid var(--Navy-Blue, #005239);
-  outline-offset: 2px;
-}
-
-.cardGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-  background: none;
-  padding: 0;
-  text-align: left;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-.card:focus-visible {
-  outline: 2px solid var(--Navy-Blue, #005239);
-  outline-offset: 4px;
-}
-
-.cardImage {
-  width: 100%;
-  aspect-ratio: 1.12;
-  border-radius: 16px;
-  object-fit: cover;
-  transition: transform 0.2s;
-}
-
-.card:hover .cardImage {
-  transform: scale(1.05);
-}
-
-.cardTitle {
-  font: 500 14px/20px Roboto, sans-serif;
-  color: var(--Dark-Black, #1e1e1e);
-  margin: 0;
-}
-
-.cardDate {
-  font: 400 12px/16px Roboto, sans-serif;
-  color: var(--Light-Black, #4c4c4c);
-  display: block;
+  background: var(--color-bg);
 }
 
 @media (max-width: 1024px) {
   .sideNav {
     width: 240px;
   }
-  
+
   .mainContent {
     padding: 16px;
-  }
-  
-  .featuredContent {
-    flex-direction: column;
-  }
-  
-  .featuredImage {
-    width: 100%;
-    height: auto;
   }
 }

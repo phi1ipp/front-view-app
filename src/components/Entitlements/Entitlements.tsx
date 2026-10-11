@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Entitlement.module.css';
+import { DeleteModal, ScreenLayout } from '../shared';
 import { EntitlementTable } from './EntitlementTable';
 import { EntitlementModal } from './EntitlementModal';
-import { DeleteModal } from './DeleteModal';
 import { Entitlement } from '../../types/types';
-import Create from './Create.png';
 import { API_ENDPOINTS } from '../../types/api';
 
 export const Entitlements: React.FC = () => {
@@ -28,19 +26,12 @@ export const Entitlements: React.FC = () => {
       }
       const data = await response.json();
       setEntitlements(data);
-      console.log('entitlements:', data); 
     } catch (error) {
       console.error('Error fetching Entitlements:', error);
     }
   };
 
-  const handleCreateEntitlement = () => {
-    setSelectedEntitlement(undefined);
-    setIsEntitlementModalOpen(true);
-  };
-
   const handleEditEntitlement = (entitlement: Entitlement) => {
-    console.log("Edit entitlement: ", JSON.stringify(entitlement, null, 2)); // Pretty print the object
     setSelectedEntitlement(entitlement);
     setIsEntitlementModalOpen(true);
   };
@@ -51,8 +42,6 @@ export const Entitlements: React.FC = () => {
   };
 
   const handleEntitlementSubmit = async (entitlement: Entitlement) => {
-    console.log('Entitlement before submit:', entitlement);
-
     if (!entitlement || !entitlement.name) {
       setErrorMessage('Entitlement name is required.');
       setTimeout(() => setErrorMessage(''), 5000);
@@ -95,7 +84,7 @@ export const Entitlements: React.FC = () => {
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
-    }
+      }
 
       setSuccessMessage('Deleted Entitlement Successfully!');
       setTimeout(() => setSuccessMessage(''), 5000);
@@ -109,36 +98,16 @@ export const Entitlements: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className={styles.errorMessage}>{errorMessage}</div>
-      )}
-      <div className={styles.header}>
-        <div className={styles.titleContainer}>
-          <h1 className={styles.title}>Entitlements</h1>
-        </div>
-        <button className={styles.createButton} onClick={handleCreateEntitlement}>
-          <div className={styles.buttonContent}>
-            <img
-              loading="lazy"
-              src={Create}
-              alt="Create Icon"
-              className={styles.buttonIcon}
-            />
-            <span className={styles.buttonText}>Create</span>
-          </div>
-        </button>
-      </div>
-      <div className={styles.content}>
-        <EntitlementTable
-          entitlements={entitlements}
-          onEdit={handleEditEntitlement}
-          onDelete={handleDeleteClick}
-        />
-      </div>
+    <ScreenLayout
+      title="Entitlements"
+      successMessage={successMessage}
+      errorMessage={errorMessage}
+    >
+      <EntitlementTable
+        entitlements={entitlements}
+        onEdit={handleEditEntitlement}
+        onDelete={handleDeleteClick}
+      />
       <EntitlementModal
         isOpen={isEntitlementModalOpen}
         onClose={() => setIsEntitlementModalOpen(false)}
@@ -148,9 +117,8 @@ export const Entitlements: React.FC = () => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        id={selectedEntitlementId}
-        onConfirm={handleDeleteConfirm}
+        onConfirm={() => handleDeleteConfirm(selectedEntitlementId)}
       />
-    </div>
+    </ScreenLayout>
   );
 };

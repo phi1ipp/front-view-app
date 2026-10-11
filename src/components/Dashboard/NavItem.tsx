@@ -1,37 +1,39 @@
-// @ts-nocheck
 import React from 'react';
 import styles from './Dashboard.module.css';
-import { NavItemProps } from './types';
+import { NavItemProps } from '../../types/types';
 
-export const NavItem: React.FC<NavItemProps> = ({ 
-  icon, 
-  label, 
-  isActive, 
+export const NavItem: React.FC<NavItemProps> = ({
+  icon,
+  label,
+  isActive,
   onClick,
   forAdmins,
-  section 
+  section,
 }) => {
-  const isDisabled = forAdmins === true && localStorage.getItem('isAdmin') === "false";
-  const isHidden = forAdmins === false && localStorage.getItem('isAdmin') === "true";
+  const isDisabled = forAdmins === true && localStorage.getItem('isAdmin') === 'false';
+  const isHidden = forAdmins === false && localStorage.getItem('isAdmin') === 'true';
 
-  // Don't render the item if it should be hidden for admins
   if (isHidden) {
     return null;
   }
 
   return (
-  <button 
-    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
-    onClick={onClick}
-    aria-pressed={isActive}
-    disabled={isDisabled}
-  >
-    <div className={styles.stateLayer}>
-      <img loading="lazy" src={icon} className={styles.navIcon} alt="" />
-      <span >{label}</span>
-      {section && <span className={styles.section}>{section}</span>}
-    </div>
-    {isDisabled && <div><span>🔒</span></div>}
-  </button>
-);
-}
+    <button
+      className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
+      onClick={onClick}
+      aria-pressed={isActive}
+      disabled={isDisabled}
+    >
+      <div className={styles.stateLayer}>
+        <img loading="lazy" src={icon} className={styles.navIcon} alt="" />
+        <span>{label}</span>
+        {section && <span className={styles.section}>{section}</span>}
+      </div>
+      {isDisabled && (
+        <div>
+          <span>🔒</span>
+        </div>
+      )}
+    </button>
+  );
+};

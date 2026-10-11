@@ -1,57 +1,49 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import styles from './ControlModal.module.css';
-import { ControlModalProps, Controls, isSodControl } from '../../types/types';
+import { Modal, ModalActions, FormField, Button } from '../shared';
+import {
+  ControlModalProps,
+  Controls,
+  GrcSaControl,
+  GrcSodControl,
+  isSodControl,
+} from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api';
+
+interface EntitlementOption {
+  id: number;
+  name: string;
+}
+
+const emptySa = (): GrcSaControl => ({
+  id: 0,
+  name: '',
+  description: '',
+  type: 'SA',
+  entId: 0,
+  entName: '',
+});
 
 export const ControlModal: React.FC<ControlModalProps> = ({
   isOpen,
   onClose: close,
   control,
-  onSubmit
+  onSubmit,
 }) => {
-
-  const [controlType, setControlType] = useState<'SA' | 'SOD'>('SA');
-  const [formData, setFormData] = useState<Controls>(
-    controlType === 'SA' 
-        ? {
-            id: 0,
-            name: '',
-            description: '',
-            type: 'SA',
-            entId: 0,
-            entName: ''
-        } as GrcSaControl
-        : {
-            id: 0,
-            name: '',
-            description: '',
-            type: 'SOD',
-            ent1Id: 0,
-            ent2Id: 0,
-            ent1Name: '',
-            ent2Name: ''
-        } as GrcSodControl
-);
+  const [formData, setFormData] = useState<Controls>(emptySa());
+  const [entitlementOptions1, setEntitlementOptions1] = useState<EntitlementOption[]>([]);
+  const [entitlementOptions2, setEntitlementOptions2] = useState<EntitlementOption[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const onClose = () => {
-    // Reset states to initial values when closing the modal
-    setControlType('SA');
-    setFormData({ name: '', entName: '', entId: 0 } as GrcSaControl);
-
+    setFormData(emptySa());
     setEntitlementOptions1([]);
     setEntitlementOptions2([]);
-    setError(null);  // Clear any errors
-    close();  // Call the onClose prop function to officially close the modal
+    setError(null);
+    close();
   };
 
-  const [entitlementOptions1, setEntitlementOptions1] = useState([]);
-  const [entitlementOptions2, setEntitlementOptions2] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   useEffect(() => {
-
     const fetchEntitlements = async () => {
       try {
         const response1 = await fetch(API_ENDPOINTS.ENTITLEMENTS);
@@ -72,125 +64,115 @@ export const ControlModal: React.FC<ControlModalProps> = ({
     fetchEntitlements();
 
     if (control) {
-      setControlType(control.type);
       setFormData(control);
     } else {
-      setControlType('SA');
-      setFormData({
-        id: 0,
-        name: '',
-        type: 'SA',
-        entName: '',
-        entId: 0
-      } as GrcSaControl);
+      setFormData(emptySa());
     }
   }, [control]);
 
-
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
   };
 
+  const ent1Value = isSodControl(formData) ? formData.ent1Name : formData.entName;
+  const ent2Value = isSodControl(formData) ? formData.ent2Name : '';
 
-  
+  const handleEnt1Change = (value: string) => {
+    const selectedOption = entitlementOptions1.find((option) => option.name === value);
+    const selectedId = selectedOption ? selectedOption.id : 0;
+
+    if (isSodControl(formData)) {
+      setFormData({
+        ...formData,
+        ent1Name: value,
+        ent1id: selectedId,
+      } as unknown as GrcSodControl);
+    } else {
+      setFormData({
+        ...formData,
+        entName: value,
+        entId: selectedId,
+      } as GrcSaControl);
+    }
+  };
+
+  const handleEnt2Change = (value: string) => {
+    const selectedOption = entitlementOptions2.find((option) => option.name === value);
+    const selectedId = selectedOption ? selectedOption.id : 0;
+
+    if (isSodControl(formData)) {
+      setFormData({
+        ...formData,
+        ent2id: selectedId,
+        ent2Name: value,
+      } as unknown as GrcSodControl);
+    } else {
+      setFormData({
+        id: formData.id,
+        name: formData.name,
+        ent1Name: formData.entName,
+        ent1id: formData.entId,
+        ent2Name: value,
+        ent2id: selectedId,
+        type: 'SOD',
+      } as unknown as GrcSodControl);
+    }
+  };
+
+  const handleNameChange = (value: string) => {
+    if (isSodControl(formData)) {
+      setFormData({ ...formData, name: value } as GrcSodControl);
+    } else {
+      setFormData({ ...formData, name: value } as GrcSaControl);
+    }
+  };
 
   if (!isOpen) return null;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {control ? 'Edit Control' : 'Create Control'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-        <div className={styles.formField}>
-  <input
-    id="Name"
-    type="text"
-    placeholder=" "
-    value={formData.name}
-    onChange={(e) => {
-      if (isSodControl(formData))
-        setFormData({ ...formData, name: e.target.value } as GrcSodControl)
-      else
-        setFormData({ ...formData, name: e.target.value } as GrcSaControl)
-    }}
-    required
-  />
-  <label htmlFor="Name">Control Name</label>
-</div>
-<div className={styles.formField}>
-  <select
-    id="ent1Name"
-    value={isSodControl(formData) ? formData.ent1Name : formData.entName}
-    onChange={(e) => {
-      const selectedOption = entitlementOptions1.find(option => option.name === e.target.value);
-
-      if (isSodControl(formData))
-        setFormData({ ...formData, ent1Name: e.target.value, ent1id: selectedOption.id } as GrcSodControl)
-      else
-        setFormData({ ...formData, entName: e.target.value, entId: selectedOption.id } as GrcSaControl)
-    }}
-    required
-  >
-    <option value="">Select Entitlement 1</option>
-    {entitlementOptions1.map(option => (
-      <option key={option.id} value={option.name}>{option.name}</option>
-    ))}
-  </select>
-  <label htmlFor="ent1Name">Entitlement 1</label>
-</div>
-<div className={styles.formField}>
-  <select
-    id="ent2Name"
-    value={isSodControl(formData) ? formData.ent2Name : ''}
-    onChange={(e) => {
-      setControlType('SOD');
-      const selectedOption = entitlementOptions2.find(option => option.name === e.target.value);
-
-      if (isSodControl(formData)) {
-        setFormData(
-          { 
-            ...formData, 
-            ent2id: selectedOption.id,
-            ent2Name: e.target.value 
-          } as GrcSodControl
-        )
-      } else {
-        setFormData(
-        {
-          id: formData.id,
-          name: formData.name,
-          ent1Name: formData.entName,
-          ent1id: formData.entId,
-          ent2Name: e.target.value,
-          ent2id: selectedOption.id,
-          type: 'SOD'
-        } as GrcSodControl)
-      }
-    }}
-  >
-    <option value="">Select Entitlement 2</option>
-    {entitlementOptions2.map(option => (
-      <option key={option.id} value={option.name}>{option.name}</option>
-    ))}
-  </select>
-  <label htmlFor="ent2Name">Entitlement 2</label>
-  </div>
-          <div className={styles.modalActions}>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              {control ? 'Save' : 'Create'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} onClose={onClose} title={control ? 'Edit Control' : 'Create Control'}>
+      <form onSubmit={handleSubmit}>
+        <FormField
+          id="Name"
+          label="Control Name"
+          type="text"
+          value={formData.name}
+          onChange={handleNameChange}
+          required
+        />
+        <FormField
+          id="ent1Name"
+          label="Entitlement 1"
+          value={ent1Value}
+          onChange={handleEnt1Change}
+          required
+          options={[
+            { value: '', label: 'Select Entitlement 1' },
+            ...entitlementOptions1.map((o) => ({ value: o.name, label: o.name })),
+          ]}
+        />
+        <FormField
+          id="ent2Name"
+          label="Entitlement 2"
+          value={ent2Value}
+          onChange={handleEnt2Change}
+          options={[
+            { value: '', label: 'Select Entitlement 2' },
+            ...entitlementOptions2.map((o) => ({ value: o.name, label: o.name })),
+          ]}
+        />
+        <ModalActions>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" type="submit">
+            {control ? 'Save' : 'Create'}
+          </Button>
+        </ModalActions>
+      </form>
+    </Modal>
   );
 };

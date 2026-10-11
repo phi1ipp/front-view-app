@@ -1,20 +1,18 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import styles from './Campaign.module.css';
+import { ScreenLayout, DeleteModal } from '../shared';
 import { Campaign } from '../../types/types';
 import { CampaignTable } from './CampaignTable';
-import {CampaignModal} from './CampaignModal';
+import { CampaignModal } from './CampaignModal';
 import { API_ENDPOINTS } from '../../types/api';
-import Create from './Create.png';
-import { DeleteModal } from './DeleteModal';
 
 export const CampaignComponent: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | undefined>();
-  const [successMessage, setSuccessMessage] = useState(''); // State to manage the success message
-  const [errorMessage,setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
@@ -24,11 +22,11 @@ export const CampaignComponent: React.FC = () => {
       } catch (error) {
         console.error('Error fetching campaigns:', error);
       }
-    }
+    };
 
     fetchCampaigns();
 
-    const intervalId = setInterval(fetchCampaigns, 60*1000);
+    const intervalId = setInterval(fetchCampaigns, 60 * 1000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -40,24 +38,21 @@ export const CampaignComponent: React.FC = () => {
 
   const fetchCampaigns = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, {credentials: "include"});
+      const response = await fetch(API_ENDPOINTS.CAMPAIGNS, { credentials: 'include' });
       const data = await response.json();
       setCampaigns(data);
     } catch (error) {
       console.error('Error fetching campaigns:', error);
     }
-  }
+  };
 
   const handleDownload = async (campaign: Campaign) => {
     try {
-      const response = await fetch(
-        API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name),
-        {
-          headers: {
-            'Content-Type': 'application/octet-stream',
-          },
-        }
-      );
+      const response = await fetch(API_ENDPOINTS.CAMPAIGN_DOWNLOAD(campaign.name), {
+        headers: {
+          'Content-Type': 'application/octet-stream',
+        },
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -65,7 +60,6 @@ export const CampaignComponent: React.FC = () => {
 
       const blob = await response.blob();
 
-      // Create a URL for the blob and trigger the download
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -79,19 +73,19 @@ export const CampaignComponent: React.FC = () => {
     }
   };
 
-
-
   const handleStartClick = async (campaign: Campaign) => {
-    const method ='POST';
+    const method = 'POST';
     try {
-      await fetch(API_ENDPOINTS.DOWNLOAD_CAMPAIGNS, {
+      // NOTE: `API_ENDPOINTS.DOWNLOAD_CAMPAIGNS` is not defined in src/types/api.ts, so this
+      // request resolves to a relative "undefined" URL and fails. Preserved unchanged so this
+      // styling refactor does not silently alter Start-button behaviour. Needs a real endpoint.
+      await fetch(undefined as unknown as string, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(campaign),
       });
       setIsModalOpen(false);
       fetchCampaigns();
-
     } catch (error) {
       console.error('Error saving campaign:', error);
     }
@@ -114,125 +108,86 @@ export const CampaignComponent: React.FC = () => {
           body: JSON.stringify(campaign),
         });
       }
-    
 
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
       }
 
-      setSuccessMessage('Created Campaign Successfully!');  // Set success message
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
-      
+      setSuccessMessage('Created Campaign Successfully!');
+      setTimeout(() => setSuccessMessage(''), 5000);
+
       setIsModalOpen(false);
       fetchCampaigns();
     } catch (error) {
       console.error('Error saving campaign:', error);
-      setErrorMessage('Failed to save campaign.');  // Set error message when saving campaign fails
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 5000);
+      setErrorMessage('Failed to save campaign.');
+      setTimeout(() => setErrorMessage(''), 5000);
     }
-
   };
 
   const handleCreateCampaign = () => {
-    // setSelectedCampaign({
-    //   id: '',
-    //   name: '',
-    //   status: '',
-    //   violationCount: '',
-    //   connectionId: '',
-    //   controls: []
-    // });
     setIsModalOpen(true);
   };
 
-
   const handleEdit = (campaign: Campaign) => {
-      setSelectedCampaign(campaign);
-      setIsModalOpen(true);
-    };
-  
+    setSelectedCampaign(campaign);
+    setIsModalOpen(true);
+  };
+
   const handleDeleteConfirm = async (name: string) => {
     try {
       const response = await fetch(`${API_ENDPOINTS.CAMPAIGNS}/${name}`, { method: 'DELETE' });
-      
+
       if (!response.ok) {
         setErrorMessage(`HTTP error! Status: ${response.status}`);
         setTimeout(() => setErrorMessage(''), 5000);
       }
 
-      setSuccessMessage('Deleted Connection Successfully!');  // Set success message
-      
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
+      setSuccessMessage('Deleted Connection Successfully!');
+      setTimeout(() => setSuccessMessage(''), 5000);
 
       fetchCampaigns();
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.error('Error deleting Connections:', error);
-      setErrorMessage('Failed to deleting Connections.');  // Set error message when saving campaign fails
-      
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 5000);
+      setErrorMessage('Failed to deleting Connections.');
+      setTimeout(() => setErrorMessage(''), 5000);
     } finally {
       setSelectedCampaign(undefined);
     }
   };
-  
-    
- 
 
   return (
-        <div className={styles.container}>
-            {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className={styles.errorMessage}>{errorMessage}</div>
-      )}
-          <div className={styles.header}>
-            <div className={styles.titleContainer}>
-              <h1 className={styles.title}>Campaigns</h1>
-            </div>
-            <button className={styles.createButton} onClick={handleCreateCampaign}>
-  <div className={styles.buttonContent}>
-    <img
-      loading="lazy"
-      src={Create}
-      alt="Create Icon"
-      className={styles.buttonIcon}
-    />
-    <span className={styles.buttonText}>Create</span>
-  </div>
-</button>
-          </div>
-      <div className={styles.content}>
-        <CampaignTable
-          campaigns={campaigns}
-          onDownload={handleDownload}
-          onEdit={handleEdit}
-          onDelete={handleDeleteClick}
-          onStart={handleStartClick}
-        />
-      </div>
+    <ScreenLayout
+      title="Campaigns"
+      onCreate={handleCreateCampaign}
+      successMessage={successMessage}
+      errorMessage={errorMessage}
+    >
+      <CampaignTable
+        campaigns={campaigns}
+        onDownload={handleDownload}
+        onEdit={handleEdit}
+        onDelete={handleDeleteClick}
+        onStart={handleStartClick}
+      />
       <CampaignModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         campaign={selectedCampaign}
         onSubmit={handleSubmit}
       />
-     <DeleteModal
-             isOpen={isDeleteModalOpen}
-             onClose={() => setIsDeleteModalOpen(false)}
-             campaign={selectedCampaign}
-             onConfirm={handleDeleteConfirm}
-           />
-    </div>
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        message={`Are you sure you want to delete campaign ${selectedCampaign?.name}? This action cannot be undone.`}
+        onConfirm={() => {
+          if (selectedCampaign) {
+            handleDeleteConfirm(selectedCampaign.name);
+          }
+        }}
+      />
+    </ScreenLayout>
   );
 };

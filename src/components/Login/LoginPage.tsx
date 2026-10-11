@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { InputField } from './InputField';
@@ -29,8 +29,8 @@ export const LoginPage: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const handleLogin = async (event?: React.SyntheticEvent) => {
+    event?.preventDefault();
 
     if (!validateForm()) {
       return;

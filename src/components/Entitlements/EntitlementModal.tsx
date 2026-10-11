@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import styles from './EntitlementModal.module.css';
+import { Modal, ModalActions, FormField, Button, TagPicker, TagOption } from '../shared';
 import { EntitlementModalProps, Entitlement } from '../../types/types';
 import { API_ENDPOINTS } from '../../types/api';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,27 +11,25 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
   onSubmit,
 }) => {
   const [formData, setFormData] = useState<Entitlement>({
-    id:'',
+    id: '',
     name: '',
-    accessSet: []
+    accessSet: [],
   });
 
+  const [functions, setFunctions] = useState<TagOption[]>([]);
+
   const onClose = () => {
-    // Reset states to initial values when closing the modal
-    setFormData({   id:'',
-      name: '',
-      accessSet: [] });  // Clear any errors
-    close();  // Call the onClose prop function to officially close the modal
+    setFormData({ id: '', name: '', accessSet: [] });
+    close();
   };
-  const [functions, setFunctions] = useState([]);
 
   useEffect(() => {
     fetchFunctions();
     if (entitlement) {
       setFormData({
-        id:entitlement.id,
+        id: entitlement.id,
         name: entitlement.name,
-        accessSet: entitlement.accessSet.map((access: any) => ({
+        accessSet: entitlement.accessSet.map((access: TagOption) => ({
           id: access.id,
           name: access.name,
         })),
@@ -78,76 +75,36 @@ export const EntitlementModal: React.FC<EntitlementModalProps> = ({
     onSubmit(formData);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {entitlement ? 'Edit Entitlement' : 'Create Entitlement'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formField}>
-            <input
-              id="name"
-              type="text"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="name">Entitlement Name</label>
-          </div>
-
-          <div className={styles.formField}>
-            <select
-              className={styles.dropdown}
-              onChange={(e) => handleAddFunction(e.target.value)}
-              value=""
-            >
-              <option value="" disabled>
-                Select a function
-              </option>
-              {functions
-                .filter((func) => !formData.accessSet.some((access) => access.id === func.id))
-                .map((func) => (
-                  <option key={func.id} value={func.id}>
-                    {func.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-
-          <div className={styles.selectedList}>
-            {formData.accessSet.map((selected) => (
-              <div key={selected.id} className={styles.selectedItem}>
-                {selected.name}
-                <button
-                  type="button"
-                  className={styles.removeButton}
-                  onClick={() => handleRemoveFunction(selected.id)}
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.modalActions}>
-            <button
-              type="button"
-              onClick={onClose}
-              className={styles.cancelButton}
-            >
-              Cancel
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              {entitlement ? 'Save' : 'Create'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={entitlement ? 'Edit Entitlement' : 'Create Entitlement'}
+    >
+      <form onSubmit={handleSubmit}>
+        <FormField
+          id="name"
+          label="Entitlement Name"
+          type="text"
+          value={formData.name}
+          onChange={(v) => setFormData({ ...formData, name: v })}
+          required
+        />
+        <TagPicker
+          options={functions}
+          selected={formData.accessSet}
+          onAdd={handleAddFunction}
+          onRemove={handleRemoveFunction}
+        />
+        <ModalActions>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" type="submit">
+            {entitlement ? 'Save' : 'Create'}
+          </Button>
+        </ModalActions>
+      </form>
+    </Modal>
   );
 };

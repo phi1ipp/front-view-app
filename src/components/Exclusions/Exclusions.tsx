@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Exclusion.module.css';
+import { DeleteModal, ScreenLayout } from '../shared';
 import { ExclusionTable } from './ExclusionTable';
 import { ExclusionModal } from './ExclusionModal';
-import { DeleteModal } from '../Dashboard/DeleteModal';
 import { Exclusion } from '../../types/types';
-import Create from './Create.png';
 import { API_ENDPOINTS } from '../../types/api';
 
 export const Exclusions: React.FC = () => {
-  const [exclusions, setExclusions] = useState<Exclusion[]>([]); 
+  const [exclusions, setExclusions] = useState<Exclusion[]>([]);
   const [isExclusionModalOpen, setIsExclusionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedExclusion, setSelectedExclusion] = useState<Exclusion | undefined>(undefined);
@@ -27,21 +25,18 @@ export const Exclusions: React.FC = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      setExclusions(data); // This updates "exclusions" state
-      console.log('Exclusions:', data); 
+      setExclusions(data);
     } catch (error) {
       console.error('Error fetching Exclusions:', error);
     }
   };
-
 
   const handleCreateExclusion = () => {
     setSelectedExclusion(undefined);
     setIsExclusionModalOpen(true);
   };
 
-  const handleEditExclusion = (exclusion: Exclusion) => {  // Ensure lowercase "exclusion"
-    console.log("Edit Exclusion: ", JSON.stringify(exclusion, null, 2)); // Pretty print the object
+  const handleEditExclusion = (exclusion: Exclusion) => {
     setSelectedExclusion(exclusion);
     setIsExclusionModalOpen(true);
   };
@@ -52,8 +47,6 @@ export const Exclusions: React.FC = () => {
   };
 
   const handleExclusionSubmit = async (exclusion: Exclusion) => {
-    console.log('Exclusion before submit:', exclusion);
-
     if (!exclusion || !exclusion.rule) {
       setErrorMessage('Exclusion rule is required.');
       setTimeout(() => setErrorMessage(''), 5000);
@@ -110,37 +103,17 @@ export const Exclusions: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className={styles.errorMessage}>{errorMessage}</div>
-      )}
-      <div className={styles.header}>
-        <div className={styles.titleContainer}>
-          <h1 className={styles.title}>Exclusions</h1>
-        </div>
-        <button className={styles.createButton} onClick={handleCreateExclusion}>
-          <div className={styles.buttonContent}>
-            <img
-              loading="lazy"
-              src={Create}
-              alt="Create Icon"
-              className={styles.buttonIcon}
-            />
-            <span className={styles.buttonText}>Create</span>
-          </div>
-        </button>
-      </div>
-
-      <div className={styles.content}>
-        <ExclusionTable
-          exclusions={exclusions} // Now passing "exclusions" instead of "Exclusions"
-          onEdit={handleEditExclusion}
-          onDelete={handleDeleteClick}
-        />
-      </div>
+    <ScreenLayout
+      title="Exclusions"
+      onCreate={handleCreateExclusion}
+      successMessage={successMessage}
+      errorMessage={errorMessage}
+    >
+      <ExclusionTable
+        exclusions={exclusions}
+        onEdit={handleEditExclusion}
+        onDelete={handleDeleteClick}
+      />
       <ExclusionModal
         isOpen={isExclusionModalOpen}
         onClose={() => setIsExclusionModalOpen(false)}
@@ -150,10 +123,8 @@ export const Exclusions: React.FC = () => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        id={selectedExclusionId}
-        onConfirm={handleDeleteConfirm}
+        onConfirm={() => handleDeleteConfirm(selectedExclusionId)}
       />
-    </div>
+    </ScreenLayout>
   );
 };
-

@@ -1,7 +1,7 @@
-// @ts-nocheck
+
 import React from 'react';
 import styles from './Login.module.css';
-import { ButtonProps } from './types';
+import { ButtonProps } from '../../types/types';
 
 export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (

@@ -1,12 +1,12 @@
-// @ts-nocheck
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import styles from './Dashboard.module.css';
-import { UserInfo } from './types';
+import { UserInfo } from '../../types/types';
 import Logout from './img/Logout.svg';
-import Lockout from './img/Lockout.svg'
+import Lockout from './img/Lockout.svg';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 
 interface UserProfileProps extends UserInfo {
+  initial: string;
   onLogout?: () => void;
   onChangePassword?: (passwordData: { currentPassword: string; newPassword: string }) => void;
 }
@@ -16,11 +16,14 @@ export const UserProfile: React.FC<UserProfileProps> = ({
   initial,
   role,
   onLogout,
-  onChangePassword
+  onChangePassword,
 }) => {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
-  const handleChangePassword = (passwordData: { currentPassword: string; newPassword: string }) => {
+  const handleChangePassword = (passwordData: {
+    currentPassword: string;
+    newPassword: string;
+  }) => {
     if (onChangePassword) {
       onChangePassword(passwordData);
     }
@@ -40,8 +43,8 @@ export const UserProfile: React.FC<UserProfileProps> = ({
             <span className={styles.userRole}>{role}</span>
           </div>
         </div>
-        
-        <button 
+
+        <button
           className={styles.logoutButton}
           onClick={() => setIsChangePasswordOpen(true)}
           aria-label="Change Password"
@@ -49,8 +52,8 @@ export const UserProfile: React.FC<UserProfileProps> = ({
           <img src={Lockout} alt="" className={styles.logoutIcon} />
           <span>Change Password</span>
         </button>
-        
-        <button 
+
+        <button
           className={styles.logoutButton}
           onClick={onLogout}
           aria-label="Logout"
@@ -67,4 +70,4 @@ export const UserProfile: React.FC<UserProfileProps> = ({
       />
     </>
   );
-}
+};

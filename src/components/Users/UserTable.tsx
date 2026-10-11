@@ -1,21 +1,22 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import styles from './UserManagement.module.css';
-import { TableHeader } from './TableHeader';
-import { TableRow } from './TableRow';
-import { TableFooter } from '../CampaignComponent/TableFooter';
-import { UserTableProps } from '../../types/types';
+import { DataTable, TableFooter, Button, ICONS, Column } from '../shared';
+import { UserTableProps, User } from '../../types/types';
+
+const columns: Array<Column<User>> = [
+  { key: 'username', label: 'User Name', sortable: true, flex: true, minWidth: 150, render: (u) => u.username },
+  { key: 'email', label: 'Email', sortable: true, flex: true, minWidth: 150, render: (u) => u.email },
+  { key: 'fullName', label: 'Full Name', sortable: true, flex: true, minWidth: 150, render: (u) => u.fullName },
+  { key: 'isAdmin', label: 'Admin?', flex: true, minWidth: 150, render: (u) => (u.isAdmin ? '✅' : '❌') },
+  { key: 'enabled', label: 'Enabled?', flex: true, minWidth: 150, render: (u) => (u.enabled ? '✅' : '❌') },
+];
 
 export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const totalPages = Math.ceil(users.length / rowsPerPage);
 
-  // Calculate the users to display based on pagination
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentUsers = users.slice(startIndex, startIndex + rowsPerPage);
-
-
   const isNextDisabled = currentPage >= totalPages || currentUsers.length === 0;
 
   const handlePageChange = (page: number) => {
@@ -29,35 +30,53 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete })
     setCurrentPage(1);
   };
 
+  const allColumns: Array<Column<User>> = [
+    ...columns,
+    {
+      key: 'actions',
+      label: 'Action',
+      isActions: true,
+      render: (user) => (
+        <>
+          <Button
+            variant="ghost"
+            icon={ICONS.edit}
+            iconAlt="Edit"
+            onClick={() => onEdit(user)}
+            ariaLabel={`Edit ${user.fullName}`}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="ghost"
+            icon={ICONS.delete}
+            iconAlt="Delete"
+            onClick={() => onDelete(user.username)}
+            ariaLabel={`Delete ${user.fullName}`}
+          >
+            Delete
+          </Button>
+        </>
+      ),
+    },
+  ];
+
   return (
-    <div className={styles.tableContainer}>
-      <div className={styles.tableHeader}>
-        <TableHeader label="User Name" sortable />
-        <TableHeader label="Email" sortable />
-        <TableHeader label="Full Name" sortable />
-        <TableHeader label="Admin?" />
-        <TableHeader label="Enabled?" />
-        <TableHeader label="Action" />
-      </div>
-      <div className={styles.tableBody}>
-        {currentUsers.map((user) => (
-          <TableRow
-            key={user.id}
-            user={user}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </div>
-      <TableFooter
-        totalItems={users.length}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        rowsPerPage={rowsPerPage}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        isNextDisabled={isNextDisabled} 
-      />
-    </div>
+    <DataTable
+      columns={allColumns}
+      rows={currentUsers}
+      rowKey={(u) => u.username}
+      footer={
+        <TableFooter
+          totalItems={users.length}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          rowsPerPage={rowsPerPage}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          isNextDisabled={isNextDisabled}
+        />
+      }
+    />
   );
 };

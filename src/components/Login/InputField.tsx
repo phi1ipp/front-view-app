@@ -1,7 +1,7 @@
-// @ts-nocheck
+
 import React from 'react';
 import styles from './Login.module.css';
-import { InputFieldProps } from './types';
+import { InputFieldProps } from '../../types/types';
 
 export const InputField: React.FC<InputFieldProps> = ({
   label,

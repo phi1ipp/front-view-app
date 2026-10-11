@@ -41,7 +41,7 @@ export interface DashboardProps {
 export interface Campaign {
   id: string;
   name: string;
-  status:String;
+  status: string;
   violationCount:string;
   connId: string;
   controls: Controls[]; 
@@ -57,9 +57,9 @@ export interface CampaignModalProps {
 export interface CampaignTableProps {
   campaigns: Campaign[];
   onEdit: (campaign: Campaign) => void;
-  onDelete: (id: string) => void;
-  onStart:(campaign:Campaign)=>void;
-
+  onDelete: (campaign: Campaign) => void;
+  onStart: (campaign: Campaign) => void;
+  onDownload: (campaign: Campaign) => void;
 }
 
 export interface StatusChipProps {
@@ -129,7 +129,7 @@ export interface Connection {
   name: string;
   host: string;
   port: string;
-  db:String;
+  db: string;
   user: string;
   password:string;
   type: 'sid' | 'service';
@@ -284,7 +284,7 @@ export interface TableFooterProps {
 
 export interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick: (e?: React.SyntheticEvent) => void;
 }
 
 export interface InputFieldProps {

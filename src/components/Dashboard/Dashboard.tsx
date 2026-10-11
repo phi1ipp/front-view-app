@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useCallback } from 'react';
 import styles from './Dashboard.module.css';
 import { SideNav } from './SideNav';
@@ -113,7 +112,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <div>Select an item from the navigation.</div>;
     }
   };
-  const userName = localStorage.getItem("userName")
+  const userName = localStorage.getItem('userName') || '';
   const userIsAdmin = localStorage.getItem('isAdmin') === 'true';
   return (
     <div className={styles.page}>
@@ -124,7 +123,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           sections={navSections}
           userInfo={{
             name: userName,
-            initial: userName?.charAt(0),
+            initial: userName.charAt(0),
             role: userIsAdmin ? 'admin' : 'user',
           }}
           onLogout={handleLogout}

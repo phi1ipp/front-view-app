@@ -1,36 +1,29 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import styles from './ExclusionModal.module.css';
+import { Modal, ModalActions, FormField, Button } from '../shared';
 import { ExclusionModalProps, Exclusion } from '../../types/types';
-
 
 export const ExclusionModal: React.FC<ExclusionModalProps> = ({
   isOpen,
-  onClose:close,
+  onClose: close,
   exclusion,
-  onSubmit
+  onSubmit,
 }) => {
   const [formData, setFormData] = useState<Exclusion>({
-    id: null,
+    id: '',
     name: '',
-    rule: ''
+    rule: '',
   });
 
   const onClose = () => {
-    // Reset states to initial values when closing the modal
-    setFormData({  id: null, name: '', rule: ''});  // Clear any errors
-    close();  // Call the onClose prop function to officially close the modal
+    setFormData({ id: '', name: '', rule: '' });
+    close();
   };
 
   useEffect(() => {
     if (exclusion) {
       setFormData(exclusion);
     } else {
-      setFormData({
-       id: null,
-       name: '',
-       rule: ''
-      });
+      setFormData({ id: '', name: '', rule: '' });
     }
   }, [exclusion]);
 
@@ -39,60 +32,38 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
     onSubmit(formData);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} role="dialog" aria-modal="true">
-        <h2 className={styles.modalTitle}>
-          {exclusion ? 'Edit Exclusion Rule' : 'Create Exclusion Rule'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-{/*          <div className={formData.id ? styles.formFieldHidden : styles.formField}>
-            <input
-              id="id"
-              type="text"
-              value={formData.id}
-              onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-              required
-              placeholder=" "
-              readOnly={formData.id}
-            />
-            <label htmlFor="id">Exclusion ID</label>
-          </div>
-*/}          <div className={styles.formField}>
-            <input
-              id="name"
-              type="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-              placeholder=" "
-            />
-            <label htmlFor="name">Exclusion Name</label>
-          </div>
-          <div className={styles.formField}>
-  <textarea
-    id="rule"
-    value={formData.rule}
-    onChange={(e) => setFormData({ ...formData, rule: e.target.value })}
-    required
-    placeholder=" "
-    rows="4"
-  />
-  <label htmlFor="rule" className={styles.floatingLabel}>Exclusion Rule</label>
-</div>
-         
-          <div className={styles.modalActions}>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              {exclusion ? 'Save' : 'Create'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={exclusion ? 'Edit Exclusion Rule' : 'Create Exclusion Rule'}
+    >
+      <form onSubmit={handleSubmit}>
+        <FormField
+          id="name"
+          label="Exclusion Name"
+          type="text"
+          value={formData.name}
+          onChange={(v) => setFormData({ ...formData, name: v })}
+          required
+        />
+        <FormField
+          id="rule"
+          label="Exclusion Rule"
+          value={formData.rule}
+          onChange={(v) => setFormData({ ...formData, rule: v })}
+          multiline
+          required
+        />
+        <ModalActions>
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" type="submit">
+            {exclusion ? 'Save' : 'Create'}
+          </Button>
+        </ModalActions>
+      </form>
+    </Modal>
   );
 };
