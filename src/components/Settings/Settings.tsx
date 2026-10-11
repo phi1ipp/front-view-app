@@ -6,7 +6,7 @@ import { API_ENDPOINTS } from '../../types/api';
 export const Settings: React.FC = () => {
   const [policy, setPolicy] = useState<PasswordPolicy | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
@@ -32,9 +32,10 @@ export const Settings: React.FC = () => {
       const data = await response.json();
       setPolicy(data);
       setFormData(data);
-      setError('');
+      setErrorMessage('');
     } catch (err) {
-      setError('Failed to fetch password policy');
+      setErrorMessage('Failed to fetch password policy');
+      setTimeout(() => setErrorMessage(''), 5000);
       console.error('Error fetching password policy:', err);
     } finally {
       setLoading(false);
@@ -68,9 +69,10 @@ export const Settings: React.FC = () => {
       setFormData(updated);
       setSuccessMessage('Password policy updated successfully!');
       setTimeout(() => setSuccessMessage(''), 5000);
-      setError('');
+      setErrorMessage('');
     } catch (err) {
-      setError('Failed to update password policy');
+      setErrorMessage('Failed to update password policy');
+      setTimeout(() => setErrorMessage(''), 5000);
       console.error('Error updating password policy:', err);
     } finally {
       setIsSaving(false);
@@ -90,8 +92,8 @@ export const Settings: React.FC = () => {
       {successMessage && (
         <div className={styles.successMessage}>{successMessage}</div>
       )}
-      {error && (
-        <div className={styles.errorMessage}>{error}</div>
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
       )}
       <div className={styles.header}>
         <div className={styles.titleContainer}>
@@ -100,10 +102,7 @@ export const Settings: React.FC = () => {
       </div>
       <div className={styles.content}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="minLength" className={styles.label}>
-              Minimum Password Length
-            </label>
+          <div className={styles.formField}>
             <input
               type="number"
               id="minLength"
@@ -111,64 +110,56 @@ export const Settings: React.FC = () => {
               value={formData.minLength}
               onChange={handleChange}
               min="1"
-              className={styles.input}
+              placeholder=" "
             />
+            <label htmlFor="minLength">Minimum Password Length</label>
           </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.checkboxLabel}>
+          <div className={styles.checkboxContainer}>
+            <div className={styles.checkboxField}>
               <input
                 type="checkbox"
+                id="requireUppercase"
                 name="requireUppercase"
                 checked={formData.requireUppercase}
                 onChange={handleChange}
                 className={styles.checkbox}
               />
-              <span className={styles.checkmark}></span>
-              Require Uppercase
-            </label>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.checkboxLabel}>
+              <label htmlFor="requireUppercase" className={styles.checkboxLabel}>Require Uppercase</label>
+            </div>
+            <div className={styles.checkboxField}>
               <input
                 type="checkbox"
+                id="requireLowercase"
                 name="requireLowercase"
                 checked={formData.requireLowercase}
                 onChange={handleChange}
                 className={styles.checkbox}
               />
-              <span className={styles.checkmark}></span>
-              Require Lowercase
-            </label>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.checkboxLabel}>
+              <label htmlFor="requireLowercase" className={styles.checkboxLabel}>Require Lowercase</label>
+            </div>
+            <div className={styles.checkboxField}>
               <input
                 type="checkbox"
+                id="requireDigit"
                 name="requireDigit"
                 checked={formData.requireDigit}
                 onChange={handleChange}
                 className={styles.checkbox}
               />
-              <span className={styles.checkmark}></span>
-              Require Digit
-            </label>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.checkboxLabel}>
+              <label htmlFor="requireDigit" className={styles.checkboxLabel}>Require Digit</label>
+            </div>
+            <div className={styles.checkboxField}>
               <input
                 type="checkbox"
+                id="requireSpecial"
                 name="requireSpecial"
                 checked={formData.requireSpecial}
                 onChange={handleChange}
                 className={styles.checkbox}
               />
-              <span className={styles.checkmark}></span>
-              Require Special Character
-            </label>
+              <label htmlFor="requireSpecial" className={styles.checkboxLabel}>Require Special Character</label>
+            </div>
           </div>
 
           <div className={styles.formActions}>
