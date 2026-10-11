@@ -15,10 +15,13 @@ import ExclusionOn from './img/ExclusionOn.svg';
 import EntitlementsOff from './img/EntitlementsOff.svg';
 import EntitlementsOn from './img/EntitlementsOn.svg';
 import InboxIcon from './img/Inbox.svg';
+import SettingsOff from './img/SettingsOff.svg';
+import SettingsOn from './img/SettingsOn.svg';
 import {ConnectionsComponent} from '../Connections/ConnectionsComponent';
 import {ControlsComponent} from '../Controls/ControlsComponent';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent';
 import { Entitlements } from '../Entitlements/Entitlements';
+import { Settings } from '../Settings/Settings';
 import { useNavigate } from 'react-router-dom';
 import { Exclusions } from '../Exclusions/Exclusions';
 import { Inbox } from '../Inbox/Inbox';
@@ -34,6 +37,7 @@ const ConnectionComponent = () => <div><ConnectionsComponent></ConnectionsCompon
 const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div>;
 const ExclusionComponent = () => <div><Exclusions></Exclusions></div>
 const EntitlementsComponent = () => <div><Entitlements></Entitlements></div>;
+const SettingsComponent = () => <div><Settings></Settings></div>;
 
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -73,7 +77,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
         { icon:  Controls, label: "Controls", isActive: activeNavIndex === 6, forAdmins: true, onClick: () => handleNavClick(6) },
         { icon:  activeNavIndex === 7?ExclusionOn:ExclusionOff, label: "Exclusion", isActive: activeNavIndex === 7, forAdmins: true, onClick: () => handleNavClick(7) },
         { icon:  activeNavIndex === 8?EntitlementsOn:EntitlementsOff, label: "Entitlements", isActive: activeNavIndex === 8, forAdmins: true, onClick: () => handleNavClick(8) },
-        // { icon: activeNavIndex === 9?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 9, forAdmins: true, onClick: () => handleNavClick(9) }
+      ]
+    },
+    {
+      title: "Settings",
+      items: [
+        { icon:  activeNavIndex === 9?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 9, forAdmins: true, onClick: () => handleNavClick(9) }
       ]
     }
   ];
@@ -98,8 +107,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <ExclusionComponent />;
       case 8:
         return <EntitlementsComponent />;
-      // case 9:
-      //   return <SettingsComponent />;
+      case 9:
+        return <SettingsComponent />;
       default:
         return <div>Select an item from the navigation.</div>;
     }
