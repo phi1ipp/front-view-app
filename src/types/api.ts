@@ -31,10 +31,14 @@ export const API_ENDPOINTS = {
      ENTITLEMENTS_ACCESSLIST: `${BASE_URL}/accessSet`,
      ACCESSLIST: `${BASE_URL}/access`,
 
-     //Config
-     CONFIG: {
-       PASSWORD_POLICY: `${BASE_URL}/config/password-policy`
-     }
+//Config
+      CONFIG: {
+        PASSWORD_POLICY: `${BASE_URL}/config/password-policy`
+      },
+
+      // Version & Changelog
+      VERSION: `${BASE_URL}/version`,
+      CHANGELOG: '/changelog.md'
 
     // Add more API endpoints as needed
 };

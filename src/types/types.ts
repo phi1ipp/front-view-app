@@ -18,6 +18,10 @@ export interface UserInfo {
   role: 'admin' | 'user';
 }
 
+export interface VersionInfo {
+  version: string;
+}
+
 export interface SideNavProps {
   logo: string;
   sections: NavSection[];
