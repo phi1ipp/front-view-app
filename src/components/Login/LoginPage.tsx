@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Login.module.css';
 import { InputField } from './InputField';
 import { Button } from './Button';
@@ -12,8 +12,54 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [, setErrors] = useState<{ username?: string; password?: string }>({});
   const [, setIsLoading] = useState(false);
- const navigate = useNavigate(); 
+  const [oidcEnabled, setOidcEnabled] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    let cancelled = false;
+
+    const checkExistingSession = async () => {
+      try {
+        const rsp = await fetch('/api/user/me');
+        if (!rsp.ok) return; // 401/302 → no session, stay on login page.
+
+        const user = await rsp.json();
+        if (!cancelled && user && user.username) {
+          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('userName', user.username);
+          localStorage.setItem('isAdmin', user.isAdmin);
+          window.dispatchEvent(new Event('auth-change'));
+          navigate('/home');
+        }
+      } catch {
+        // No active session; stay on login page.
+      }
+    };
+
+    const fetchOidcConfig = async () => {
+      try {
+        const response = await fetch('/api/auth/sso-status');
+        if (!response.ok) throw new Error('Failed to fetch');
+
+        const data = await response.json();
+        if (!cancelled) setOidcEnabled(data.ssoEnabled === true);
+      } catch {
+        if (!cancelled) setOidcEnabled(false);
+      }
+    };
+
+    checkExistingSession();
+    fetchOidcConfig();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [navigate]);
+
+
+  const handleOidcLogin = () => {
+    window.location.href = '/oauth2/authorization/oidc';
+  };
 
   const validateForm = (): boolean => {
     const newErrors: { username?: string; password?: string } = {};
@@ -105,6 +151,9 @@ export const LoginPage: React.FC = () => {
                       icon="https://cdn.builder.io/api/v1/image/assets/TEMP/612fb9c937453b33d31c2c41ec8ceb4a6515f3e19362262b1bc0343f0b6d299e?placeholderIfAbsent=true&apiKey=a425ac4ee7f44c4e8f299e4382456740"
                     />
                     <Button label="Login" onClick={handleLogin}/>
+                    {oidcEnabled && (
+                      <Button label="Sign in with SSO" onClick={handleOidcLogin} variant="secondary"/>
+                    )}
                   </form>
                 </div>
                 <p className={styles.helpText}>Having Trouble? Contact Admin</p>

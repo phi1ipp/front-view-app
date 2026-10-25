@@ -33,7 +33,8 @@ export const API_ENDPOINTS = {
 
 //Config
       CONFIG: {
-        PASSWORD_POLICY: `${BASE_URL}/config/password-policy`
+        PASSWORD_POLICY: `${BASE_URL}/config/password-policy`,
+        OIDC: `${BASE_URL}/config/oidc`
       },
 
       // Version & Changelog

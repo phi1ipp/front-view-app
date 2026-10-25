@@ -23,6 +23,7 @@ import {ControlsComponent} from '../Controls/ControlsComponent';
 import { CampaignComponent } from '../CampaignComponent/CampaignComponent';
 import { Entitlements } from '../Entitlements/Entitlements';
 import { Settings } from '../Settings/Settings';
+import { OidcConfig } from '../Settings/OidcConfig';
 import { About } from '../About/About';
 import { useNavigate } from 'react-router-dom';
 import { Exclusions } from '../Exclusions/Exclusions';
@@ -40,6 +41,7 @@ const ControlComponent = () => <div><ControlsComponent></ControlsComponent></div
 const ExclusionComponent = () => <div><Exclusions></Exclusions></div>
 const EntitlementsComponent = () => <div><Entitlements></Entitlements></div>;
 const SettingsComponent = () => <div><Settings></Settings></div>;
+const OidcConfigComponent = () => <div><OidcConfig></OidcConfig></div>;
 const AboutComponent = () => <div><About></About></div>;
 
 
@@ -85,7 +87,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
     {
       title: "Settings",
       items: [
-        { icon:  activeNavIndex === 9?SettingsOn:SettingsOff, label: "Settings", isActive: activeNavIndex === 9, forAdmins: true, onClick: () => handleNavClick(9) }
+        { icon:  activeNavIndex === 9?SettingsOn:SettingsOff, label: "Password Policy", isActive: activeNavIndex === 9, forAdmins: true, onClick: () => handleNavClick(9) },
+        { icon: SettingsOff, label: "OIDC Config", isActive: activeNavIndex === 11, forAdmins: true, onClick: () => handleNavClick(11) }
       ]
     },
     {
@@ -117,6 +120,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <EntitlementsComponent />;
       case 9:
         return <SettingsComponent />;
+      case 11:
+        return <OidcConfigComponent />;
       case 10:
         return <AboutComponent />;
       default:

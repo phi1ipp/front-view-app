@@ -91,6 +91,21 @@ export interface PasswordPolicy {
   requireSpecial: boolean;
 }
 
+export interface OidcGroupRoleMapping {
+  groupValue: string;
+  role: string;
+}
+
+export interface OidcConfig {
+  issuer: string;
+  clientId: string;
+  clientSecret: string;
+  scopes: string;
+  roleClaimName: string;
+  enabled: boolean;
+  groupRoleMappings: OidcGroupRoleMapping[];
+}
+
 export interface User {
   username: string;
   enabled: boolean;
@@ -289,6 +304,8 @@ export interface TableFooterProps {
 export interface ButtonProps {
   label: string;
   onClick: (e?: React.SyntheticEvent) => void;
+  variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit';
 }
 
 export interface InputFieldProps {
