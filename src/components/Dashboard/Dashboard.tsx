@@ -128,7 +128,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <div>Select an item from the navigation.</div>;
     }
   };
-  const userName = localStorage.getItem('userName') || '';
+  const userName = localStorage.getItem('fullName') || '';
   const userIsAdmin = localStorage.getItem('isAdmin') === 'true';
   return (
     <div className={styles.page}>

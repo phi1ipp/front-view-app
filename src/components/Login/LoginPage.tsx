@@ -27,6 +27,7 @@ export const LoginPage: React.FC = () => {
         if (!cancelled && user && user.username) {
           localStorage.setItem('isAuthenticated', 'true');
           localStorage.setItem('userName', user.username);
+          localStorage.setItem('fullName', user.fullName);
           localStorage.setItem('isAdmin', user.isAdmin);
           window.dispatchEvent(new Event('auth-change'));
           navigate('/home');
@@ -99,6 +100,7 @@ export const LoginPage: React.FC = () => {
 
       localStorage.setItem("isAuthenticated", "true"); 
       localStorage.setItem("userName", user.username);
+      localStorage.setItem("fullName", user.fullName);
       localStorage.setItem("isAdmin", user.isAdmin);
 
       // Manually trigger authentication state update
