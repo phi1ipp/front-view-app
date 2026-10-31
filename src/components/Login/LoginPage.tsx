@@ -5,6 +5,8 @@ import { InputField } from './InputField';
 import { Button } from './Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_ENDPOINTS } from '../../types/api';
+import { VersionInfo } from '../../types/types';
 
 export const LoginPage: React.FC = () => {
 
@@ -13,6 +15,7 @@ export const LoginPage: React.FC = () => {
   const [, setErrors] = useState<{ username?: string; password?: string }>({});
   const [, setIsLoading] = useState(false);
   const [oidcEnabled, setOidcEnabled] = useState(false);
+  const [version, setVersion] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +54,18 @@ export const LoginPage: React.FC = () => {
 
     checkExistingSession();
     fetchOidcConfig();
+
+    const fetchVersion = async () => {
+      try {
+        const response = await fetch(API_ENDPOINTS.VERSION);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data: VersionInfo = await response.json();
+        if (!cancelled) setVersion(data.version || '');
+      } catch {
+        if (!cancelled) setVersion('');
+      }
+    };
+    fetchVersion();
 
     return () => {
       cancelled = true;
@@ -159,6 +174,7 @@ export const LoginPage: React.FC = () => {
                   </form>
                 </div>
                 <p className={styles.helpText}>Having Trouble? Contact Admin</p>
+                {version && <div className={styles.versionFooter}>v{version}</div>}
               </div>
             </div>
           </div>
