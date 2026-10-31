@@ -56,6 +56,7 @@
   overflow: hidden; /* Prevents any overflow from creating a scrollbar */
   margin: 0; /* Removes default margin */
   padding: 0; /* Removes default padding */
+  position: relative;
 }
 
 .logo {
@@ -78,6 +79,7 @@
   max-width: 400px; /* Maximum width of the login card */
   width: 100%; /* Adjust width to fit content */
   margin-right: 50px; /* Right margin to position the card slightly to the left */
+  position: relative;
 }
 
 
@@ -204,6 +206,18 @@
   font: 400 12px/2 Roboto;
   margin-top: 16px;
   padding: 0 24px;
+}
+
+.versionFooter {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font: 400 12px/1 Roboto;
+  color: var(--color-text);
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 991px) {
