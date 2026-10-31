@@ -150,24 +150,30 @@ export const OidcConfig: React.FC = () => {
         <div>
           <h3>Group to Role Mappings</h3>
           {config.groupRoleMappings.map((m, i) => (
-            <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-              <FormField
-                id={`groupValue-${i}`}
-                label="Group Value"
-                type="text"
-                value={m.groupValue}
-                onChange={(v) => updateMapping(i, 'groupValue', v)}
-              />
-              <FormField
-                id={`role-${i}`}
-                label="Role"
-                type="text"
-                value={m.role}
-                onChange={(v) => updateMapping(i, 'role', v)}
-              />
-              <Button variant="primary" type="button" onClick={() => removeMapping(i)}>
-                Remove
-              </Button>
+            <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-end', marginBottom: '8px' }}>
+              <div style={{ flex: 1 }}>
+                <FormField
+                  id={`groupValue-${i}`}
+                  label="Group Value"
+                  type="text"
+                  value={m.groupValue}
+                  onChange={(v) => updateMapping(i, 'groupValue', v)}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <FormField
+                  id={`role-${i}`}
+                  label="Role"
+                  type="text"
+                  value={m.role}
+                  onChange={(v) => updateMapping(i, 'role', v)}
+                />
+              </div>
+              <div style={{ marginBottom: '24px' }}>
+                <Button variant="primary" type="button" onClick={() => removeMapping(i)}>
+                  Remove
+                </Button>
+              </div>
             </div>
           ))}
           <Button variant="primary" type="button" onClick={addMapping}>
