@@ -14,7 +14,7 @@
   background-image: url('https://d1emqz38fnux30.cloudfront.net/eyJidWNrZXQiOiJwb3dlbGxpbmQtcHJvZC1idWNrZXQiLCJrZXkiOiJpbWFnZXMvZnNhbmNoZXpfNUUxQTIzMzguanBnIiwiZWRpdHMiOnsid2VicCI6eyJxdWFsaXR5Ijo4Mn0sInJlc2l6ZSI6eyJ3aWR0aCI6MTUwMCwiaGVpZ2h0Ijo5OTksImZpdCI6ImNvdmVyIn0sInNoYXJwZW4iOnRydWV9fQ==');
   background-size: cover; /* Ensures the image covers the entire element */
   background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents repeating */
+  background-repeat: no-repeat; /* Prevents repeating the image */
   background-color: var(--color-primary);
   width: 100%;
   height: 100%; /* Ensures it fills the parent without exceeding */
@@ -31,9 +31,8 @@
 }
 
 .loginContent {
-  padding: 50px; /* Adjust padding to reduce height */
+  padding: 24px; /* Compact layout */
   width: 100%;
- /* Or whatever max width you prefer */
   box-sizing: border-box; /* Includes padding in width calculation */
 }
 
@@ -47,10 +46,9 @@
 }
 
 
-
 .loginContainer {
   justify-content: center; /* Center items horizontally in the viewport */
-  align-items: center; 
+  align-items: center;
   background-color: var(--color-surface);
   display: flex;
   flex-direction: column;
@@ -76,13 +74,11 @@
   border-right: 1px solid var(--color-border); /* Adds a border to the right */
   border-left: 1px solid var(--color-border); /* Adds a border to the left */
   border-bottom: none; /* No border at the bottom */
-  padding: 40px; /* Inner padding */
+  padding: 32px; /* Inner padding */
   max-width: 400px; /* Maximum width of the login card */
   width: 100%; /* Adjust width to fit content */
   margin-right: 50px; /* Right margin to position the card slightly to the left */
 }
-
-
 
 
 .loginForm {
@@ -99,11 +95,11 @@
 }
 
 .formContent {
-  margin-top: 72px;
+  margin-top: 24px;
 }
 
 .inputContainer {
-  margin-bottom: 80px;
+  margin-bottom: 48px;
 }
 
 .inputWrapper {
@@ -174,8 +170,24 @@
   width: 100%;
   border: none;
   cursor: pointer;
-  margin-top: 108px;
+  margin-top: 16px;
   overflow: hidden;
+}
+
+.loginButtonSecondary {
+  border-radius: 100px;
+  background: transparent;
+  box-shadow: none;
+  min-height: 40px;
+  width: 100%;
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.loginButtonSecondary .buttonContent {
+  color: var(--color-primary);
 }
 
 .buttonContent {
@@ -190,28 +202,28 @@
   color: var(--color-primary);
   letter-spacing: 0.4px;
   font: 400 12px/2 Roboto;
-  margin-top: 24px;
+  margin-top: 16px;
   padding: 0 24px;
 }
 
 @media (max-width: 991px) {
   .loginContent {
-    padding: 20px; /* Reduced padding for smaller screens */
+    padding: 16px; /* Reduced padding for smaller screens */
   }
 
   .headerSection {
     flex-direction: column; /* Stacks logo and card vertically */
     align-items: center; /* Center items for smaller screens */
-    padding: 10px;
+    padding: 8px;
   }
 
   .logo {
     max-width: 80%; /* Adjust for smaller screens if needed */
-    margin-bottom: 20px; /* Adds space between logo and card on small screens */
+    margin-bottom: 16px; /* Adds space between logo and card on small screens */
   }
 
   .loginCard {
-    padding: 20px; /* Reduce padding inside card for smaller screens */
+    padding: 16px; /* Reduce padding inside card for smaller screens */
     width: 100%; /* Use full width for small screens */
     max-width: none; /* Overrides any max-width settings */
     margin-left: 0; /* Reset margin for alignment on small screens */
@@ -219,17 +231,16 @@
   }
 
 
-
   .formContent {
-    margin-top: 40px;
+    margin-top: 16px;
   }
 
   .inputContainer {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
 
   .loginButton {
-    margin-top: 40px;
+    margin-top: 12px;
   }
 
   .buttonContent {

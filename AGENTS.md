@@ -13,6 +13,7 @@
 1. User logs in via API `/login` (sets `JSESSIONID` cookie)
 2. All subsequent requests include cookie automatically
 3. API returns 401 if session invalid → redirect to login
+4. When user logs in the back-end will determine if they have admin rights or not and save that in the back-end session, so some of the API endpoints/methods will check for the role of a user
 
 ## Adding API Endpoints
 1. Check `grc-api` for new DTOs/endpoints

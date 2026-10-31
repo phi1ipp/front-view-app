@@ -8,6 +8,7 @@ export const Logout: React.FC = () => {
     // Clear authentication data
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("userName");
+    localStorage.removeItem("fullName");
     localStorage.removeItem("isAdmin");
     
     // Dispatch event to notify about auth change
