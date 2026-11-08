@@ -20,12 +20,9 @@ export const ExclusionModal: React.FC<ExclusionModalProps> = ({
   };
 
   useEffect(() => {
-    if (exclusion) {
-      setFormData(exclusion);
-    } else {
-      setFormData({ id: '', name: '', rule: '' });
-    }
-  }, [exclusion]);
+    if (!isOpen) return;
+    setFormData(exclusion ?? { id: '', name: '', rule: '' });
+  }, [isOpen, exclusion]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
